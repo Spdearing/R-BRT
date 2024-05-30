@@ -20,7 +20,7 @@ public class PlayerRaycast : MonoBehaviour
     [SerializeField] TMP_Text interactableText;
 
 
-    [SerializeField] string[] tagsToCheck = new string[] { "Block", "Block2", "Block3", "PickUpItem" };
+    //[SerializeField] string[] tagsToCheck = new string[] { "Block", "Block2", "Block3", "PickUpItem" };
 
 
 
@@ -54,7 +54,7 @@ public class PlayerRaycast : MonoBehaviour
 
                 if(hitInfo.collider.tag == "PickUpItem")
                 {
-                    interactableText.text = "Press (F) to pick up Ball ";
+                    interactableText.text = "Press (F) to pick up the rock";
 
                     if (Input.GetKeyDown(KeyCode.F) && !holding)
                     {
@@ -88,17 +88,17 @@ public class PlayerRaycast : MonoBehaviour
     }
 
 
-    bool ContainsTag(string tag)
-    {
-        foreach (string t in tagsToCheck)
-        {
-            if (t == tag)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+    //bool ContainsTag(string tag)
+    //{
+    //    foreach (string t in tagsToCheck)
+    //    {
+    //        if (t == tag)
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
 
     public GameObject ReturnObjectHit()
