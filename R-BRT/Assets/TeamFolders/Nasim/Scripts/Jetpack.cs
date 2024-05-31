@@ -38,12 +38,12 @@ public class Jetpack : MonoBehaviour
         {
             canUseJetpack = false;
         }
-        else if (!playerCharacterController.hasJumpedThisFrame && Input.GetKeyDown(Keycode.Space))
+        else if (!playerCharacterController.hasJumpedThisFrame && Input.GetKeyDown(KeyCode.Space))
         {
             canUseJetpack = true;
         }
 
-        bool jetpackIsInUse = canUseJetpack && currentFuelRatio > 0f && Input.GetKey(Keycode.Space);
+        bool jetpackIsInUse = canUseJetpack && currentFuelRatio > 0f && Input.GetKey(KeyCode.Space);
 
         if(jetpackIsInUse)
         {
@@ -55,7 +55,7 @@ public class Jetpack : MonoBehaviour
 
             totalAcceleration += playerCharacterController.gravity;
 
-            if (playerCharacterControllerController.velocity.y < 0f)
+            if (playerCharacterController.velocity.y < 0f)
             {
                 totalAcceleration += ((-playerCharacterController.velocity.y / Time.deltaTime) * jetpackDownwardVelocityCanceling);
             }
