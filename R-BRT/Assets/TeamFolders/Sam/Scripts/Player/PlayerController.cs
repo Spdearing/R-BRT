@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
+    public float gravity = -1f;
 
     public float groundDrag;
 
     public float jumpForce;
     public float jumpCooldown;
+    public bool hasJumpedThisFrame = false;
     public float airMultiplier;
     bool readyToJump;
 
@@ -35,8 +37,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Ground Check")]
     public float playerHeight;
-    public LayerMask whatIsGround;
-    bool grounded;
+    public LayerMask groundMask;
+    public bool isGrounded;
+
+    public Vector3 velocity;
 
     public Transform orientation;
 
@@ -48,6 +52,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
 
     public MovementState state;
+
+    [SerializeField] private TrailRenderer tr;
 
     //public AudioSource footstepsSound, sprintSound;
 
@@ -72,14 +78,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 1.0f , whatIsGround);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 1.0f , groundMask);
 
         MyInput();
         SpeedControl();
         StateHandler();
         //FootSteps();
         // handle drag
-        if (grounded)
+        if (isGrounded)
         {
             rb.drag = groundDrag;
         }  
@@ -103,7 +109,7 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && isGrounded)
         {
             readyToJump = false;
 
@@ -141,11 +147,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // on ground
-        if (grounded)
+        if (isGrounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // in air
-        else if (!grounded)
+        else if (!isGrounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
         rb.useGravity = !OnSlope();
@@ -201,7 +207,7 @@ public class PlayerController : MonoBehaviour
             moveSpeed = crouchSpeed;
         }
         // Mode - Sprinting
-        if (grounded && Input.GetKey(sprintKey))
+        if (isGrounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             moveSpeed = sprintSpeed;
@@ -209,7 +215,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Mode - Walking 
-        else if (grounded)
+        else if (isGrounded)
         {
             state = MovementState.walking;
             moveSpeed = walkSpeed;
@@ -239,9 +245,9 @@ public class PlayerController : MonoBehaviour
 
     //private void FootSteps() 
     //{
-    //    if (horizontalInput !=0 || verticalInput !=0 && grounded)
+    //    if (horizontalInput !=0 || verticalInput !=0 && isGrounded)
     //    {
-    //        if (grounded && Input.GetKey(sprintKey))
+    //        if (isGgrounded && Input.GetKey(sprintKey))
     //        {
     //            footstepsSound.enabled = false;
     //            sprintSound.enabled = true;
