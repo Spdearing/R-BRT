@@ -10,7 +10,7 @@ public class Jetpack : MonoBehaviour
     [Range(0f, 1f)]
     public float jetpackDownwardVelocityCanceling = 0.75f;
 
-    public float fuelConsumedDuration = 1.5f;
+    public float consumeDuration = 1.5f;
     public float refuelDurationGrounded = 2f;
     public float refuelDurationFlying = 5f;
     public float refuelDelay = 1f;
@@ -18,13 +18,13 @@ public class Jetpack : MonoBehaviour
     public float currentFuelRatio;
     float lastTimeofUse;
 
-    PlayerMovement3d playerCharacterController;
+    PlayerController playerCharacterController;
     [SerializeField] private TrailRenderer tr;
 
 
     void Start()
     {
-        playerCharacterController = GetComponent<PlayerMovement3d>();
+        playerCharacterController = GetComponent<PlayerController>();
 
         currentFuelRatio = 1f;
         tr.emitting = false;
