@@ -12,7 +12,7 @@ public class ThrowObject : MonoBehaviour
 
     private void Start()
     {
-        shootForce = 1400.0f;
+        shootForce = 700.0f;
         pickUpObject = GetComponent<PickUpObject>();
     }
 
