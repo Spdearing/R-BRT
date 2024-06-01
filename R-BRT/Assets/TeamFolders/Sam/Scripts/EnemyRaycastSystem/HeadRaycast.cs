@@ -7,11 +7,15 @@ public class HeadRaycast : MonoBehaviour
     [SerializeField] private float raycastDistance;
     [SerializeField] float interactDistance = 10;
     [SerializeField] Light enemyLight;
+    [SerializeField] private GameObject player;
+    [SerializeField] private HeadMovement headMovement;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
+        headMovement = GetComponent<HeadMovement>();
         raycastDistance = interactDistance;
         enemyLight = GetComponentInChildren<Light>();
         enemyLight.color = Color.green;
@@ -34,14 +38,19 @@ public class HeadRaycast : MonoBehaviour
             {
                 if (objectHit == "Player")
                 {
+                    headMovement.SetPlayerSpotted(true);
+                    transform.LookAt(player.transform.position);
                     enemyLight.color = Color.red;
                 }
+                else if (objectHit != "player")
+                {
+                    headMovement.SetPlayerSpotted(false);
+                    enemyLight.color = Color.green;
+                }
             }
-            
-        }
-        else
-        {
-            enemyLight.color = Color.green;
+            else 
+
+            headMovement.SetPlayerSpotted(false);
         }
     }
 }
