@@ -37,10 +37,11 @@ public class HeadRaycast : MonoBehaviour
                     enemyLight.color = Color.red;
                 }
             }
-            else
-            {
-                enemyLight.color = Color.green;
-            }
+            
+        }
+        else
+        {
+            enemyLight.color = Color.green;
         }
     }
 }
