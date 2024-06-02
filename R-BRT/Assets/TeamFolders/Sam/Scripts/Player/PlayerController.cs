@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
         readyToJump = true;
 
         startYScale = transform.localScale.y;
+
+        crouchSpeed = 3.5f;
     }
 
     private void Update()
