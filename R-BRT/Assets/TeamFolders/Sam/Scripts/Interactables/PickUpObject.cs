@@ -47,6 +47,7 @@ public class PickUpObject : MonoBehaviour
     public void PutDown()
     {
         holding = false;
+        rb.constraints = RigidbodyConstraints.None;
     }
 
     IEnumerator MoveObjectSmoothly(Vector3 start, Vector3 end, float duration)
