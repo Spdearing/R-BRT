@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] bool shockwaveAbilityActive;
+    [SerializeField] RockCollision rockCollision;
+    [SerializeField] PickUpObject rock;
+
 
 
 
@@ -17,17 +19,28 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shockwaveAbilityActive = true;
-
+        rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
+        rock = GetComponent<PickUpObject>();
     }
 
-    public bool ReturnShockWaveAbilityStatus()
+    public void SendOutNoise()
     {
-        return shockwaveAbilityActive;
-    }
+        if (rockCollision.ReturnSound() == true)
+        {
+            GameObject throwable = rock.ReturnThisObject();
 
-    public void SetShockWaveAbilityStatus(bool value)
-    {
-        shockwaveAbilityActive = value;
-    }    
+            
+            AllDirectionRaycast raycastComponent = throwable.GetComponent<AllDirectionRaycast>();
+
+            
+            if (raycastComponent != null)
+            {
+                raycastComponent.enabled = true;
+            }
+            else
+            {
+                Debug.LogWarning("AllDirectionRaycast component not found on the throwable object.");
+            }
+        }
+    }
 }
