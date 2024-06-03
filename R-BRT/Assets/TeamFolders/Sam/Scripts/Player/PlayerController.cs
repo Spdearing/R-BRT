@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    private float moveSpeed;
+    public float moveSpeed;
     public float walkSpeed;
     public float sprintSpeed;
     public float gravity = -1f;
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool hasJumpedThisFrame = false;
     public float airMultiplier;
     bool readyToJump;
+    public bool isJumping;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -84,7 +85,17 @@ public class PlayerController : MonoBehaviour
 
         MyInput();
         SpeedControl();
+        Sprint();
         UpdateState();
+
+        if (!isGrounded)
+        {
+            InAir();
+        }
+
+        
+        
+
         //FootSteps();
         // handle drag
         if (isGrounded)
@@ -98,6 +109,7 @@ public class PlayerController : MonoBehaviour
 
         else
             rb.drag = 0;
+            
     }
 
     private void FixedUpdate()
@@ -116,6 +128,7 @@ public class PlayerController : MonoBehaviour
             readyToJump = false;
 
             Jump();
+            isJumping = true;
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
@@ -125,13 +138,13 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 10.0f, ForceMode.Impulse);
-            isCrouching = true;
+            Crouching();
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-            isCrouching = false;
+            Walking();
         }
     }
 
@@ -195,6 +208,14 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
+    void InAir()
+    {
+        if (!isGrounded && isJumping)
+        {
+            ChangeState(MovementState.air);
+        }    
+    }
+
     void Sprint()
     {
         if(Input.GetKeyDown(sprintKey)) 
@@ -221,6 +242,7 @@ public class PlayerController : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+        isJumping = false;
 
         exitingSlope = false;
     }
@@ -261,6 +283,10 @@ public class PlayerController : MonoBehaviour
 
             default:
 
+                if(isGrounded)
+                {
+                    currentState = MovementState.walking;
+                }
 
                 break;
 
