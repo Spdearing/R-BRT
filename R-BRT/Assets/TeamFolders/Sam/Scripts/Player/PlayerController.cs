@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     public float gravity = -1f;
+    public bool isSprinting;
 
     public float groundDrag;
 
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Crouching")]
     public float crouchSpeed;
+    public bool isCrouching;
     public float crouchYScale;
     private float startYScale;
 
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
-    public MovementState state;
+    public MovementState currentState;
 
     [SerializeField] private TrailRenderer tr;
 
@@ -73,8 +75,6 @@ public class PlayerController : MonoBehaviour
         readyToJump = true;
 
         startYScale = transform.localScale.y;
-
-        crouchSpeed = 3.5f;
     }
 
     private void Update()
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
         MyInput();
         SpeedControl();
-        StateHandler();
+        UpdateState();
         //FootSteps();
         // handle drag
         if (isGrounded)
@@ -125,11 +125,13 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 10.0f, ForceMode.Impulse);
+            isCrouching = true;
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+            isCrouching = false;
         }
     }
 
@@ -192,6 +194,30 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+
+    void Sprint()
+    {
+        if(Input.GetKeyDown(sprintKey)) 
+        {
+            Sprinting();
+        }
+        else if(Input.GetKeyUp(sprintKey))
+        {
+            Walking();
+        }
+    }
+
+    void Sprinting()
+    {
+        ChangeState(MovementState.sprinting);
+    }
+
+    void Walking()
+    {
+        ChangeState(MovementState.walking);
+    }
+
+
     private void ResetJump()
     {
         readyToJump = true;
@@ -199,34 +225,46 @@ public class PlayerController : MonoBehaviour
         exitingSlope = false;
     }
 
-    private void StateHandler()
+    public void ChangeState(MovementState newState)
     {
+        currentState = newState;
+    }
 
-        //Mode - Crouching 
-        if (Input.GetKey(crouchKey))
-        {
-            state = MovementState.crouching;
-            moveSpeed = crouchSpeed;
-        }
-        // Mode - Sprinting
-        if (isGrounded && Input.GetKey(sprintKey))
-        {
-            state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+    void Crouching()
+    {
+        ChangeState(MovementState.crouching);
+    }
 
-        }
+    
 
-        // Mode - Walking 
-        else if (isGrounded)
-        {
-            state = MovementState.walking;
-            moveSpeed = walkSpeed;
-        }
+    void UpdateState()
+    {
+       switch(currentState) 
+        { 
+            case MovementState.crouching:
 
-        // Mode - Air
-        else
-        {
-            state = MovementState.air;
+                moveSpeed = crouchSpeed;
+
+                break;
+
+            case MovementState.walking:
+
+                moveSpeed = walkSpeed;
+
+                break;
+
+            case MovementState.sprinting: 
+                
+                moveSpeed = sprintSpeed; 
+                
+                break;
+
+            default:
+
+
+                break;
+
+
         }
     }
 
