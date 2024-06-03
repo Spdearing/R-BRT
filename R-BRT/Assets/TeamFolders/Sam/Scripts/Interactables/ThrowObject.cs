@@ -29,6 +29,8 @@ public class ThrowObject : MonoBehaviour
     {
         Rigidbody rb = pickUpObject.ReturnThisObject().GetComponent<Rigidbody>();
 
+        rb.constraints = RigidbodyConstraints.None;
+
         Vector3 shootDirection = Camera.main.transform.forward;
 
         if (rb != null && pickUpObject.ReturnHoldingStatus() == true)

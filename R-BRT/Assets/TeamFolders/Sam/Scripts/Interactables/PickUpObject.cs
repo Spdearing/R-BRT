@@ -7,11 +7,13 @@ public class PickUpObject : MonoBehaviour
 {
     private bool holding;
     private bool pickingUp;
+    Rigidbody rb;
 
     [SerializeField] private Transform holdPosition;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         gameObject.tag = "PickUpItem";
         holdPosition = GameObject.Find("HoldPosition").GetComponentInChildren<Transform>();
         holding = false;
@@ -25,7 +27,8 @@ public class PickUpObject : MonoBehaviour
         }
         else if (holding)
         {
-            StartCoroutine(MoveObjectSmoothly(this.gameObject.transform.position, holdPosition.transform.position, 0.05f)); 
+            StartCoroutine(MoveObjectSmoothly(this.gameObject.transform.position, holdPosition.transform.position, 0.05f));
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 
