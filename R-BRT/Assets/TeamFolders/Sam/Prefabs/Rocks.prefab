@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 7051377420132053784}
   - component: {fileID: 1926993332744310970}
   - component: {fileID: 2290817713462208892}
+  - component: {fileID: 7602557618789619542}
+  - component: {fileID: 5092354580679888210}
   m_Layer: 0
   m_Name: Rocks
   m_TagString: Untagged
@@ -32,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 436.4484, y: 261.36194, z: 79962.88}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 02d814c6115a5374ba572fd5f82d5778, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -162,3 +164,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUpObject: {fileID: 0}
   shootForce: 0
+--- !u!114 &7602557618789619542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372166936813134152}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fee568766d6be147810e955cb54b279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numRays: 100
+  raycastDistance: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &5092354580679888210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372166936813134152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87f5a5407e9f0bc498ed76440ffc86ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  makingSound: 0
+  gameManager: {fileID: 0}
