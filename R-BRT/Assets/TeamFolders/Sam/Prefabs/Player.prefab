@@ -256,15 +256,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8a5e6f3d5395b48bf41b9b5e35acd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  sprintSpeed: 10
+  moveSpeed: 0
+  walkSpeed: 3.5
+  sprintSpeed: 7
   gravity: -1
+  isSprinting: 0
   groundDrag: 5
   jumpForce: 7.5
   jumpCooldown: 0.25
   hasJumpedThisFrame: 0
   airMultiplier: 0.4
-  crouchSpeed: 3
+  isJumping: 0
+  crouchSpeed: 2.5
   isCrouching: 0
   crouchYScale: 0.5
   maxSlopeAngle: 40
@@ -278,7 +281,7 @@ MonoBehaviour:
   isGrounded: 0
   velocity: {x: 0, y: 0, z: 0}
   orientation: {fileID: 159131420631619943}
-  state: 0
+  currentState: 0
   tr: {fileID: 0}
 --- !u!54 &7535573870673738426
 Rigidbody:
