@@ -13,7 +13,8 @@ public class ThrowObject : MonoBehaviour
 
     private void Start()
     {
-        shootForce = 25.0f;
+        shootForce = 10.0f;
+        upwardForce = 5.0f;
         pickUpObject = GetComponent<PickUpObject>();
     }
 
@@ -38,9 +39,10 @@ public class ThrowObject : MonoBehaviour
             
             rb.constraints = RigidbodyConstraints.None;
             //heldObject.transform.SetParent(null);
+           
             pickUpObject.GetComponent<PickUpObject>().PutDown();
             rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
-            //rb.AddForce(shootDirection * upwardForce);
+            rb.AddForce(shootDirection * upwardForce);
         }
     }
 }
