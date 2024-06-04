@@ -6,13 +6,14 @@ public class ThrowObject : MonoBehaviour
 {
     [SerializeField] PickUpObject pickUpObject;
          
-    [SerializeField] private float shootForce;      
+    [SerializeField] private float shootForce;
+    [SerializeField] private float upwardForce;
     
 
 
     private void Start()
     {
-        shootForce = 700.0f;
+        shootForce = 25.0f;
         pickUpObject = GetComponent<PickUpObject>();
     }
 
@@ -27,22 +28,19 @@ public class ThrowObject : MonoBehaviour
 
     private void Shoot()
     {
+        GameObject heldObject = pickUpObject.ReturnThisObject();
         Rigidbody rb = pickUpObject.ReturnThisObject().GetComponent<Rigidbody>();
-
         
-
         Vector3 shootDirection = Camera.main.transform.forward;
 
         if (rb != null && pickUpObject.ReturnHoldingStatus() == true)
         {
             
-
-            // Apply force to the projectile to shoot it
-
-            
             rb.constraints = RigidbodyConstraints.None;
+            //heldObject.transform.SetParent(null);
             pickUpObject.GetComponent<PickUpObject>().PutDown();
-            rb.AddForce(shootDirection * shootForce);
+            rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
+            //rb.AddForce(shootDirection * upwardForce);
         }
     }
 }

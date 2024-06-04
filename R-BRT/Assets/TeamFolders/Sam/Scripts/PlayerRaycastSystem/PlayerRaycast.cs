@@ -16,6 +16,11 @@ public class PlayerRaycast : MonoBehaviour
     [SerializeField] float pickUpCooldown = 0.5f;
     [SerializeField] float pickUpTime;
 
+    [SerializeField] PickUpObject pickUpObject;
+    [SerializeField] Transform holdingPosition;
+    [SerializeField] GameObject heldPosition;
+    
+
     //[SerializeField] ChangeBoxColor changeBoxColor;
     [SerializeField] TMP_Text interactableText;
 
@@ -29,9 +34,9 @@ public class PlayerRaycast : MonoBehaviour
         raycastDistance = interactDistance; // raycastDistance = 4
         holding = false;
         interactableText = GameObject.Find("InteractableText").GetComponent<TMP_Text>();
-        //enemy = GameObject.Find("RobotBody");
-        //enemyLight = enemy.GetComponentInChildren<Light>();
-
+        pickUpObject = GameObject.Find("Rocks").GetComponent<PickUpObject>();
+        holdingPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
+        heldPosition = GameObject.Find("HoldPosition");
 
     }
 
@@ -42,6 +47,7 @@ public class PlayerRaycast : MonoBehaviour
 
         RaycastHit hitInfo;
 
+       
         if (Physics.Raycast(ray, out hitInfo))
         {
             string objectHit = hitInfo.collider.gameObject.tag;
@@ -64,16 +70,11 @@ public class PlayerRaycast : MonoBehaviour
                         pickUpTime = 0f;
                     }
                 }
-                //if(hitInfo.collider.tag == "Enemy")
-                //{
-                //    enemyLight.color = Color.red;
-                //}
-                
             }
             else
             {
                 interactableText.text = " ";
-                //enemyLight.color = Color.green;
+                
             }
 
             pickUpTime += Time.deltaTime;
