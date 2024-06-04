@@ -29,16 +29,20 @@ public class ThrowObject : MonoBehaviour
     {
         Rigidbody rb = pickUpObject.ReturnThisObject().GetComponent<Rigidbody>();
 
-        rb.constraints = RigidbodyConstraints.None;
+        
 
         Vector3 shootDirection = Camera.main.transform.forward;
 
         if (rb != null && pickUpObject.ReturnHoldingStatus() == true)
         {
             
+
             // Apply force to the projectile to shoot it
-            rb.AddForce(shootDirection * shootForce);
+
+            
+            rb.constraints = RigidbodyConstraints.None;
             pickUpObject.GetComponent<PickUpObject>().PutDown();
+            rb.AddForce(shootDirection * shootForce);
         }
     }
 }
