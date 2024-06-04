@@ -69,6 +69,7 @@ public class UIController : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
+        isPaused = false;
         DisableCursor();
     }
 

@@ -28,7 +28,7 @@ public class PickUpObject : MonoBehaviour
         else if (holding)
         {
             StartCoroutine(MoveObjectSmoothly(this.gameObject.transform.position, holdPosition.transform.position, 0.05f));
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            //rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 
@@ -47,7 +47,7 @@ public class PickUpObject : MonoBehaviour
     public void PutDown()
     {
         holding = false;
-        rb.constraints = RigidbodyConstraints.None;
+        //rb.constraints = RigidbodyConstraints.None;
     }
 
     IEnumerator MoveObjectSmoothly(Vector3 start, Vector3 end, float duration)
