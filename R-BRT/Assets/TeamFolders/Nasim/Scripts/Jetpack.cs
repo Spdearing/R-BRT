@@ -24,6 +24,7 @@ public class Jetpack : MonoBehaviour
         void Start()
         {
             playerCharacterController = GetComponent<PlayerController>();
+            tr = GetComponent<TrailRenderer>();
 
             currentFillRatio = 1f;
             tr.emitting = false;
@@ -31,9 +32,12 @@ public class Jetpack : MonoBehaviour
 
         void Update()
         {
-            if (playerCharacterController.isGrounded) {
+            if (playerCharacterController.ReturnIsGrounded()) 
+            {
                 canUseJetpack = false;
-            } else if (!playerCharacterController.hasJumpedThisFrame && Input.GetKeyDown(KeyCode.Space)) {
+            } 
+            else if ( Input.GetKey(KeyCode.Space)) 
+            {
                 canUseJetpack = true;
             }
 

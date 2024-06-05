@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
 
     public float jumpForce;
     public float jumpCooldown;
-    public bool hasJumpedThisFrame = false;
     public float airMultiplier;
     bool readyToJump;
     public bool isJumping;
@@ -304,9 +303,17 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+
+
     private Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+    }
+
+
+    public bool ReturnIsGrounded()
+    {
+        return this.isGrounded;
     }
 
     //private void FootSteps() 
