@@ -5,39 +5,32 @@ using UnityEngine.UI;
 
 public class DetectionMeter : MonoBehaviour
 {
-
     [SerializeField] Image detectionMeter;
-    [SerializeField] float startingDetection;
+    [SerializeField] float startingDetection = 0.0f;
+    [SerializeField] float detectionIncrement = 0.75f;
+    [SerializeField] float maxDetection = 200.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        startingDetection = 0.0f;
-        detectionMeter.fillAmount = startingDetection;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
+        detectionMeter.fillAmount = startingDetection / maxDetection;
     }
 
     public void IncreaseDetection(float detection)
     {
-        startingDetection += detection;
-        detectionMeter.fillAmount = startingDetection / 200.0f;
+        startingDetection += detection * Time.deltaTime * detectionIncrement;
+        startingDetection = Mathf.Clamp(startingDetection, 0, maxDetection);
+        detectionMeter.fillAmount = startingDetection / maxDetection;
     }
 
     public void DecreaseDetection(float detectionLost)
     {
         startingDetection -= detectionLost;
-        startingDetection = Mathf.Clamp(startingDetection, 0, 200);
-
-        detectionMeter.fillAmount = startingDetection / 200.0f;
+        startingDetection = Mathf.Clamp(startingDetection, 0, maxDetection);
+        detectionMeter.fillAmount = startingDetection / maxDetection;
     }
 
     public float ReturnStartingDetection()
     {
-        return this.startingDetection;
+        return startingDetection;
     }
 }
