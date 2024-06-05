@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] RockCollision rockCollision;
     [SerializeField] PickUpObject rock;
 
+    [SerializeField] bool hasJetPack;
+
 
 
 
@@ -42,5 +44,15 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("AllDirectionRaycast component not found on the throwable object.");
             }
         }
+    }
+
+    public void SetJetPackStatus(bool value)
+    {
+        hasJetPack = value;
+    }
+
+    public bool CanUseJetPack()
+    {
+        return this.hasJetPack;
     }
 }

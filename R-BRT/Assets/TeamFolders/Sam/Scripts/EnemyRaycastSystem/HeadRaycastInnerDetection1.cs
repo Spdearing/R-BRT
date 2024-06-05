@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadRaycast : MonoBehaviour
+public class HeadRaycastInnerDetection : MonoBehaviour
 {
     [SerializeField] private float raycastDistance;
     [SerializeField] private float detectionAngle; // Total angle of the cone
@@ -38,7 +38,7 @@ public class HeadRaycast : MonoBehaviour
             Ray ray = new Ray(transform.position, rayDirection);
             RaycastHit hitInfo;
 
-            Debug.DrawRay(ray.origin, ray.direction * raycastDistance, Color.red);
+            Debug.DrawRay(ray.origin, ray.direction * raycastDistance, Color.yellow);
 
             if (Physics.Raycast(ray, out hitInfo, raycastDistance))
             {
