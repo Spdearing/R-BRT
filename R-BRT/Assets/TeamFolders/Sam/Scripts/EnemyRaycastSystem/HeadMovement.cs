@@ -1,31 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeadMovement : MonoBehaviour
 {
-    bool robotIsActive;
+    bool robotIsActive = true;
     bool playerIsSpotted;
+    bool rotatingLeft = true;
+    bool isPaused = false;
 
-    [SerializeField] private Vector3 turningHeadLeft;
-    [SerializeField] private Vector3 turningHeadRight;
-
+    [SerializeField] private float rotationAngle = 45f; // Rotation angle in degrees
+    [SerializeField] private float rotationSpeed = 25f; // Rotation speed
     [SerializeField] Light enemyLight;
 
-
-    private bool rotatingLeft = true;
-    private bool isPaused = false;
+    private float startYRotation;
+    private float targetYRotation;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        turningHeadLeft = new Vector3(0, 25, 0); // Turning the head clockwise
-        turningHeadRight = new Vector3(0, -25, 0); // Turning the head counterclockwise
-        robotIsActive = true;
+        startYRotation = transform.eulerAngles.y;
+        SetTargetYRotation();
         enemyLight = GetComponentInChildren<Light>();
-
-        StartCoroutine(MovingHeadRotation());
     }
 
     // Update is called once per frame
@@ -34,32 +29,16 @@ public class HeadMovement : MonoBehaviour
         if (robotIsActive && !isPaused && !playerIsSpotted)
         {
             enemyLight.color = Color.green;
-            if (rotatingLeft)
+
+            float step = rotationSpeed * Time.deltaTime;
+            float newYRotation = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetYRotation, step);
+
+            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, newYRotation, transform.eulerAngles.z);
+
+            if (Mathf.Approximately(newYRotation, targetYRotation))
             {
-                transform.Rotate(turningHeadLeft * Time.deltaTime);
-
-                if (transform.eulerAngles.y >= 45 && transform.eulerAngles.y <= 60)
-                {
-                    StartCoroutine(PauseAndSwitchDirection());
-                }
+                StartCoroutine(PauseAndSwitchDirection());
             }
-            else
-            {
-                transform.Rotate(turningHeadRight * Time.deltaTime);
-
-                if (transform.eulerAngles.y <= 315 && transform.eulerAngles.y >= 300)
-                {
-                    StartCoroutine(PauseAndSwitchDirection());
-                }
-            }
-        }
-    }
-
-    IEnumerator MovingHeadRotation()
-    {
-        while (robotIsActive)
-        {
-            yield return null;
         }
     }
 
@@ -68,14 +47,32 @@ public class HeadMovement : MonoBehaviour
         isPaused = true;
         yield return new WaitForSeconds(2.0f);
         rotatingLeft = !rotatingLeft;
+        SetTargetYRotation();
         isPaused = false;
+    }
+
+    private void SetTargetYRotation()
+    {
+        if (rotatingLeft)
+        {
+            targetYRotation = startYRotation - rotationAngle;
+        }
+        else
+        {
+            targetYRotation = startYRotation + rotationAngle;
+        }
     }
 
     public void SetPlayerSpotted(bool value)
     {
         playerIsSpotted = value;
+        if (playerIsSpotted)
+        {
+            enemyLight.color = Color.red; // Change the light color to red if the player is spotted
+        }
+        else
+        {
+            enemyLight.color = Color.green; // Change the light color to green if the player is not spotted
+        }
     }
 }
-
-
-
