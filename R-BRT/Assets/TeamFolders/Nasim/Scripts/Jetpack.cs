@@ -60,7 +60,6 @@ public class Jetpack : MonoBehaviour
                 }
 
                 playerCharacterController.rb.velocity += Vector3.up * totalAcceleration * Time.deltaTime;
-                Debug.Log(playerCharacterController.rb.velocity);
 
                 currentFillRatio = currentFillRatio - (Time.deltaTime / consumeFuelDuration);
 
