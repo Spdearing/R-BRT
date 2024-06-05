@@ -7,6 +7,7 @@ TagManager:
   - PickUpItem
   - Enemy
   - Ground
+  - Battery
   layers:
   - Default
   - TransparentFX
