@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Best Performance;
+        Application.targetFrameRate = -1;
+        // Limit the framerate to 60
+        Application.targetFrameRate = 60;
         rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
         rock = GetComponent<PickUpObject>();
     }

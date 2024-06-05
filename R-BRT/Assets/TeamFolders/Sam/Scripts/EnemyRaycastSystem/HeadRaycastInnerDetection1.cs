@@ -10,7 +10,7 @@ public class HeadRaycastDetection : MonoBehaviour
     [SerializeField] private HeadMovement headMovement; // Reference to the HeadMovement script
     [SerializeField] private DetectionMeter detection; // Reference to the DetectionMeter script
     [SerializeField] private float detectionDelay; // Delay before increasing detection
-    [SerializeField] private float detectionAmount; // Amount of detection increase
+    [SerializeField] private float detectionAmountLow; // Amount of detection increase
 
     private float detectionTimer = 0.0f; // Timer to track detection delay
     private float detectionPeriod = 0.0f; // Period of time that the player is being detected.
@@ -19,7 +19,9 @@ public class HeadRaycastDetection : MonoBehaviour
     void Start()
     {
         detectionDelay = .0005f;
-        detectionAmount = .075f;
+        detectionAmountLow = .075f;
+        //detectionAmountMedium = .1f;
+        //detectionAmountHight = .075f;
         raycastDistance = 10.0f;
         player = GameObject.FindWithTag("Player"); // Find the player by tag
         headMovement = GetComponent<HeadMovement>(); // Get the HeadMovement component
@@ -48,7 +50,7 @@ public class HeadRaycastDetection : MonoBehaviour
 
                 if (detectionTimer >= detectionDelay)
                 {
-                    detection.IncreaseDetection(detectionAmount); // Increase detection level
+                    detection.IncreaseDetection(detectionAmountLow); // Increase detection level
                     detectionTimer = 0.0f; // Reset the detection timer
                 }
             }
