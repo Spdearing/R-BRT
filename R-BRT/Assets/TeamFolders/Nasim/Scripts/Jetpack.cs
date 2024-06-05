@@ -5,14 +5,14 @@ using UnityEngine;
 public class Jetpack : MonoBehaviour
     {
         public bool canUseJetpack;
-        public float jetpackAcceleration = 25f;
+        public float jetpackAcceleration = 15f;
 
         [Range(0f, 1f)]
         public float jetpackDownwardVelocity = 0.75f;
 
         public float consumeFuelDuration = 1.5f;
         public float refuelDurationGrounded = 2f;
-        public float refuelDurationAirborne = 5f;
+        public float refuelDurationAirborne = 3f;
         public float refuelDelay = 1f;
 
         public float currentFillRatio;
@@ -54,12 +54,13 @@ public class Jetpack : MonoBehaviour
 
                 totalAcceleration += playerCharacterController.gravity;
 
-                if (playerCharacterController.velocity.y < 0f) {
+                if (playerCharacterController.rb.velocity.y < 0f) {
 
-                    totalAcceleration += ((-playerCharacterController.velocity.y / Time.deltaTime) * jetpackDownwardVelocity);
+                    totalAcceleration += ((-playerCharacterController.rb.velocity.y / Time.deltaTime) * jetpackDownwardVelocity);
                 }
 
-                playerCharacterController.velocity += Vector3.up * totalAcceleration * Time.deltaTime;
+                playerCharacterController.rb.velocity += Vector3.up * totalAcceleration * Time.deltaTime;
+                Debug.Log(playerCharacterController.rb.velocity);
 
                 currentFillRatio = currentFillRatio - (Time.deltaTime / consumeFuelDuration);
 
