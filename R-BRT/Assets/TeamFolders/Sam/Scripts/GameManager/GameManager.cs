@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PickUpObject rock;
 
     [SerializeField] bool hasJetPack;
+    [SerializeField] bool hasStealth;
 
 
 
@@ -54,5 +55,15 @@ public class GameManager : MonoBehaviour
     public bool CanUseJetPack()
     {
         return this.hasJetPack;
+    }
+
+    public void SetStealthStatus(bool value)
+    {
+        hasStealth = value;
+    }
+
+    public bool CanUseStealth()
+    {
+        return this.hasStealth;
     }
 }
