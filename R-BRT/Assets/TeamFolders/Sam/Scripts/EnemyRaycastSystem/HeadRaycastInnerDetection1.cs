@@ -9,19 +9,13 @@ public class HeadRaycastDetection : MonoBehaviour
     [SerializeField] private GameObject player; // Reference to the player object
     [SerializeField] private HeadMovement headMovement; // Reference to the HeadMovement script
     [SerializeField] private DetectionMeter detection; // Reference to the DetectionMeter script
-    [SerializeField] private float detectionDelay; // Delay before increasing detection
-    [SerializeField] private float detectionAmountLow; // Amount of detection increase
+    [SerializeField] private float detectionIncreaseRate = 10.0f; // Base rate at which detection increases
+    [SerializeField] private float detectionDecreaseRate = 5.0f; // Rate at which detection decreases when player is not detected
 
-    private float detectionTimer = 0.0f; // Timer to track detection delay
-    private float detectionPeriod = 0.0f; // Period of time that the player is being detected.
     private bool playerDetected = false; // Flag to track player detection status
 
     void Start()
     {
-        detectionDelay = .0005f;
-        detectionAmountLow = .075f;
-        //detectionAmountMedium = .1f;
-        //detectionAmountHight = .075f;
         raycastDistance = 10.0f;
         player = GameObject.FindWithTag("Player"); // Find the player by tag
         headMovement = GetComponent<HeadMovement>(); // Get the HeadMovement component
@@ -44,26 +38,18 @@ public class HeadRaycastDetection : MonoBehaviour
             {
                 playerDetected = true;
                 Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-                transform.LookAt(lookPosition); // Make the head look at the player
-                detectionTimer += Time.deltaTime; // Increment the detection timer
-                detectionPeriod += Time.deltaTime; // Increment the detection timer
-
-                if (detectionTimer >= detectionDelay)
-                {
-                    detection.IncreaseDetection(detectionAmountLow); // Increase detection level
-                    detectionTimer = 0.0f; // Reset the detection timer
-                }
+                transform.LookAt(lookPosition); 
+                detection.IncreaseDetection(detectionIncreaseRate);
+                detectionIncreaseRate = (detectionIncreaseRate + .1f);
             }
             else
             {
                 playerDetected = false;
-                detectionTimer = 0.0f; // Reset the detection timer if the player is not detected
             }
         }
         else
         {
             playerDetected = false;
-            detectionTimer = 0.0f; // Reset the detection timer if the player is not detected
         }
 
         if (playerDetected)
@@ -75,6 +61,8 @@ public class HeadRaycastDetection : MonoBehaviour
         {
             headMovement.SetPlayerSpotted(false); // Notify the head movement script
             enemyLight.color = Color.green; // Change light color to green
+            detection.DecreaseDetection(detectionDecreaseRate * Time.deltaTime); // Gradually decrease detection when the player is not detected
+            detectionDecreaseRate = (detectionDecreaseRate + 0.1f);
         }
     }
 }
