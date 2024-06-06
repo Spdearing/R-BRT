@@ -7,7 +7,7 @@ public class DetectionMeter : MonoBehaviour
 {
     [SerializeField] Image detectionMeter;
     [SerializeField] float startingDetection = 0.0f;
-    [SerializeField] float detectionIncrement = 0.75f;
+    [SerializeField] float detectionIncrement = 0.5f;
     [SerializeField] float maxDetection = 200.0f;
 
     void Start()
