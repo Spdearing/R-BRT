@@ -24,7 +24,7 @@ public class DetectionMeter : MonoBehaviour
 
     public void DecreaseDetection(float detectionLost)
     {
-        startingDetection -= detectionLost;
+        startingDetection -= detectionLost * Time.deltaTime * detectionIncrement;
         startingDetection = Mathf.Clamp(startingDetection, 0, maxDetection);
         detectionMeter.fillAmount = startingDetection / maxDetection;
     }
