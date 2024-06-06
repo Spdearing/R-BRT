@@ -40,7 +40,7 @@ public class HeadRaycastDetection : MonoBehaviour
                 Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
                 transform.LookAt(lookPosition); 
                 detection.IncreaseDetection(detectionIncreaseRate);
-                detectionIncreaseRate = (detectionIncreaseRate + .1f);
+                detectionIncreaseRate = (detectionIncreaseRate + .5f);
             }
             else
             {
@@ -61,8 +61,8 @@ public class HeadRaycastDetection : MonoBehaviour
         {
             headMovement.SetPlayerSpotted(false); // Notify the head movement script
             enemyLight.color = Color.green; // Change light color to green
-            detection.DecreaseDetection(detectionDecreaseRate * Time.deltaTime); // Gradually decrease detection when the player is not detected
-            detectionDecreaseRate = (detectionDecreaseRate + 0.1f);
+            detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+            detectionDecreaseRate = (detectionDecreaseRate + 0.5f);
         }
     }
 }
