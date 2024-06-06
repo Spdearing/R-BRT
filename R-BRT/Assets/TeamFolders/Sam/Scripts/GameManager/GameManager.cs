@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] RockCollision rockCollision;
     [SerializeField] PickUpObject rock;
 
+
+
     [SerializeField] bool hasJetPack;
     [SerializeField] bool hasStealth;
 
@@ -23,9 +25,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // Best Performance;
-        //Application.targetFrameRate = -1;
-        //// Limit the framerate to 60
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = -1;
+        // Limit the framerate to 60
+        Application.targetFrameRate = 60;
         rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
         rock = GetComponent<PickUpObject>();
     }
