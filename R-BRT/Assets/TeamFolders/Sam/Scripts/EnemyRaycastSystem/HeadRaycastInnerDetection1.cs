@@ -9,13 +9,15 @@ public class HeadRaycastDetection : MonoBehaviour
     [SerializeField] private GameObject player; // Reference to the player object
     [SerializeField] private HeadMovement headMovement; // Reference to the HeadMovement script
     [SerializeField] private DetectionMeter detection; // Reference to the DetectionMeter script
-    [SerializeField] private float detectionIncreaseRate = 10.0f; // Base rate at which detection increases
-    [SerializeField] private float detectionDecreaseRate = 5.0f; // Rate at which detection decreases when player is not detected
+    [SerializeField] private float detectionIncreaseRate; // Base rate at which detection increases
+    [SerializeField] private float detectionDecreaseRate; // Rate at which detection decreases when player is not detected
 
     private bool playerDetected = false; // Flag to track player detection status
 
     void Start()
     {
+        detectionDecreaseRate = 25.0f;
+        detectionIncreaseRate = 5.0f;
         raycastDistance = 10.0f;
         player = GameObject.FindWithTag("Player"); // Find the player by tag
         headMovement = GetComponent<HeadMovement>(); // Get the HeadMovement component
@@ -62,7 +64,8 @@ public class HeadRaycastDetection : MonoBehaviour
             headMovement.SetPlayerSpotted(false); // Notify the head movement script
             enemyLight.color = Color.green; // Change light color to green
             detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
-            detectionDecreaseRate = (detectionDecreaseRate + 0.5f);
+            detectionIncreaseRate = 5.0f;
+
         }
     }
 }
