@@ -5,11 +5,10 @@ using UnityEngine;
 public class HeadRaycastGroundBotDetection : MonoBehaviour
 {
     [SerializeField] private float raycastDistance; // Distance of the raycast
-    [SerializeField] private Renderer enemyHeadColor;
-    [SerializeField] private GameObject groundBot;
-    [SerializeField] private GameObject enemyHead; // Light component on the enemy
+    [SerializeField] private GameObject groundBotHead;
+    [SerializeField] private Renderer groundBotHeadColor;
     [SerializeField] private GameObject player; // Reference to the player object
-    [SerializeField] private HeadMovement headMovement; // Reference to the HeadMovement script
+    [SerializeField] private GroundBotHeadMovement headMovement; // Reference to the HeadMovement script
     [SerializeField] private DetectionMeter detection; // Reference to the DetectionMeter script
     [SerializeField] private float detectionIncreaseRate; // Base rate at which detection increases
     [SerializeField] private float detectionDecreaseRate; // Rate at which detection decreases when player is not detected
@@ -22,10 +21,9 @@ public class HeadRaycastGroundBotDetection : MonoBehaviour
         detectionIncreaseRate = 5.0f;
         raycastDistance = 10.0f;
         player = GameObject.FindWithTag("Player"); // Find the player by tag
-        headMovement = GetComponent<HeadMovement>(); // Get the HeadMovement component
-        groundBot = GameObject.Find("GroundBotUnity-3").GetComponent<GameObject>();
-        enemyHead = groundBot.transform.Find("Head").GetComponent<GameObject>(); // Set initial light color to green
-        enemyHeadColor = GetComponent<Renderer>();
+        headMovement = GetComponent<GroundBotHeadMovement>(); // Get the HeadMovement component
+        groundBotHead = gameObject.transform.Find("Head").gameObject;
+        groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
         detection = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>(); // Find the DetectionMeter script
     }
 
@@ -60,12 +58,12 @@ public class HeadRaycastGroundBotDetection : MonoBehaviour
         if (playerDetected)
         {
             headMovement.SetPlayerSpotted(true); // Notify the head movement script
-            enemyHeadColor.material.color = Color.red; // Change light color to red
+            groundBotHeadColor.material.color = Color.red; // Change light color to red
         }
         else
         {
             headMovement.SetPlayerSpotted(false); // Notify the head movement script
-            enemyHeadColor.material.color = Color.green; // Change light color to green
+            groundBotHeadColor.material.color = Color.green; // Change light color to green
             detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
             detectionIncreaseRate = 5.0f;
 
