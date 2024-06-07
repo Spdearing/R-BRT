@@ -6,7 +6,9 @@ public class EnemyProximity : MonoBehaviour
 {
     [SerializeField] GameObject enemyRaycast;
     [SerializeField] GameObject player;
-    [SerializeField] bool playerIsSeen;
+    [SerializeField] bool playerWithinRange;
+
+    [SerializeField] GroundBotHeadRaycastDetection groundBotDetection;
 
 
     private void Start()
@@ -17,7 +19,7 @@ public class EnemyProximity : MonoBehaviour
 
     private void Update()
     {
-        if (playerIsSeen)
+        if (playerWithinRange && groundBotDetection.ReturnPlayerDetected() == false)
         {
             Vector3 playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
             enemyRaycast.transform.LookAt(playerPosition);
@@ -29,7 +31,7 @@ public class EnemyProximity : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            playerIsSeen = true;
+            playerWithinRange = true;
         }
     }
 
@@ -38,7 +40,12 @@ public class EnemyProximity : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            playerIsSeen = false;
+            playerWithinRange = false;
         }
+    }
+
+    public bool ReturnPlayerProximity()
+    {
+        return this.playerWithinRange;
     }
 }

@@ -700,7 +700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &715207159
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1484,7 +1484,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2673026289010004462, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1445639722}
   m_SourcePrefab: {fileID: 100100000, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
 --- !u!1 &1402097067
 GameObject:
@@ -1534,8 +1537,10 @@ MonoBehaviour:
   groundBotHead: {fileID: 0}
   groundBotHeadColor: {fileID: 0}
   player: {fileID: 0}
+  playerCollisions: {fileID: 0}
   groundBot: {fileID: 0}
   headMovement: {fileID: 0}
+  proximityCheck: {fileID: 0}
   detection: {fileID: 0}
   detectionIncreaseRate: 0
   detectionDecreaseRate: 0
@@ -1615,6 +1620,24 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 960964354}
   m_SourcePrefab: {fileID: 100100000, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
+--- !u!1 &1445639718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2673026289010004462, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+  m_PrefabInstance: {fileID: 1338830129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1445639722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445639718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3686e1adf80bb3468c5b4917ef1d686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpotted: 0
 --- !u!1 &1583053368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,6 +2112,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1228320988700292397, guid: 192a00c5b08640b4bb5935dfb8834453, type: 3}
+      propertyPath: m_TagString
+      value: FOV
+      objectReference: {fileID: 0}
     - target: {fileID: 1557320945941864441, guid: 192a00c5b08640b4bb5935dfb8834453, type: 3}
       propertyPath: m_Mesh
       value: 
