@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadRaycastGroundBotDetection : MonoBehaviour
+public class GroundBotHeadRaycastDetection : MonoBehaviour
 {
     [SerializeField] private float raycastDistance; // Distance of the raycast
     [SerializeField] private GameObject groundBotHead;
     [SerializeField] private Renderer groundBotHeadColor;
     [SerializeField] private GameObject player; // Reference to the player object
+    [SerializeField] private PlayerCollisions playerCollisions;
     [SerializeField] private GameObject groundBot;
     [SerializeField] private GroundBotHeadMovement headMovement; // Reference to the HeadMovement script
+    [SerializeField] private EnemyProximity proximityCheck;
     [SerializeField] private DetectionMeter detection; // Reference to the DetectionMeter script
     [SerializeField] private float detectionIncreaseRate; // Base rate at which detection increases
     [SerializeField] private float detectionDecreaseRate; // Rate at which detection decreases when player is not detected
@@ -22,8 +24,10 @@ public class HeadRaycastGroundBotDetection : MonoBehaviour
         detectionDecreaseRate = 25.0f;
         detectionIncreaseRate = 5.0f;
         raycastDistance = 10.0f;
-        player = GameObject.FindWithTag("Player"); // Find the player by tag
+        player = GameObject.Find("Player"); // Find the player by tag
+        playerCollisions = GameObject.Find("Player").GetComponent<PlayerCollisions>(); 
         headMovement = GameObject.Find("GroundBot").GetComponent<GroundBotHeadMovement>(); // Get the HeadMovement component
+        proximityCheck = GameObject.Find("GroundBot").GetComponent<EnemyProximity>();
         groundBotHead = GameObject.Find("GroundBotHead");
         groundBot = GameObject.Find("GroundBot");
         groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
@@ -40,7 +44,7 @@ public class HeadRaycastGroundBotDetection : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, raycastDistance))
         {
-            if (hitInfo.collider.CompareTag("Player"))
+            if (hitInfo.collider.CompareTag("Player") && proximityCheck.ReturnPlayerProximity() == true && playerCollisions.ReturnPlayerSpotted() == true)
             {
                 playerDetected = true;
                 Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
@@ -51,7 +55,7 @@ public class HeadRaycastGroundBotDetection : MonoBehaviour
                 if (playerDetected)
                 {
                     headMovement.SetPlayerSpotted(true); // Notify the head movement script
-                    groundBotHeadColor.material.color = Color.red; // Change light color to red
+                    this.groundBotHeadColor.material.color = Color.red; // Change light color to red
                 }
             }
             else
@@ -62,10 +66,15 @@ public class HeadRaycastGroundBotDetection : MonoBehaviour
         else
         {
             headMovement.SetPlayerSpotted(false); // Notify the head movement script
-            groundBotHeadColor.material.color = Color.green; // Change light color to green
+            this.groundBotHeadColor.material.color = Color.green; // Change light color to green
             detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
             detectionIncreaseRate = 5.0f;
 
         }
+    }
+
+    public bool ReturnPlayerDetected()
+    {
+        return this.playerDetected;
     }
 }
