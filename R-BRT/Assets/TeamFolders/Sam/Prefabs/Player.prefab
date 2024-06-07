@@ -264,7 +264,7 @@ MonoBehaviour:
   gravity: -1
   isSprinting: 0
   groundDrag: 5
-  jumpForce: 7.5
+  jumpForce: 4
   jumpCooldown: 0.25
   airMultiplier: 0.4
   isJumping: 0
@@ -282,6 +282,7 @@ MonoBehaviour:
   isGrounded: 0
   velocity: {x: 0, y: 0, z: 0}
   orientation: {fileID: 159131420631619943}
+  rb: {fileID: 0}
   currentState: 0
   tr: {fileID: 0}
 --- !u!54 &7535573870673738426
