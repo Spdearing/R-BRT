@@ -538,7 +538,9 @@ PrefabInstance:
       value: R-BRT-RightSize2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -6543199710458433195, guid: 7c5742ae96cf3544288a6c558825e183, type: 3}
+    - {fileID: 2515922944097591039, guid: 7c5742ae96cf3544288a6c558825e183, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c5742ae96cf3544288a6c558825e183, type: 3}
