@@ -56,8 +56,7 @@ public class PlayerRaycast : MonoBehaviour
 
             if (hitInfo.distance < interactDistance)
             {
-                Debug.Log("Hit Something");
-
+                
                 if(hitInfo.collider.tag == "PickUpItem")
                 {
                     interactableText.text = "Press (F) to pick up the rock";

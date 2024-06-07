@@ -13,6 +13,7 @@ public class EnemyProximity : MonoBehaviour
 
     private void Start()
     {
+        groundBotDetection = GameObject.Find("EnemyRaycast").GetComponent<GroundBotHeadRaycastDetection>();
         player = GameObject.Find("Player");
         
     }

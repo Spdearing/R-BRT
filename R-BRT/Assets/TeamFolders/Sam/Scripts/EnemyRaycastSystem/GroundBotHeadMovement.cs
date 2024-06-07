@@ -12,6 +12,7 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 25f; // Rotation speed
     [SerializeField] private GameObject groundBotHead;
     [SerializeField] private Renderer groundBotHeadColor;
+    [SerializeField] private PlayerCollisions playerCollision;
     [SerializeField] private Material green;
     [SerializeField] private Material red;
 
@@ -22,6 +23,7 @@ public class GroundBotHeadMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerCollision = GameObject.Find("Player").GetComponent<PlayerCollisions>();
         groundBotHead = this.gameObject.transform.Find("GroundBotHead").gameObject;
         groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
         groundBotHeadColor.material = green; // Change light color to red
@@ -34,19 +36,20 @@ public class GroundBotHeadMovement : MonoBehaviour
     {
         if (robotIsActive && !isPaused && !playerIsSpotted)
         {
-            
-            float step = rotationSpeed * Time.deltaTime;
-
-            float newYRotation = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetYRotation, step);
-
-            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, newYRotation, transform.eulerAngles.z);
-
-            if (Mathf.Approximately(newYRotation, targetYRotation))
+            if (playerCollision.ReturnPlayerSpotted() == false)
             {
-                StartCoroutine(PauseAndSwitchDirection());
+                float step = rotationSpeed * Time.deltaTime;
+
+                float newYRotation = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetYRotation, step);
+
+                transform.rotation = Quaternion.Euler(transform.eulerAngles.x, newYRotation, transform.eulerAngles.z);
+
+                if (Mathf.Approximately(newYRotation, targetYRotation))
+                {
+                    StartCoroutine(PauseAndSwitchDirection());
+                }
             }
         }
-
         //PlayerIsDetected();
     }
 
