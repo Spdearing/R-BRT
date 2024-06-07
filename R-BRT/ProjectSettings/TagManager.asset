@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Ground
   - Battery
+  - FOV
   layers:
   - Default
   - TransparentFX

@@ -36,6 +36,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         {
             
             float step = rotationSpeed * Time.deltaTime;
+
             float newYRotation = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetYRotation, step);
 
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, newYRotation, transform.eulerAngles.z);
@@ -46,7 +47,7 @@ public class GroundBotHeadMovement : MonoBehaviour
             }
         }
 
-        PlayerIsDetected();
+        //PlayerIsDetected();
     }
 
     IEnumerator PauseAndSwitchDirection()
@@ -75,15 +76,15 @@ public class GroundBotHeadMovement : MonoBehaviour
         playerIsSpotted = value;
     }
 
-    public void PlayerIsDetected()
-    {
-        if (playerIsSpotted)
-        {
-            groundBotHeadColor.material = red; // Change light color to red
-        }
-        else
-        {
-            groundBotHeadColor.material = green; // Change light color to green
-        }
-    }
+    //public void PlayerIsDetected()
+    //{
+    //    if (playerIsSpotted)
+    //    {
+    //        groundBotHeadColor.material = red; // Change light color to red
+    //    }
+    //    else
+    //    {
+    //        groundBotHeadColor.material = green; // Change light color to green
+    //    }
+    //}
 }
