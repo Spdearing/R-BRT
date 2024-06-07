@@ -12,6 +12,8 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 25f; // Rotation speed
     [SerializeField] private GameObject groundBotHead;
     [SerializeField] private Renderer groundBotHeadColor;
+    [SerializeField] private Material green;
+    [SerializeField] private Material red;
 
 
     private float startYRotation;
@@ -20,9 +22,9 @@ public class GroundBotHeadMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        groundBotHead = gameObject.transform.Find("Head").gameObject;
+        groundBotHead = this.gameObject.transform.Find("GroundBotHead").gameObject;
         groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
-        groundBotHeadColor.material.color = Color.green; // Change light color to red
+        groundBotHeadColor.material = green; // Change light color to red
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
     }
@@ -43,6 +45,8 @@ public class GroundBotHeadMovement : MonoBehaviour
                 StartCoroutine(PauseAndSwitchDirection());
             }
         }
+
+        PlayerIsDetected();
     }
 
     IEnumerator PauseAndSwitchDirection()
@@ -69,13 +73,17 @@ public class GroundBotHeadMovement : MonoBehaviour
     public void SetPlayerSpotted(bool value)
     {
         playerIsSpotted = value;
+    }
+
+    public void PlayerIsDetected()
+    {
         if (playerIsSpotted)
         {
-            groundBotHeadColor.material.color = Color.red; // Change light color to red
+            groundBotHeadColor.material = red; // Change light color to red
         }
         else
         {
-            groundBotHeadColor.material.color = Color.red; // Change light color to red
+            groundBotHeadColor.material = green; // Change light color to green
         }
     }
 }
