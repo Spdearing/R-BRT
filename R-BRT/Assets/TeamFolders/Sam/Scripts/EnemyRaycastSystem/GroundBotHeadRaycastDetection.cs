@@ -48,8 +48,11 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
             {
                 playerDetected = true;
                 Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-                groundBot.transform.LookAt(lookPosition); 
+                groundBot.transform.LookAt(lookPosition);
+                transform.LookAt(lookPosition);
+                Debug.Log("Player is being locked on to");
                 detection.IncreaseDetection(detectionIncreaseRate);
+                Debug.Log("Player is being detected");
                 detectionIncreaseRate = (detectionIncreaseRate + .5f);
 
                 if (playerDetected)
