@@ -4,15 +4,41 @@ using UnityEngine;
 
 public class EnemyProximity : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject enemyRaycast;
+    [SerializeField] GameObject player;
+    [SerializeField] bool playerIsSeen;
+
+
+    private void Start()
     {
+        player = GameObject.Find("Player");
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (playerIsSeen)
+        {
+            Vector3 playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+            enemyRaycast.transform.LookAt(playerPosition);
+        }
+    }
+
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            playerIsSeen = true;
+        }
+    }
+
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            playerIsSeen = false;
+        }
     }
 }
