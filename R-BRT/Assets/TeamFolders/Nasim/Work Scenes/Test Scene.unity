@@ -754,6 +754,8 @@ MonoBehaviour:
   player: {fileID: 1521761626}
   GUICanvas: {fileID: 1816412024}
   interactableText: {fileID: 517471803}
+  jetpackButton: {fileID: 2067924901}
+  stealthButton: {fileID: 1208863024}
 --- !u!65 &923998375
 BoxCollider:
   m_ObjectHideFlags: 0

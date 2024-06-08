@@ -8,11 +8,12 @@ public class Battery : MonoBehaviour
     Rigidbody rb;
     public GameObject player;
     Jetpack jetPack;
+    Invisibility invisibility;
 
     public Canvas GUICanvas;
     public GameObject interactableText;
-    public Button jetpackButton;
-    public Button stealthButton;
+    public GameObject jetpackButton;
+    public GameObject stealthButton;
 
     PlayerController playerCharacterController;
 
@@ -24,6 +25,7 @@ public class Battery : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gameObject.tag = "Battery";
         jetPack = player.GetComponent<Jetpack>();
+        invisibility = player.GetComponent<Invisibility>();
         playerCharacterController = player.GetComponent<PlayerController>();
     }
 
@@ -47,8 +49,12 @@ public class Battery : MonoBehaviour
         Destroy(gameObject);*/
     }
 
-    void SelectAbility()
+    public void OnClick()
     {
-        
+        jetpackButton.onClick()
+        {
+        jetPack.enabled = true;
+        Destroy(gameObject);
+        }
     }
 }
