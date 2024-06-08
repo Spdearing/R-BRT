@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class EnemyProximity : MonoBehaviour
 {
-    [SerializeField] GameObject enemyRaycast;
-    [SerializeField] GameObject player;
-    [SerializeField] bool playerWithinRange;
-
-    [SerializeField] GroundBotHeadRaycastDetection groundBotDetection;
-
+    [SerializeField] private GameObject enemyRaycast;
+    [SerializeField] private GameObject player;
+    [SerializeField] private bool playerWithinRange;
+    [SerializeField] private GroundBotHeadRaycastDetection groundBotDetection;
 
     private void Start()
     {
-        groundBotDetection = GameObject.Find("EnemyRaycast").GetComponent<GroundBotHeadRaycastDetection>();
-        player = GameObject.Find("Player");
-        
+        // Using GetComponentInChildren to find the GroundBotHeadRaycastDetection script within the prefab instance
+        groundBotDetection = GetComponentInChildren<GroundBotHeadRaycastDetection>();
+
+        // Ensure player is correctly referenced
+        player = GameObject.FindWithTag("Player");
+
+        // Validate component assignments
+        if (groundBotDetection == null)
+        {
+            Debug.LogError("GroundBotHeadRaycastDetection component not found in children.");
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("Player GameObject not found.");
+        }
     }
 
     private void Update()
@@ -27,19 +38,17 @@ public class EnemyProximity : MonoBehaviour
         }
     }
 
-
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             playerWithinRange = true;
         }
     }
 
-
-    public void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             playerWithinRange = false;
         }
@@ -47,6 +56,6 @@ public class EnemyProximity : MonoBehaviour
 
     public bool ReturnPlayerProximity()
     {
-        return this.playerWithinRange;
+        return playerWithinRange;
     }
 }
