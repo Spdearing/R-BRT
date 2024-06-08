@@ -27,7 +27,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
         detectionDecreaseRate = 25.0f;
         detectionIncreaseRate = 5.0f;
         raycastDistance = 10.0f;
-        //player = GameObject.Find("Player"); // Find the player by tag
+        player = GameObject.Find ("Player"); // Find the player by tag
         //groundBot = GameObject.FindWithTag("GroundBot");
         //enemyFieldOfView = groundBot.GetComponentInChildren<EnemyFieldOfView>(); 
         //headMovement = GameObject.Find("GroundBot").GetComponent<GroundBotHeadMovement>(); // Get the HeadMovement component
