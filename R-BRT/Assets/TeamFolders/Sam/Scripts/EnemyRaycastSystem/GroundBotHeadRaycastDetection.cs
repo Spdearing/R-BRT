@@ -4,52 +4,37 @@ using UnityEngine;
 
 public class GroundBotHeadRaycastDetection : MonoBehaviour
 {
-    [SerializeField] private float raycastDistance = 10.0f; // Distance of the raycast
+    [SerializeField] private float raycastDistance; // Distance of the raycast
+    [SerializeField] private GameObject groundBotHead;
     [SerializeField] private Renderer groundBotHeadColor;
     [SerializeField] private GameObject player; // Reference to the player object
-    [SerializeField] private GameObject groundBot;
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] private GameObject groundBot;
     [SerializeField] private GroundBotHeadMovement headMovement; // Reference to the HeadMovement script
     [SerializeField] private EnemyProximity proximityCheck;
     [SerializeField] private DetectionMeter detection; // Reference to the DetectionMeter script
-    [SerializeField] private float detectionIncreaseRate = 5.0f; // Base rate at which detection increases
-    [SerializeField] private float detectionDecreaseRate = 25.0f; // Rate at which detection decreases when player is not detected
+    [SerializeField] private float detectionIncreaseRate; // Base rate at which detection increases
+    [SerializeField] private float detectionDecreaseRate; // Rate at which detection decreases when player is not detected
 
-    private bool playerDetected = false; // Flag to track player detection status
-    private bool playerIsBeingTracked = false;
+    [SerializeField] private bool playerDetected; // Flag to track player detection status
+    [SerializeField] private bool playerIsBeingTracked;
     [SerializeField] private LayerMask ignoreLayerMask;
 
     void Start()
     {
-        // Use GetComponentInChildren or GetComponentInParent if the components are in the hierarchy
-        player = GameObject.FindWithTag("Player");
-        groundBot = GameObject.FindWithTag("GroundBot");
-
-        if (player != null)
-        {
-            enemyFieldOfView = groundBot.GetComponentInChildren<EnemyFieldOfView>();
-
-            if (enemyFieldOfView == null)
-            {
-                Debug.LogError("EnemyFieldOfView component not found on the Player GameObject.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Player GameObject not found.");
-        }
-
-        // Get components on the same GameObject or its children
-        groundBotHeadColor = GetComponentInChildren<Renderer>();
-        headMovement = GetComponent<GroundBotHeadMovement>();
-        proximityCheck = GetComponent<EnemyProximity>();
-        detection = FindObjectOfType<DetectionMeter>(); // Assuming there's only one DetectionMeter in the scene
-
-        // Validate component assignments
-        if (groundBotHeadColor == null || headMovement == null || proximityCheck == null || detection == null)
-        {
-            Debug.LogError("Required components not found on GroundBot or its children.");
-        }
+        playerIsBeingTracked = false;
+        playerDetected = false;
+        detectionDecreaseRate = 25.0f;
+        detectionIncreaseRate = 5.0f;
+        raycastDistance = 10.0f;
+        player = GameObject.Find("Player"); // Find the player by tag
+        enemyFieldOfView = GameObject.Find("FOV").GetComponent<EnemyFieldOfView>(); 
+        headMovement = GameObject.Find("GroundBot").GetComponent<GroundBotHeadMovement>(); // Get the HeadMovement component
+        proximityCheck = GameObject.Find("GroundBot").GetComponent<EnemyProximity>();
+        groundBotHead = GameObject.Find("GroundBotHead");
+        groundBot = GameObject.Find("GroundBot");
+        groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
+        detection = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>(); // Find the DetectionMeter script
     }
 
     void Update()
@@ -62,7 +47,6 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
         Debug.DrawRay(ray.origin, ray.direction * raycastDistance, Color.yellow); // Draw the ray in the Scene view
 
-        // Raycast with LayerMask to ignore specified layers
         if (Physics.Raycast(ray, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
             Debug.Log(hitInfo.collider.gameObject);
@@ -73,48 +57,59 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                 {
                     playerDetected = true;
                     Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                    groundBot.transform.LookAt(lookPosition);
                     transform.LookAt(lookPosition);
 
                     if (playerDetected)
                     {
                         detection.IncreaseDetection(detectionIncreaseRate);
-                        detectionIncreaseRate += 0.5f;
+                        detectionIncreaseRate = (detectionIncreaseRate + .5f);
                         headMovement.SetPlayerSpotted(true); // Notify the head movement script
                         groundBotHeadColor.material.color = Color.red; // Change light color to red
                     }
                 }
-                else
+                else if (!playerIsBeingTracked)
                 {
-                    ResetDetection();
+                    headMovement.SetPlayerSpotted(false); // Notify the head movement script
+                    groundBotHeadColor.material.color = Color.green; // Change light color to green
+                    detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+                    detectionIncreaseRate = 5.0f;
                 }
             }
             else
             {
                 playerDetected = false;
-                ResetDetection();
+                headMovement.SetPlayerSpotted(false); // Notify the head movement script
+                groundBotHeadColor.material.color = Color.green; // Change light color to green
+                detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+                detectionIncreaseRate = 5.0f;
             }
         }
-        else
+
+        else 
         {
-            ResetDetection();
+            headMovement.SetPlayerSpotted(false); // Notify the head movement script
+            groundBotHeadColor.material.color = Color.green; // Change light color to green
+            detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+            detectionIncreaseRate = 5.0f;
         }
     }
 
     void EnemyLockedOn()
     {
-        playerIsBeingTracked = proximityCheck.ReturnPlayerProximity() && enemyFieldOfView.ReturnPlayerSpotted();
-    }
+        if (proximityCheck.ReturnPlayerProximity() == true && enemyFieldOfView.ReturnPlayerSpotted() == true)
+        {
+            playerIsBeingTracked = true;
+        }
 
-    void ResetDetection()
-    {
-        headMovement.SetPlayerSpotted(false); // Notify the head movement script
-        groundBotHeadColor.material.color = Color.green; // Change light color to green
-        detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
-        detectionIncreaseRate = 5.0f;
+        else
+        {
+            playerIsBeingTracked = false;
+        }
     }
 
     public bool ReturnPlayerDetected()
     {
-        return playerDetected;
+        return this.playerDetected;
     }
 }

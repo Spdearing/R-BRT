@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Battery
   - FOV
+  - GroundBot
   layers:
   - Default
   - TransparentFX
