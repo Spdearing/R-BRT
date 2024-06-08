@@ -18,6 +18,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
     [SerializeField] private bool playerDetected; // Flag to track player detection status
     [SerializeField] private bool playerIsBeingTracked;
+    [SerializeField] private LayerMask ignoreLayerMask;
 
     void Start()
     {
@@ -46,11 +47,13 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
         Debug.DrawRay(ray.origin, ray.direction * raycastDistance, Color.yellow); // Draw the ray in the Scene view
 
-        if (Physics.Raycast(ray, out hitInfo, raycastDistance))
+        if (Physics.Raycast(ray, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
+            Debug.Log(hitInfo.collider.gameObject);
+
             if (hitInfo.collider.CompareTag("Player"))
             {
-                if(playerIsBeingTracked) 
+                if (playerIsBeingTracked)
                 {
                     playerDetected = true;
                     Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
@@ -64,29 +67,36 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                         headMovement.SetPlayerSpotted(true); // Notify the head movement script
                         groundBotHeadColor.material.color = Color.red; // Change light color to red
                     }
-                } 
+                }
+                else if (!playerIsBeingTracked)
+                {
+                    headMovement.SetPlayerSpotted(false); // Notify the head movement script
+                    groundBotHeadColor.material.color = Color.green; // Change light color to green
+                    detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+                    detectionIncreaseRate = 5.0f;
+                }
             }
             else
             {
-              playerDetected = false;
+                playerDetected = false;
+                headMovement.SetPlayerSpotted(false); // Notify the head movement script
+                groundBotHeadColor.material.color = Color.green; // Change light color to green
+                detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+                detectionIncreaseRate = 5.0f;
             }
         }
-        else
+
+        else 
         {
-            
             headMovement.SetPlayerSpotted(false); // Notify the head movement script
             groundBotHeadColor.material.color = Color.green; // Change light color to green
             detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
             detectionIncreaseRate = 5.0f;
-
         }
     }
 
     void EnemyLockedOn()
     {
-        Debug.Log(proximityCheck.ReturnPlayerProximity());
-        Debug.Log(enemyFieldOfView.ReturnPlayerSpotted());
-
         if (proximityCheck.ReturnPlayerProximity() == true && enemyFieldOfView.ReturnPlayerSpotted() == true)
         {
             playerIsBeingTracked = true;
