@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GroundBotHeadRaycastDetection : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private float raycastDistance; // Distance of the raycast
     [SerializeField] private GameObject groundBotHead;
     [SerializeField] private Renderer groundBotHeadColor;
@@ -22,12 +23,13 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingTracked = false;
         playerDetected = false;
         detectionDecreaseRate = 25.0f;
         detectionIncreaseRate = 5.0f;
         raycastDistance = 10.0f;
-        player = GameObject.Find ("Player"); // Find the player by tag
+        player = gameManager.ReturnPlayer(); // Find the player by tag
         //groundBot = GameObject.FindWithTag("GroundBot");
         //enemyFieldOfView = groundBot.GetComponentInChildren<EnemyFieldOfView>(); 
         //headMovement = GameObject.Find("GroundBot").GetComponent<GroundBotHeadMovement>(); // Get the HeadMovement component

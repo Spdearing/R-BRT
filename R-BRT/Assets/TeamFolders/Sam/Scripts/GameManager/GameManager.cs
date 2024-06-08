@@ -10,6 +10,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool hasJetPack;
     [SerializeField] bool hasStealth;
 
+    [SerializeField] GameObject player;
+
+    [SerializeField] static GameManager instance;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                // Look for an existing instance in the scene
+                instance = FindObjectOfType<GameManager>();
+
+                // If no instance exists, create a new one
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject("GameManager");
+                    instance = singletonObject.AddComponent<GameManager>();
+
+                    // Ensure that the GameManager persists across scene changes
+                    DontDestroyOnLoad(singletonObject);
+                }
+            }
+            return instance;
+        }
+    }
 
 
 
@@ -22,11 +48,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        // Best Performance;
-        Application.targetFrameRate = -1;
-        // Limit the framerate to 60
-        Application.targetFrameRate = 60;
+        player = GameObject.FindWithTag("Player");
         rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
         rock = GetComponent<PickUpObject>();
     }
@@ -70,5 +92,10 @@ public class GameManager : MonoBehaviour
     public bool CanUseStealth()
     {
         return this.hasStealth;
+    }
+
+    public GameObject ReturnPlayer()
+    {
+        return this.player;
     }
 }
