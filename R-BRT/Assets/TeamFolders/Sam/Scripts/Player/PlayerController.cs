@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     public bool isGrounded;
 
+    public bool isCameraLocked;
 
     public Vector3 velocity;
 
@@ -70,6 +71,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        isCameraLocked = false;
+
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
