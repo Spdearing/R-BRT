@@ -30,13 +30,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
         detectionIncreaseRate = 5.0f;
         raycastDistance = 10.0f;
         player = gameManager.ReturnPlayer(); // Find the player by tag
-        //groundBot = GameObject.FindWithTag("GroundBot");
-        //enemyFieldOfView = groundBot.GetComponentInChildren<EnemyFieldOfView>(); 
-        //headMovement = GameObject.Find("GroundBot").GetComponent<GroundBotHeadMovement>(); // Get the HeadMovement component
-        //proximityCheck = GameObject.Find("GroundBot").GetComponent<EnemyProximity>();
-        //groundBotHead = GameObject.FindWithTag("GroundBotHead");
-        //groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
-        //detection = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>(); // Find the DetectionMeter script
+        detection = gameManager.ReturnDetectionMeter();
     }
 
     void Update()
