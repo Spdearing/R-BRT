@@ -10,7 +10,10 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            Debug.Log("Seeing the Player");
+            Debug.Log(playerSpotted);
             playerSpotted = true;
+            Debug.Log(playerSpotted);
         }
         
     }
@@ -19,6 +22,7 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            Debug.Log("Player went away");
             playerSpotted = false;
         }
     }

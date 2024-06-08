@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 1296094807378304844}
   - component: {fileID: 1557320945941864441}
   - component: {fileID: 5517289864649627207}
-  m_Layer: 0
+  - component: {fileID: 3864121476492775101}
+  m_Layer: 2
   m_Name: FOV
   m_TagString: FOV
   m_Icon: {fileID: 0}
@@ -704,7 +705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3973
+  m_VersionIndex: 3976
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -811,6 +812,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &3864121476492775101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228320988700292397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3686e1adf80bb3468c5b4917ef1d686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpotted: 0
 --- !u!1 &3526448843167345577
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +873,7 @@ MonoBehaviour:
   groundBotHead: {fileID: 0}
   groundBotHeadColor: {fileID: 0}
   player: {fileID: 0}
-  playerCollisions: {fileID: 0}
+  enemyFieldOfView: {fileID: 0}
   groundBot: {fileID: 0}
   headMovement: {fileID: 0}
   proximityCheck: {fileID: 0}
@@ -868,6 +882,9 @@ MonoBehaviour:
   detectionDecreaseRate: 0
   playerDetected: 0
   playerIsBeingTracked: 0
+  ignoreLayerMask:
+    serializedVersion: 2
+    m_Bits: 4
 --- !u!1001 &5046710223778431915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -983,7 +1000,7 @@ MonoBehaviour:
   rotationSpeed: 25
   groundBotHead: {fileID: 0}
   groundBotHeadColor: {fileID: 0}
-  playerCollision: {fileID: 0}
+  enemyFieldOfView: {fileID: 0}
   green: {fileID: 2100000, guid: ebd55815eacc7474b96fea326e3f83a1, type: 2}
   red: {fileID: 2100000, guid: 0f3fb867325fb02428bf54b109e8a561, type: 2}
 --- !u!135 &6340269154454056214
