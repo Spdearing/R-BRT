@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool hasStealth;
 
     [SerializeField] GameObject player;
+    [SerializeField] DetectionMeter detectionMeter;
 
     [SerializeField] static GameManager instance;
 
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
         rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
         rock = GetComponent<PickUpObject>();
     }
@@ -97,5 +99,10 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnPlayer()
     {
         return this.player;
+    }
+
+    public DetectionMeter ReturnDetectionMeter()
+    {
+        return this.detectionMeter;
     }
 }
