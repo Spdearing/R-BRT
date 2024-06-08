@@ -23,9 +23,9 @@ public class GroundBotHeadMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyFieldOfView = GameObject.Find("FOV").GetComponent<EnemyFieldOfView>();
-        groundBotHead = this.gameObject.transform.Find("GroundBotHead").gameObject;
-        groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
+        //enemyFieldOfView = GameObject.Find("FOV").GetComponent<EnemyFieldOfView>();
+        //groundBotHead = this.gameObject.transform.Find("GroundBotHead").gameObject;
+        //groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
         groundBotHeadColor.material = green; // Change light color to red
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();

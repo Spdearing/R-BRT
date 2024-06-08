@@ -705,7 +705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3979
+  m_VersionIndex: 3982
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -870,13 +870,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDistance: 0
-  groundBotHead: {fileID: 0}
-  groundBotHeadColor: {fileID: 0}
+  groundBotHead: {fileID: 4210268098146252679}
+  groundBotHeadColor: {fileID: 19146883599842288}
   player: {fileID: 0}
-  enemyFieldOfView: {fileID: 0}
-  groundBot: {fileID: 0}
-  headMovement: {fileID: 0}
-  proximityCheck: {fileID: 0}
+  enemyFieldOfView: {fileID: 3864121476492775101}
+  groundBot: {fileID: 5388818519144562426}
+  headMovement: {fileID: 7232645992728819319}
+  proximityCheck: {fileID: 3211672700824180304}
   detection: {fileID: 0}
   detectionIncreaseRate: 0
   detectionDecreaseRate: 0
@@ -977,6 +977,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3211672700824180304}
   m_SourcePrefab: {fileID: 100100000, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
+--- !u!23 &19146883599842288 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4157524182732408741, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
+  m_PrefabInstance: {fileID: 5046710223778431915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &611594947227546448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5653519914247303419, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
@@ -985,6 +990,11 @@ Transform:
 --- !u!4 &3117834522237789891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7876023681238672744, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
+  m_PrefabInstance: {fileID: 5046710223778431915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4210268098146252679 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -259972160606440404, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
   m_PrefabInstance: {fileID: 5046710223778431915}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5388818519144562426 stripped
@@ -1006,9 +1016,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationAngle: 45
   rotationSpeed: 25
-  groundBotHead: {fileID: 0}
-  groundBotHeadColor: {fileID: 0}
-  enemyFieldOfView: {fileID: 0}
+  groundBotHead: {fileID: 4210268098146252679}
+  groundBotHeadColor: {fileID: 19146883599842288}
+  enemyFieldOfView: {fileID: 3864121476492775101}
   green: {fileID: 2100000, guid: ebd55815eacc7474b96fea326e3f83a1, type: 2}
   red: {fileID: 2100000, guid: 0f3fb867325fb02428bf54b109e8a561, type: 2}
 --- !u!135 &6340269154454056214
@@ -1047,4 +1057,4 @@ MonoBehaviour:
   enemyRaycast: {fileID: 3526448843167345577}
   player: {fileID: 0}
   playerWithinRange: 0
-  groundBotDetection: {fileID: 0}
+  groundBotDetection: {fileID: 3653301431870888279}
