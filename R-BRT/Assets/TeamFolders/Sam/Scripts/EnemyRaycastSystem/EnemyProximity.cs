@@ -4,29 +4,18 @@ using UnityEngine;
 
 public class EnemyProximity : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyRaycast;
-    [SerializeField] private GameObject player;
-    [SerializeField] private bool playerWithinRange;
-    [SerializeField] private GroundBotHeadRaycastDetection groundBotDetection;
+    [SerializeField] GameObject enemyRaycast;
+    [SerializeField] GameObject player;
+    [SerializeField] bool playerWithinRange;
+
+    [SerializeField] GroundBotHeadRaycastDetection groundBotDetection;
+
 
     private void Start()
     {
-        // Using GetComponentInChildren to find the GroundBotHeadRaycastDetection script within the prefab instance
-        groundBotDetection = GetComponentInChildren<GroundBotHeadRaycastDetection>();
-
-        // Ensure player is correctly referenced
-        player = GameObject.FindWithTag("Player");
-
-        // Validate component assignments
-        if (groundBotDetection == null)
-        {
-            Debug.LogError("GroundBotHeadRaycastDetection component not found in children.");
-        }
-
-        if (player == null)
-        {
-            Debug.LogError("Player GameObject not found.");
-        }
+        groundBotDetection = GameObject.Find("EnemyRaycast").GetComponent<GroundBotHeadRaycastDetection>();
+        player = GameObject.Find("Player");
+        
     }
 
     private void Update()
@@ -38,24 +27,26 @@ public class EnemyProximity : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if(other.gameObject.tag == "Player")
         {
-            playerWithinRange = true;
+            this.playerWithinRange = true;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+
+    public void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
-            playerWithinRange = false;
+            this.playerWithinRange = false;
         }
     }
 
     public bool ReturnPlayerProximity()
     {
-        return playerWithinRange;
+        return this.playerWithinRange;
     }
 }
