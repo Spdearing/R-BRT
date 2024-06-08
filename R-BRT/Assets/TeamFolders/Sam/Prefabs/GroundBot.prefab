@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5517289864649627207}
   m_Layer: 0
   m_Name: FOV
-  m_TagString: Untagged
+  m_TagString: FOV
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -859,12 +859,15 @@ MonoBehaviour:
   groundBotHead: {fileID: 0}
   groundBotHeadColor: {fileID: 0}
   player: {fileID: 0}
+  playerCollisions: {fileID: 0}
   groundBot: {fileID: 0}
   headMovement: {fileID: 0}
+  proximityCheck: {fileID: 0}
   detection: {fileID: 0}
   detectionIncreaseRate: 0
   detectionDecreaseRate: 0
   playerDetected: 0
+  playerIsBeingTracked: 0
 --- !u!1001 &5046710223778431915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -980,6 +983,7 @@ MonoBehaviour:
   rotationSpeed: 25
   groundBotHead: {fileID: 0}
   groundBotHeadColor: {fileID: 0}
+  playerCollision: {fileID: 0}
   green: {fileID: 2100000, guid: ebd55815eacc7474b96fea326e3f83a1, type: 2}
   red: {fileID: 2100000, guid: 0f3fb867325fb02428bf54b109e8a561, type: 2}
 --- !u!135 &6340269154454056214
@@ -1001,7 +1005,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3211672700824180304
 MonoBehaviour:
@@ -1017,4 +1021,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyRaycast: {fileID: 3526448843167345577}
   player: {fileID: 0}
-  playerIsSeen: 0
+  playerWithinRange: 0
+  groundBotDetection: {fileID: 0}

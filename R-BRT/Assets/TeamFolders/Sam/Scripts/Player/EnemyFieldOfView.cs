@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCollisions : MonoBehaviour
+public class EnemyFieldOfView : MonoBehaviour
 {
     [SerializeField] bool playerSpotted;
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "FOV")
+        if(other.gameObject.tag == "Player")
         {
             playerSpotted = true;
         }
@@ -17,7 +17,7 @@ public class PlayerCollisions : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "FOV")
+        if (other.gameObject.tag == "Player")
         {
             playerSpotted = false;
         }

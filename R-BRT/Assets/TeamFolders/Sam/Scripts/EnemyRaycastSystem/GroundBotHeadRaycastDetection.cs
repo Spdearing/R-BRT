@@ -8,7 +8,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
     [SerializeField] private GameObject groundBotHead;
     [SerializeField] private Renderer groundBotHeadColor;
     [SerializeField] private GameObject player; // Reference to the player object
-    [SerializeField] private PlayerCollisions playerCollisions;
+    [SerializeField] private EnemyFieldOfView enemyFieldOfView;
     [SerializeField] private GameObject groundBot;
     [SerializeField] private GroundBotHeadMovement headMovement; // Reference to the HeadMovement script
     [SerializeField] private EnemyProximity proximityCheck;
@@ -17,15 +17,17 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
     [SerializeField] private float detectionDecreaseRate; // Rate at which detection decreases when player is not detected
 
     [SerializeField] private bool playerDetected; // Flag to track player detection status
+    [SerializeField] private bool playerIsBeingTracked;
 
     void Start()
     {
+        playerIsBeingTracked = false;
         playerDetected = false;
         detectionDecreaseRate = 25.0f;
         detectionIncreaseRate = 5.0f;
         raycastDistance = 10.0f;
         player = GameObject.Find("Player"); // Find the player by tag
-        playerCollisions = GameObject.Find("Player").GetComponent<PlayerCollisions>(); 
+        enemyFieldOfView = GameObject.Find("FOV").GetComponent<EnemyFieldOfView>(); 
         headMovement = GameObject.Find("GroundBot").GetComponent<GroundBotHeadMovement>(); // Get the HeadMovement component
         proximityCheck = GameObject.Find("GroundBot").GetComponent<EnemyProximity>();
         groundBotHead = GameObject.Find("GroundBotHead");
@@ -36,6 +38,8 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
     void Update()
     {
+        EnemyLockedOn();
+
         Vector3 rayDirection = transform.forward; // Direction of the ray
         Ray ray = new Ray(transform.position, rayDirection);
         RaycastHit hitInfo;
@@ -44,35 +48,53 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, raycastDistance))
         {
-            if (hitInfo.collider.CompareTag("Player") && proximityCheck.ReturnPlayerProximity() == true && playerCollisions.ReturnPlayerSpotted() == true)
+            if (hitInfo.collider.CompareTag("Player"))
             {
-                playerDetected = true;
-                Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-                groundBot.transform.LookAt(lookPosition);
-                transform.LookAt(lookPosition);
-                Debug.Log("Player is being locked on to");
-                detection.IncreaseDetection(detectionIncreaseRate);
-                Debug.Log("Player is being detected");
-                detectionIncreaseRate = (detectionIncreaseRate + .5f);
-
-                if (playerDetected)
+                if(playerIsBeingTracked) 
                 {
-                    headMovement.SetPlayerSpotted(true); // Notify the head movement script
-                    this.groundBotHeadColor.material.color = Color.red; // Change light color to red
-                }
+                    playerDetected = true;
+                    Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                    groundBot.transform.LookAt(lookPosition);
+                    transform.LookAt(lookPosition);
+
+                    if (playerDetected)
+                    {
+                        detection.IncreaseDetection(detectionIncreaseRate);
+                        detectionIncreaseRate = (detectionIncreaseRate + .5f);
+                        headMovement.SetPlayerSpotted(true); // Notify the head movement script
+                        groundBotHeadColor.material.color = Color.red; // Change light color to red
+                    }
+                } 
             }
             else
             {
-                playerDetected = false;
+              playerDetected = false;
             }
         }
         else
         {
+            
             headMovement.SetPlayerSpotted(false); // Notify the head movement script
-            this.groundBotHeadColor.material.color = Color.green; // Change light color to green
+            groundBotHeadColor.material.color = Color.green; // Change light color to green
             detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
             detectionIncreaseRate = 5.0f;
 
+        }
+    }
+
+    void EnemyLockedOn()
+    {
+        Debug.Log(proximityCheck.ReturnPlayerProximity());
+        Debug.Log(enemyFieldOfView.ReturnPlayerSpotted());
+
+        if (proximityCheck.ReturnPlayerProximity() == true && enemyFieldOfView.ReturnPlayerSpotted() == true)
+        {
+            playerIsBeingTracked = true;
+        }
+
+        else
+        {
+            playerIsBeingTracked = false;
         }
     }
 
