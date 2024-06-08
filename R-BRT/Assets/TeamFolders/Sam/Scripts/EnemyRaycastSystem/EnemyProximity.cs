@@ -9,13 +9,16 @@ public class EnemyProximity : MonoBehaviour
     [SerializeField] bool playerWithinRange;
 
     [SerializeField] GroundBotHeadRaycastDetection groundBotDetection;
+    [SerializeField] GameManager gameManager;
 
 
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         //groundBotDetection = GameObject.Find("EnemyRaycast").GetComponent<GroundBotHeadRaycastDetection>();
-        player = GameObject.Find("Player");
-        
+        player = gameManager.ReturnPlayer();
+
+
     }
 
     private void Update()
