@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] RockCollision rockCollision;
     [SerializeField] PickUpObject rock;
 
-
-
     [SerializeField] bool hasJetPack;
     [SerializeField] bool hasStealth;
 
@@ -24,6 +22,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // Best Performance;
         Application.targetFrameRate = -1;
         // Limit the framerate to 60

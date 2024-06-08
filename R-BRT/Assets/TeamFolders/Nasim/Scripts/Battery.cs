@@ -11,16 +11,20 @@ public class Battery : MonoBehaviour
 
     public Canvas GUICanvas;
     public GameObject interactableText;
+    public Button jetpackButton;
+    public Button stealthButton;
+
+    PlayerController playerCharacterController;
 
     // Start is called before the first frame update
     void Start()
     {
         GUICanvas.gameObject.SetActive(false);
-        interactableText.gameObject.SetActive(false);
 
         rb = GetComponent<Rigidbody>();
         gameObject.tag = "Battery";
         jetPack = player.GetComponent<Jetpack>();
+        playerCharacterController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -33,10 +37,18 @@ public class Battery : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            playerCharacterController.isCameraLocked = true;
             interactableText.gameObject.SetActive(true);
             GUICanvas.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         /*jetPack.enabled = true;
         Destroy(gameObject);*/
+    }
+
+    void SelectAbility()
+    {
+        
     }
 }

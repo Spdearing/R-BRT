@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &517471804
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1131,6 +1131,17 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1521761634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+  m_PrefabInstance: {fileID: 1819477305}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521761626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8a5e6f3d5395b48bf41b9b5e35acd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1555413304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,6 +1495,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3001296285487943445, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: playerCharacterController
+      value: 
+      objectReference: {fileID: 1521761634}
     - target: {fileID: 7188083678439878143, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.597233
