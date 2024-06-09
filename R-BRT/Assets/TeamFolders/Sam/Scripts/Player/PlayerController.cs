@@ -59,6 +59,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private TrailRenderer tr;
 
+    [SerializeField] private bool invisibilityAvailable;
+    
+
+
     //public AudioSource footstepsSound, sprintSound;
 
     public enum MovementState
@@ -71,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        invisibilityAvailable = true;
         isCameraLocked = false;
 
         rb = GetComponent<Rigidbody>();
@@ -90,6 +95,7 @@ public class PlayerController : MonoBehaviour
         SpeedControl();
         Sprint();
         UpdateState();
+        BecomeInvisible();
 
         if (!isGrounded)
         {
@@ -199,6 +205,25 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
+    }
+
+    public void BecomeInvisible()
+    {
+        if(Input.GetKeyDown(KeyCode.E) && invisibilityAvailable)
+        {
+            this.gameObject.tag = "Invisible";
+            StartCoroutine(InvisibilityTimer());
+
+        }
+    }
+
+    IEnumerator InvisibilityTimer()
+    {
+        invisibilityAvailable = false;
+        yield return new WaitForSeconds(6.0f);
+        this.gameObject.tag = "Player";
+        invisibilityAvailable = true;
+
     }
 
     private void Jump()
@@ -318,6 +343,11 @@ public class PlayerController : MonoBehaviour
     public bool ReturnIsGrounded()
     {
         return this.isGrounded;
+    }
+
+    public bool ReturnInvisibilityStatus()
+    {
+        return this.invisibilityAvailable;
     }
 
     //private void FootSteps() 

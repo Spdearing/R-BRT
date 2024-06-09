@@ -13,6 +13,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
     [SerializeField] private EnemyProximity proximityCheck;
     [SerializeField] private DetectionMeter detection;
     [SerializeField] private GroundBotStateMachine groundBotBehaviour;
+    [SerializeField] private PlayerController playerController;
 
     [Header("Floats")]
     [SerializeField] private float raycastDistance; 
@@ -68,7 +69,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
         {
             Debug.Log(hitInfo.collider.gameObject);
 
-            if (hitInfo.collider.CompareTag("Player"))
+            if (hitInfo.collider.CompareTag("Player") && playerController.ReturnInvisibilityStatus() == true)// player has not used invisibility yet
             {
                 if (playerIsBeingTracked)
                 {
@@ -78,7 +79,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                     groundBot.transform.LookAt(lookPosition);
                     transform.LookAt(lookPosition);
 
-                    if (playerDetected)
+                    if (playerDetected && playerController.ReturnInvisibilityStatus() == true)//player has not used invisibility yet
                     {
                         groundBotBehaviour.ChangeBehaviour(BehaviourState.scanning);
                         detection.IncreaseDetection(detectionIncreaseRate);

@@ -2010,6 +2010,10 @@ PrefabInstance:
       propertyPath: detection
       value: 
       objectReference: {fileID: 5393447419348811549}
+    - target: {fileID: 3653301431870888279, guid: 192a00c5b08640b4bb5935dfb8834453, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1338830132}
     - target: {fileID: 3920128845371230678, guid: 192a00c5b08640b4bb5935dfb8834453, type: 3}
       propertyPath: m_Mesh
       value: 
