@@ -705,7 +705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3985
+  m_VersionIndex: 3991
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -870,22 +870,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  raycastDistance: 0
-  groundBotHead: {fileID: 4210268098146252679}
-  groundBotHeadColor: {fileID: 19146883599842288}
-  player: {fileID: 0}
   enemyFieldOfView: {fileID: 3864121476492775101}
-  groundBot: {fileID: 5388818519144562426}
   headMovement: {fileID: 7232645992728819319}
   proximityCheck: {fileID: 3211672700824180304}
   detection: {fileID: 0}
+  groundBotBehaviour: {fileID: 7859140458019894209}
+  playerController: {fileID: 0}
+  raycastDistance: 0
   detectionIncreaseRate: 0
   detectionDecreaseRate: 0
+  groundBotHead: {fileID: 4210268098146252679}
+  player: {fileID: 0}
+  groundBot: {fileID: 5388818519144562426}
+  groundBotHeadColor: {fileID: 19146883599842288}
   playerDetected: 0
   playerIsBeingTracked: 0
   ignoreLayerMask:
     serializedVersion: 2
     m_Bits: 4
+--- !u!1 &6070293171804367705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4011583499528924795}
+  m_Layer: 0
+  m_Name: EndingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4011583499528924795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6070293171804367705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.74, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4720684217117713472}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5046710223778431915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -896,7 +929,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1574793
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
       propertyPath: m_LocalPosition.y
@@ -904,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.031642
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
       propertyPath: m_LocalRotation.w
@@ -961,6 +994,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 4011583499528924795}
     - targetCorrespondingSourceObject: {fileID: 5653519914247303419, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6928908932216015044}
@@ -1001,6 +1037,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -259972160606440404, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
   m_PrefabInstance: {fileID: 5046710223778431915}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &4720684217117713472 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
+  m_PrefabInstance: {fileID: 5046710223778431915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5388818519144562426 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
@@ -1018,8 +1059,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26595b3ea5434cf4e9f318084e44c35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  robotIsActive: 0
+  playerIsSpotted: 0
+  rotatingLeft: 0
+  isPaused: 0
   rotationAngle: 45
   rotationSpeed: 25
+  startYRotation: 0
+  targetYRotation: 0
   groundBotHead: {fileID: 4210268098146252679}
   groundBotHeadColor: {fileID: 19146883599842288}
   enemyFieldOfView: {fileID: 3864121476492775101}
@@ -1077,10 +1124,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   player: {fileID: 0}
-  endingPoint: {fileID: 0}
+  endingPoint: {fileID: 6070293171804367705}
   startingLocation: {x: 0, y: 0, z: 0}
+  endingLocation: {x: 0, y: 0, z: 0}
+  startRotation: {x: 0, y: 0, z: 0, w: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  endingLocationObject: {fileID: 4011583499528924795}
   robotHeight: 0
+  duration: 0
+  elapsedTime: 0
+  rotationSpeed: 0
   isGrounded: 0
+  goingToTarget: 0
   currentState: 0

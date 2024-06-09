@@ -78,6 +78,7 @@ public class GroundBotStateMachine : MonoBehaviour
         switch (currentState)
         {
             case BehaviourState.patrolling:
+
                 if (isGrounded)
                 {
                     elapsedTime += Time.deltaTime;
