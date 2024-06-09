@@ -51,7 +51,7 @@ public class Battery : MonoBehaviour
 
     public void OnClick()
     {
-        jetpackButton.onClick()
+        //jetpackButton.onClick()
         {
         jetPack.enabled = true;
         Destroy(gameObject);
