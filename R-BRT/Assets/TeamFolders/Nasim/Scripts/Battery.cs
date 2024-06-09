@@ -22,11 +22,11 @@ public class Battery : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        
         gameObject.tag = "Battery";
         abilitySelectionPanel.SetActive(false);
         jetPack = GameObject.Find("Player").GetComponent<Jetpack>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        
     }
 
 
@@ -59,7 +59,7 @@ public class Battery : MonoBehaviour
 
     public void OnClickInvisibleButton()
     {
-        
+        playerController.SetInvisibilityUnlock(true);
         abilitySelectionPanel.SetActive(false);
         interactableText.SetActive(false);
         
