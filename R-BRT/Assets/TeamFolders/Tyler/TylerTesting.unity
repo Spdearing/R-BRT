@@ -29725,10 +29725,8 @@ MonoBehaviour:
   m_VersionIndex: 11601
   m_IsSelectable: 1
   m_SelectedFaces: 
-  m_SelectedEdges:
-  - a: 22
-    b: 20
-  m_SelectedVertices: 1600000014000000
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!4 &1378285596
 Transform:
   m_ObjectHideFlags: 0
@@ -30599,7 +30597,7 @@ GameObject:
   - component: {fileID: 1428212518}
   - component: {fileID: 1428212517}
   - component: {fileID: 1428212516}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33317,7 +33315,7 @@ GameObject:
   - component: {fileID: 1540406156}
   - component: {fileID: 1540406155}
   - component: {fileID: 1540406154}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
