@@ -772,13 +772,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd0f720d21e70c4799b0582b57b17bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1521761626}
   interactableText: {fileID: 517471803}
   abilitySelectionPanel: {fileID: 755335413}
   jetpackButton: {fileID: 2067924901}
   stealthButton: {fileID: 1208863024}
   battery: {fileID: 923998373}
-  playerController: {fileID: 0}
+  playerController: {fileID: 1521761634}
   jetPack: {fileID: 0}
 --- !u!1 &1208863024
 GameObject:
@@ -1519,7 +1519,7 @@ MonoBehaviour:
   jetpackButton: {fileID: 2067924901}
   stealthButton: {fileID: 1208863024}
   battery: {fileID: 923998373}
-  playerController: {fileID: 0}
+  playerController: {fileID: 1521761634}
   jetPack: {fileID: 0}
 --- !u!1001 &1819477305
 PrefabInstance:
