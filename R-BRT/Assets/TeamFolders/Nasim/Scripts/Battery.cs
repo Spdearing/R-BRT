@@ -5,68 +5,67 @@ using UnityEngine.UI;
 
 public class Battery : MonoBehaviour
 {
-    Rigidbody rb;
-    public GameObject player;
-    Jetpack jetPack;
-    PlayerController invisibility;
 
-    public Canvas GUICanvas;
-    public GameObject interactableText;
-    public GameObject jetpackButton;
-    public GameObject stealthButton;
+    [Header("Game Objects")]
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject interactableText;
+    [SerializeField] private GameObject abilitySelectionPanel;
+    [SerializeField] private GameObject jetpackButton;
+    [SerializeField] private GameObject stealthButton;
+    [SerializeField] private GameObject battery;
 
-    PlayerController playerCharacterController;
+    [Header("Scripts")]
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private Jetpack jetPack;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        GUICanvas.gameObject.SetActive(false);
-
-        rb = GetComponent<Rigidbody>();
+        player = GameObject.FindWithTag("Player");
         gameObject.tag = "Battery";
-        jetPack = player.GetComponent<Jetpack>();
-        invisibility = player.GetComponent<PlayerController>();
-        playerCharacterController = player.GetComponent<PlayerController>();
+        abilitySelectionPanel.SetActive(false);
+        jetPack = GameObject.Find("Player").GetComponent<Jetpack>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            playerCharacterController.isCameraLocked = true;
-            interactableText.gameObject.SetActive(true);
-            GUICanvas.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            abilitySelectionPanel.SetActive(true);
+            interactableText.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            Destroy(gameObject);
         }
     }
 
     public void OnClickJetpackButton()
     {
+        
         jetPack.enabled = true;
 
-        playerCharacterController.isCameraLocked = false;
-        interactableText.gameObject.SetActive(false);
-        GUICanvas.gameObject.SetActive(false);
+        
+        abilitySelectionPanel.SetActive(false);
+        interactableText.SetActive(false);
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Time.timeScale = 1;
+        Destroy(battery);
     }
 
     public void OnClickInvisibleButton()
     {
-        invisibility.enabled = true;
-
-        playerCharacterController.isCameraLocked = false;
-        interactableText.gameObject.SetActive(false);
-        GUICanvas.gameObject.SetActive(false);
+        
+        abilitySelectionPanel.SetActive(false);
+        interactableText.SetActive(false);
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Time.timeScale = 1;
+        Destroy(battery);
     }
 }
