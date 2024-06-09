@@ -32,6 +32,7 @@ public class GroundBotStateMachine : MonoBehaviour
         patrolling,
         chasing,
         scanning,
+        reset
         
     }
 
