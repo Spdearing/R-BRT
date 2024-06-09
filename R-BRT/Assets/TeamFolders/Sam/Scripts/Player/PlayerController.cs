@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private bool invisibilityUnlocked;
     [SerializeField] private bool invisibilityAvailable;
+
+    [SerializeField] private bool jetPackUnlocked;
     
 
 
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
         startYScale = transform.localScale.y;
 
         invisibilityUnlocked = false;
+        jetPackUnlocked = false;
     }
 
     private void Update()
@@ -352,9 +355,24 @@ public class PlayerController : MonoBehaviour
         return this.invisibilityAvailable;
     }
 
-    public void SetInvisibilityUnclock(bool value)
+    public void SetInvisibilityUnlock(bool value)
     {
         invisibilityUnlocked = value;
+    }
+
+    public void SetJetPackUnlock(bool value)
+    {
+        jetPackUnlocked = value;
+    }
+
+    public GameObject ReturnThisPlayer()
+    {
+        return this.gameObject;
+    }
+
+    public void SetCameraLock(bool value)
+    {
+        isCameraLocked = value;
     }
 
     //private void FootSteps() 
