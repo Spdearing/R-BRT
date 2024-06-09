@@ -869,6 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71be9ac3849528f49900d49c7b5caf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   raycastDistance: 0
   groundBotHead: {fileID: 4210268098146252679}
   groundBotHeadColor: {fileID: 19146883599842288}
@@ -976,6 +977,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3211672700824180304}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7859140458019894209}
   m_SourcePrefab: {fileID: 100100000, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
 --- !u!23 &19146883599842288 stripped
 MeshRenderer:
@@ -1058,3 +1062,25 @@ MonoBehaviour:
   player: {fileID: 0}
   playerWithinRange: 0
   groundBotDetection: {fileID: 3653301431870888279}
+  gameManager: {fileID: 0}
+--- !u!114 &7859140458019894209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5388818519144562426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c397b37cc8fda48891b8e3e47cec57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  player: {fileID: 0}
+  endingPoint: {fileID: 0}
+  startingLocation: {x: 0, y: 0, z: 0}
+  robotHeight: 0
+  isGrounded: 0
+  currentState: 0

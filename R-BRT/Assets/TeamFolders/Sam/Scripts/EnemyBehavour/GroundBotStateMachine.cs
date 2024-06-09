@@ -10,9 +10,13 @@ public class GroundBotStateMachine : MonoBehaviour
 
     [Header("GameObjects")]
     [SerializeField] GameObject player;
+    [SerializeField] GameObject endingPoint;
+
+    [Header("Vector3")]
+    [SerializeField] Vector3 startingLocation;
 
     [Header("Floats")]
-    [SerializeField] float robotHeight;
+    [SerializeField] float robotHeight = 1.329f;
 
     [Header("Rigidbody")]
     private Rigidbody rb;
@@ -34,7 +38,8 @@ public class GroundBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        startingLocation = transform.position;
+        currentState = BehaviourState.patrolling;
     }
 
     // Update is called once per frame
