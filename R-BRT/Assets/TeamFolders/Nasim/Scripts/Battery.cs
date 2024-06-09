@@ -8,7 +8,7 @@ public class Battery : MonoBehaviour
     Rigidbody rb;
     public GameObject player;
     Jetpack jetPack;
-    Invisibility invisibility;
+    PlayerController invisibility;
 
     public Canvas GUICanvas;
     public GameObject interactableText;
@@ -25,7 +25,7 @@ public class Battery : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gameObject.tag = "Battery";
         jetPack = player.GetComponent<Jetpack>();
-        invisibility = player.GetComponent<Invisibility>();
+        invisibility = player.GetComponent<PlayerController>();
         playerCharacterController = player.GetComponent<PlayerController>();
     }
 
@@ -44,17 +44,29 @@ public class Battery : MonoBehaviour
             GUICanvas.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            Destroy(gameObject);
         }
-        /*jetPack.enabled = true;
-        Destroy(gameObject);*/
     }
 
-    public void OnClick()
+    public void OnClickJetpackButton()
     {
-        //jetpackButton.onClick()
-        {
         jetPack.enabled = true;
-        Destroy(gameObject);
-        }
+
+        playerCharacterController.isCameraLocked = false;
+        interactableText.gameObject.SetActive(false);
+        GUICanvas.gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void OnClickInvisibleButton()
+    {
+        invisibility.enabled = true;
+
+        playerCharacterController.isCameraLocked = false;
+        interactableText.gameObject.SetActive(false);
+        GUICanvas.gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
