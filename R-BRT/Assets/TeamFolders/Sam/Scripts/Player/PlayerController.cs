@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private TrailRenderer tr;
 
+    [SerializeField] private bool invisibilityUnlocked;
     [SerializeField] private bool invisibilityAvailable;
     
 
@@ -84,6 +85,8 @@ public class PlayerController : MonoBehaviour
         readyToJump = true;
 
         startYScale = transform.localScale.y;
+
+        invisibilityUnlocked = false;
     }
 
     private void Update()
@@ -209,11 +212,10 @@ public class PlayerController : MonoBehaviour
 
     public void BecomeInvisible()
     {
-        if(Input.GetKeyDown(KeyCode.E) && invisibilityAvailable)
+        if(Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked)
         {
             this.gameObject.tag = "Invisible";
             StartCoroutine(InvisibilityTimer());
-
         }
     }
 
@@ -348,6 +350,11 @@ public class PlayerController : MonoBehaviour
     public bool ReturnInvisibilityStatus()
     {
         return this.invisibilityAvailable;
+    }
+
+    public void SetInvisibilityUnclock(bool value)
+    {
+        invisibilityUnlocked = value;
     }
 
     //private void FootSteps() 
