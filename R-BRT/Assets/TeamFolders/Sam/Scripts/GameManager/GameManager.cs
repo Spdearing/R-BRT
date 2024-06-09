@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         allDirectionRaycast.enabled = true;
 
         // Wait for the specified duration
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.1f);
 
         // Disable the script after the duration
         allDirectionRaycast.enabled = false;
