@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] static GameManager instance;
 
+    [SerializeField] private AllDirectionRaycast allDirectionRaycast;
+
     public static GameManager Instance
     {
         get
@@ -57,23 +59,18 @@ public class GameManager : MonoBehaviour
 
     public void SendOutNoise()
     {
-        if (rockCollision.ReturnSound() == true)
-        {
-            GameObject throwable = rock.ReturnThisObject();
+        StartCoroutine(EnableSoundForDuration());
+    }
+    IEnumerator EnableSoundForDuration()
+    {
+        // Enable the desired script
+        allDirectionRaycast.enabled = true;
 
-            
-            AllDirectionRaycast raycastComponent = throwable.GetComponent<AllDirectionRaycast>();
+        // Wait for the specified duration
+        yield return new WaitForSeconds(.25f);
 
-            
-            if (raycastComponent != null)
-            {
-                raycastComponent.enabled = true;
-            }
-            else
-            {
-                Debug.LogWarning("AllDirectionRaycast component not found on the throwable object.");
-            }
-        }
+        // Disable the script after the duration
+        allDirectionRaycast.enabled = false;
     }
 
     public void SetJetPackStatus(bool value)
