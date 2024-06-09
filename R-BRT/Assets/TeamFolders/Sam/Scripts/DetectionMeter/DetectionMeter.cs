@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class DetectionMeter : MonoBehaviour
 {
-    [SerializeField] Image detectionMeter;
+    [Header("Image")]
+    [SerializeField] Image detectionMeter; //Image that will be filled, or depleted because of the script.
+
+    [Header("Floats")]
     [SerializeField] float startingDetection = 0.0f;
     [SerializeField] float detectionIncrement = 0.5f;
     [SerializeField] float maxDetection = 200.0f;

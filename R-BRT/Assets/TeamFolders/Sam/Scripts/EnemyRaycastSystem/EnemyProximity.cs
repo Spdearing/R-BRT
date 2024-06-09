@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class EnemyProximity : MonoBehaviour
 {
+    [Header("Game Objects")]
     [SerializeField] GameObject enemyRaycast;
     [SerializeField] GameObject player;
+
+    [Header("Bools")]
     [SerializeField] bool playerWithinRange;
 
+    [Header("Scripts")]
     [SerializeField] GroundBotHeadRaycastDetection groundBotDetection;
+
+    [Header("Game Manager")]
     [SerializeField] GameManager gameManager;
 
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        //groundBotDetection = GameObject.Find("EnemyRaycast").GetComponent<GroundBotHeadRaycastDetection>();
         player = gameManager.ReturnPlayer();
 
 

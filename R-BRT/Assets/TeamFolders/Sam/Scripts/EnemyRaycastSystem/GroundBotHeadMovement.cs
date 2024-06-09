@@ -3,30 +3,45 @@ using UnityEngine;
 
 public class GroundBotHeadMovement : MonoBehaviour
 {
-    bool robotIsActive = true;
-    bool playerIsSpotted;
-    bool rotatingLeft = true;
-    bool isPaused = false;
 
-    [SerializeField] private float rotationAngle = 45f; // Rotation angle in degrees
-    [SerializeField] private float rotationSpeed = 25f; // Rotation speed
+
+    [Header("Bools")]
+    [SerializeField] private bool robotIsActive;
+    [SerializeField] private bool playerIsSpotted;
+    [SerializeField] private bool rotatingLeft;
+    [SerializeField] private bool isPaused;
+
+    [Header("Floats")]
+    [SerializeField] private float rotationAngle;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float startYRotation;
+    [SerializeField] private float targetYRotation;
+
+    [Header("Game Objects")]
     [SerializeField] private GameObject groundBotHead;
+
+    [Header("Renderer")]
     [SerializeField] private Renderer groundBotHeadColor;
+
+    [Header("Scripts")]
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
+
+    [Header("Materials")]
     [SerializeField] private Material green;
     [SerializeField] private Material red;
 
 
-    private float startYRotation;
-    private float targetYRotation;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        //enemyFieldOfView = GameObject.Find("FOV").GetComponent<EnemyFieldOfView>();
-        //groundBotHead = this.gameObject.transform.Find("GroundBotHead").gameObject;
-        //groundBotHeadColor = groundBotHead.GetComponent<Renderer>();
-        groundBotHeadColor.material = green; // Change light color to red
+        isPaused = false;
+        rotatingLeft = true;
+        robotIsActive = true;
+        rotationAngle = 45f;
+        rotationSpeed = 25f;
+        groundBotHeadColor.material = green; 
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
     }
@@ -78,16 +93,4 @@ public class GroundBotHeadMovement : MonoBehaviour
     {
         this.playerIsSpotted = value;
     }
-
-    //public void PlayerIsDetected()
-    //{
-    //    if (playerIsSpotted)
-    //    {
-    //        groundBotHeadColor.material = red; // Change light color to red
-    //    }
-    //    else
-    //    {
-    //        groundBotHeadColor.material = green; // Change light color to green
-    //    }
-    //}
 }

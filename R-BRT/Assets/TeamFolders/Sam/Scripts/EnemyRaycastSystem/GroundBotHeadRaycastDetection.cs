@@ -1,25 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GroundBotStateMachine;
 
 public class GroundBotHeadRaycastDetection : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private float raycastDistance; // Distance of the raycast
-    [SerializeField] private GameObject groundBotHead;
-    [SerializeField] private Renderer groundBotHeadColor;
-    [SerializeField] private GameObject player; // Reference to the player object
-    [SerializeField] private EnemyFieldOfView enemyFieldOfView;
-    [SerializeField] private GameObject groundBot;
-    [SerializeField] private GroundBotHeadMovement headMovement; // Reference to the HeadMovement script
-    [SerializeField] private EnemyProximity proximityCheck;
-    [SerializeField] private DetectionMeter detection; // Reference to the DetectionMeter script
-    [SerializeField] private float detectionIncreaseRate; // Base rate at which detection increases
-    [SerializeField] private float detectionDecreaseRate; // Rate at which detection decreases when player is not detected
 
-    [SerializeField] private bool playerDetected; // Flag to track player detection status
+    [Header("Scripts")]
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] private GroundBotHeadMovement headMovement;
+    [SerializeField] private EnemyProximity proximityCheck;
+    [SerializeField] private DetectionMeter detection;
+    [SerializeField] private GroundBotStateMachine groundBotBehaviour;
+
+    [Header("Floats")]
+    [SerializeField] private float raycastDistance; 
+    [SerializeField] private float detectionIncreaseRate; 
+    [SerializeField] private float detectionDecreaseRate; 
+
+    [Header("Game Objects")]
+    [SerializeField] private GameObject groundBotHead;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject groundBot;
+
+    [Header("Renderer")]
+    [SerializeField] private Renderer groundBotHeadColor;
+
+    [Header("Bools")]
+    [SerializeField] private bool playerDetected; 
     [SerializeField] private bool playerIsBeingTracked;
+
+    [Header("LayerMask")]
     [SerializeField] private LayerMask ignoreLayerMask;
+
+
+
+
+
+
+
 
     void Start()
     {
@@ -31,6 +51,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
         raycastDistance = 10.0f;
         player = gameManager.ReturnPlayer(); // Find the player by tag
         detection = gameManager.ReturnDetectionMeter();
+        groundBotBehaviour = GetComponentInParent<GroundBotStateMachine>();
     }
 
     void Update()
@@ -51,6 +72,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
             {
                 if (playerIsBeingTracked)
                 {
+                    
                     playerDetected = true;
                     Vector3 lookPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
                     groundBot.transform.LookAt(lookPosition);
@@ -58,35 +80,42 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
                     if (playerDetected)
                     {
+                        groundBotBehaviour.ChangeBehaviour(BehaviourState.scanning);
                         detection.IncreaseDetection(detectionIncreaseRate);
                         detectionIncreaseRate = (detectionIncreaseRate + .5f);
                         headMovement.SetPlayerSpotted(true); // Notify the head movement script
                         groundBotHeadColor.material.color = Color.red; // Change light color to red
+
+                        if(detection.ReturnStartingDetection() == 200)// if the detection bar becomes full
+                        {
+                            groundBotBehaviour.ChangeBehaviour(BehaviourState.chasing); // Enemy will chase the player
+                        }
                     }
                 }
                 else if (!playerIsBeingTracked)
                 {
-                    headMovement.SetPlayerSpotted(false); // Notify the head movement script
-                    groundBotHeadColor.material.color = Color.green; // Change light color to green
-                    detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+                    groundBotBehaviour.ChangeBehaviour(BehaviourState.patrolling);
+                    headMovement.SetPlayerSpotted(false); 
+                    groundBotHeadColor.material.color = Color.green; 
+                    detection.DecreaseDetection(detectionDecreaseRate); 
                     detectionIncreaseRate = 5.0f;
                 }
             }
             else
             {
                 playerDetected = false;
-                headMovement.SetPlayerSpotted(false); // Notify the head movement script
-                groundBotHeadColor.material.color = Color.green; // Change light color to green
-                detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+                headMovement.SetPlayerSpotted(false); 
+                groundBotHeadColor.material.color = Color.green; 
+                detection.DecreaseDetection(detectionDecreaseRate); 
                 detectionIncreaseRate = 5.0f;
             }
         }
 
         else 
         {
-            headMovement.SetPlayerSpotted(false); // Notify the head movement script
-            groundBotHeadColor.material.color = Color.green; // Change light color to green
-            detection.DecreaseDetection(detectionDecreaseRate); // Gradually decrease detection when the player is not detected
+            headMovement.SetPlayerSpotted(false); 
+            groundBotHeadColor.material.color = Color.green; 
+            detection.DecreaseDetection(detectionDecreaseRate); 
             detectionIncreaseRate = 5.0f;
         }
     }
