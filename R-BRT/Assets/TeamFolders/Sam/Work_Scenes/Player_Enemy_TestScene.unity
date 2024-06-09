@@ -551,6 +551,7 @@ MonoBehaviour:
   hasStealth: 0
   player: {fileID: 0}
   detectionMeter: {fileID: 0}
+  allDirectionRaycast: {fileID: 1725081014}
 --- !u!4 &383400998
 Transform:
   m_ObjectHideFlags: 0
@@ -1006,7 +1007,7 @@ GameObject:
   - component: {fileID: 1148024314}
   m_Layer: 6
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1723,6 +1724,8 @@ GameObject:
   - component: {fileID: 1725081008}
   - component: {fileID: 1725081007}
   - component: {fileID: 1725081006}
+  - component: {fileID: 1725081013}
+  - component: {fileID: 1725081014}
   m_Layer: 0
   m_Name: Rocks
   m_TagString: Untagged
@@ -1871,6 +1874,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1725081013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725081005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87f5a5407e9f0bc498ed76440ffc86ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  makingSound: 0
+  gameManager: {fileID: 0}
+--- !u!114 &1725081014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725081005}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fee568766d6be147810e955cb54b279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numRays: 100
+  raycastDistance: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2144248066
 GameObject:
   m_ObjectHideFlags: 0
