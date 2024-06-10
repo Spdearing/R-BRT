@@ -22,10 +22,12 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] Transform endingLocationObject;
 
     [Header("Floats")]
-    [SerializeField] float robotHeight;
-    [SerializeField] float duration;
-    [SerializeField] float elapsedTime;
+    [SerializeField] private float robotHeight;
+    [SerializeField] private float duration;
+    [SerializeField] private float elapsedTime;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float chaseSpeed; 
+    [SerializeField] private float stoppingDistance = 2f;
 
     [Header("Rigidbody")]
     private Rigidbody rb;
@@ -33,6 +35,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [Header("Bools")]
     [SerializeField] bool isGrounded;
     [SerializeField] bool goingToTarget;
+    [SerializeField] bool isChasing;
 
 
     public BehaviourState currentState;
@@ -49,8 +52,10 @@ public class GroundBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stoppingDistance = 1.0f;
+        chaseSpeed = 2.5f;
         rotationSpeed = 2.0f;
-        duration = 10.0f;
+        duration = 20.0f;
         robotHeight = 1.329f;
         startingLocation = transform.position;
         endingLocation = endingLocationObject.position;
@@ -65,12 +70,22 @@ public class GroundBotStateMachine : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, robotHeight * 2.5f, groundMask);
+        
+    }
+
+    private void FixedUpdate()
+    {
         UpdateBehaviour();
     }
 
     public void ChangeBehaviour(BehaviourState newState)
     {
         currentState = newState;
+    }
+
+    public void ChasePlayer(bool value)
+    {
+        isChasing = value;
     }
 
     void UpdateBehaviour()
@@ -82,20 +97,21 @@ public class GroundBotStateMachine : MonoBehaviour
                 if (isGrounded)
                 {
                     elapsedTime += Time.deltaTime;
-                    float t = elapsedTime / duration;
+
+                    float patrollingSpeed = elapsedTime / duration;
 
                     // Lerp the position
                     if (goingToTarget)
                     {
-                        transform.position = Vector3.Lerp(startingLocation, endingLocation, t);
+                        transform.position = Vector3.Lerp(startingLocation, endingLocation, patrollingSpeed);
                     }
                     else
                     {
-                        transform.position = Vector3.Lerp(endingLocation, startingLocation, t);
+                        transform.position = Vector3.Lerp(endingLocation, startingLocation, patrollingSpeed);
                     }
 
                     // If the lerp is complete, reverse direction and reset elapsedTime
-                    if (t >= 1.0f)
+                    if (patrollingSpeed >= 1.0f)
                     {
                         goingToTarget = !goingToTarget; // Reverse the direction
                         elapsedTime = 0f; // Reset the elapsed time
@@ -123,11 +139,40 @@ public class GroundBotStateMachine : MonoBehaviour
                 break;
 
             case BehaviourState.chasing:
-              
-                break;
+
+                if (isChasing && isGrounded)
+                {
+                    
+                    Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+
+                    
+                    float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+                    
+                    if (distanceToPlayer > stoppingDistance)
+                    {
+                        
+                        transform.Translate(directionToPlayer * chaseSpeed * Time.deltaTime, Space.World);
+
+                       
+                        transform.LookAt(player.transform.position);
+                    }
+                    else
+                    {
+                        // Stop chasing if within stopping distance
+                        isChasing = false;
+                    }
+                }
+        
+
+            break;
 
             case BehaviourState.reset:
-              
+
+                float returnSpeed = 10.0f;
+
+                transform.position = Vector3.Lerp(transform.position, startingLocation, returnSpeed);
+
                 break;
 
             default:
