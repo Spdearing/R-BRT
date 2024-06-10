@@ -17,6 +17,8 @@ public class EnemyProximity : MonoBehaviour
     [Header("Game Manager")]
     [SerializeField] GameManager gameManager;
 
+    private float capsuleHeight = 0.96f; // Capsule collider height
+
 
     private void Start()
     {
@@ -30,8 +32,10 @@ public class EnemyProximity : MonoBehaviour
     {
         if (playerWithinRange && groundBotDetection.ReturnPlayerDetected() == false)
         {
-            Vector3 playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-            enemyRaycast.transform.LookAt(playerPosition);
+            Vector3 playerCenterPosition = player.transform.position + new Vector3(0, capsuleHeight / 2, 0);
+
+
+            enemyRaycast.transform.LookAt(playerCenterPosition);
         }
     }
 
@@ -50,6 +54,7 @@ public class EnemyProximity : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             this.playerWithinRange = false;
+            groundBotDetection.SetPlayerDetected(false);
         }
     }
 
