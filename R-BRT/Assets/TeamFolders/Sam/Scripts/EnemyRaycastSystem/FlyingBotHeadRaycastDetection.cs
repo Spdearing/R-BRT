@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static FlyingBotStateMachine;
 using static GroundBotStateMachine;
 
-public class GroundBotHeadRaycastDetection : MonoBehaviour
+public class FlyingBotHeadRaycastDetection : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
-    [SerializeField] private GroundBotHeadMovement headMovement;
-    [SerializeField] private GroundEnemyProximity proximityCheck;
+    [SerializeField] private FlyingBotHeadMovement headMovement;
+    [SerializeField] private FlyingEnemyProximity proximityCheck;
     [SerializeField] private DetectionMeter detection;
-    [SerializeField] private GroundBotStateMachine groundBotBehaviour;
+    [SerializeField] private FlyingBotStateMachine flyingBotBehaviour;
     [SerializeField] private PlayerController playerController;
 
     [Header("Floats")]
@@ -21,12 +22,12 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
     [SerializeField] private float capsuleHeight;
 
     [Header("Game Objects")]
-    [SerializeField] private GameObject groundBotHead;
+    [SerializeField] private GameObject flyingBotHead;
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject groundBot;
+    [SerializeField] private GameObject flyingBot;
 
     [Header("Renderer")]
-    [SerializeField] private Renderer groundBotHeadColor;
+    [SerializeField] private Renderer flyingBotHeadColor;
 
     [Header("Bools")]
     [SerializeField] private bool playerDetected;
@@ -45,7 +46,6 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
         raycastDistance = 10.0f;
         player = gameManager.ReturnPlayer();
         detection = gameManager.ReturnDetectionMeter();
-        groundBotBehaviour = GetComponentInParent<GroundBotStateMachine>();
         capsuleHeight = 0.96f;
     }
 
@@ -67,29 +67,29 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                 {
                     playerDetected = true;
                     Vector3 playerCenterPosition = player.transform.position + new Vector3(0, capsuleHeight / 2.5f, 0);
-                    groundBot.transform.LookAt(playerCenterPosition);
+                    flyingBot.transform.LookAt(playerCenterPosition);
                     transform.LookAt(playerCenterPosition);
 
                     if (playerDetected && playerController.ReturnInvisibilityStatus())
                     {
-                        groundBotBehaviour.ChangeBehaviour(BehaviourState.scanning);
+                        flyingBotBehaviour.ChangeBehaviour(FlyingState.scanning);
                         detection.IncreaseDetection(detectionIncreaseRate);
                         detectionIncreaseRate += 0.5f;
                         headMovement.SetPlayerSpotted(true);
-                        groundBotHeadColor.material.color = Color.red;
+                        flyingBotHeadColor.material.color = Color.red;
 
                         if (detection.ReturnStartingDetection() == 200)
                         {
-                            groundBotBehaviour.ChasePlayer(true);
-                            groundBotBehaviour.ChangeBehaviour(BehaviourState.playerCaught);
+                            
+                            flyingBotBehaviour.ChangeBehaviour(FlyingState.playerCaught);
                         }
                     }
                 }
                 else if (!playerIsBeingTracked)
                 {
-                    groundBotBehaviour.ChangeBehaviour(BehaviourState.patrolling);
+                    flyingBotBehaviour.ChangeBehaviour(FlyingState.patrolling);
                     headMovement.SetPlayerSpotted(false);
-                    groundBotHeadColor.material.color = Color.green;
+                    flyingBotHeadColor.material.color = Color.green;
                     detection.DecreaseDetection(detectionDecreaseRate);
                     detectionIncreaseRate = 5.0f;
                 }
@@ -98,7 +98,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
             {
                 playerDetected = false;
                 headMovement.SetPlayerSpotted(false);
-                groundBotHeadColor.material.color = Color.green;
+                flyingBotHeadColor.material.color = Color.green;
                 detection.DecreaseDetection(detectionDecreaseRate);
                 detectionIncreaseRate = 5.0f;
             }
@@ -106,7 +106,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
         else
         {
             headMovement.SetPlayerSpotted(false);
-            groundBotHeadColor.material.color = Color.green;
+            flyingBotHeadColor.material.color = Color.green;
             detection.DecreaseDetection(detectionDecreaseRate);
             detectionIncreaseRate = 5.0f;
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProximity : MonoBehaviour
+public class GroundEnemyProximity : MonoBehaviour
 {
     [Header("Game Objects")]
     [SerializeField] GameObject enemyRaycast;

@@ -1,15 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.AI;
 
-public class GroundBotStateMachine : MonoBehaviour
+
+public class FlyingBotStateMachine : MonoBehaviour
 {
     [Header("Nav Mesh")]
     private NavMeshAgent navGhost;
-
-    [Header("LayerMask")]
-    [SerializeField] LayerMask groundMask;
 
     [Header("GameObjects")]
     [SerializeField] GameObject player;
@@ -37,18 +34,13 @@ public class GroundBotStateMachine : MonoBehaviour
     [Header("Rigidbody")]
     private Rigidbody rb;
 
-    [Header("Bools")]
-    [SerializeField] bool isGrounded;
-    //[SerializeField] bool goingToTarget;
-    [SerializeField] bool isChasing;
-
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
 
 
-    public BehaviourState currentState;
+    public FlyingState currentState;
 
-    public enum BehaviourState
+    public enum FlyingState
     {
         patrolling,
         scanning,
@@ -71,13 +63,13 @@ public class GroundBotStateMachine : MonoBehaviour
         startRotation = transform.rotation;
         //targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
         //goingToTarget = true;
-        currentState = BehaviourState.patrolling;
+        currentState = FlyingState.patrolling;
     }
 
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, robotHeight * 2.5f, groundMask);
+        
         
     }
 
@@ -86,24 +78,18 @@ public class GroundBotStateMachine : MonoBehaviour
         UpdateBehaviour();
     }
 
-    public void ChangeBehaviour(BehaviourState newState)
+    public void ChangeBehaviour(FlyingState newState)
     {
         currentState = newState;
-    }
-
-    public void ChasePlayer(bool value)
-    {
-        isChasing = value;
     }
 
     void UpdateBehaviour()
     {
         switch (currentState)
         {
-            case BehaviourState.patrolling:
+            case FlyingState.patrolling:
 
-                //if (isGrounded)
-                //{
+             
                 //    elapsedTime += Time.deltaTime;
 
                 //    float patrollingSpeed = elapsedTime / duration;
@@ -142,11 +128,11 @@ public class GroundBotStateMachine : MonoBehaviour
                 //}
                 break;
 
-            case BehaviourState.scanning:
+            case FlyingState.scanning:
                
                 break;
 
-            case BehaviourState.playerCaught:
+            case FlyingState.playerCaught:
 
             gameOverScreen.ReturnGameOverPanel().SetActive(true);
             Time.timeScale = 0.0f;
@@ -156,7 +142,7 @@ public class GroundBotStateMachine : MonoBehaviour
 
                 break;
 
-            case BehaviourState.reset:
+            case FlyingState.reset:
 
                 float returnSpeed = 10.0f;
 
@@ -165,10 +151,9 @@ public class GroundBotStateMachine : MonoBehaviour
                 break;
 
             default:
-                if (isGrounded)
-                {
-                    currentState = BehaviourState.patrolling;
-                }
+             
+                    currentState = FlyingState.patrolling;
+               
                 break;
         }
     }
