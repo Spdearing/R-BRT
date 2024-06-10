@@ -279,6 +279,10 @@ PrefabInstance:
       propertyPath: playerCharacterController
       value: 
       objectReference: {fileID: 243999748}
+    - target: {fileID: 6419028404292639107, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: interactableText
+      value: 
+      objectReference: {fileID: 1539462488}
     - target: {fileID: 7188083678439878143, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: m_LocalPosition.x
       value: -79.13
@@ -2928,8 +2932,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 297}
-  m_SizeDelta: {x: 500, y: 120}
+  m_AnchoredPosition: {x: 32.719, y: 299.066}
+  m_SizeDelta: {x: 956.106, y: 267.423}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &765872701
 MonoBehaviour:
