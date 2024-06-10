@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b8af22a7fc09a824d8cc33e07d4c17f8
+guid: 54a5b5cf5f002134d958f4076e28ff27
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sees
+      name: IdleFixed2
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 29
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
