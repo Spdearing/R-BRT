@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] RockCollision rockCollision;
-    [SerializeField] PickUpObject rock;
+    //[SerializeField] RockCollision rockCollision;
+    //[SerializeField] PickUpObject rock;
 
     [SerializeField] bool hasJetPack;
     [SerializeField] bool hasStealth;
@@ -22,23 +22,19 @@ public class GameManager : MonoBehaviour
 
 
 
-    private void Awake()
+    void Awake()
     {
+        // Implement Singleton pattern
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
+            DontDestroyOnLoad(gameObject); // This makes the GameObject persistent across scenes
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroy duplicate GameManager instances
         }
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -53,8 +49,8 @@ public class GameManager : MonoBehaviour
         {
             player = GameObject.FindWithTag("Player");
             detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
-            rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
-            rock = GetComponent<PickUpObject>();
+            //rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
+            //rock = GameObject.Find("Rocks").GetComponent<PickUpObject>();
         }
         else if(scene.name == "ChooseYourFriend")
         {
@@ -65,6 +61,14 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
             StartCoroutine(TransitionBackToStart());
+        }
+        if (scene.name == "Player_Enemy_TestScene")
+        {
+            player = GameObject.FindWithTag("Player");
+            detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
+            //rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
+            //rock = GetComponent<PickUpObject>();
+            allDirectionRaycast = GameObject.Find("Rocks").GetComponent<AllDirectionRaycast>();
         }
     }
 
