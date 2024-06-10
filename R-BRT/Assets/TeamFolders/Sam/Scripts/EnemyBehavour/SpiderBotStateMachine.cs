@@ -5,9 +5,6 @@ using UnityEngine.AI;
 
 public class SpiderBotStateMachine : MonoBehaviour
 {
-    [Header("Nav Mesh")]
-    private NavMeshAgent navGhost;
-
     [Header("GameObjects")]
     [SerializeField] GameObject player;
     
@@ -38,9 +35,9 @@ public class SpiderBotStateMachine : MonoBehaviour
     [SerializeField] GameOverScreen gameOverScreen;
 
 
-    public FlyingState currentState;
+    public IdleState currentState;
 
-    public enum FlyingState
+    public enum IdleState
     {
         patrolling,
         scanning,
@@ -63,7 +60,7 @@ public class SpiderBotStateMachine : MonoBehaviour
         startRotation = transform.rotation;
         //targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
         //goingToTarget = true;
-        currentState = FlyingState.patrolling;
+        currentState = IdleState.patrolling;
     }
 
     // Update is called once per frame
@@ -78,7 +75,7 @@ public class SpiderBotStateMachine : MonoBehaviour
         UpdateBehaviour();
     }
 
-    public void ChangeBehaviour(FlyingState newState)
+    public void ChangeBehaviour(IdleState newState)
     {
         currentState = newState;
     }
@@ -87,7 +84,7 @@ public class SpiderBotStateMachine : MonoBehaviour
     {
         switch (currentState)
         {
-            case FlyingState.patrolling:
+            case IdleState.patrolling:
 
              
                 //    elapsedTime += Time.deltaTime;
@@ -128,11 +125,11 @@ public class SpiderBotStateMachine : MonoBehaviour
                 //}
                 break;
 
-            case FlyingState.scanning:
+            case IdleState.scanning:
                
                 break;
 
-            case FlyingState.playerCaught:
+            case IdleState.playerCaught:
 
             gameOverScreen.ReturnGameOverPanel().SetActive(true);
             Time.timeScale = 0.0f;
@@ -142,7 +139,7 @@ public class SpiderBotStateMachine : MonoBehaviour
 
                 break;
 
-            case FlyingState.reset:
+            case IdleState.reset:
 
                 float returnSpeed = 10.0f;
 
@@ -152,7 +149,7 @@ public class SpiderBotStateMachine : MonoBehaviour
 
             default:
              
-                    currentState = FlyingState.patrolling;
+                    currentState = IdleState.patrolling;
                
                 break;
         }
