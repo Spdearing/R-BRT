@@ -1,8 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.AI;
 
 public class GroundBotStateMachine : MonoBehaviour
 {
+    [Header("Nav Mesh")]
+    private NavMeshAgent navGhost;
+
     [Header("LayerMask")]
     [SerializeField] LayerMask groundMask;
 

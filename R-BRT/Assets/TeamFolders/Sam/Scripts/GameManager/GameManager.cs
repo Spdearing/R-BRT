@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,48 +17,58 @@ public class GameManager : MonoBehaviour
     [SerializeField] static GameManager instance;
 
     [SerializeField] private AllDirectionRaycast allDirectionRaycast;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                // Look for an existing instance in the scene
-                instance = FindObjectOfType<GameManager>();
-
-                // If no instance exists, create a new one
-                if (instance == null)
-                {
-                    GameObject singletonObject = new GameObject("GameManager");
-                    instance = singletonObject.AddComponent<GameManager>();
-
-                    // Ensure that the GameManager persists across scene changes
-                    DontDestroyOnLoad(singletonObject);
-                }
-            }
-            return instance;
-        }
-    }
+    
+    public static GameManager Instance;
 
 
 
     private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
-        rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
-        rock = GetComponent<PickUpObject>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        
     }
 
-    public void SendOutNoise()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "GameScene")
+        {
+            player = GameObject.FindWithTag("Player");
+            detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
+            rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
+            rock = GetComponent<PickUpObject>();
+        }
+        else if(scene.name == "ChooseYourFriend")
+        {
+            Time.timeScale = 1;
+            StartCoroutine(TransitionBackToStart());
+        }
+        if(scene.name == "SaveTheWorld")
+        {
+            Time.timeScale = 1;
+            StartCoroutine(TransitionBackToStart());
+        }
+    }
+
+        public void SendOutNoise()
     {
         StartCoroutine(EnableSoundForDuration());
     }
@@ -101,5 +112,12 @@ public class GameManager : MonoBehaviour
     public DetectionMeter ReturnDetectionMeter()
     {
         return this.detectionMeter;
+    }
+
+
+    IEnumerator TransitionBackToStart()
+    {
+        yield return new WaitForSeconds(15.0f);
+        SceneManager.LoadScene("MainMenu");
     }
 }

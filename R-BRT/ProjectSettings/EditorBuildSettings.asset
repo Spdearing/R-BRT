@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 851b43a7f2ee45a4186b06beb18337d2
+  - enabled: 1
+    path: Assets/Scenes/ChooseYourFriend.unity
+    guid: 9fdd778ed20e6204cba699daa97381df
+  - enabled: 1
+    path: Assets/Scenes/SaveTheWorld.unity
+    guid: e939968c562a4e341b7724d40ac0b4e8
   m_configObjects: {}

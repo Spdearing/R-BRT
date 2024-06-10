@@ -3,17 +3,15 @@ using UnityEngine;
 using TMPro;
 
 
-// Assignment/Lab/Project: Portal
-// Name: Nasim Issa
-// Section: SGD285.4171
-// Instructor: Aurore Locklear
-// Date: 04/07/2024
 
 public class UIController : MonoBehaviour
 {
-
+    [Header("Game Object")]
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject phoenixChipMenu;
 
+
+    [Header("Bool")]
     private bool isPaused;
 
     private void Start()
@@ -21,6 +19,7 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1.0f;
         pauseMenu.SetActive(false);
         isPaused = false;
+        phoenixChipMenu.SetActive(false);
     }
 
     private void Update()
@@ -81,5 +80,22 @@ public class UIController : MonoBehaviour
     public void BackToMainMenu()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+
+    public void PhoenixChipDecision()
+    {
+        phoenixChipMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ChooseYourFriend()
+    {
+        SceneManager.LoadScene("ChooseYourFriend");
+    }
+
+    public void SaveTheWorld()
+    {
+        SceneManager.LoadScene("SaveTheWorld");
     }
 }

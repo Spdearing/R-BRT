@@ -12,6 +12,7 @@ TagManager:
   - GroundBot
   - GroundBotHead
   - Invisible
+  - PhoenixChip
   layers:
   - Default
   - TransparentFX
