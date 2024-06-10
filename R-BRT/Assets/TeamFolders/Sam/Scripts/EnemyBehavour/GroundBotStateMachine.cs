@@ -42,6 +42,9 @@ public class GroundBotStateMachine : MonoBehaviour
     //[SerializeField] bool goingToTarget;
     [SerializeField] bool isChasing;
 
+    [Header("Scripts")]
+    [SerializeField] GameOverScreen gameOverScreen;
+
 
     public BehaviourState currentState;
 
@@ -49,7 +52,7 @@ public class GroundBotStateMachine : MonoBehaviour
     {
         patrolling,
         scanning,
-        chasing,
+        playerCaught,
         reset
 
     }
@@ -143,34 +146,15 @@ public class GroundBotStateMachine : MonoBehaviour
                
                 break;
 
-            case BehaviourState.chasing:
+            case BehaviourState.playerCaught:
 
-                //if (isChasing && isGrounded)
-                //{
-                    
-                //    Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+            gameOverScreen.ReturnGameOverPanel().SetActive(true);
+            Time.timeScale = 0.0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
-                    
-                //    float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-                    
-                //    if (distanceToPlayer > stoppingDistance)
-                //    {
-                        
-                //        transform.Translate(directionToPlayer * chaseSpeed * Time.deltaTime, Space.World);
-
-                       
-                //        transform.LookAt(player.transform.position);
-                //    }
-                //    else
-                //    {
-                //        // Stop chasing if within stopping distance
-                //        isChasing = false;
-                //    }
-                //}
-        
-
-            break;
+                break;
 
             case BehaviourState.reset:
 
