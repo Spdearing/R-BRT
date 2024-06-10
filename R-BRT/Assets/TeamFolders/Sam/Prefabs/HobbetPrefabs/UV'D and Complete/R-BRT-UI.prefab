@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6686504595572359412
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.005
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2718023
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.172
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.025241792
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99968135
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 177.107
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+      propertyPath: m_Name
+      value: R-BRT-UI
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: -7533217053001161890, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: -6943318742547697729, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: -810094612784545860, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 7901141999854396062, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 8702337937780134327, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: -8471243090207171586, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 4457605927252949883, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 4567499608646628457, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: -8363324037629473239, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 5849352979124214449, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 2863164565644901808, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 5195137977504364194, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 7845208948026226146, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 687214383510473400, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 6862430785285805557, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 5782905741215196248, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: -3984760199286059137, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    - {fileID: 2288029988408169147, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: abe7121c746bc2b44afd3ff96d5b25fb, type: 3}
