@@ -291,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bc59613e6b4f98c41be5f1fa9e9214e5, type: 3}
       propertyPath: m_Name
-      value: CameraBotAnim
+      value: CamerBotAnim
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -482,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f496b2dadc4a4d944be550832fc99c94, type: 3}
       propertyPath: m_Name
-      value: CameraBot
+      value: CameraBot-1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7c5742ae96cf3544288a6c558825e183, type: 3}
       propertyPath: m_Name
-      value: R-BRT
+      value: R-BRT-RightSize2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -598,7 +598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 239e638730a37d6448bf0ef0e79a0de7, type: 3}
       propertyPath: m_Name
-      value: S-4M
+      value: Hobbet S-4M-Maya2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -897,7 +897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4c959e151010682448d45879cbf0cf42, type: 3}
       propertyPath: m_Name
-      value: FlyinBotUnity
+      value: FlyinBotUnity_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -954,7 +954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: be9ec512dac85e142ac277c981fadf13, type: 3}
       propertyPath: m_Name
-      value: GroundBotUnity
+      value: GroundBotUnity-3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1011,7 +1011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1041404581247712549, guid: 15cd5808415d3dd488d33ae0c86c1062, type: 3}
       propertyPath: m_Name
-      value: R-BRT-UI
+      value: R-BRT-RightSize2 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
