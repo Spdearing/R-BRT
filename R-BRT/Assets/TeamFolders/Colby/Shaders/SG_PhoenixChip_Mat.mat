@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SG_PhoenixChip_Mat
+  m_Shader: {fileID: -6465566751694194690, guid: 32cf76ce2b5994042a415379cf8c02b0, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_6c24f14a62ad4c4fb803f48908fb4dfd_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 7f87d91eb9fa79a4e98cf7b05325d51e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6d6e61902f5b4b84acc41e9bce77e80f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: a650525808b608e4b974738073af10c1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_8c8d94f6ea0742db9a1cb3afec5a535f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 96126383888919f438a21e6e32618826, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_e095448afea44d0396ec0c5836b745a5_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 3c659219974c45e46ba111a20e9bf6c1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_f913d6b62b3744b29f5fb61937a993a5_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 4903beabcd6f1b04e8d4e706d88b686c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _SecondaryBrightness: 10
+    - _TilingSize: 5
+    - _TilingSpeed: 0.1
+    m_Colors:
+    - _MainColor: {r: 1, g: 0.49108696, b: 0, a: 0}
+    - _SecondaryColor: {r: 1, g: 0.6364831, b: 0, a: 0}
+    - _TilingDirection: {r: 0.2, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &5310232170613238199
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
