@@ -13,18 +13,18 @@ public class GroundBotStateMachine : MonoBehaviour
 
     [Header("GameObjects")]
     [SerializeField] GameObject player;
-    [SerializeField] GameObject endingPoint;
+    
 
     [Header("Vector3")]
     [SerializeField] Vector3 startingLocation;
-    [SerializeField] Vector3 endingLocation;
+    
 
     [Header("Rotations")]
     [SerializeField] private Quaternion startRotation;
     [SerializeField] private Quaternion targetRotation;
 
     [Header("Transform")]
-    [SerializeField] Transform endingLocationObject;
+    //[SerializeField] Transform endingLocationObject;
 
     [Header("Floats")]
     [SerializeField] private float robotHeight;
@@ -39,7 +39,7 @@ public class GroundBotStateMachine : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] bool isGrounded;
-    [SerializeField] bool goingToTarget;
+    //[SerializeField] bool goingToTarget;
     [SerializeField] bool isChasing;
 
 
@@ -63,11 +63,11 @@ public class GroundBotStateMachine : MonoBehaviour
         duration = 20.0f;
         robotHeight = 1.329f;
         startingLocation = transform.position;
-        endingLocation = endingLocationObject.position;
+        //endingLocation = endingLocationObject.position;
         elapsedTime = 0f;
         startRotation = transform.rotation;
-        targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-        goingToTarget = true;
+        //targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
+        //goingToTarget = true;
         currentState = BehaviourState.patrolling;
     }
 
@@ -99,45 +99,45 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviourState.patrolling:
 
-                if (isGrounded)
-                {
-                    elapsedTime += Time.deltaTime;
+                //if (isGrounded)
+                //{
+                //    elapsedTime += Time.deltaTime;
 
-                    float patrollingSpeed = elapsedTime / duration;
+                //    float patrollingSpeed = elapsedTime / duration;
 
-                    // Lerp the position
-                    if (goingToTarget)
-                    {
-                        transform.position = Vector3.Lerp(startingLocation, endingLocation, patrollingSpeed);
-                    }
-                    else
-                    {
-                        transform.position = Vector3.Lerp(endingLocation, startingLocation, patrollingSpeed);
-                    }
+                //    // Lerp the position
+                //    if (goingToTarget)
+                //    {
+                //        transform.position = Vector3.Lerp(startingLocation, endingLocation, patrollingSpeed);
+                //    }
+                //    else
+                //    {
+                //        transform.position = Vector3.Lerp(endingLocation, startingLocation, patrollingSpeed);
+                //    }
 
-                    // If the lerp is complete, reverse direction and reset elapsedTime
-                    if (patrollingSpeed >= 1.0f)
-                    {
-                        goingToTarget = !goingToTarget; // Reverse the direction
-                        elapsedTime = 0f; // Reset the elapsed time
+                //    // If the lerp is complete, reverse direction and reset elapsedTime
+                //    if (patrollingSpeed >= 1.0f)
+                //    {
+                //        goingToTarget = !goingToTarget; // Reverse the direction
+                //        elapsedTime = 0f; // Reset the elapsed time
 
-                        // Swap start and target rotations for the next movement
-                        if (goingToTarget)
-                        {
-                            startRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-                            targetRotation = Quaternion.LookRotation(startingLocation - endingLocation);
-                        }
-                        else
-                        {
-                            startRotation = Quaternion.LookRotation(startingLocation - endingLocation);
-                            targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-                        }
+                //        // Swap start and target rotations for the next movement
+                //        if (goingToTarget)
+                //        {
+                //            startRotation = Quaternion.LookRotation(endingLocation - startingLocation);
+                //            targetRotation = Quaternion.LookRotation(startingLocation - endingLocation);
+                //        }
+                //        else
+                //        {
+                //            startRotation = Quaternion.LookRotation(startingLocation - endingLocation);
+                //            targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
+                //        }
 
-                        // Rotate to face the new direction
-                        StartCoroutine(RotateToFaceDirection());
-                    }
-                }
-                break;
+                //        // Rotate to face the new direction
+                //        StartCoroutine(RotateToFaceDirection());
+                //    }
+                //}
+                //break;
 
             case BehaviourState.scanning:
                
@@ -145,29 +145,29 @@ public class GroundBotStateMachine : MonoBehaviour
 
             case BehaviourState.chasing:
 
-                if (isChasing && isGrounded)
-                {
+                //if (isChasing && isGrounded)
+                //{
                     
-                    Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+                //    Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
 
                     
-                    float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+                //    float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
                     
-                    if (distanceToPlayer > stoppingDistance)
-                    {
+                //    if (distanceToPlayer > stoppingDistance)
+                //    {
                         
-                        transform.Translate(directionToPlayer * chaseSpeed * Time.deltaTime, Space.World);
+                //        transform.Translate(directionToPlayer * chaseSpeed * Time.deltaTime, Space.World);
 
                        
-                        transform.LookAt(player.transform.position);
-                    }
-                    else
-                    {
-                        // Stop chasing if within stopping distance
-                        isChasing = false;
-                    }
-                }
+                //        transform.LookAt(player.transform.position);
+                //    }
+                //    else
+                //    {
+                //        // Stop chasing if within stopping distance
+                //        isChasing = false;
+                //    }
+                //}
         
 
             break;
