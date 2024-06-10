@@ -89,6 +89,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
                         if(detection.ReturnStartingDetection() == 200)// if the detection bar becomes full
                         {
+                            groundBotBehaviour.ChasePlayer(true);
                             groundBotBehaviour.ChangeBehaviour(BehaviourState.chasing); // Enemy will chase the player
                         }
                     }
