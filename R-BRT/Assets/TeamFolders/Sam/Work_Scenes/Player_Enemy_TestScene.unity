@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2253,9 +2253,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7380649729882110404, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: playerHeight
       value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: jetPackUnlocked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: invisibilityUnlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: invisibilityAvailable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7531759830370130341, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
