@@ -61,8 +61,9 @@ public class PlayerRaycast : MonoBehaviour
 
             if (hitInfo.distance < interactDistance)
             {
-                
-                if(hitInfo.collider.tag == "PickUpItem")
+                Debug.Log(hitInfo.collider.gameObject);
+
+                if (hitInfo.collider.tag == "PickUpItem")
                 {
                     interactableText.text = "Press (E) to pick up the rock";
 
@@ -86,12 +87,12 @@ public class PlayerRaycast : MonoBehaviour
 
                 }
             }
-            
+
 
             else
             {
                 interactableText.text = " ";
-                
+
             }
 
             pickUpTime += Time.deltaTime;

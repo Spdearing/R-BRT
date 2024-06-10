@@ -87,6 +87,8 @@ public class UIController : MonoBehaviour
     {
         phoenixChipMenu.SetActive(true);
         Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void ChooseYourFriend()

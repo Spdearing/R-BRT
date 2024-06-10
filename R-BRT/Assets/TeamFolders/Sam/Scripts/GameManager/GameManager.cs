@@ -74,13 +74,13 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator EnableSoundForDuration()
     {
-        // Enable the desired script
+        
         allDirectionRaycast.enabled = true;
 
-        // Wait for the specified duration
+        
         yield return new WaitForSeconds(.1f);
 
-        // Disable the script after the duration
+        
         allDirectionRaycast.enabled = false;
     }
 
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator TransitionBackToStart()
     {
-        yield return new WaitForSeconds(15.0f);
-        SceneManager.LoadScene("MainMenu");
+        yield return new WaitForSeconds(7.5f);
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
