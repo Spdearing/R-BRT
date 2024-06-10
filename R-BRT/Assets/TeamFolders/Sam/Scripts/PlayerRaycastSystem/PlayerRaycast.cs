@@ -5,38 +5,43 @@ using TMPro;
 
 public class PlayerRaycast : MonoBehaviour
 {
-    [SerializeField] private float raycastDistance;
-    [SerializeField] float interactDistance = 4;
+
+    [Header("Game Objects")]
     [SerializeField] GameObject lastHitObject;
-    //[SerializeField] GameObject enemy;
-    //[SerializeField] Light enemyLight;
- 
-    [SerializeField] bool holding;
     [SerializeField] GameObject heldObject;
-    [SerializeField] float pickUpCooldown = 0.5f;
-    [SerializeField] float pickUpTime;
-
-    [SerializeField] PickUpObject pickUpObject;
-    [SerializeField] Transform holdingPosition;
     [SerializeField] GameObject heldPosition;
-    
 
-    //[SerializeField] ChangeBoxColor changeBoxColor;
+    [Header("Floats")]
+    [SerializeField] private float interactDistance;
+    [SerializeField] private float raycastDistance;
+    [SerializeField] private float pickUpCooldown;
+    [SerializeField] private float pickUpTime;
+
+    [Header("Bool")]
+    [SerializeField] bool holding;
+
+    [Header("Transform")]
+    [SerializeField] Transform holdingPosition;
+
+    [Header("Scripts")]
+    [SerializeField] PickUpObject pickUpObject;
+    [SerializeField] UIController uI;
+
+    [Header("UI Elements")]
     [SerializeField] TMP_Text interactableText;
-
-
-    //[SerializeField] string[] tagsToCheck = new string[] { "Block", "Block2", "Block3", "PickUpItem" };
-
-
 
     void Start()
     {
-        raycastDistance = interactDistance; // raycastDistance = 4
+
+        interactDistance = 4;
+        raycastDistance = interactDistance;
+        pickUpCooldown = 0.5f;
         holding = false;
         interactableText = GameObject.Find("InteractableText").GetComponent<TMP_Text>();
         pickUpObject = GameObject.Find("Rocks").GetComponent<PickUpObject>();
         holdingPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
         heldPosition = GameObject.Find("HoldPosition");
+        uI = GameObject.Find("Canvas").GetComponent<UIController>();
 
     }
 
@@ -59,9 +64,9 @@ public class PlayerRaycast : MonoBehaviour
                 
                 if(hitInfo.collider.tag == "PickUpItem")
                 {
-                    interactableText.text = "Press (F) to pick up the rock";
+                    interactableText.text = "Press (E) to pick up the rock";
 
-                    if (Input.GetKeyDown(KeyCode.F) && !holding)
+                    if (Input.GetKeyDown(KeyCode.E) && !holding)
                     {
                         holding = true;
                         hitInfo.collider.gameObject.GetComponent<PickUpObject>().PickUp();
@@ -69,7 +74,20 @@ public class PlayerRaycast : MonoBehaviour
                         pickUpTime = 0f;
                     }
                 }
+
+                else if (hitInfo.collider.tag == "PhoenixChip")
+                {
+                    interactableText.text = "Press (E) to pick up the Phoenix Chip";
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        uI.PhoenixChipDecision();
+                    }
+
+                }
             }
+            
+
             else
             {
                 interactableText.text = " ";
