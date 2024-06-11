@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class GroundBotStateMachine : MonoBehaviour
 {
     [Header("Nav Mesh")]
-    [SerializeField] private NavMeshAgent navRobot;
+    //[SerializeField] private NavMeshAgent navRobot;
 
     [Header("LayerMask")]
     [SerializeField] LayerMask groundMask;
@@ -25,7 +25,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] private Quaternion targetRotation;
 
     [Header("Transform")]
-    [SerializeField] private Transform[] patrolPoints;
+    //[SerializeField] private Transform[] patrolPoints;
 
     [Header("Floats")]
     [SerializeField] private float robotHeight;
@@ -37,7 +37,7 @@ public class GroundBotStateMachine : MonoBehaviour
 
 
     [Header("Int")]
-    [SerializeField] private int currentWaypointIndex;
+    //[SerializeField] private int currentWaypointIndex;
 
     [Header("Rigidbody")]
     private Rigidbody rb;
@@ -45,7 +45,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [Header("Bools")]
     [SerializeField] bool isGrounded;
     //[SerializeField] bool goingToTarget;
-    [SerializeField] bool isChasing;
+    //[SerializeField] bool isChasing;
 
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
@@ -73,7 +73,7 @@ public class GroundBotStateMachine : MonoBehaviour
         startingLocation = transform.position;
         elapsedTime = 0f;
         startRotation = transform.rotation;
-        navRobot = GetComponent<NavMeshAgent>();
+        //navRobot = GetComponent<NavMeshAgent>();
         currentState = BehaviourState.patrolling;
     }
 
@@ -94,10 +94,10 @@ public class GroundBotStateMachine : MonoBehaviour
         currentState = newState;
     }
 
-    public void ChasePlayer(bool value)
-    {
-        isChasing = value;
-    }
+    //public void ChasePlayer(bool value)
+    //{
+    //    isChasing = value;
+    //}
 
     void UpdateBehaviour()
     {
@@ -105,12 +105,12 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviourState.patrolling:
 
-                if (navRobot.remainingDistance < 0.1f)
-                {
-                    currentWaypointIndex = UnityEngine.Random.Range(0,patrolPoints.Length); 
+                //if (navRobot.remainingDistance < 0.1f)
+                //{
+                //    currentWaypointIndex = UnityEngine.Random.Range(0,patrolPoints.Length); 
 
-                    navRobot.SetDestination(patrolPoints[currentWaypointIndex].position);
-                }
+                //    navRobot.SetDestination(patrolPoints[currentWaypointIndex].position);
+                //}
 
                 break;
 

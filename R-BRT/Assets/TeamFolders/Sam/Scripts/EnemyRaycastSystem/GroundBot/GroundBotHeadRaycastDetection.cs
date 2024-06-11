@@ -80,7 +80,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
                         if (detection.ReturnStartingDetection() == 200)
                         {
-                            groundBotBehaviour.ChasePlayer(true);
+                            //groundBotBehaviour.ChasePlayer(true);
                             groundBotBehaviour.ChangeBehaviour(BehaviourState.playerCaught);
                         }
                     }
