@@ -769,7 +769,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3991
+  m_VersionIndex: 3994
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -899,19 +899,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.072962
+      value: 6.500352
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.78
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.36219
+      value: -32.04915
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7306121
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -919,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.6827928
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalRotation.z
@@ -931,7 +931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -86.125
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -963,9 +963,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 450757283413428717}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3328188366028488355}
   m_SourcePrefab: {fileID: 100100000, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
 --- !u!4 &37323812658789258 stripped
 Transform:
@@ -1008,6 +1005,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   player: {fileID: 0}
+  destination: {fileID: 0}
   startingLocation: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1018,7 +1016,6 @@ MonoBehaviour:
   chaseSpeed: 0
   stoppingDistance: 2
   isGrounded: 0
-  isChasing: 0
   gameOverScreen: {fileID: 0}
   currentState: 0
 --- !u!114 &8445430652349647264
@@ -1084,25 +1081,3 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &3328188366028488355
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769495032135890464}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
