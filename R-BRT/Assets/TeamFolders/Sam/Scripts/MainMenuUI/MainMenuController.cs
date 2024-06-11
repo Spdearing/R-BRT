@@ -4,17 +4,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-// Assignment/Lab/Project: Portal
-// Name: Samuel Dearing
-// Section: SGD285.4171
-// Instructor: Aurore Locklear
-// Date: 05/5/2024
 
 public class MainMenuController : MonoBehaviour
 {
  
     [SerializeField] GameObject mainMenuPanel;
     [SerializeField] GameObject playMenuPanel;
+    [SerializeField] GameObject instructionsPanel;
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject creditsPanel;
 
@@ -25,6 +21,7 @@ public class MainMenuController : MonoBehaviour
     void Start()
     {
         panels.Add("MainMenuPanel", mainMenuPanel);
+        panels.Add("InstructionsPanel", instructionsPanel);
         panels.Add("PlayMenuPanel", playMenuPanel);
         panels.Add("OptionsPanel", optionsPanel);
         panels.Add("CreditsPanel", creditsPanel);
@@ -64,6 +61,10 @@ public class MainMenuController : MonoBehaviour
     public void SwitchToCreditsPanel()
     {
         SwitchPanel("CreditsPanel");
+    }
+    public void SwitchToinstuctionsPanel()
+    {
+        SwitchPanel("InstructionsPanel");
     }
 
     public void SwitchToPlayMenu()
