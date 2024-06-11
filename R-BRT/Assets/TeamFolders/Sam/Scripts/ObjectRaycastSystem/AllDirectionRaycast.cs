@@ -5,15 +5,17 @@ using UnityEngine;
 public class AllDirectionRaycast : MonoBehaviour
 {
     public int numRays = 100; // Number of rays to cast
-    public float raycastDistance = 10f; // Distance for the raycasts
+    public float raycastDistance = 20f; // Distance for the raycasts
     public LayerMask layerMask; // Layer mask to filter raycast hits
+
+    [SerializeField] private GameObject enemyObject;
 
     void Update()
     {
-        CastRaysInAllDirections();
+        //CastRaysInAllDirections();
     }
 
-    void CastRaysInAllDirections()
+    public void CastRaysInAllDirections()
     {
         for (int i = 0; i < numRays; i++)
         {
@@ -29,9 +31,9 @@ public class AllDirectionRaycast : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, raycastDistance, layerMask))
             {
-               if(hit.collider.tag == "GroundBot" || hit.collider.tag == "FlyingBot" || hit.collider.tag == "SpiderBot")
+               if(hit.collider.tag == "GroundBot")
                 {
-                    GameObject enemyObject = hit.collider.gameObject;
+                    enemyObject = hit.collider.gameObject;
                     enemyObject.transform.LookAt(transform.position);
                 }
             }

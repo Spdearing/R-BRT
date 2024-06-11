@@ -74,7 +74,9 @@ public class GameManager : MonoBehaviour
 
         public void SendOutNoise()
     {
-        StartCoroutine(EnableSoundForDuration());
+
+        allDirectionRaycast.CastRaysInAllDirections();
+        //StartCoroutine(EnableSoundForDuration());
     }
     IEnumerator EnableSoundForDuration()
     {
@@ -82,7 +84,7 @@ public class GameManager : MonoBehaviour
         allDirectionRaycast.enabled = true;
 
         
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.5f);
 
         
         allDirectionRaycast.enabled = false;
