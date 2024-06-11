@@ -70,7 +70,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                     groundBot.transform.LookAt(playerCenterPosition);
                     transform.LookAt(playerCenterPosition);
 
-                    if (playerDetected && playerController.ReturnInvisibilityStatus())
+                    if (playerDetected && playerController.ReturnInvisibilityStatus() == true)
                     {
                         groundBotBehaviour.ChangeBehaviour(BehaviourState.scanning);
                         detection.IncreaseDetection(detectionIncreaseRate);
@@ -80,7 +80,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
                         if (detection.ReturnStartingDetection() == 200)
                         {
-                            //groundBotBehaviour.ChasePlayer(true);
+                           
                             groundBotBehaviour.ChangeBehaviour(BehaviourState.playerCaught);
                         }
                     }

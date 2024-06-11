@@ -9,12 +9,15 @@ public class DetectionMeter : MonoBehaviour
     [SerializeField] Image detectionMeter; //Image that will be filled, or depleted because of the script.
 
     [Header("Floats")]
-    [SerializeField] float startingDetection = 0.0f;
-    [SerializeField] float detectionIncrement = 0.5f;
-    [SerializeField] float maxDetection = 200.0f;
+    [SerializeField] float startingDetection;
+    [SerializeField] float detectionIncrement;
+    [SerializeField] float maxDetection;
 
     void Start()
     {
+        startingDetection = 0.0f;
+        detectionIncrement = 1.0f;
+        maxDetection = 200.0f;
         detectionMeter.fillAmount = startingDetection / maxDetection;
     }
 
