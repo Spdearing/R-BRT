@@ -11,7 +11,6 @@ public class SpiderBotHeadRaycastDetection : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
-    [SerializeField] private SpiderBotHeadMovement headMovement;
     [SerializeField] private SpiderEnemyProximity proximityCheck;
     [SerializeField] private DetectionMeter detection;
     [SerializeField] private SpiderBotStateMachine spiderBotBehaviour;
@@ -24,12 +23,9 @@ public class SpiderBotHeadRaycastDetection : MonoBehaviour
     [SerializeField] private float capsuleHeight;
 
     [Header("Game Objects")]
-    [SerializeField] private GameObject spiderBotHead;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject spiderBot;
 
-    [Header("Renderer")]
-    [SerializeField] private Renderer spiderBotHeadColor;
 
     [Header("Bools")]
     [SerializeField] private bool playerDetected;
@@ -68,19 +64,13 @@ public class SpiderBotHeadRaycastDetection : MonoBehaviour
                 if (playerIsBeingTracked)
                 {
                     playerDetected = true;
-                    Vector3 playerCenterPosition = player.transform.position + new Vector3(0, capsuleHeight / 2.5f, 0);
-                    Vector3 playerLocation = player.transform.position ;
-                    spiderBot.transform.LookAt(playerLocation);
-                    transform.LookAt(playerCenterPosition);
 
                     if (playerDetected && playerController.ReturnInvisibilityStatus())
                     {
                         spiderBotBehaviour.ChangeBehaviour(IdleState.scanning);
                         detection.IncreaseDetection(detectionIncreaseRate);
                         detectionIncreaseRate += 0.5f;
-                        headMovement.SetPlayerSpotted(true);
-                        spiderBotHeadColor.material.color = Color.red;
-
+                        
                         if (detection.ReturnStartingDetection() == 200)
                         {
                             
@@ -91,8 +81,6 @@ public class SpiderBotHeadRaycastDetection : MonoBehaviour
                 else if (!playerIsBeingTracked)
                 {
                     spiderBotBehaviour.ChangeBehaviour(IdleState.patrolling);
-                    headMovement.SetPlayerSpotted(false);
-                    spiderBotHeadColor.material.color = Color.green;
                     detection.DecreaseDetection(detectionDecreaseRate);
                     detectionIncreaseRate = 5.0f;
                 }
@@ -100,16 +88,12 @@ public class SpiderBotHeadRaycastDetection : MonoBehaviour
             else
             {
                 playerDetected = false;
-                headMovement.SetPlayerSpotted(false);
-                spiderBotHeadColor.material.color = Color.green;
                 detection.DecreaseDetection(detectionDecreaseRate);
                 detectionIncreaseRate = 5.0f;
             }
         }
         else
         {
-            headMovement.SetPlayerSpotted(false);
-            spiderBotHeadColor.material.color = Color.green;
             detection.DecreaseDetection(detectionDecreaseRate);
             detectionIncreaseRate = 5.0f;
         }
