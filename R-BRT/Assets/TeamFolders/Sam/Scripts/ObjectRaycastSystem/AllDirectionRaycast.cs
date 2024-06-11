@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class AllDirectionRaycast : MonoBehaviour
@@ -29,8 +30,11 @@ public class AllDirectionRaycast : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, raycastDistance, layerMask))
             {
-                // Handle the hit
-                Debug.Log("Hit: " + hit.collider.name + " at distance: " + hit.distance);
+               if(hit.collider.tag == "GroundBot" || hit.collider.tag == "FlyingBot" || hit.collider.tag == "SpiderBot")
+                {
+                    GameObject enemyObject = hit.collider.gameObject;
+                    enemyObject.transform.LookAt(transform.position);
+                }
             }
         }
     }
