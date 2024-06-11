@@ -61,7 +61,7 @@ public class PlayerRaycast : MonoBehaviour
 
             if (hitInfo.distance < interactDistance)
             {
-                Debug.Log(hitInfo.collider.gameObject);
+               
 
                 if (hitInfo.collider.tag == "PickUpItem")
                 {
