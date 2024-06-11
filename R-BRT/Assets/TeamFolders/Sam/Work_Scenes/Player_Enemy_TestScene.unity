@@ -2297,7 +2297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7188083678439878143, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.81
+      value: 39.73
       objectReference: {fileID: 0}
     - target: {fileID: 7188083678439878143, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2305,7 +2305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7188083678439878143, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -31.54
+      value: -17.42
       objectReference: {fileID: 0}
     - target: {fileID: 7188083678439878143, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3014,6 +3014,10 @@ PrefabInstance:
     - target: {fileID: 4769495032135890464, guid: f444048db34c874468b6dfe80d36d339, type: 3}
       propertyPath: m_Name
       value: GroundRobot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769495032135890464, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+      propertyPath: m_TagString
+      value: GroundBot
       objectReference: {fileID: 0}
     - target: {fileID: 5294956468376923290, guid: f444048db34c874468b6dfe80d36d339, type: 3}
       propertyPath: m_LocalPosition.x
