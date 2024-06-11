@@ -97,7 +97,7 @@ public class PlayerRaycast : MonoBehaviour
 
             pickUpTime += Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.F) && holding && pickUpTime >= pickUpCooldown)
+            if (Input.GetKeyDown(KeyCode.E) && holding && pickUpTime >= pickUpCooldown)
             {
                 holding = false;
                 heldObject.GetComponent<PickUpObject>().PutDown();
