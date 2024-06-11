@@ -36,13 +36,13 @@ public class Jetpack : MonoBehaviour
             {
                 canUseJetpack = false;
             } 
-            else if ( Input.GetKey(KeyCode.Space)) 
+            else if (Input.GetKey(KeyCode.E)) 
             {
                 canUseJetpack = true;
             }
 
 
-            bool jetpackIsInUse = canUseJetpack && currentFillRatio > 0f && Input.GetKey(KeyCode.Space);
+            bool jetpackIsInUse = canUseJetpack && currentFillRatio > 0f && Input.GetKey(KeyCode.E);
 
             if(jetpackIsInUse) {
 
