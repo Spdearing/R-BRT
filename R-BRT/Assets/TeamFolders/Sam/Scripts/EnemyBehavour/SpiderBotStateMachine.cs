@@ -55,11 +55,8 @@ public class SpiderBotStateMachine : MonoBehaviour
         duration = 20.0f;
         robotHeight = 1.329f;
         startingLocation = transform.position;
-        //endingLocation = endingLocationObject.position;
         elapsedTime = 0f;
         startRotation = transform.rotation;
-        //targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-        //goingToTarget = true;
         currentState = IdleState.patrolling;
     }
 
@@ -86,43 +83,6 @@ public class SpiderBotStateMachine : MonoBehaviour
         {
             case IdleState.patrolling:
 
-             
-                //    elapsedTime += Time.deltaTime;
-
-                //    float patrollingSpeed = elapsedTime / duration;
-
-                //    // Lerp the position
-                //    if (goingToTarget)
-                //    {
-                //        transform.position = Vector3.Lerp(startingLocation, endingLocation, patrollingSpeed);
-                //    }
-                //    else
-                //    {
-                //        transform.position = Vector3.Lerp(endingLocation, startingLocation, patrollingSpeed);
-                //    }
-
-                //    // If the lerp is complete, reverse direction and reset elapsedTime
-                //    if (patrollingSpeed >= 1.0f)
-                //    {
-                //        goingToTarget = !goingToTarget; // Reverse the direction
-                //        elapsedTime = 0f; // Reset the elapsed time
-
-                //        // Swap start and target rotations for the next movement
-                //        if (goingToTarget)
-                //        {
-                //            startRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-                //            targetRotation = Quaternion.LookRotation(startingLocation - endingLocation);
-                //        }
-                //        else
-                //        {
-                //            startRotation = Quaternion.LookRotation(startingLocation - endingLocation);
-                //            targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-                //        }
-
-                //        // Rotate to face the new direction
-                //        StartCoroutine(RotateToFaceDirection());
-                //    }
-                //}
                 break;
 
             case IdleState.scanning:

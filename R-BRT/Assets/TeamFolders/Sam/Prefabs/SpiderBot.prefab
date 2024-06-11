@@ -705,7 +705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4000
+  m_VersionIndex: 4003
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -871,7 +871,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   enemyFieldOfView: {fileID: 1054252082952986824}
-  headMovement: {fileID: 3483429173965573612}
   proximityCheck: {fileID: 6013910537078758980}
   detection: {fileID: 0}
   spiderBotBehaviour: {fileID: 3807562265862019822}
@@ -880,10 +879,8 @@ MonoBehaviour:
   detectionIncreaseRate: 0
   detectionDecreaseRate: 0
   capsuleHeight: 0
-  spiderBotHead: {fileID: 3336531328137135803}
   player: {fileID: 0}
   spiderBot: {fileID: 7759255010075347408}
-  spiderBotHeadColor: {fileID: 6110844370738948312}
   playerDetected: 0
   playerIsBeingTracked: 0
   ignoreLayerMask:
@@ -899,15 +896,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 17.421085
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.34
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -20.27
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -953,9 +950,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3483429173965573612}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6013910537078758980}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
       insertIndex: -1
@@ -964,19 +958,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2261225268820290697}
   m_SourcePrefab: {fileID: 100100000, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
---- !u!1 &3336531328137135803 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6657560127643677590, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
-  m_PrefabInstance: {fileID: 8226346133196305709}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4349505622201091542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5653519914247303419, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
-  m_PrefabInstance: {fileID: 8226346133196305709}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6110844370738948312 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2803436535603912181, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
   m_PrefabInstance: {fileID: 8226346133196305709}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8476728068997616326 stripped
@@ -989,31 +973,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f8c1808fc1f3a14dab4d3ffda84f77b, type: 3}
   m_PrefabInstance: {fileID: 8226346133196305709}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3483429173965573612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9144756856560797820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef1c6bfa03cbb20408a22ecf4ae031bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  robotIsActive: 0
-  playerIsSpotted: 0
-  rotatingLeft: 0
-  isPaused: 0
-  rotationAngle: 0
-  rotationSpeed: 0
-  startYRotation: 0
-  targetYRotation: 0
-  spiderBotHead: {fileID: 3336531328137135803}
-  spiderBotHeadColor: {fileID: 6110844370738948312}
-  enemyFieldOfView: {fileID: 1054252082952986824}
-  green: {fileID: 2100000, guid: ebd55815eacc7474b96fea326e3f83a1, type: 2}
-  red: {fileID: 2100000, guid: 0f3fb867325fb02428bf54b109e8a561, type: 2}
 --- !u!114 &6013910537078758980
 MonoBehaviour:
   m_ObjectHideFlags: 0
