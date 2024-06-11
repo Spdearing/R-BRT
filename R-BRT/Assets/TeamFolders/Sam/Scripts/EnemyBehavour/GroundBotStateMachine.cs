@@ -6,13 +6,14 @@ using UnityEngine.AI;
 public class GroundBotStateMachine : MonoBehaviour
 {
     [Header("Nav Mesh")]
-    private NavMeshAgent navGhost;
+    [SerializeField] private NavMeshAgent navRobot;
 
     [Header("LayerMask")]
     [SerializeField] LayerMask groundMask;
 
     [Header("GameObjects")]
     [SerializeField] GameObject player;
+    [SerializeField] GameObject destination;
     
 
     [Header("Vector3")]
@@ -24,7 +25,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] private Quaternion targetRotation;
 
     [Header("Transform")]
-    //[SerializeField] Transform endingLocationObject;
+    [SerializeField] private Transform[] patrolPoints;
 
     [Header("Floats")]
     [SerializeField] private float robotHeight;
@@ -33,6 +34,10 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float chaseSpeed; 
     [SerializeField] private float stoppingDistance = 2f;
+
+
+    [Header("Int")]
+    [SerializeField] private int currentWaypointIndex;
 
     [Header("Rigidbody")]
     private Rigidbody rb;
@@ -66,11 +71,9 @@ public class GroundBotStateMachine : MonoBehaviour
         duration = 20.0f;
         robotHeight = 1.329f;
         startingLocation = transform.position;
-        //endingLocation = endingLocationObject.position;
         elapsedTime = 0f;
         startRotation = transform.rotation;
-        //targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-        //goingToTarget = true;
+        navRobot = GetComponent<NavMeshAgent>();
         currentState = BehaviourState.patrolling;
     }
 
@@ -102,44 +105,13 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviourState.patrolling:
 
-                //if (isGrounded)
-                //{
-                //    elapsedTime += Time.deltaTime;
+                if (navRobot.remainingDistance < 0.1f)
+                {
+                    currentWaypointIndex = UnityEngine.Random.Range(0,patrolPoints.Length); 
 
-                //    float patrollingSpeed = elapsedTime / duration;
+                    navRobot.SetDestination(patrolPoints[currentWaypointIndex].position);
+                }
 
-                //    // Lerp the position
-                //    if (goingToTarget)
-                //    {
-                //        transform.position = Vector3.Lerp(startingLocation, endingLocation, patrollingSpeed);
-                //    }
-                //    else
-                //    {
-                //        transform.position = Vector3.Lerp(endingLocation, startingLocation, patrollingSpeed);
-                //    }
-
-                //    // If the lerp is complete, reverse direction and reset elapsedTime
-                //    if (patrollingSpeed >= 1.0f)
-                //    {
-                //        goingToTarget = !goingToTarget; // Reverse the direction
-                //        elapsedTime = 0f; // Reset the elapsed time
-
-                //        // Swap start and target rotations for the next movement
-                //        if (goingToTarget)
-                //        {
-                //            startRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-                //            targetRotation = Quaternion.LookRotation(startingLocation - endingLocation);
-                //        }
-                //        else
-                //        {
-                //            startRotation = Quaternion.LookRotation(startingLocation - endingLocation);
-                //            targetRotation = Quaternion.LookRotation(endingLocation - startingLocation);
-                //        }
-
-                //        // Rotate to face the new direction
-                //        StartCoroutine(RotateToFaceDirection());
-                //    }
-                //}
                 break;
 
             case BehaviourState.scanning:
