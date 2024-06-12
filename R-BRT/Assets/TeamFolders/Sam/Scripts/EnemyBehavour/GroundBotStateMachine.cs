@@ -17,11 +17,6 @@ public class GroundBotStateMachine : MonoBehaviour
     [Header("Int")]
     //[SerializeField] private int currentWaypointIndex;
 
-    [Header("Bools")]
-    [SerializeField] bool isGrounded;
-    //[SerializeField] bool goingToTarget;
-    //[SerializeField] bool isChasing;
-
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
 
@@ -45,7 +40,7 @@ public class GroundBotStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        UpdateBehavior();
     }
 
     private void FixedUpdate()
