@@ -10,13 +10,12 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
     [SerializeField] private GroundBotHeadMovement headMovement;
     [SerializeField] private GroundEnemyProximity proximityCheck;
-    [SerializeField] private DetectionMeter detection;
     [SerializeField] private GroundBotStateMachine groundBotBehavior;
     [SerializeField] private PlayerController playerController;
 
     [Header("Floats")]
     [SerializeField] private float raycastDistance;
-    [SerializeField] private float detectionDecreaseRate;
+    
     [SerializeField] private float capsuleHeight;
 
     [Header("Game Objects")]
@@ -24,8 +23,6 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject groundBot;
 
-    [Header("Renderer")]
-    [SerializeField] private Renderer groundBotHeadColor;
 
     [Header("Bools")]
     [SerializeField] private bool playerDetected;
@@ -39,10 +36,8 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingTracked = false;
         playerDetected = false;
-        detectionDecreaseRate = 25.0f;
         raycastDistance = 10.0f;
         player = gameManager.ReturnPlayer();
-        detection = gameManager.ReturnDetectionMeter();
         groundBotBehavior = GetComponentInParent<GroundBotStateMachine>();
         capsuleHeight = 0.96f;
     }
@@ -72,30 +67,23 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                     {
                         groundBotBehavior.ChangeBehavior(BehaviorState.scanning);
                         headMovement.SetPlayerSpotted(true);
-                        groundBotHeadColor.material.color = Color.red;
                     }
                 }
                 else if (!playerIsBeingTracked)
                 {
                     groundBotBehavior.ChangeBehavior(BehaviorState.patrolling);
                     headMovement.SetPlayerSpotted(false);
-                    groundBotHeadColor.material.color = Color.green;
-                    detection.DecreaseDetection(detectionDecreaseRate);
                 }
             }
             else
             {
                 playerDetected = false;
                 headMovement.SetPlayerSpotted(false);
-                groundBotHeadColor.material.color = Color.green;
-                detection.DecreaseDetection(detectionDecreaseRate);
             }
         }
         else
         {
             headMovement.SetPlayerSpotted(false);
-            groundBotHeadColor.material.color = Color.green;
-            detection.DecreaseDetection(detectionDecreaseRate);
         }
     }
 

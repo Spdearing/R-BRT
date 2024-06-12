@@ -17,7 +17,7 @@ public class GroundEnemyProximity : MonoBehaviour
     [Header("Game Manager")]
     [SerializeField] GameManager gameManager;
 
-    private float capsuleHeight = 0.96f; // Capsule collider height
+    private float capsuleHeight = 0.96f; 
 
 
     private void Start()
