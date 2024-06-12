@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private TrailRenderer tr;
 
-    [SerializeField] private bool invisibilityUnlocked;
-    [SerializeField] private bool invisibilityAvailable;
+    [SerializeField] private bool invisibilityUnlocked = false;
+    [SerializeField] private bool invisibilityAvailable = true;
 
-    [SerializeField] private bool jetPackUnlocked;
+    [SerializeField] private bool jetPackUnlocked = false;
     
 
 
@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //limiting speed on ground or in air
+
         else
         {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -245,6 +245,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded && isJumping)
         {
+            
             ChangeState(MovementState.air);
         }    
     }

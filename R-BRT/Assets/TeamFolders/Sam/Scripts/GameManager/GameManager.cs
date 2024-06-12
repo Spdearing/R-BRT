@@ -5,26 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //[SerializeField] RockCollision rockCollision;
-    //[SerializeField] PickUpObject rock;
-
+    [Header("Bools")]
     [SerializeField] bool hasJetPack;
     [SerializeField] bool hasStealth;
 
+    [Header("Game Objects")]
     [SerializeField] GameObject player;
+ 
+
+    [Header("GameManager Instance")]
+    public static GameManager Instance;
+
+    [Header("Scripts")]
+    [SerializeField] private AllDirectionRaycast allDirectionRaycast;
     [SerializeField] DetectionMeter detectionMeter;
 
-    [SerializeField] static GameManager instance;
-
-    [SerializeField] private AllDirectionRaycast allDirectionRaycast;
-    
-    public static GameManager Instance;
+   
 
 
 
     void Awake()
     {
-        // Implement Singleton pattern
         if (Instance == null)
         {
             Instance = this;
@@ -40,7 +41,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour
         {
             player = GameObject.FindWithTag("Player");
             detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
-            //rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
-            //rock = GameObject.Find("Rocks").GetComponent<PickUpObject>();
         }
         else if(scene.name == "ChooseYourFriend")
         {
@@ -66,8 +64,6 @@ public class GameManager : MonoBehaviour
         {
             player = GameObject.FindWithTag("Player");
             detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
-            //rockCollision = GameObject.Find("Rocks").GetComponent<RockCollision>();
-            //rock = GetComponent<PickUpObject>();
             allDirectionRaycast = GameObject.Find("Rocks").GetComponent<AllDirectionRaycast>();
         }
     }
@@ -76,7 +72,6 @@ public class GameManager : MonoBehaviour
     {
 
         allDirectionRaycast.CastRaysInAllDirections();
-        //StartCoroutine(EnableSoundForDuration());
     }
     IEnumerator EnableSoundForDuration()
     {
