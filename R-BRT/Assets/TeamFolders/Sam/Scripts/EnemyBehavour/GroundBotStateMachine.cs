@@ -67,15 +67,6 @@ public class GroundBotStateMachine : MonoBehaviour
                 //    navRobot.SetDestination(patrolPoints[currentWaypointIndex].position);
                 //}
 
-                if(detectionMeter.ReturnStartingDetection() <= 200)
-                {
-                    playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
-                }
-                else if(detectionMeter.ReturnStartingDetection() <= 0)
-                {
-                    playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.exploring);
-                }
-
                 break;
 
             case BehaviorState.scanning:

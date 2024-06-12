@@ -51,13 +51,15 @@ public class PlayerDetectionState : MonoBehaviour
             case DetectionState.beingDetected:
 
                 detection.IncreaseDetection(detectionIncreaseRate);
-                detectionIncreaseRate += 1.0f;
+                detectionIncreaseRate += .5f;
+                
 
-                if (detection.ReturnStartingDetection() == 200.0f)// checks to see if bar is full
+                if (detection.ReturnStartingDetection() >= detection.GetDetectionMax())// checks to see if bar is full
                 {
-                    currentState = DetectionState.detected;// sets the capped amount, and then changes the state
-                    groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
-                    
+                    Debug.Log("Should have changed to GameOver");
+                    ChangeDetectionState(DetectionState.detected);// sets the capped amount, and then changes the state
+                    Debug.Log("Should have changed the state");
+
                 }
 
                 break;
@@ -67,9 +69,9 @@ public class PlayerDetectionState : MonoBehaviour
                 detection.DecreaseDetection(detectionDecreaseRate);
                 detectionIncreaseRate = 5.0f;
 
-                if(detection.ReturnStartingDetection() >= 0)
+                if(detection.ReturnStartingDetection() <= 0)
                 {
-                    currentState = DetectionState.exploring;
+                    ChangeDetectionState(DetectionState.exploring);
                 }
 
                 break;
@@ -77,7 +79,8 @@ public class PlayerDetectionState : MonoBehaviour
 
             case DetectionState.detected:
 
-                detection.SetDetectionAmount(200);
+                //detection.SetDetectionAmount(200);
+                groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
 
                 break;
 

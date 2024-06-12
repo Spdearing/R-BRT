@@ -7,11 +7,13 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private DetectionMeter detectionMeter;
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
     [SerializeField] private GroundBotHeadMovement headMovement;
     [SerializeField] private GroundEnemyProximity proximityCheck;
     [SerializeField] private GroundBotStateMachine groundBotBehavior;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerDetectionState playerDetectionState;
 
     [Header("Floats")]
     [SerializeField] private float raycastDistance;
@@ -27,6 +29,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool playerDetected;
     [SerializeField] private bool playerIsBeingTracked;
+    [SerializeField] private bool playerHasBeenDetected;
 
     [Header("LayerMask")]
     [SerializeField] private LayerMask ignoreLayerMask;
@@ -36,6 +39,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingTracked = false;
         playerDetected = false;
+        playerHasBeenDetected = false;
         raycastDistance = 10.0f;
         player = gameManager.ReturnPlayer();
         groundBotBehavior = GetComponentInParent<GroundBotStateMachine>();
@@ -63,27 +67,55 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                     groundBot.transform.LookAt(playerCenterPosition);
                     transform.LookAt(playerCenterPosition);
 
-                    if (playerDetected && playerController.ReturnInvisibilityStatus() == true)
+                    if (playerDetected && playerController.ReturnInvisibilityStatus() == true && playerHasBeenDetected == false)
                     {
-                        groundBotBehavior.ChangeBehavior(BehaviorState.scanning);
+                        playerHasBeenDetected = true;
+                        PlayerBeingDetected();
                         headMovement.SetPlayerSpotted(true);
                     }
                 }
                 else if (!playerIsBeingTracked)
                 {
+                    playerHasBeenDetected = false;
+                    EnemyDisengaged();
                     groundBotBehavior.ChangeBehavior(BehaviorState.patrolling);
                     headMovement.SetPlayerSpotted(false);
                 }
             }
             else
             {
+                playerHasBeenDetected = false;
+                EnemyDisengaged();
                 playerDetected = false;
                 headMovement.SetPlayerSpotted(false);
             }
         }
         else
         {
+            EnemyDisengaged();
             headMovement.SetPlayerSpotted(false);
+        }
+    }
+
+    void PlayerBeingDetected()
+    {
+        if(playerDetected)
+        {
+            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+        }
+        
+    }
+
+    public void EnemyDisengaged()
+    {
+        
+        if (detectionMeter.ReturnStartingDetection() <= 200 && detectionMeter.ReturnStartingDetection() >= 0)
+        {
+            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+        }
+        else if (detectionMeter.ReturnStartingDetection() <= 0)
+        {
+            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.exploring);
         }
     }
 
