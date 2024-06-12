@@ -19,6 +19,10 @@ public class GroundBotStateMachine : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
+    [SerializeField] DetectionMeter detection;
+
+    [Header("Floats")]
+    [SerializeField] private float detectionIncreaseRate;
 
 
     public BehaviorState currentState;
@@ -69,6 +73,14 @@ public class GroundBotStateMachine : MonoBehaviour
                 break;
 
             case BehaviorState.scanning:
+
+                detection.IncreaseDetection(detectionIncreaseRate);
+                detectionIncreaseRate += 0.5f;
+
+                if(detection.ReturnStartingDetection() == 200)
+                {
+                   ChangeBehavior(BehaviorState.playerCaught);
+                }
 
                 break;
 
