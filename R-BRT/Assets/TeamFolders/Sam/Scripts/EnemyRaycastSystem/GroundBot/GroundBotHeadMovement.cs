@@ -30,10 +30,6 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private Material green;
     [SerializeField] private Material red;
 
-
-    
-
-    // Start is called before the first frame update
     void Start()
     {
         isPaused = false;
@@ -65,7 +61,6 @@ public class GroundBotHeadMovement : MonoBehaviour
                 }
             }
         }
-        //PlayerIsDetected();
     }
 
     IEnumerator PauseAndSwitchDirection()

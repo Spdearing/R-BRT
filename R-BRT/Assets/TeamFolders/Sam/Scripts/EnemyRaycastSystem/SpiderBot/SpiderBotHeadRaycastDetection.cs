@@ -13,14 +13,13 @@ public class SpiderBotHeadRaycastDetection : MonoBehaviour
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
     [SerializeField] private SpiderEnemyProximity proximityCheck;
     [SerializeField] private DetectionMeter detection;
-    [SerializeField] private SpiderBotStateMachine spiderBotBehaviour;
+    [SerializeField] private SpiderBotStateMachine spiderBotBehavior;
     [SerializeField] private PlayerController playerController;
 
     [Header("Floats")]
     [SerializeField] private float raycastDistance;
     [SerializeField] private float detectionIncreaseRate;
     [SerializeField] private float detectionDecreaseRate;
-    [SerializeField] private float capsuleHeight;
 
     [Header("Game Objects")]
     [SerializeField] private GameObject player;
@@ -44,7 +43,6 @@ public class SpiderBotHeadRaycastDetection : MonoBehaviour
         raycastDistance = 10.0f;
         player = gameManager.ReturnPlayer();
         detection = gameManager.ReturnDetectionMeter();
-        capsuleHeight = 0.96f;
     }
 
     void Update()
@@ -67,20 +65,20 @@ public class SpiderBotHeadRaycastDetection : MonoBehaviour
 
                     if (playerDetected && playerController.ReturnInvisibilityStatus())
                     {
-                        spiderBotBehaviour.ChangeBehaviour(IdleState.scanning);
+                        spiderBotBehavior.ChangeBehavior(IdleState.scanning);
                         detection.IncreaseDetection(detectionIncreaseRate);
                         detectionIncreaseRate += 0.5f;
                         
                         if (detection.ReturnStartingDetection() == 200)
                         {
                             
-                            spiderBotBehaviour.ChangeBehaviour(IdleState.playerCaught);
+                            spiderBotBehavior.ChangeBehavior(IdleState.playerCaught);
                         }
                     }
                 }
                 else if (!playerIsBeingTracked)
                 {
-                    spiderBotBehaviour.ChangeBehaviour(IdleState.patrolling);
+                    spiderBotBehavior.ChangeBehavior(IdleState.patrolling);
                     detection.DecreaseDetection(detectionDecreaseRate);
                     detectionIncreaseRate = 5.0f;
                 }
