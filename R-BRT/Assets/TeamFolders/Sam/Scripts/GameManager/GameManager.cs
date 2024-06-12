@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         }
         if (scene.name == "Player_Enemy_TestScene")
         {
+            Time.timeScale = 1.0f;
             player = GameObject.FindWithTag("Player");
             detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
             allDirectionRaycast = GameObject.Find("Rocks").GetComponent<AllDirectionRaycast>();

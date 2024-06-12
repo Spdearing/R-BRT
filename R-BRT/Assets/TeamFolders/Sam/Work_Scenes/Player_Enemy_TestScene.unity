@@ -250,6 +250,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7375162, y: 0.7399104, z: 0.27990016}
   m_Center: {x: -0.010594639, y: -0.1047493, z: -0.008729336}
+--- !u!114 &37051495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1798049005543312898, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+  m_PrefabInstance: {fileID: 868885821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37051493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c397b37cc8fda48891b8e3e47cec57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &93069852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,6 +1571,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1798049005543312898, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1338830130}
+    - target: {fileID: 1798049005543312898, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+      propertyPath: gameOverScreen
+      value: 
+      objectReference: {fileID: 1583053374}
     - target: {fileID: 2226380332123744010, guid: f444048db34c874468b6dfe80d36d339, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1692,6 +1711,10 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1338830132}
+    - target: {fileID: 9021255582033742509, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+      propertyPath: groundBotBehaviour
+      value: 
+      objectReference: {fileID: 37051495}
     - target: {fileID: 9221608910242288566, guid: f444048db34c874468b6dfe80d36d339, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2667,6 +2690,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7375162, y: 0.7399104, z: 0.27990016}
   m_Center: {x: -0.010594639, y: -0.1047493, z: -0.008729336}
+--- !u!114 &1520324311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1798049005543312898, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+  m_PrefabInstance: {fileID: 2423423583149597001}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520324304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c397b37cc8fda48891b8e3e47cec57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1583053368
 GameObject:
   m_ObjectHideFlags: 0
@@ -3577,6 +3611,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1798049005543312898, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1338830130}
+    - target: {fileID: 1798049005543312898, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+      propertyPath: gameOverScreen
+      value: 
+      objectReference: {fileID: 1583053374}
     - target: {fileID: 2226380332123744010, guid: f444048db34c874468b6dfe80d36d339, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3709,6 +3751,10 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1338830132}
+    - target: {fileID: 9021255582033742509, guid: f444048db34c874468b6dfe80d36d339, type: 3}
+      propertyPath: groundBotBehaviour
+      value: 
+      objectReference: {fileID: 1520324311}
     - target: {fileID: 9221608910242288566, guid: f444048db34c874468b6dfe80d36d339, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3799,6 +3845,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 443192295}
   - {fileID: 1583053373}
+  - {fileID: 383400998}
   - {fileID: 1148024317}
   - {fileID: 1725081012}
   - {fileID: 1338830129}
@@ -3807,7 +3854,6 @@ SceneRoots:
   - {fileID: 293552472}
   - {fileID: 717397746}
   - {fileID: 1634218316}
-  - {fileID: 383400998}
   - {fileID: 5393447419348811548}
   - {fileID: 2423423583149597001}
   - {fileID: 868885821}

@@ -52,7 +52,6 @@ MonoBehaviour:
   groundBotBehaviour: {fileID: 0}
   playerController: {fileID: 0}
   raycastDistance: 0
-  detectionIncreaseRate: 0
   detectionDecreaseRate: 0
   capsuleHeight: 0
   groundBotHead: {fileID: 3645007581651533661}
@@ -1065,6 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  isGrounded: 0
   gameOverScreen: {fileID: 0}
+  detection: {fileID: 0}
+  detectionIncreaseRate: 0
   currentState: 0
