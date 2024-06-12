@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //limiting speed on ground or in air
+
         else
         {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -245,6 +245,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded && isJumping)
         {
+            
             ChangeState(MovementState.air);
         }    
     }
