@@ -4,7 +4,6 @@ using UnityEngine;
 public class GroundBotHeadMovement : MonoBehaviour
 {
 
-
     [Header("Bools")]
     [SerializeField] private bool robotIsActive;
     [SerializeField] private bool playerIsSpotted;
@@ -27,7 +26,8 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
 
     [Header("Materials")]
-    [SerializeField] private Material green;
+    [SerializeField] private Material yellow;
+    [SerializeField] private Material lightBlue;
     [SerializeField] private Material red;
 
     void Start()
@@ -37,7 +37,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         robotIsActive = true;
         rotationAngle = 45f;
         rotationSpeed = 25f;
-        groundBotHeadColor.material = green; 
+        groundBotHeadColor.material = lightBlue; 
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
     }

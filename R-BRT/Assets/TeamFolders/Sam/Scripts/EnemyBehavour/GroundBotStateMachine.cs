@@ -19,12 +19,9 @@ public class GroundBotStateMachine : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
-    [SerializeField] DetectionMeter detection;
-
-    [Header("Floats")]
-    [SerializeField] private float detectionIncreaseRate;
-
-
+    [SerializeField] PlayerDetectionState playerDetectionState;
+    [SerializeField] DetectionMeter detectionMeter;
+    
     public BehaviorState currentState;
 
     public enum BehaviorState
@@ -70,17 +67,20 @@ public class GroundBotStateMachine : MonoBehaviour
                 //    navRobot.SetDestination(patrolPoints[currentWaypointIndex].position);
                 //}
 
+                if(detectionMeter.ReturnStartingDetection() <= 200)
+                {
+                    playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+                }
+                else if(detectionMeter.ReturnStartingDetection() <= 0)
+                {
+                    playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.exploring);
+                }
+
                 break;
 
             case BehaviorState.scanning:
 
-                detection.IncreaseDetection(detectionIncreaseRate);
-                detectionIncreaseRate += 0.5f;
-
-                if(detection.ReturnStartingDetection() == 200)
-                {
-                   ChangeBehavior(BehaviorState.playerCaught);
-                }
+                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
 
                 break;
 

@@ -16,7 +16,7 @@ public class DetectionMeter : MonoBehaviour
     void Start()
     {
         startingDetection = 0.0f;
-        detectionIncrement = 1.0f;
+        detectionIncrement = .75f;
         maxDetection = 200.0f;
         detectionMeter.fillAmount = startingDetection / maxDetection;
     }
@@ -38,5 +38,11 @@ public class DetectionMeter : MonoBehaviour
     public float ReturnStartingDetection()
     {
         return startingDetection;
+    }
+
+
+    public void SetDetectionAmount(float detectionAmount)
+    {
+        startingDetection = detectionAmount;
     }
 }
