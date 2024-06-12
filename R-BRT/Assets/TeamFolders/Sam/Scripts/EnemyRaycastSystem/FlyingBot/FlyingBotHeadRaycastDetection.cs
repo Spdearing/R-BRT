@@ -72,7 +72,7 @@ public class FlyingBotHeadRaycastDetection : MonoBehaviour
 
                     if (playerDetected && playerController.ReturnInvisibilityStatus())
                     {
-                        flyingBotBehaviour.ChangeBehaviour(FlyingState.scanning);
+                        flyingBotBehaviour.ChangeBehavior(FlyingState.scanning);
                         detection.IncreaseDetection(detectionIncreaseRate);
                         detectionIncreaseRate += 0.5f;
                         headMovement.SetPlayerSpotted(true);
@@ -81,13 +81,13 @@ public class FlyingBotHeadRaycastDetection : MonoBehaviour
                         if (detection.ReturnStartingDetection() == 200)
                         {
                             
-                            flyingBotBehaviour.ChangeBehaviour(FlyingState.playerCaught);
+                            flyingBotBehaviour.ChangeBehavior(FlyingState.playerCaught);
                         }
                     }
                 }
                 else if (!playerIsBeingTracked)
                 {
-                    flyingBotBehaviour.ChangeBehaviour(FlyingState.patrolling);
+                    flyingBotBehaviour.ChangeBehavior(FlyingState.patrolling);
                     headMovement.SetPlayerSpotted(false);
                     flyingBotHeadColor.material.color = Color.green;
                     detection.DecreaseDetection(detectionDecreaseRate);

@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private TrailRenderer tr;
 
-    [SerializeField] private bool invisibilityUnlocked;
-    [SerializeField] private bool invisibilityAvailable;
+    [SerializeField] private bool invisibilityUnlocked = false;
+    [SerializeField] private bool invisibilityAvailable = true;
 
-    [SerializeField] private bool jetPackUnlocked;
+    [SerializeField] private bool jetPackUnlocked = false;
     
 
 

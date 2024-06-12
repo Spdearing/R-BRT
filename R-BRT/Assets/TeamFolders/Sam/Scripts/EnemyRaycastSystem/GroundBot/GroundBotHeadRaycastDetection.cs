@@ -61,7 +61,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
-            if (hitInfo.collider.CompareTag("Player") && playerController.ReturnInvisibilityStatus())
+            if (hitInfo.collider.CompareTag("Player") && playerController.ReturnInvisibilityStatus() == true)
             {
                 if (playerIsBeingTracked)
                 {
@@ -72,7 +72,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
 
                     if (playerDetected && playerController.ReturnInvisibilityStatus() == true)
                     {
-                        groundBotBehaviour.ChangeBehaviour(BehaviourState.scanning);
+                        groundBotBehaviour.ChangeBehavior(BehaviorState.scanning);
                         detection.IncreaseDetection(detectionIncreaseRate);
                         detectionIncreaseRate += 0.5f;
                         headMovement.SetPlayerSpotted(true);
@@ -81,13 +81,13 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                         if (detection.ReturnStartingDetection() == 200)
                         {
                            
-                            groundBotBehaviour.ChangeBehaviour(BehaviourState.playerCaught);
+                            groundBotBehaviour.ChangeBehavior(BehaviorState.playerCaught);
                         }
                     }
                 }
                 else if (!playerIsBeingTracked)
                 {
-                    groundBotBehaviour.ChangeBehaviour(BehaviourState.patrolling);
+                    groundBotBehaviour.ChangeBehavior(BehaviorState.patrolling);
                     headMovement.SetPlayerSpotted(false);
                     groundBotHeadColor.material.color = Color.green;
                     detection.DecreaseDetection(detectionDecreaseRate);
