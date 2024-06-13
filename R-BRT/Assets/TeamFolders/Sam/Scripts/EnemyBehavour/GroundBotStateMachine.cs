@@ -36,6 +36,7 @@ public class GroundBotStateMachine : MonoBehaviour
     {
         //navRobot = GetComponent<NavMeshAgent>();
         currentState = BehaviorState.patrolling;
+        playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
     }
 
     // Update is called once per frame
