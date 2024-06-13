@@ -718,6 +718,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bc4a74476d96aeb44a325d38a621a008, type: 2}
+    - target: {fileID: 3802361698399484824, guid: 4345342bb36e1264a96aefa75a04ec28, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c00606fb3243f3d4fa97ed9b9baa1d5f, type: 2}
     - target: {fileID: 5176492945884766314, guid: 4345342bb36e1264a96aefa75a04ec28, type: 3}
       propertyPath: m_Name
       value: R-BRT-InGameApart
