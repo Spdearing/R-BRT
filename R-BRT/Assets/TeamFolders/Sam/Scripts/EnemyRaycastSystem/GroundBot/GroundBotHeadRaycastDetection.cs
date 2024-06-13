@@ -77,7 +77,7 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
                 else if (!playerIsBeingTracked)
                 {
                     playerHasBeenDetected = false;
-                    EnemyDisengaged();
+                    //EnemyDisengaged();
                     groundBotBehavior.ChangeBehavior(BehaviorState.patrolling);
                     headMovement.SetPlayerSpotted(false);
                 }
@@ -85,14 +85,14 @@ public class GroundBotHeadRaycastDetection : MonoBehaviour
             else
             {
                 playerHasBeenDetected = false;
-                EnemyDisengaged();
+                //EnemyDisengaged();
                 playerDetected = false;
                 headMovement.SetPlayerSpotted(false);
             }
         }
         else
         {
-            EnemyDisengaged();
+            //EnemyDisengaged();
             headMovement.SetPlayerSpotted(false);
         }
     }
