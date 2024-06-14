@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraBot-AnimBase
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 25a30f583c25d514d9b9672bf5ae326b, type: 3}
+      propertyPath: m_TagString
+      value: SpiderBot
+      objectReference: {fileID: 0}
     - target: {fileID: 1574866632283520503, guid: 25a30f583c25d514d9b9672bf5ae326b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
