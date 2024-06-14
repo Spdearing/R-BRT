@@ -10,7 +10,7 @@ public class EnemyProximityCheck : MonoBehaviour
     [Header("String")]
 
     [Header("Bools")]
-    [SerializeField] bool playerWithinRange;
+    [SerializeField] bool enemyWithinRange;
 
     [Header("Scripts")]
 
@@ -18,7 +18,6 @@ public class EnemyProximityCheck : MonoBehaviour
     [SerializeField] GameManager gameManager;
 
     [Header("Floats")]
-    [SerializeField] private float capsuleHeight;
     [SerializeField] private float raycastDistance;
 
     [Header("Vector3")]
@@ -34,22 +33,9 @@ public class EnemyProximityCheck : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        capsuleHeight = 0.96f;
         raycastDistance = 10.0f;
 
     }
-
-    private void Update()
-    {
-        //if (playerWithinRange && groundBotDetection.ReturnPlayerDetected() == false)
-        //{
-        //    Vector3 playerCenterPosition = player.transform.position + new Vector3(0, capsuleHeight / 2, 0);
-
-
-        //    enemyRaycast.transform.LookAt(playerCenterPosition);
-        //}
-    }
-
 
     public void OnTriggerEnter(Collider other)
     {
@@ -79,7 +65,7 @@ public class EnemyProximityCheck : MonoBehaviour
 
     public bool ReturnPlayerProximity()
     {
-        return this.playerWithinRange;
+        return this.enemyWithinRange;
     }
 
     private void DetectEnemy(GameObject enemyDetected)
@@ -97,13 +83,7 @@ public class EnemyProximityCheck : MonoBehaviour
 
         if (Physics.Raycast(rayOrigin, rayDirection, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
-       
-
-          
-        }
-        else
-        {
-            Debug.Log("Raycast did not hit anything.");
+            enemyWithinRange = true;
         }
     }
 }

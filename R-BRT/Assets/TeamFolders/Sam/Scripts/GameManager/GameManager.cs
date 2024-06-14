@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Bools")]
     [SerializeField] bool hasJetPack;
     [SerializeField] bool hasStealth;
+    [SerializeField] bool playerIsSpotted;
 
     [Header("Game Objects")]
     [SerializeField] GameObject player;
@@ -50,12 +51,12 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindWithTag("Player");
             detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
         }
-        else if(scene.name == "ChooseYourFriend")
+        else if (scene.name == "ChooseYourFriend")
         {
             Time.timeScale = 1;
             StartCoroutine(TransitionBackToStart());
         }
-        if(scene.name == "SaveTheWorld")
+        if (scene.name == "SaveTheWorld")
         {
             Time.timeScale = 1;
             StartCoroutine(TransitionBackToStart());
@@ -69,9 +70,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-        public void SendOutNoise()
-    {
 
+    public void SendOutNoise()
+    {
         allDirectionRaycast.CastRaysInAllDirections();
     }
     IEnumerator EnableSoundForDuration()
@@ -115,6 +116,27 @@ public class GameManager : MonoBehaviour
     {
         return this.detectionMeter;
     }
+
+    public bool ReturnPlayerSpotted()
+    {
+        return this.playerIsSpotted;
+    }
+
+    public void SetPlayerIsSpotted(bool value)
+    {
+        if(playerIsSpotted == false)
+        {
+            playerIsSpotted = value;
+        }
+
+        //else
+        //{
+        //    playerIsSpotted = !playerIsSpotted;
+        //}
+        
+    }
+
+
 
 
     IEnumerator TransitionBackToStart()
