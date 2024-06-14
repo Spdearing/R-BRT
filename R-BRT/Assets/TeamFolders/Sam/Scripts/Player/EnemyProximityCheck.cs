@@ -5,14 +5,8 @@ using static GroundBotStateMachine;
 
 public class EnemyProximityCheck : MonoBehaviour
 {
-    [Header("Game Objects")]
-
-    [Header("String")]
-
     [Header("Bools")]
     [SerializeField] bool enemyWithinRange;
-
-    [Header("Scripts")]
 
     [Header("Game Manager")]
     [SerializeField] GameManager gameManager;
@@ -28,6 +22,9 @@ public class EnemyProximityCheck : MonoBehaviour
 
     [Header("List Of Enemies")]
     [SerializeField] private List<GameObject> detectedEnemies = new List<GameObject>();
+
+    [Header("Array Of Tags To Compare")]
+    [SerializeField] private string[] enemyTags;
 
 
     private void Start()
@@ -83,8 +80,23 @@ public class EnemyProximityCheck : MonoBehaviour
 
         if (Physics.Raycast(rayOrigin, rayDirection, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
-            enemyWithinRange = true;
+            if(IsTagInList(hitInfo.collider.tag))
+            {
+                enemyWithinRange = true;
+            }
         }
+    }
+
+    private bool IsTagInList(string tag)
+    {
+        foreach (var enemyTag in enemyTags)
+        {
+            if (tag == enemyTag)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

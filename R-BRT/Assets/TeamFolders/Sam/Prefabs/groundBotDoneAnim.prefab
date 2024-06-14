@@ -74,7 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: dd0781ea3a1616f4ab11c54a84a058ab, type: 2}
     - target: {fileID: 919132149155446097, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_Name
-      value: groundBotDone 1
+      value: groundBotDoneAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
+      propertyPath: m_TagString
+      value: GroundBot
       objectReference: {fileID: 0}
     - target: {fileID: 1751825128598537630, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_Materials.Array.data[0]

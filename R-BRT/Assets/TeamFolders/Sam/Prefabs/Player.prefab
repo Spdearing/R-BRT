@@ -166,7 +166,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   pickUpCooldown: 0.5
   pickUpTime: 0
   holding: 0
-  holdingPosition: {fileID: 0}
+  holdingPosition: {fileID: 9171299991702683578}
   pickUpObject: {fileID: 0}
   uI: {fileID: 0}
   interactableText: {fileID: 0}
@@ -224,9 +224,9 @@ GameObject:
   - component: {fileID: 7535573870673738426}
   - component: {fileID: 3887827219048110652}
   - component: {fileID: 8150307748205352333}
-  - component: {fileID: 7380649729882110404}
-  - component: {fileID: 7738647478269754144}
   - component: {fileID: 6194348691798833131}
+  - component: {fileID: 9090620449033406597}
+  - component: {fileID: 5209847220083871333}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -340,7 +340,7 @@ MonoBehaviour:
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
-  playerHeight: 0.98
+  playerHeight: 0.96
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -348,13 +348,13 @@ MonoBehaviour:
   isCameraLocked: 0
   velocity: {x: 0, y: 0, z: 0}
   orientation: {fileID: 159131420631619943}
-  rb: {fileID: 0}
+  rb: {fileID: 7535573870673738426}
   currentState: 0
-  tr: {fileID: 0}
+  tr: {fileID: 5209847220083871333}
   invisibilityUnlocked: 1
   invisibilityAvailable: 1
   jetPackUnlocked: 0
---- !u!114 &7380649729882110404
+--- !u!114 &6194348691798833131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,6 +362,26 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2673026289010004462}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a63f3289437c3f47957aa61a4887188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyWithinRange: 0
+  gameManager: {fileID: 0}
+  raycastDistance: 0
+  rayCastDirection: {x: 0, y: 0, z: 0}
+  ignoreLayerMask:
+    serializedVersion: 2
+    m_Bits: 4
+  detectedEnemies: []
+--- !u!114 &9090620449033406597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673026289010004462}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8340512505ef2a449c14b3d303f3bc9, type: 3}
   m_Name: 
@@ -371,11 +391,11 @@ MonoBehaviour:
   jetpackDownwardVelocity: 0.75
   consumeFuelDuration: 1.5
   refuelDurationGrounded: 2
-  refuelDurationAirborne: 5
+  refuelDurationAirborne: 3
   refuelDelay: 1
   currentFillRatio: 0
-  tr: {fileID: 0}
---- !u!96 &7738647478269754144
+  tr: {fileID: 5209847220083871333}
+--- !u!96 &5209847220083871333
 TrailRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -479,27 +499,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &6194348691798833131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2673026289010004462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a63f3289437c3f47957aa61a4887188, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerWithinRange: 0
-  groundBotDetection: {fileID: 0}
-  gameManager: {fileID: 0}
-  capsuleHeight: 0
-  raycastDistance: 0
-  rayCastDirection: {x: 0, y: 0, z: 0}
-  ignoreLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &4796986106535725871
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +711,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &9124633717863209405
 CapsuleCollider:

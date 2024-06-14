@@ -17,7 +17,7 @@ public class RockCollision : MonoBehaviour
         if(collision.gameObject.CompareTag("Ground"))
         {
             makingSound = true;
-            gameManager.SendOutNoise();
+            //gameManager.SendOutNoise();
         }
     }
 

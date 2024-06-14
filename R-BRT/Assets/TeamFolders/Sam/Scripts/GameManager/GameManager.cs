@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private AllDirectionRaycast allDirectionRaycast;
-    [SerializeField] DetectionMeter detectionMeter;
+    [SerializeField] private DetectionMeter detectionMeter;
 
    
 
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         {
             player = GameObject.FindWithTag("Player");
             detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
+            playerIsSpotted = false;
         }
         else if (scene.name == "ChooseYourFriend")
         {
@@ -70,22 +71,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    public void SendOutNoise()
-    {
-        allDirectionRaycast.CastRaysInAllDirections();
-    }
-    IEnumerator EnableSoundForDuration()
-    {
-        
-        allDirectionRaycast.enabled = true;
-
-        
-        yield return new WaitForSeconds(.5f);
-
-        
-        allDirectionRaycast.enabled = false;
-    }
 
     public void SetJetPackStatus(bool value)
     {
@@ -124,20 +109,8 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerIsSpotted(bool value)
     {
-        if(playerIsSpotted == false)
-        {
-            playerIsSpotted = value;
-        }
-
-        //else
-        //{
-        //    playerIsSpotted = !playerIsSpotted;
-        //}
-        
+           this.playerIsSpotted = value; 
     }
-
-
-
 
     IEnumerator TransitionBackToStart()
     {
