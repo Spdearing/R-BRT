@@ -1,65 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2667684001729137439
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4822359144119854335}
-  - component: {fileID: 9021255582033742509}
-  m_Layer: 2
-  m_Name: EnemyRaycast
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4822359144119854335
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667684001729137439}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.7070264, y: 0.010093723, z: -0.011200685, w: 0.7070264}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0007753, y: 1, z: 0.99471724}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 37323812658789258}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &9021255582033742509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2667684001729137439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71be9ac3849528f49900d49c7b5caf6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  enemyFieldOfView: {fileID: 976936630970935444}
-  headMovement: {fileID: 8994760371543398320}
-  proximityCheck: {fileID: 8445430652349647264}
-  groundBotBehavior: {fileID: 1798049005543312898}
-  playerController: {fileID: 0}
-  raycastDistance: 0
-  capsuleHeight: 0
-  groundBotHead: {fileID: 3645007581651533661}
-  player: {fileID: 0}
-  groundBot: {fileID: 4769495032135890464}
-  playerDetected: 0
-  playerIsBeingTracked: 0
-  ignoreLayerMask:
-    serializedVersion: 2
-    m_Bits: 4
 --- !u!1 &8084784711945421396
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,9 +884,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5653519914247303419, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4822359144119854335}
     - targetCorrespondingSourceObject: {fileID: 7876023681238672744, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8862171678203519043}
@@ -959,22 +896,11 @@ PrefabInstance:
       addedObject: {fileID: 8994760371543398320}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 450757283413428717}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1798049005543312898}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1548598310524362301}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2787804980131870803}
   m_SourcePrefab: {fileID: 100100000, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
---- !u!4 &37323812658789258 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5653519914247303419, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
-  m_PrefabInstance: {fileID: 5688556124144274289}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &629464288173323050 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4157524182732408741, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
@@ -1007,11 +933,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a63f3289437c3f47957aa61a4887188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRaycast: {fileID: 2667684001729137439}
-  player: {fileID: 0}
   playerWithinRange: 0
-  groundBotDetection: {fileID: 9021255582033742509}
   gameManager: {fileID: 0}
+  capsuleHeight: 0
+  raycastDistance: 0
+  rayCastDirection: {x: 0, y: 0, z: 0}
+  ignoreLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  detectedEnemies: []
 --- !u!114 &8994760371543398320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,27 +968,6 @@ MonoBehaviour:
   yellow: {fileID: 2100000, guid: 850ab2585de056e4fa8a2ba0743639dd, type: 2}
   lightBlue: {fileID: 2100000, guid: 850ab2585de056e4fa8a2ba0743639dd, type: 2}
   red: {fileID: 2100000, guid: 0f3fb867325fb02428bf54b109e8a561, type: 2}
---- !u!135 &450757283413428717
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769495032135890464}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1798049005543312898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,27 +986,6 @@ MonoBehaviour:
   detectionMeter: {fileID: 0}
   currentState: 0
 --- !u!65 &1548598310524362301
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769495032135890464}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7375162, y: 0.7399104, z: 0.27990016}
-  m_Center: {x: -0.010594639, y: -0.1047493, z: -0.008729336}
---- !u!65 &2787804980131870803
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

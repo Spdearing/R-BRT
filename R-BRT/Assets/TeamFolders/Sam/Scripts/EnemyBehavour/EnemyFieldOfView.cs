@@ -7,6 +7,14 @@ public class EnemyFieldOfView : MonoBehaviour
     [Header("Bools")]
     [SerializeField] bool playerSpotted;
 
+    [Header("Scripts")]
+    [SerializeField] private PlayerDetectionState playerDetectionState;
+
+    private void Update()
+    {
+        DetectingPlayer();
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
@@ -27,4 +35,11 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         return this.playerSpotted;
     }
+
+    void DetectingPlayer()
+    {
+        playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+    }
+
+
 }
