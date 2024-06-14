@@ -25,6 +25,7 @@ public class FlyingBotHeadMovement : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] private GameManager gameManager;
 
     [Header("Materials")]
     [SerializeField] private Material green;
@@ -44,6 +45,7 @@ public class FlyingBotHeadMovement : MonoBehaviour
         flyingBotHeadColor.material = green; 
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -51,7 +53,7 @@ public class FlyingBotHeadMovement : MonoBehaviour
     {
         if (robotIsActive && !isPaused && !playerIsSpotted)
         {
-            if (enemyFieldOfView.ReturnPlayerSpotted() == false)
+            if (gameManager.ReturnPlayerSpotted() == false)
             {
                 float step = rotationSpeed * Time.deltaTime;
 

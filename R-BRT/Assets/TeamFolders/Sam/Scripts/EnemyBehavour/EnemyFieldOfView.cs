@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class EnemyFieldOfView : MonoBehaviour
 {
-    [Header("Bools")]
-    [SerializeField] bool playerSpotted;
-
     [Header("Scripts")]
     [SerializeField] private PlayerDetectionState playerDetectionState;
+    [SerializeField] private GameManager gameManager;
+
+    private void Start()
+    {
+        playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     private void Update()
     {
@@ -19,7 +23,7 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            playerSpotted = true;
+            gameManager.SetPlayerIsSpotted(true);
         }
     }
 
@@ -27,19 +31,17 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            playerSpotted = false;
+            gameManager.SetPlayerIsSpotted(false);
         }
     }
 
-    public bool ReturnPlayerSpotted()
-    {
-        return this.playerSpotted;
-    }
 
     void DetectingPlayer()
     {
-        playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+        if (gameManager.ReturnPlayerSpotted() == true)
+        {
+            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+            gameManager.SetPlayerIsSpotted(false);
+        }
     }
-
-
 }

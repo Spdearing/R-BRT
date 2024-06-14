@@ -24,6 +24,7 @@ public class GroundBotHeadMovement : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] private GameManager gameManager;
 
     [Header("Materials")]
     [SerializeField] private Material yellow;
@@ -40,6 +41,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         groundBotHeadColor.material = lightBlue; 
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -47,7 +49,7 @@ public class GroundBotHeadMovement : MonoBehaviour
     {
         if (robotIsActive && !isPaused && !playerIsSpotted)
         {
-            if (enemyFieldOfView.ReturnPlayerSpotted() == false)
+            if (gameManager.ReturnPlayerSpotted() == false)
             {
                 float step = rotationSpeed * Time.deltaTime;
 
