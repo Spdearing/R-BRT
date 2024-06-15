@@ -31,11 +31,8 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
             gameManager.SetPlayerIsSpotted(false);
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
-
-
         }
     }
 
