@@ -16,6 +16,9 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private float startYRotation;
     [SerializeField] private float targetYRotation;
 
+    [Header("Transform")]
+    [SerializeField] private Transform player;
+
     [Header("Game Objects")]
     [SerializeField] private GameObject groundBotHead;
 
@@ -42,6 +45,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        player = GameObject.Find("Player").GetComponent<Transform>();  
     }
 
     // Update is called once per frame
@@ -61,6 +65,15 @@ public class GroundBotHeadMovement : MonoBehaviour
                 {
                     StartCoroutine(PauseAndSwitchDirection());
                 }
+            }
+            else if (gameManager.ReturnPlayerSpotted() == true)
+            {
+                Vector3 direction = player.position - transform.position;
+                direction.y = 0; 
+
+                // Rotate the enemy to face the player
+                Quaternion rotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5.0f);
             }
         }
     }

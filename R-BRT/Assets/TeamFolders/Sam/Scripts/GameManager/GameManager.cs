@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Scripts")]
-    [SerializeField] private AllDirectionRaycast allDirectionRaycast;
     [SerializeField] private DetectionMeter detectionMeter;
 
    
@@ -67,7 +66,6 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1.0f;
             player = GameObject.FindWithTag("Player");
             detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
-            allDirectionRaycast = GameObject.Find("Rocks").GetComponent<AllDirectionRaycast>();
         }
     }
 

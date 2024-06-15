@@ -1,21 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static GroundBotStateMachine;
 
 public class EnemyProximityCheck : MonoBehaviour
 {
     [Header("Bools")]
-    [SerializeField] bool enemyWithinRange;
+    [SerializeField] private bool enemyWithinRange;
 
     [Header("Game Manager")]
-    [SerializeField] GameManager gameManager;
+    [SerializeField] private GameManager gameManager;
 
     [Header("Floats")]
     [SerializeField] private float raycastDistance;
-
-    [Header("Vector3")]
-    [SerializeField] private Vector3 rayCastDirection;
 
     [Header("LayerMask")]
     [SerializeField] private LayerMask ignoreLayerMask;
@@ -26,49 +22,49 @@ public class EnemyProximityCheck : MonoBehaviour
     [Header("Array Of Tags To Compare")]
     [SerializeField] private string[] enemyTags;
 
-
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         raycastDistance = 10.0f;
-
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GroundBot"))
+        if (IsTagInList(other.tag))
         {
             detectedEnemies.Add(other.gameObject);
             DetectEnemy(other.gameObject);
         }
     }
 
-    public void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("GroundBot"))
+        if (IsTagInList(other.tag))
         {
             DetectEnemy(other.gameObject);
         }
     }
 
-
-    public void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("GroundBot"))
+        if (IsTagInList(other.tag))
         {
             detectedEnemies.Remove(other.gameObject);
+            if (detectedEnemies.Count == 0)
+            {
+                enemyWithinRange = false;
+            }
         }
     }
 
     public bool ReturnPlayerProximity()
     {
-        return this.enemyWithinRange;
+        return enemyWithinRange;
     }
 
     private void DetectEnemy(GameObject enemyDetected)
     {
-        if (enemyDetected == null) 
-            
+        if (enemyDetected == null)
             return;
 
         Vector3 rayOrigin = transform.position;
@@ -80,10 +76,18 @@ public class EnemyProximityCheck : MonoBehaviour
 
         if (Physics.Raycast(rayOrigin, rayDirection, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
-            if(IsTagInList(hitInfo.collider.tag))
+            if (IsTagInList(hitInfo.collider.tag))
             {
                 enemyWithinRange = true;
             }
+            else
+            {
+                enemyWithinRange = false;
+            }
+        }
+        else
+        {
+            enemyWithinRange = false;
         }
     }
 
@@ -101,11 +105,6 @@ public class EnemyProximityCheck : MonoBehaviour
 
     public bool ReturnEnemyWithinRange()
     {
-        return this.enemyWithinRange;
+        return enemyWithinRange;
     }
 }
-
-
-
-
-        
