@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9ae76ed1fb4833d4a9c05c27f3075ebd
+guid: 257d5d75b9c83bd44a7ddbd24d937a65
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,18 +33,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: GroundSees
+      name: HandsDown
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 659
-      lastFrame: 689
+      firstFrame: 836
+      lastFrame: 850
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
