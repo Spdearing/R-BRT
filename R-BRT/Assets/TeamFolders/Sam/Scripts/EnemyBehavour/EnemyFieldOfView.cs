@@ -7,9 +7,11 @@ public class EnemyFieldOfView : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PlayerDetectionState playerDetectionState;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private EnemyProximityCheck enemyProximity;
 
     private void Start()
     {
+        enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
@@ -39,8 +41,9 @@ public class EnemyFieldOfView : MonoBehaviour
 
     void DetectingPlayer()
     {
-        if (gameManager.ReturnPlayerSpotted() == true)
+        if (enemyProximity.ReturnEnemyWithinRange() == true && gameManager.ReturnPlayerSpotted() == true)
         {
+
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
             gameManager.SetPlayerIsSpotted(false);
         }

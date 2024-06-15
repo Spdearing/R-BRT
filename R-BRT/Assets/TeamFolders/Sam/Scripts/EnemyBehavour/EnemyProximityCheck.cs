@@ -98,6 +98,11 @@ public class EnemyProximityCheck : MonoBehaviour
         }
         return false;
     }
+
+    public bool ReturnEnemyWithinRange()
+    {
+        return this.enemyWithinRange;
+    }
 }
 
 
