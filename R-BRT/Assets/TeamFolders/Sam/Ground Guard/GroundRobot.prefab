@@ -824,7 +824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3686e1adf80bb3468c5b4917ef1d686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpotted: 0
+  playerDetectionState: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1001 &5688556124144274289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -835,15 +836,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.072962
+      value: -67.38194
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.78
+      value: 7.94
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.36219
+      value: 6.99
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -890,9 +891,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8445430652349647264}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8994760371543398320}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
       insertIndex: -1
@@ -921,27 +919,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ba79f63d23af4946942c5119846e2c6, type: 3}
   m_PrefabInstance: {fileID: 5688556124144274289}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8445430652349647264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769495032135890464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a63f3289437c3f47957aa61a4887188, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerWithinRange: 0
-  gameManager: {fileID: 0}
-  capsuleHeight: 0
-  raycastDistance: 0
-  rayCastDirection: {x: 0, y: 0, z: 0}
-  ignoreLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  detectedEnemies: []
 --- !u!114 &8994760371543398320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +942,7 @@ MonoBehaviour:
   groundBotHead: {fileID: 3645007581651533661}
   groundBotHeadColor: {fileID: 629464288173323050}
   enemyFieldOfView: {fileID: 976936630970935444}
+  gameManager: {fileID: 0}
   yellow: {fileID: 2100000, guid: 850ab2585de056e4fa8a2ba0743639dd, type: 2}
   lightBlue: {fileID: 2100000, guid: 850ab2585de056e4fa8a2ba0743639dd, type: 2}
   red: {fileID: 2100000, guid: 0f3fb867325fb02428bf54b109e8a561, type: 2}
