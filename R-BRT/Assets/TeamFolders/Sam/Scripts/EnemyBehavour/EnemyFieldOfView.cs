@@ -31,12 +31,11 @@ public class EnemyFieldOfView : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if(gameManager.ReturnPlayerSpotted() == true)
-            {
-                gameManager.SetPlayerIsSpotted(false);
-                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
-            }
-            
+
+            gameManager.SetPlayerIsSpotted(false);
+            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+
+
         }
     }
 
@@ -46,7 +45,7 @@ public class EnemyFieldOfView : MonoBehaviour
         if (gameManager.ReturnPlayerSpotted() == true)
         {
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
-            //gameManager.SetPlayerIsSpotted(false);
+            gameManager.SetPlayerIsSpotted(false);
         }
     }
 }
