@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a556efb93c586ed4c866a73e2a71ee86
+guid: dd7222113a28d534da3478c79da9cf78
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: CameraSees
+      name: StandUpAnimLoop
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 100
-      lastFrame: 110
+      firstFrame: 340
+      lastFrame: 345
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
