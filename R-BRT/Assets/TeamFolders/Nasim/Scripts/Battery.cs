@@ -18,6 +18,7 @@ public class Battery : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Jetpack jetPack;
 
+    [SerializeField] private GameObject fuelMeter;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class Battery : MonoBehaviour
         
         gameObject.tag = "Battery";
         abilitySelectionPanel.SetActive(false);
+        fuelMeter.SetActive(false);
         jetPack = GameObject.Find("Player").GetComponent<Jetpack>();
         
     }
@@ -46,10 +48,11 @@ public class Battery : MonoBehaviour
     {
         
         jetPack.enabled = true;
-
         
+        fuelMeter.SetActive(true);
         abilitySelectionPanel.SetActive(false);
         interactableText.SetActive(false);
+
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
