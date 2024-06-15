@@ -1055,7 +1055,8 @@ MonoBehaviour:
   stealthButton: {fileID: 1208863024}
   battery: {fileID: 923998373}
   playerController: {fileID: 1521761634}
-  jetPack: {fileID: 1521761631}
+  jetPack: {fileID: 0}
+  fuelMeter: {fileID: 922267142}
 --- !u!1 &1064462216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,17 +1428,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2673026289010004462, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
   m_PrefabInstance: {fileID: 1819477305}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1521761631 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7380649729882110404, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-  m_PrefabInstance: {fileID: 1819477305}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521761626}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8340512505ef2a449c14b3d303f3bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1521761634 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
@@ -1449,11 +1439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8a5e6f3d5395b48bf41b9b5e35acd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!96 &1521761638 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 7738647478269754144, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-  m_PrefabInstance: {fileID: 1819477305}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1555413304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,7 +1801,8 @@ MonoBehaviour:
   stealthButton: {fileID: 1208863024}
   battery: {fileID: 923998373}
   playerController: {fileID: 1521761634}
-  jetPack: {fileID: 1521761631}
+  jetPack: {fileID: 0}
+  fuelMeter: {fileID: 922267142}
 --- !u!1001 &1819477305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1872,7 +1858,7 @@ PrefabInstance:
     - target: {fileID: 7380649729882110404, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: tr
       value: 
-      objectReference: {fileID: 1521761638}
+      objectReference: {fileID: 0}
     - target: {fileID: 7380649729882110404, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: fuelMeter
       value: 
@@ -1889,6 +1875,10 @@ PrefabInstance:
       propertyPath: invisibilityAvailable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9090620449033406597, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: fuelMeter
+      value: 
+      objectReference: {fileID: 922267144}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
