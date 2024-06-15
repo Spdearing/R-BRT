@@ -9,11 +9,15 @@ public class EnemyFieldOfView : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyProximityCheck enemyProximity;
 
+    [Header("Bools")]
+    [SerializeField] private bool playerIsBeingDetected;
+
     private void Start()
     {
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerIsBeingDetected = false;
     }
 
     private void Update()
@@ -21,31 +25,56 @@ public class EnemyFieldOfView : MonoBehaviour
         DetectingPlayer();
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && enemyProximity.ReturnEnemyWithinRange() == true)
         {
             gameManager.SetPlayerIsSpotted(true);
+            playerIsBeingDetected = true;
         }
     }
 
-    public void OnTriggerExit(Collider other)
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            bool withinRange = enemyProximity.ReturnEnemyWithinRange();
+            gameManager.SetPlayerIsSpotted(withinRange);
+
+            if (!withinRange)
+            {
+                playerIsBeingDetected = false;
+                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+            }
+            else if(withinRange) 
+            { 
+                playerIsBeingDetected = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             gameManager.SetPlayerIsSpotted(false);
+            playerIsBeingDetected = false;
+
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
         }
     }
 
 
-    void DetectingPlayer()
+    private void DetectingPlayer()
     {
-        if (enemyProximity.ReturnEnemyWithinRange() == true && gameManager.ReturnPlayerSpotted() == true)
+        if (enemyProximity.ReturnEnemyWithinRange() && gameManager.ReturnPlayerSpotted())
         {
-
-            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
-            gameManager.SetPlayerIsSpotted(false);
+            if (playerIsBeingDetected)
+            {
+                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+                playerIsBeingDetected = false;
+            }
         }
     }
+
 }
