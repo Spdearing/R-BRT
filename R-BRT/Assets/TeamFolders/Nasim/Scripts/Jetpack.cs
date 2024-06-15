@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Jetpack : MonoBehaviour
     {
@@ -21,6 +22,9 @@ public class Jetpack : MonoBehaviour
         PlayerController playerCharacterController;
         [SerializeField] private TrailRenderer tr;
 
+        [SerializeField]
+        private Slider fuelMeter;
+
         void Start()
         {
             playerCharacterController = GetComponent<PlayerController>();
@@ -36,13 +40,13 @@ public class Jetpack : MonoBehaviour
             {
                 canUseJetpack = false;
             } 
-            else if (Input.GetKey(KeyCode.E)) 
+            else if (Input.GetKey(KeyCode.Space)) 
             {
                 canUseJetpack = true;
             }
 
 
-            bool jetpackIsInUse = canUseJetpack && currentFillRatio > 0f && Input.GetKey(KeyCode.E);
+            bool jetpackIsInUse = canUseJetpack && currentFillRatio > 0f && Input.GetKey(KeyCode.Space);
 
             if(jetpackIsInUse) {
 
@@ -75,7 +79,7 @@ public class Jetpack : MonoBehaviour
                 currentFillRatio = Mathf.Clamp01(currentFillRatio);
             }
 
-             
+            fuelMeter.value = currentFillRatio;
 
         }
     }
