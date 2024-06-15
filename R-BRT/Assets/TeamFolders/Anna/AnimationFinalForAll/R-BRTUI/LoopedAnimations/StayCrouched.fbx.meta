@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a556efb93c586ed4c866a73e2a71ee86
+guid: 98f309094dcbb78409c6adcd08597abe
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: CameraSees
+      name: StayCrouched
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 100
-      lastFrame: 110
+      firstFrame: 330
+      lastFrame: 335
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

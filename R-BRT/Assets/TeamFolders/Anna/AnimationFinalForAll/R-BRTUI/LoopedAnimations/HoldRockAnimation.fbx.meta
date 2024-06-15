@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a556efb93c586ed4c866a73e2a71ee86
+guid: f2188338b434a3d40baa5985d49ef618
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: CameraSees
+      name: HoldRockAnimation
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 100
-      lastFrame: 110
+      firstFrame: 145
+      lastFrame: 150
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
