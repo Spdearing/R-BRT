@@ -8,15 +8,9 @@ public class CameraZoom : MonoBehaviour
 	int normal = 60;
 	float smooth = 5;
 
-	private bool isZoomed = false;
-
 	void Update()
 	{
-		if(Input.GetMouseButtonDown(1))
-		{
-			isZoomed = !isZoomed;
-		}
-		if(isZoomed)
+		if(Input.GetMouseButton(1))
 		{
 			GetComponent<Camera>().fieldOfView = Mathf.Lerp(GetComponent<Camera>().fieldOfView, zoom, Time.deltaTime * smooth);
 		}
