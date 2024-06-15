@@ -943,6 +943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Battery
       objectReference: {fileID: 0}
+    - target: {fileID: 3733703770188302059, guid: a15ab3b8bdd96f9429641b54eaadf877, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4078879591218551889, guid: a15ab3b8bdd96f9429641b54eaadf877, type: 3}
       propertyPath: m_LocalScale.x
       value: 26.0052
@@ -1874,6 +1878,10 @@ PrefabInstance:
     - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: invisibilityAvailable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390514909149832101, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9090620449033406597, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: fuelMeter
