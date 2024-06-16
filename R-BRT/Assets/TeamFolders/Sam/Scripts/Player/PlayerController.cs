@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform orientation;
 
     [Header("RigidBody")]
-    [SerializeField] private Rigidbody rb;
+    public Rigidbody rb;
 
     [Header("Raycast")]
     [SerializeField] private RaycastHit slopeHit;
@@ -336,5 +336,14 @@ public class PlayerController : MonoBehaviour
     public void SetCameraLock(bool value)
     {
         isCameraLocked = value;
+    }
+
+    public float ReturnGravity()
+    {
+        return this.gravity;
+    }
+    public bool ReturnCameraLock()
+    {
+        return this.isCameraLocked;
     }
 }

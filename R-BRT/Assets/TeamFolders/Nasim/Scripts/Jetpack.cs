@@ -56,7 +56,7 @@ public class Jetpack : MonoBehaviour
 
                 float totalAcceleration = jetpackAcceleration;
 
-                totalAcceleration += playerCharacterController.gravity;
+                totalAcceleration += playerCharacterController.ReturnGravity();
 
                 if (playerCharacterController.rb.velocity.y < 0f) {
 
@@ -72,7 +72,7 @@ public class Jetpack : MonoBehaviour
 
                 if (Time.time - lastTimeOfUse >= refuelDelay)
                 {
-                    float refillRate = 1 / (playerCharacterController.isGrounded ? refuelDurationGrounded : refuelDurationAirborne);
+                    float refillRate = 1 / (playerCharacterController.ReturnIsGrounded() ? refuelDurationGrounded : refuelDurationAirborne);
                     currentFillRatio = currentFillRatio + Time.deltaTime * refillRate;
 
                 }
