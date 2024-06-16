@@ -474,16 +474,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8a5e6f3d5395b48bf41b9b5e35acd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.75
+  moveSpeed: 10
   walkSpeed: 1.75
-  sprintSpeed: 3
+  sprintSpeed: 15
   gravity: -1
   jumpForce: 4
   jumpCooldown: 0.25
-  airMultiplier: 0.4
-  groundDrag: 0
+  airMultiplier: 0.75
+  groundDrag: 1
   crouchSpeed: 1.2
-  crouchHeight: 0
+  crouchHeight: 0.48
   originalHeight: 0
   maxSlopeAngle: 40
   playerHeight: 0.96
