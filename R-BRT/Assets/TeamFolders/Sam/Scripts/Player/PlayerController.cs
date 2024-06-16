@@ -1,72 +1,69 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed;
-    public float walkSpeed;
-    public float sprintSpeed;
-    public float gravity = -1f;
-    public bool isSprinting;
+    [Header("Floats")]
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
+    [SerializeField] private float gravity;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpCooldown;
+    [SerializeField] private float airMultiplier;
+    [SerializeField] private float groundDrag;
+    [SerializeField] private float crouchSpeed;
+    [SerializeField] private float crouchHeight;
+    [SerializeField] private float originalHeight;
+    [SerializeField] private float maxSlopeAngle;
+    [SerializeField] private float playerHeight;
+    [SerializeField] private float horizontalInput;
+    [SerializeField] private float verticalInput;
 
-    public float groundDrag;
+    [Header("Bools")]
+    [SerializeField] private bool isSprinting;
+    [SerializeField] private bool readyToJump;
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool isCrouching;
+    [SerializeField] private bool exitingSlope;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isCameraLocked;
+    [SerializeField] private bool invisibilityUnlocked;
+    [SerializeField] private bool invisibilityAvailable;
+    [SerializeField] private bool jetPackUnlocked;
 
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
-    bool readyToJump;
-    public bool isJumping;
+    [Header("Vector3")]
+    [SerializeField] private Vector3 originalCameraPosition;
+    [SerializeField] private Vector3 velocity;
+    [SerializeField] private Vector3 moveDirection;
 
-    [Header("Crouching")]
-    public float crouchSpeed;
-    public bool isCrouching;
-    public float crouchYScale;
-    private float startYScale;
+    [Header("Transform")]
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Transform orientation;
 
-    [Header("Slope Handling")]
-    public float maxSlopeAngle;
-    private RaycastHit slopeHit;
-    private bool exitingSlope;
+    [Header("RigidBody")]
+    [SerializeField] private Rigidbody rb;
+
+    [Header("Raycast")]
+    [SerializeField] private RaycastHit slopeHit;
 
     [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode crouchKey = KeyCode.LeftControl;
+    [SerializeField] private KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
-    [Header("Ground Check")]
-    public float playerHeight;
-    public LayerMask groundMask;
-    public bool isGrounded;
+    [Header("Layer Mask")]
+    [SerializeField] private LayerMask groundMask;
 
-    public bool isCameraLocked;
+    [Header("Colliders")]
+    [SerializeField] private CapsuleCollider playerCollider;
 
-    public Vector3 velocity;
+    [Header("Movement State")]
+    [SerializeField] private MovementState currentState;
 
-    public Transform orientation;
-
-    float horizontalInput;
-    float verticalInput;
-
-    Vector3 moveDirection;
-
-    public Rigidbody rb;
-
-    public MovementState currentState;
-
+    [Header("Trail Renderer")]
     [SerializeField] private TrailRenderer tr;
 
-    [SerializeField] private bool invisibilityUnlocked = false;
-    [SerializeField] private bool invisibilityAvailable = true;
-
-    [SerializeField] private bool jetPackUnlocked = false;
-    
-
-
-    //public AudioSource footstepsSound, sprintSound;
 
     public enum MovementState
     {
@@ -79,52 +76,42 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         invisibilityAvailable = true;
-        isCameraLocked = false;
-
+        jetPackUnlocked = false;
+        invisibilityUnlocked = false;
+        readyToJump = true;
+        gravity = -1.0f;
         rb = GetComponent<Rigidbody>();
+        playerCollider = GetComponent<CapsuleCollider>();
         rb.freezeRotation = true;
 
-        readyToJump = true;
-
-        startYScale = transform.localScale.y;
-
-        invisibilityUnlocked = false;
-        jetPackUnlocked = false;
+        originalHeight = playerCollider.height;
+        originalCameraPosition = cameraTransform.localPosition;
     }
 
     private void Update()
     {
-        // ground check
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * .6f , groundMask);
+        // Ground check
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.6f, groundMask);
 
-        MyInput();
-        SpeedControl();
-        Sprint();
+        HandleInput();
+        ControlSpeed();
+        HandleSprint();
         UpdateState();
-        BecomeInvisible();
+        HandleInvisibility();
 
-        if (!isGrounded)
-        {
-            InAir();
-        }
-
-        
-        
-
-        //FootSteps();
-        // handle drag
+        // Handle drag
         if (isGrounded)
         {
             rb.drag = groundDrag;
-        }  
+        }
         else if (OnSlope() && !exitingSlope)
         {
             rb.drag = groundDrag;
         }
-
         else
+        {
             rb.drag = 0;
-            
+        }
     }
 
     private void FixedUpdate()
@@ -132,64 +119,58 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
     }
 
-    private void MyInput()
+    private void HandleInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        // when to jump
+        // Jump
         if (Input.GetKey(jumpKey) && readyToJump && isGrounded)
         {
             readyToJump = false;
-
             Jump();
             isJumping = true;
-
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        // Start Crouch
+        // Crouch
         if (Input.GetKeyDown(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            rb.AddForce(Vector3.down * 10.0f, ForceMode.Impulse);
-            Crouching();
+            Crouch();
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-            Walking();
+            StandUp();
         }
     }
 
     private void MovePlayer()
     {
-        // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20.0f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
 
             if (rb.velocity.y > 0)
             {
-                rb.AddForce(Vector3.down * 80.0f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
             }
         }
-
-        // on ground
-        if (isGrounded)
+        else if (isGrounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-
-        // in air
+        }
         else if (!isGrounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
 
         rb.useGravity = !OnSlope();
     }
 
-    private void SpeedControl()
+    private void ControlSpeed()
     {
         if (OnSlope() && !exitingSlope)
         {
@@ -198,13 +179,10 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = rb.velocity.normalized * moveSpeed;
             }
         }
-
-
         else
         {
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-            // limit velocity if needed
             if (flatVel.magnitude > moveSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
@@ -213,118 +191,105 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void BecomeInvisible()
+    public void HandleInvisibility()
     {
-        if(Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked)
+        if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked)
         {
-            this.gameObject.tag = "Invisible";
+            gameObject.tag = "Invisible";
             StartCoroutine(InvisibilityTimer());
         }
     }
 
-    IEnumerator InvisibilityTimer()
+    private IEnumerator InvisibilityTimer()
     {
         invisibilityAvailable = false;
         yield return new WaitForSeconds(6.0f);
-        this.gameObject.tag = "Player";
+        gameObject.tag = "Player";
         invisibilityAvailable = true;
-
     }
 
     private void Jump()
     {
         exitingSlope = true;
-
-        // reset y velocity
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
-    void InAir()
+    private void InAir()
     {
         if (!isGrounded && isJumping)
         {
-            
             ChangeState(MovementState.air);
-        }    
+        }
     }
 
-    void Sprint()
+    private void HandleSprint()
     {
-        if(Input.GetKeyDown(sprintKey)) 
+        if (Input.GetKeyDown(sprintKey))
         {
-            Sprinting();
+            Sprint();
         }
-        else if(Input.GetKeyUp(sprintKey))
+        else if (Input.GetKeyUp(sprintKey))
         {
-            Walking();
+            Walk();
         }
     }
 
-    void Sprinting()
+    private void Sprint()
     {
         ChangeState(MovementState.sprinting);
     }
 
-    void Walking()
+    private void Walk()
     {
         ChangeState(MovementState.walking);
     }
-
 
     private void ResetJump()
     {
         readyToJump = true;
         isJumping = false;
-
         exitingSlope = false;
     }
 
-    public void ChangeState(MovementState newState)
+    private void ChangeState(MovementState newState)
     {
         currentState = newState;
     }
 
-    void Crouching()
+    private void Crouch()
     {
+        playerCollider.height = crouchHeight;
+        cameraTransform.localPosition = new Vector3(cameraTransform.localPosition.x, crouchHeight / 2f, cameraTransform.localPosition.z);
         ChangeState(MovementState.crouching);
     }
 
-    
-
-    void UpdateState()
+    private void StandUp()
     {
-       switch(currentState) 
-        { 
+        playerCollider.height = originalHeight;
+        cameraTransform.localPosition = originalCameraPosition;
+        ChangeState(MovementState.walking);
+    }
+
+    private void UpdateState()
+    {
+        switch (currentState)
+        {
             case MovementState.crouching:
-
                 moveSpeed = crouchSpeed;
-
                 break;
-
             case MovementState.walking:
-
                 moveSpeed = walkSpeed;
-
                 break;
-
-            case MovementState.sprinting: 
-                
-                moveSpeed = sprintSpeed; 
-                
+            case MovementState.sprinting:
+                moveSpeed = sprintSpeed;
                 break;
-
             default:
-
-                if(isGrounded)
+                if (isGrounded)
                 {
                     currentState = MovementState.walking;
                 }
-
                 break;
-
-
         }
     }
 
@@ -338,13 +303,10 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-
-
     private Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
-
 
     public bool ReturnIsGrounded()
     {
@@ -375,27 +337,4 @@ public class PlayerController : MonoBehaviour
     {
         isCameraLocked = value;
     }
-
-    //private void FootSteps() 
-    //{
-    //    if (horizontalInput !=0 || verticalInput !=0 && isGrounded)
-    //    {
-    //        if (isGgrounded && Input.GetKey(sprintKey))
-    //        {
-    //            footstepsSound.enabled = false;
-    //            sprintSound.enabled = true;
-    //        }
-    //        else
-    //        {
-    //            footstepsSound.enabled = true;
-    //            sprintSound.enabled = false;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        footstepsSound.enabled = false;
-    //        sprintSound.enabled = false;
-    //    }
-    //}
 }
-    
