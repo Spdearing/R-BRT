@@ -16,12 +16,15 @@ public class ThrowObject : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool threwObject;
 
+    [Header("Animator")]
+    [SerializeField] private Animator playerAnimator;
+
 
 
     private void Start()
     {
         threwObject = false;
-        shootForce = 20.0f;
+        shootForce = 10.0f;
         upwardForce = 5.0f;
         pickUpObject = GetComponent<PickUpObject>();
     }
@@ -53,6 +56,8 @@ public class ThrowObject : MonoBehaviour
             pickUpObject.GetComponent<PickUpObject>().PutDown();
             rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
             rb.AddForce(shootDirection * upwardForce);
+            playerAnimator.SetBool("holdingRock", false);
+            playerAnimator.SetBool("pickingUpRock", false);
         }
     }
 

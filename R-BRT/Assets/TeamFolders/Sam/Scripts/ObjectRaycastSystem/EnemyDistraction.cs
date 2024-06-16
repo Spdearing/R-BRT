@@ -37,8 +37,8 @@ public class EnemyDistraction : MonoBehaviour
         sphereCollider.radius = initialRadius;
 
         maxRadius = 10.0f;
-        expansionRate = 30.0f; // Adjusted to a reasonable rate
-        initialRadius = .5f;
+        expansionRate = 30.0f;
+        initialRadius = 0.5f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -78,7 +78,7 @@ public class EnemyDistraction : MonoBehaviour
             {
                 if (IsTagDetectable(enemy.tag))
                 {
-                    StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform, 5.0f));
+                    StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 5.0f));
                 }
             }
 
@@ -88,16 +88,16 @@ public class EnemyDistraction : MonoBehaviour
         ResetExpansion();
     }
 
-    private IEnumerator EnemyLookAtForDuration(Transform enemy, Transform target, float duration)
+    private IEnumerator EnemyLookAtForDuration(Transform enemy, Vector3 targetPosition, float duration)
     {
-        Vector3 direction = (target.position - enemy.position).normalized;
-        direction.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
         float timeElapsed = 0f;
+        Vector3 direction = (targetPosition - enemy.position).normalized;
+        direction.y = 0; // Ensure the enemy looks horizontally
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
 
         while (timeElapsed < duration)
         {
-            enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * 1.0f);
+            enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * 2.5f);
             timeElapsed += Time.deltaTime;
             yield return null;
         }

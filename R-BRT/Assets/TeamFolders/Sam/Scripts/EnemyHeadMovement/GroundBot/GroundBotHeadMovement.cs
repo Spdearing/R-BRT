@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class GroundBotHeadMovement : MonoBehaviour
 {
-
     [Header("Bools")]
     [SerializeField] private bool robotIsActive;
     [SerializeField] private bool playerIsSpotted;
@@ -13,8 +12,8 @@ public class GroundBotHeadMovement : MonoBehaviour
     [Header("Floats")]
     [SerializeField] private float rotationAngle;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private float startYRotation;
-    [SerializeField] private float targetYRotation;
+    private float startYRotation;
+    private float targetYRotation;
 
     [Header("Transform")]
     [SerializeField] private Transform player;
@@ -41,41 +40,46 @@ public class GroundBotHeadMovement : MonoBehaviour
         robotIsActive = true;
         rotationAngle = 45f;
         rotationSpeed = 25f;
-        groundBotHeadColor.material = lightBlue; 
+        groundBotHeadColor.material = lightBlue;
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        player = GameObject.Find("Player").GetComponent<Transform>();  
+        player = GameObject.Find("Player").GetComponent<Transform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (robotIsActive && !isPaused && !playerIsSpotted)
+        if (robotIsActive && !isPaused)
         {
-            if (gameManager.ReturnPlayerSpotted() == false)
+            if (playerIsSpotted)
             {
-                float step = rotationSpeed * Time.deltaTime;
-
-                float newYRotation = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetYRotation, step);
-
-                transform.rotation = Quaternion.Euler(transform.eulerAngles.x, newYRotation, transform.eulerAngles.z);
-
-                if (Mathf.Approximately(newYRotation, targetYRotation))
-                {
-                    StartCoroutine(PauseAndSwitchDirection());
-                }
+                RotateTowardsPlayer();
             }
-            else if (gameManager.ReturnPlayerSpotted() == true)
+            else
             {
-                Vector3 direction = player.position - transform.position;
-                direction.y = 0; 
-
-                // Rotate the enemy to face the player
-                Quaternion rotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5.0f);
+                Patrol();
             }
         }
+    }
+
+    private void Patrol()
+    {
+        float step = rotationSpeed * Time.deltaTime;
+        float newYRotation = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetYRotation, step);
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, newYRotation, transform.eulerAngles.z);
+
+        if (Mathf.Approximately(newYRotation, targetYRotation))
+        {
+            StartCoroutine(PauseAndSwitchDirection());
+        }
+    }
+
+    private void RotateTowardsPlayer()
+    {
+        Vector3 direction = player.position - transform.position;
+        direction.y = 0;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
     }
 
     IEnumerator PauseAndSwitchDirection()
