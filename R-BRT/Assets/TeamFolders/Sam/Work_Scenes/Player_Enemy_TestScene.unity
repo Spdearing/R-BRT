@@ -1329,11 +1329,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &773866744 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 159131420631619943, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-  m_PrefabInstance: {fileID: 1338830129}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &795521369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,11 +1434,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &859911471 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7665220146202737740, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-  m_PrefabInstance: {fileID: 1338830129}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &903473865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,69 +2192,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3001296285487943445, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: playerCharacterController
-      value: 
-      objectReference: {fileID: 1338830146}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 1338830145}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: tr
-      value: 
-      objectReference: {fileID: 1338830144}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: jumpForce
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: moveSpeed
-      value: 1.75
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: walkSpeed
       value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: crouchSpeed
-      value: 1.2
+      propertyPath: groundDrag
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: orientation
-      value: 
-      objectReference: {fileID: 773866744}
     - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: sprintSpeed
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: jumpCooldown
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: playerHeight
-      value: 0.96
+      propertyPath: crouchHeight
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: airMultiplier
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: maxSlopeAngle
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: playerCollider
-      value: 
-      objectReference: {fileID: 1408302653}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: cameraTransform
-      value: 
-      objectReference: {fileID: 859911471}
-    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: groundMask.m_Bits
-      value: 64
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7188083678439878143, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2314,78 +2264,10 @@ PrefabInstance:
       propertyPath: groundBotStateMachine
       value: 
       objectReference: {fileID: 44479760}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: tr
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: isJumping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: jumpForce
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: walkSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: groundDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: crouchSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: orientation
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: sprintSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: crouchYScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: jumpCooldown
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: playerHeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: airMultiplier
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: maxSlopeAngle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      propertyPath: invisibilityUnlocked
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2673026289010004462, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1338830142}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
 --- !u!1 &1338830130 stripped
 GameObject:
@@ -2403,84 +2285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88111a6c7b269e469bdd10328996432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1338830142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1338830130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a8a5e6f3d5395b48bf41b9b5e35acd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
-  walkSpeed: 0
-  sprintSpeed: 0
-  gravity: -1
-  jumpForce: 0
-  jumpCooldown: 0
-  airMultiplier: 0
-  groundDrag: 0
-  crouchSpeed: 0
-  crouchHeight: 0
-  originalHeight: 0
-  maxSlopeAngle: 0
-  playerHeight: 0
-  horizontalInput: 0
-  verticalInput: 0
-  isSprinting: 0
-  readyToJump: 0
-  isJumping: 0
-  isCrouching: 0
-  exitingSlope: 0
-  isGrounded: 0
-  isCameraLocked: 0
-  invisibilityUnlocked: 0
-  invisibilityAvailable: 1
-  jetPackUnlocked: 0
-  originalCameraPosition: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  cameraTransform: {fileID: 0}
-  orientation: {fileID: 0}
-  rb: {fileID: 0}
-  jumpKey: 32
-  sprintKey: 304
-  crouchKey: 306
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  playerCollider: {fileID: 0}
-  currentState: 0
-  tr: {fileID: 0}
---- !u!96 &1338830144 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 5209847220083871333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-  m_PrefabInstance: {fileID: 1338830129}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1338830145 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 7535573870673738426, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-  m_PrefabInstance: {fileID: 1338830129}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1338830146 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-  m_PrefabInstance: {fileID: 1338830129}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1338830130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a8a5e6f3d5395b48bf41b9b5e35acd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!136 &1408302653 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 9124633717863209405, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
-  m_PrefabInstance: {fileID: 1338830129}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1583053368
 GameObject:
   m_ObjectHideFlags: 0

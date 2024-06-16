@@ -86,6 +86,11 @@ public class PlayerController : MonoBehaviour
             playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
         }
 
+        if (cameraTransform == null)
+        {
+            cameraTransform = GameObject.Find("Main Camera").GetComponent<Transform>();
+        }
+
         if (playerCollider != null)
         {
             originalHeight = playerCollider.height;
@@ -303,14 +308,23 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case MovementState.crouching:
+
                 moveSpeed = crouchSpeed;
+
                 break;
+
             case MovementState.walking:
+
                 moveSpeed = walkSpeed;
+
                 break;
+
             case MovementState.sprinting:
+
                 moveSpeed = sprintSpeed;
+
                 break;
+
             default:
                 if (isGrounded)
                 {
