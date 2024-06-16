@@ -1,16 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
     private bool holding;
     private bool pickingUp;
-    Rigidbody rb;
+    private Rigidbody rb;
 
     [SerializeField] private Transform holdPosition;
 
+    private Coroutine moveCoroutine;
 
     void Start()
     {
@@ -22,13 +21,16 @@ public class PickUpObject : MonoBehaviour
 
     void Update()
     {
-        if (pickingUp)
+        if (pickingUp || holding)
         {
-            StartCoroutine(MoveObjectSmoothly(this.gameObject.transform.position, holdPosition.transform.position, 0.5f));
-        }
-        else if (holding)
-        {
-            StartCoroutine(MoveObjectSmoothly(this.gameObject.transform.position, holdPosition.transform.position, 0.05f));
+            if (moveCoroutine != null)
+            {
+                StopCoroutine(moveCoroutine);
+            }
+
+            float moveDuration = pickingUp ? 0.5f : 0.05f;
+
+            moveCoroutine = StartCoroutine(MoveObjectSmoothly(this.gameObject.transform.position, holdPosition.transform.position, moveDuration));
         }
     }
 
@@ -56,10 +58,10 @@ public class PickUpObject : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
-            float t = elapsedTime / duration; 
+            float t = elapsedTime / duration;
             transform.position = Vector3.Lerp(start, end, t);
             elapsedTime += Time.deltaTime;
-            yield return null; 
+            yield return null;
         }
         transform.position = end;
     }
