@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExpandingSphere : MonoBehaviour
+public class EnemyDistraction : MonoBehaviour
 {
     [Header("Floats")]
     [SerializeField] private float expansionRate;
     [SerializeField] private float maxRadius;
+    [SerializeField] private float initialRadius;
 
     [Header("Colliders")]
     [SerializeField] private SphereCollider sphereCollider;
@@ -26,18 +27,22 @@ public class ExpandingSphere : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private ThrowObject throwObject;
 
-
     private void Start()
     {
-        sphereCollider = GetComponent<SphereCollider>();
+        if (sphereCollider == null)
+        {
+            sphereCollider = GetComponent<SphereCollider>();
+        }
         sphereCollider.isTrigger = true; // Ensure the collider is a trigger
+
         maxRadius = 10.0f;
-        expansionRate = 20.0f;
+        expansionRate = 100.0f;
+        initialRadius = 1.0f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isExpanding)
+        if (!isExpanding && throwObject.ReturnThrowStatus() == true && !other.CompareTag("Player"))
         {
             // Start expanding the sphere
             isExpanding = true;
@@ -71,20 +76,36 @@ public class ExpandingSphere : MonoBehaviour
             {
                 if (IsTagDetectable(enemy.tag))
                 {
-                    EnemyLookAt(enemy.transform, targetTransform);
+                    StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform, 1.0f));
                 }
             }
 
             yield return null;
         }
-        isExpanding = false;
+
+        ResetExpansion();
     }
 
-    private void EnemyLookAt(Transform enemy, Transform target)
+    private IEnumerator EnemyLookAtForDuration(Transform enemy, Transform target, float duration)
     {
         Vector3 direction = (target.position - enemy.position).normalized;
-        direction.y = 0; // Optional: Keep the enemy on the same horizontal plane
+        direction.y = 0; 
         Quaternion lookRotation = Quaternion.LookRotation(direction);
-        enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * 5.0f); // Adjust the rotation speed if needed
+        float timeElapsed = 0f;
+
+        while (timeElapsed < duration)
+        {
+            enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * 5.0f); 
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private void ResetExpansion()
+    {
+        sphereCollider.radius = initialRadius;
+        isExpanding = false;
     }
 }
+
+

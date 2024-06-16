@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class ThrowObject : MonoBehaviour
 {
-    [SerializeField] PickUpObject pickUpObject;
-         
+
+    [Header("Scripts")]
+    [SerializeField] private PickUpObject pickUpObject;
+
+
+    [Header("Floats")]
     [SerializeField] private float shootForce;
     [SerializeField] private float upwardForce;
-    
+
+    [Header("Bools")]
+    [SerializeField] private bool threwObject;
+
 
 
     private void Start()
     {
+        threwObject = false;
         shootForce = 10.0f;
         upwardForce = 5.0f;
         pickUpObject = GetComponent<PickUpObject>();
@@ -24,6 +32,8 @@ public class ThrowObject : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
+            threwObject = true;
+            StartCoroutine(ResetThrowStatus());
         }
     }
 
@@ -44,6 +54,17 @@ public class ThrowObject : MonoBehaviour
             rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
             rb.AddForce(shootDirection * upwardForce);
         }
+    }
+
+    IEnumerator ResetThrowStatus()
+    {
+        yield return new WaitForSeconds(1.0f);
+        threwObject = false;
+    }
+
+    public bool ReturnThrowStatus()
+    {
+        return this.threwObject;
     }
 }
 
