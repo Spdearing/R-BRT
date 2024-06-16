@@ -34,16 +34,18 @@ public class EnemyDistraction : MonoBehaviour
             sphereCollider = GetComponent<SphereCollider>();
         }
         sphereCollider.isTrigger = true; // Ensure the collider is a trigger
+        sphereCollider.radius = initialRadius;
 
         maxRadius = 10.0f;
-        expansionRate = 100.0f;
-        initialRadius = 1.0f;
+        expansionRate = 30.0f; // Adjusted to a reasonable rate
+        initialRadius = .5f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!isExpanding && throwObject.ReturnThrowStatus() == true && !other.CompareTag("Player"))
         {
+            Debug.Log("Trigger entered and expanding sphere collider");
             // Start expanding the sphere
             isExpanding = true;
             targetTransform = other.transform;
@@ -76,7 +78,7 @@ public class EnemyDistraction : MonoBehaviour
             {
                 if (IsTagDetectable(enemy.tag))
                 {
-                    StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform, 1.0f));
+                    StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform, 5.0f));
                 }
             }
 
@@ -89,13 +91,13 @@ public class EnemyDistraction : MonoBehaviour
     private IEnumerator EnemyLookAtForDuration(Transform enemy, Transform target, float duration)
     {
         Vector3 direction = (target.position - enemy.position).normalized;
-        direction.y = 0; 
+        direction.y = 0;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         float timeElapsed = 0f;
 
         while (timeElapsed < duration)
         {
-            enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * 5.0f); 
+            enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * 1.0f);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
@@ -105,7 +107,6 @@ public class EnemyDistraction : MonoBehaviour
     {
         sphereCollider.radius = initialRadius;
         isExpanding = false;
+        Debug.Log("Expansion reset");
     }
 }
-
-

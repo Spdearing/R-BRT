@@ -21,7 +21,7 @@ public class ThrowObject : MonoBehaviour
     private void Start()
     {
         threwObject = false;
-        shootForce = 10.0f;
+        shootForce = 20.0f;
         upwardForce = 5.0f;
         pickUpObject = GetComponent<PickUpObject>();
     }
@@ -58,7 +58,7 @@ public class ThrowObject : MonoBehaviour
 
     IEnumerator ResetThrowStatus()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(3.0f);
         threwObject = false;
     }
 
