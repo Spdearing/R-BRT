@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isCrouching;
     [SerializeField] private bool exitingSlope;
     [SerializeField] private bool isGrounded;
-    [SerializeField] private bool isCameraLocked;
+    [SerializeField] public bool isCameraLocked;
     [SerializeField] private bool invisibilityUnlocked;
     [SerializeField] private bool invisibilityAvailable;
     [SerializeField] private bool jetPackUnlocked;
@@ -81,9 +81,7 @@ public class PlayerController : MonoBehaviour
         readyToJump = true;
         gravity = -1.0f;
         rb = GetComponent<Rigidbody>();
-        playerCollider = GetComponent<CapsuleCollider>();
         rb.freezeRotation = true;
-
         originalHeight = playerCollider.height;
         originalCameraPosition = cameraTransform.localPosition;
     }

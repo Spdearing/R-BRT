@@ -19,7 +19,6 @@ public class DetectionMeter : MonoBehaviour
         detectionIncrement = .75f;
         maxDetection = 201.0f;
         detectionMeter.fillAmount = startingDetection / maxDetection;
-        Debug.Log(startingDetection);
     }
 
     public void IncreaseDetection(float detection)
