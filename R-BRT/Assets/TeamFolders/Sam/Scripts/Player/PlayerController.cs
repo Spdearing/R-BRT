@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Transform")]
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private Transform orientation;
 
     [Header("RigidBody")]
     public Rigidbody rb;
@@ -63,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Trail Renderer")]
     [SerializeField] private TrailRenderer tr;
-
 
     public enum MovementState
     {
@@ -145,7 +143,8 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        // If not using an orientation transform, use the player's transform for movement direction
+        moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
 
         if (OnSlope() && !exitingSlope)
         {
@@ -331,17 +330,8 @@ public class PlayerController : MonoBehaviour
         return this.gameObject;
     }
 
-    public void SetCameraLock(bool value)
-    {
-        isCameraLocked = value;
-    }
-
     public float ReturnGravity()
     {
         return this.gravity;
-    }
-    public bool ReturnCameraLock()
-    {
-        return this.isCameraLocked;
     }
 }
