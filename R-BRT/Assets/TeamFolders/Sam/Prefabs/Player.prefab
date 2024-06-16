@@ -143,7 +143,7 @@ MonoBehaviour:
   sensX: 400
   sensY: 400
   orientation: {fileID: 159131420631619943}
-  playerCharacterController: {fileID: 0}
+  playerCharacterController: {fileID: 7008604672352831750}
 --- !u!114 &2337215869573568991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 5209847220083871333}
   - component: {fileID: 7535573870673738426}
   - component: {fileID: 7008604672352831750}
+  - component: {fileID: 6071246618273762802}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -473,37 +474,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8a5e6f3d5395b48bf41b9b5e35acd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 1.75
+  walkSpeed: 1.75
+  sprintSpeed: 3
+  gravity: -1
+  jumpForce: 4
+  jumpCooldown: 0.25
+  airMultiplier: 0.4
+  groundDrag: 0
+  crouchSpeed: 1.2
+  crouchHeight: 0
+  originalHeight: 0
+  maxSlopeAngle: 40
+  playerHeight: 0.96
+  horizontalInput: 0
+  verticalInput: 0
+  isSprinting: 0
+  readyToJump: 0
+  isJumping: 0
+  isCrouching: 0
+  exitingSlope: 0
+  isGrounded: 0
+  isCameraLocked: 0
+  invisibilityUnlocked: 0
+  invisibilityAvailable: 1
+  jetPackUnlocked: 0
+  originalCameraPosition: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  moveDirection: {x: 0, y: 0, z: 0}
+  cameraTransform: {fileID: 7665220146202737740}
+  rb: {fileID: 7535573870673738426}
+  jumpKey: 32
+  sprintKey: 304
+  crouchKey: 306
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  playerCollider: {fileID: 9124633717863209405}
+  currentState: 0
+  tr: {fileID: 5209847220083871333}
+--- !u!114 &6071246618273762802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673026289010004462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8a5e6f3d5395b48bf41b9b5e35acd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   moveSpeed: 0
   walkSpeed: 0
   sprintSpeed: 0
   gravity: -1
-  isSprinting: 0
-  groundDrag: 0
   jumpForce: 0
   jumpCooldown: 0
   airMultiplier: 0
-  isJumping: 0
+  groundDrag: 0
   crouchSpeed: 0
-  isCrouching: 0
-  crouchYScale: 0
+  crouchHeight: 0
+  originalHeight: 0
   maxSlopeAngle: 0
-  jumpKey: 32
-  sprintKey: 304
-  crouchKey: 306
   playerHeight: 0
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
+  horizontalInput: 0
+  verticalInput: 0
+  isSprinting: 0
+  readyToJump: 0
+  isJumping: 0
+  isCrouching: 0
+  exitingSlope: 0
   isGrounded: 0
   isCameraLocked: 0
-  velocity: {x: 0, y: 0, z: 0}
-  orientation: {fileID: 0}
-  rb: {fileID: 0}
-  currentState: 0
-  tr: {fileID: 0}
   invisibilityUnlocked: 0
   invisibilityAvailable: 1
   jetPackUnlocked: 0
+  originalCameraPosition: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  moveDirection: {x: 0, y: 0, z: 0}
+  cameraTransform: {fileID: 0}
+  rb: {fileID: 0}
+  jumpKey: 32
+  sprintKey: 304
+  crouchKey: 306
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  playerCollider: {fileID: 0}
+  currentState: 0
+  tr: {fileID: 0}
 --- !u!1 &4796986106535725871
 GameObject:
   m_ObjectHideFlags: 0
