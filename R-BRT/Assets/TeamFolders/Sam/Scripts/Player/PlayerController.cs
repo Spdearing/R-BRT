@@ -80,8 +80,22 @@ public class PlayerController : MonoBehaviour
         gravity = -1.0f;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        originalHeight = playerCollider.height;
-        originalCameraPosition = cameraTransform.localPosition;
+
+        if (playerCollider == null)
+        {
+            playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
+        }
+
+        if (playerCollider != null)
+        {
+            originalHeight = playerCollider.height;
+            originalCameraPosition = cameraTransform.localPosition;
+            Debug.Log("CapsuleCollider successfully assigned.");
+        }
+        else
+        {
+            Debug.LogError("CapsuleCollider not assigned!");
+        }
     }
 
     private void Update()
@@ -143,8 +157,18 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        // If not using an orientation transform, use the player's transform for movement direction
-        moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
+        // Use the camera's forward and right vectors for movement direction
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+
+        // Remove the y component to keep the movement horizontal
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        moveDirection = forward * verticalInput + right * horizontalInput;
 
         if (OnSlope() && !exitingSlope)
         {
@@ -256,14 +280,20 @@ public class PlayerController : MonoBehaviour
 
     private void Crouch()
     {
-        playerCollider.height = crouchHeight;
+        if (playerCollider != null)
+        {
+            playerCollider.height = crouchHeight;
+        }
         cameraTransform.localPosition = new Vector3(cameraTransform.localPosition.x, crouchHeight / 2f, cameraTransform.localPosition.z);
         ChangeState(MovementState.crouching);
     }
 
     private void StandUp()
     {
-        playerCollider.height = originalHeight;
+        if (playerCollider != null)
+        {
+            playerCollider.height = originalHeight;
+        }
         cameraTransform.localPosition = originalCameraPosition;
         ChangeState(MovementState.walking);
     }
