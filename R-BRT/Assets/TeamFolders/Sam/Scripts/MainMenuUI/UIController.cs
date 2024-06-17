@@ -79,7 +79,7 @@ public class UIController : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("MainMenuScene");
     }
 
 
