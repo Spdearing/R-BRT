@@ -63,6 +63,9 @@ public class PlayerController : MonoBehaviour
     [Header("Trail Renderer")]
     [SerializeField] private TrailRenderer tr;
 
+    [Header("Animator")]
+    [SerializeField] private Animator playerAnimator;
+
     public enum MovementState
     {
         walking,
@@ -144,19 +147,23 @@ public class PlayerController : MonoBehaviour
         {
             readyToJump = false;
             Jump();
+            playerAnimator.SetBool("isJumping", true);
             isJumping = true;
             Invoke(nameof(ResetJump), jumpCooldown);
+            
         }
 
         // Crouch
         if (Input.GetKeyDown(crouchKey))
         {
             Crouch();
+            playerAnimator.SetBool("isCrouching", true);
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
             StandUp();
+            playerAnimator.SetBool("isCrouching", false);
         }
     }
 
@@ -253,11 +260,34 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(sprintKey))
         {
+            if (isSprinting == false)
+            {
+                isSprinting = true;
+            }
+
             Sprint();
+            HandleSprintAnimation();
+            
         }
         else if (Input.GetKeyUp(sprintKey))
         {
             Walk();
+            isSprinting = false;
+            HandleSprintAnimation();
+
+        }
+    }
+
+    private void HandleSprintAnimation()
+    {
+        if(isSprinting == true)
+        {
+            playerAnimator.SetBool("isSprinting", true);
+        }
+        else if (isSprinting == false)
+        {
+            playerAnimator.SetBool("isSprinting", false);
+            
         }
     }
 
@@ -276,6 +306,7 @@ public class PlayerController : MonoBehaviour
         readyToJump = true;
         isJumping = false;
         exitingSlope = false;
+        playerAnimator.SetBool("isJumping", false);
     }
 
     private void ChangeState(MovementState newState)
@@ -322,6 +353,8 @@ public class PlayerController : MonoBehaviour
             case MovementState.sprinting:
 
                 moveSpeed = sprintSpeed;
+
+                
 
                 break;
 
