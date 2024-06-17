@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public class SpiderBotStateMachine : MonoBehaviour
 {
     [Header("GameObjects")]
@@ -10,11 +9,12 @@ public class SpiderBotStateMachine : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
+    [SerializeField] PlayerDetectionState playerDetectionState;
+    [SerializeField] DetectionMeter detectionMeter;
 
+    public BehaviorState currentState;
 
-    public IdleState currentState;
-
-    public enum IdleState
+    public enum BehaviorState
     {
         patrolling,
         scanning,
@@ -24,14 +24,22 @@ public class SpiderBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentState = IdleState.patrolling;
+        currentState = BehaviorState.patrolling;
+        playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
     }
-    private void Update()
+
+    // Update is called once per frame
+    void Update()
     {
         UpdateBehavior();
     }
 
-    public void ChangeBehavior(IdleState newState)
+    private void FixedUpdate()
+    {
+        UpdateBehavior();
+    }
+
+    public void ChangeBehavior(BehaviorState newState)
     {
         currentState = newState;
     }
@@ -40,28 +48,29 @@ public class SpiderBotStateMachine : MonoBehaviour
     {
         switch (currentState)
         {
-            case IdleState.patrolling:
+            case BehaviorState.patrolling:
 
                 break;
 
-            case IdleState.scanning:
-               
+            case BehaviorState.scanning:
+
+                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+
                 break;
 
-            case IdleState.playerCaught:
+            case BehaviorState.playerCaught:
 
-            gameOverScreen.ReturnGameOverPanel().SetActive(true);
-            Time.timeScale = 0.0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-
+                gameOverScreen.ReturnGameOverPanel().SetActive(true);
+                Time.timeScale = 0.0f;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
 
                 break;
 
             default:
-             
-                    currentState = IdleState.patrolling;
-               
+
+                currentState = BehaviorState.patrolling;
+
                 break;
         }
     }
