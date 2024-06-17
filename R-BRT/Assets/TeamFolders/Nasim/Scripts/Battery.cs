@@ -19,6 +19,7 @@ public class Battery : MonoBehaviour
     [SerializeField] private Jetpack jetPack;
 
     [SerializeField] private GameObject fuelMeter;
+    [SerializeField] private GameObject invisibleMeter;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class Battery : MonoBehaviour
         gameObject.tag = "Battery";
         abilitySelectionPanel.SetActive(false);
         fuelMeter.SetActive(false);
+        invisibleMeter.SetActive(false);
         jetPack = GameObject.Find("Player").GetComponent<Jetpack>();
         
     }
@@ -63,6 +65,8 @@ public class Battery : MonoBehaviour
     public void OnClickInvisibleButton()
     {
         playerController.SetInvisibilityUnlock(true);
+
+        invisibleMeter.SetActive(true);
         abilitySelectionPanel.SetActive(false);
         interactableText.SetActive(false);
         
