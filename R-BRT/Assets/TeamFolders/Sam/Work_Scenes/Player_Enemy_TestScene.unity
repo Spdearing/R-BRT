@@ -2244,8 +2244,7 @@ PrefabInstance:
       propertyPath: groundBotStateMachine
       value: 
       objectReference: {fileID: 44479760}
-    m_RemovedComponents:
-    - {fileID: 6071246618273762802, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
