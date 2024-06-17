@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -60,6 +61,12 @@ public class PlayerController : MonoBehaviour
     [Header("Movement State")]
     [SerializeField] private MovementState currentState;
 
+    [Header("Invisibility")]
+    [SerializeField] private Image invisibleMeter;
+    [SerializeField] float startInvisible;
+    [SerializeField] float invisibleIncrement;
+    [SerializeField] float maxInvisible;
+
     [Header("Trail Renderer")]
     [SerializeField] private TrailRenderer tr;
 
@@ -83,6 +90,11 @@ public class PlayerController : MonoBehaviour
         gravity = -1.0f;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        rb.freezeRotation = true;
+
+        startInvisible = 100.0f;
+        invisibleIncrement = 0.05f;
+        maxInvisible = 0.0f;
 
         if (playerCollider == null)
         {
@@ -121,6 +133,11 @@ public class PlayerController : MonoBehaviour
         HandleSprint();
         UpdateState();
         HandleInvisibility();
+
+        if(invisibilityAvailable == false)
+        {
+            InvisibilityMeter();
+        }
 
         // Handle drag
         if (isGrounded)
@@ -247,6 +264,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(6.0f);
         gameObject.tag = "Player";
         invisibilityAvailable = true;
+    }
+
+    public void InvisibilityMeter()
+    {
+        startInvisible -= 5.0f * Time.deltaTime * invisibleIncrement;
+        startInvisible = Mathf.Clamp(startInvisible, 0, maxInvisible);
+        invisibleMeter.fillAmount = startInvisible / maxInvisible;
     }
 
     private void Jump()
