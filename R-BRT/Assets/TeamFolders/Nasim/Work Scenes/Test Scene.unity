@@ -919,7 +919,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 451996742}
   m_FillRect: {fileID: 126063968}
   m_HandleRect: {fileID: 451996741}
@@ -1058,7 +1058,7 @@ MonoBehaviour:
   jetpackButton: {fileID: 2067924901}
   stealthButton: {fileID: 1208863024}
   battery: {fileID: 923998373}
-  playerController: {fileID: 1521761634}
+  playerController: {fileID: 1521761628}
   jetPack: {fileID: 0}
   fuelMeter: {fileID: 922267142}
 --- !u!1 &1064462216
@@ -1432,9 +1432,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2673026289010004462, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
   m_PrefabInstance: {fileID: 1819477305}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1521761634 stripped
+--- !u!114 &1521761628 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8150307748205352333, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
   m_PrefabInstance: {fileID: 1819477305}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521761626}
@@ -1804,7 +1804,7 @@ MonoBehaviour:
   jetpackButton: {fileID: 2067924901}
   stealthButton: {fileID: 1208863024}
   battery: {fileID: 923998373}
-  playerController: {fileID: 1521761634}
+  playerController: {fileID: 1521761628}
   jetPack: {fileID: 0}
   fuelMeter: {fileID: 922267142}
 --- !u!1001 &1819477305
