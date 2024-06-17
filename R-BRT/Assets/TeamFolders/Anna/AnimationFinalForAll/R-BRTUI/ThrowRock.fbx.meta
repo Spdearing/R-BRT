@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 857e877a8a814154eb0b138c976f0338
+guid: f21ede7ec5fbdb0469ce9df0ce1b9e96
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Thinks it sees
+      name: ThrowRockRock
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 799
-      lastFrame: 815
+      firstFrame: 155
+      lastFrame: 167
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
