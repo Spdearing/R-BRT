@@ -94,6 +94,11 @@ public class PlayerController : MonoBehaviour
             cameraTransform = GameObject.Find("Main Camera").GetComponent<Transform>();
         }
 
+        if (playerAnimator == null)
+        {
+            playerAnimator = GameObject.Find("R-BRT-UI-Done").GetComponent<Animator>();
+        }
+
         if (playerCollider != null)
         {
             originalHeight = playerCollider.height;
@@ -158,12 +163,15 @@ public class PlayerController : MonoBehaviour
         {
             Crouch();
             playerAnimator.SetBool("isCrouching", true);
+            playerAnimator.SetBool("isCrouched", true);
         }
 
         if (Input.GetKeyUp(crouchKey))
         {
             StandUp();
             playerAnimator.SetBool("isCrouching", false);
+            playerAnimator.SetBool("isCrouched", false);
+            playerAnimator.SetBool("standingUp", true);
         }
     }
 
