@@ -27,7 +27,7 @@ public class EnemyFieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player" && enemyProximity.ReturnEnemyWithinRange() == true)
+        if(other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() == true)
         {
             gameManager.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
@@ -55,7 +55,7 @@ public class EnemyFieldOfView : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             gameManager.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;

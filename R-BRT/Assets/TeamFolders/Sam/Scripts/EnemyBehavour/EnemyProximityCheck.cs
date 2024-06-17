@@ -20,7 +20,7 @@ public class EnemyProximityCheck : MonoBehaviour
     [SerializeField] private List<GameObject> detectedEnemies = new List<GameObject>();
 
     [Header("Array Of Tags To Compare")]
-    [SerializeField] private string[] enemyTags;
+    [SerializeField] private string[] enemyTags = new string[] { "GroundBot", "SpiderBot", "FlyingBot" };
 
     private void Start()
     {
@@ -76,6 +76,8 @@ public class EnemyProximityCheck : MonoBehaviour
 
         if (Physics.Raycast(rayOrigin, rayDirection, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
+            Debug.Log(enemyDetected.tag);
+
             if (IsTagInList(hitInfo.collider.tag))
             {
                 enemyWithinRange = true;
