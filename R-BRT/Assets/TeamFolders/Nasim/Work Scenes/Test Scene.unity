@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2074,6 +2074,18 @@ PrefabInstance:
       propertyPath: invisibleMeter
       value: 
       objectReference: {fileID: 438999038}
+    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: invisibilityVisualEmpty
+      value: 
+      objectReference: {fileID: 1186421758}
+    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: invisibilityVisualMeter
+      value: 
+      objectReference: {fileID: 597325151}
+    - target: {fileID: 7008604672352831750, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
+      propertyPath: invisibilityVisualAmount
+      value: 
+      objectReference: {fileID: 438999038}
     - target: {fileID: 7188083678439878143, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.9
@@ -2142,7 +2154,8 @@ PrefabInstance:
       propertyPath: fuelMeter
       value: 
       objectReference: {fileID: 922267144}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6071246618273762802, guid: 3fde1f6c990cc1547b3429db251f6590, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool invisibilityUnlocked;
     [SerializeField] private bool invisibilityAvailable;
     [SerializeField] private bool jetPackUnlocked;
+    [SerializeField] private bool invisibilityMeterFillingBackUp;
 
     [Header("Vector3")]
     [SerializeField] private Vector3 originalCameraPosition;
@@ -101,9 +102,11 @@ public class PlayerController : MonoBehaviour
         readyToJump = true;
         gravity = -1.0f;
 
+
         maxInvisible = 7.5f;
         invisibleIncrement = .25f;
         startingInvisible = 7.5f;
+        invisibilityMeterFillingBackUp = false;
 
         if (playerCollider == null)
         {
@@ -144,11 +147,8 @@ public class PlayerController : MonoBehaviour
         HandleSprint();
         UpdateState();
         HandleInvisibility();
-
-        if(invisibilityAvailable == false)
-        {
-            InvisibilityMeter();
-        }
+        InvisibilityMeter();
+        InvisibilityMeterFillingBackUp();
 
         // Handle drag
         if (isGrounded)
@@ -292,7 +292,7 @@ public class PlayerController : MonoBehaviour
 
     public void HandleInvisibility()
     {
-        if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked)
+        if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked && !invisibilityMeterFillingBackUp)
         {
             gameObject.tag = "Invisible";
             StartCoroutine(InvisibilityTimer());
@@ -304,26 +304,47 @@ public class PlayerController : MonoBehaviour
         invisibilityAvailable = false;
         yield return new WaitForSeconds(6.0f);
         Debug.Log("Invisibility Over (Corotine)");
-        startingInvisible = 7.5f;
-        invisibleMeter.fillAmount = startingInvisible / maxInvisible;
-        gameObject.tag = "Player";
-        invisibilityAvailable = true;
     }
 
     public void InvisibilityMeter()
     {
-        startingInvisible -= 5.0f * Time.deltaTime * invisibleIncrement;
-        startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
-        invisibleMeter.fillAmount = startingInvisible / maxInvisible;
-
-        if(startingInvisible <= 0) 
+        if(!invisibilityAvailable) 
         {
-            Debug.Log("Invisibility Over (decrement)");
-            startingInvisible = 0;
+            startingInvisible -= 5.0f * Time.deltaTime * invisibleIncrement;
+            startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
+            invisibleMeter.fillAmount = startingInvisible / maxInvisible;
+
+            if (startingInvisible <= 0)
+            {
+                Debug.Log("Invisibility Over (decrement)");
+                startingInvisible = 0;
+                invisibilityAvailable = true;
+                invisibilityMeterFillingBackUp = true;
+            }
         }
+        
     }
 
-    private void Jump()
+    public void InvisibilityMeterFillingBackUp()
+    {
+        if(invisibilityMeterFillingBackUp)
+        {
+            startingInvisible += 2.5f * Time.deltaTime * invisibleIncrement;
+            startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
+            invisibleMeter.fillAmount = startingInvisible / maxInvisible;
+
+            if (startingInvisible >= 7.5f)
+            {
+                startingInvisible = 7.5f;
+                invisibilityAvailable = true;
+                gameObject.tag = "Player";
+                invisibilityMeterFillingBackUp = false;
+            }
+        }
+     
+    }
+
+        private void Jump()
     {
         exitingSlope = true;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
