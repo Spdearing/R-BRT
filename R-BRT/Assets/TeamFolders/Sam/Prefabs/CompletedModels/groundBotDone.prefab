@@ -705,7 +705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4015
+  m_VersionIndex: 4018
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -963,6 +963,11 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4157524182732408741, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
   m_PrefabInstance: {fileID: 8412989961871818546}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &8307532411826510041 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
+  m_PrefabInstance: {fileID: 8412989961871818546}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8647359997036380771 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
@@ -1045,10 +1050,10 @@ MonoBehaviour:
   isPaused: 0
   rotationAngle: 0
   rotationSpeed: 0
-  player: {fileID: 0}
+  player: {fileID: 8307532411826510041}
   groundBotHead: {fileID: 622786997081344798}
   groundBotHeadColor: {fileID: 3642690833534715753}
-  enemyFieldOfView: {fileID: 0}
+  enemyFieldOfView: {fileID: 2135621362713458595}
   gameManager: {fileID: 0}
   yellow: {fileID: 2100000, guid: cc16cdcd39fe61b4b86876b69b275e97, type: 2}
   lightBlue: {fileID: 2100000, guid: bbe3763c62ac6df4cbe39e4ec9d243ed, type: 2}
