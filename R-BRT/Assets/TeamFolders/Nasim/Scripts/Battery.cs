@@ -28,7 +28,7 @@ public class Battery : MonoBehaviour
         gameObject.tag = "Battery";
         abilitySelectionPanel.SetActive(false);
         fuelMeter.SetActive(false);
-        invisibleMeter.SetActive(false);
+        //invisibleMeter.SetActive(false);
         jetPack = GameObject.Find("Player").GetComponent<Jetpack>();
         
     }
@@ -65,8 +65,7 @@ public class Battery : MonoBehaviour
     public void OnClickInvisibleButton()
     {
         playerController.SetInvisibilityUnlock(true);
-
-        invisibleMeter.SetActive(true);
+        playerController.DisplayInvisibilityMeter();
         abilitySelectionPanel.SetActive(false);
         interactableText.SetActive(false);
         

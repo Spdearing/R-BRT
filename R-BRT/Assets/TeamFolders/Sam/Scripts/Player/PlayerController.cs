@@ -61,11 +61,17 @@ public class PlayerController : MonoBehaviour
     [Header("Movement State")]
     [SerializeField] private MovementState currentState;
 
+    [Header("Images")]
+    [SerializeField] private Image invisibilityVisualMeter;
+    [SerializeField] private Image invisibilityVisualEmpty;
+    [SerializeField] private Image invisibilityVisualAmount;
+
+
     [Header("Invisibility")]
     [SerializeField] private Image invisibleMeter;
-    [SerializeField] float startInvisible;
-    [SerializeField] float invisibleIncrement;
     [SerializeField] float maxInvisible;
+    [SerializeField] float invisibleIncrement;
+    [SerializeField] float startingInvisible;
 
     [Header("Trail Renderer")]
     [SerializeField] private TrailRenderer tr;
@@ -83,18 +89,21 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        
+        
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        rb.freezeRotation = true;
+
         invisibilityAvailable = true;
         jetPackUnlocked = false;
         invisibilityUnlocked = false;
         readyToJump = true;
         gravity = -1.0f;
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-        rb.freezeRotation = true;
 
-        startInvisible = 100.0f;
-        invisibleIncrement = 0.05f;
-        maxInvisible = 0.0f;
+        maxInvisible = 7.5f;
+        invisibleIncrement = .25f;
+        startingInvisible = 7.5f;
 
         if (playerCollider == null)
         {
@@ -121,6 +130,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("CapsuleCollider not assigned!");
         }
+
+        HideInvisibilityMeter();
     }
 
     private void Update()
@@ -249,6 +260,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void HideInvisibilityMeter()
+    {
+        Color amountColor = invisibilityVisualAmount.color;
+        amountColor.a = 0.0f;
+        invisibilityVisualAmount.color = amountColor;
+
+        Color emptyColor = invisibilityVisualEmpty.color;
+        emptyColor.a = 0.0f;
+        invisibilityVisualEmpty.color = emptyColor;
+
+        Color meterColor = invisibilityVisualMeter.color;
+        meterColor.a = 0.0f;
+        invisibilityVisualMeter.color = meterColor;
+    }
+
+    public void DisplayInvisibilityMeter()
+    {
+        Color amountColor = invisibilityVisualAmount.color;
+        amountColor.a = 255.0f;
+        invisibilityVisualAmount.color = amountColor;
+
+        Color emptyColor = invisibilityVisualEmpty.color;
+        emptyColor.a = 255.0f;
+        invisibilityVisualEmpty.color = emptyColor;
+
+        Color meterColor = invisibilityVisualMeter.color;
+        meterColor.a = 255.0f;
+        invisibilityVisualMeter.color = meterColor;
+    }
+
     public void HandleInvisibility()
     {
         if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked)
@@ -262,15 +303,24 @@ public class PlayerController : MonoBehaviour
     {
         invisibilityAvailable = false;
         yield return new WaitForSeconds(6.0f);
+        Debug.Log("Invisibility Over (Corotine)");
+        startingInvisible = 7.5f;
+        invisibleMeter.fillAmount = startingInvisible / maxInvisible;
         gameObject.tag = "Player";
         invisibilityAvailable = true;
     }
 
     public void InvisibilityMeter()
     {
-        startInvisible -= 5.0f * Time.deltaTime * invisibleIncrement;
-        startInvisible = Mathf.Clamp(startInvisible, 0, maxInvisible);
-        invisibleMeter.fillAmount = startInvisible / maxInvisible;
+        startingInvisible -= 5.0f * Time.deltaTime * invisibleIncrement;
+        startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
+        invisibleMeter.fillAmount = startingInvisible / maxInvisible;
+
+        if(startingInvisible <= 0) 
+        {
+            Debug.Log("Invisibility Over (decrement)");
+            startingInvisible = 0;
+        }
     }
 
     private void Jump()
@@ -442,5 +492,20 @@ public class PlayerController : MonoBehaviour
     public float ReturnGravity()
     {
         return this.gravity;
+    }
+
+    public float ReturnStartingInvisibility()
+    {
+        return this.startingInvisible;
+    }
+
+    public float ReturnMaxInvisibility()
+    {
+        return this.maxInvisible;
+    }
+
+    public Image ReturnInvisibilityMeter()
+    {
+        return this.invisibleMeter;
     }
 }
