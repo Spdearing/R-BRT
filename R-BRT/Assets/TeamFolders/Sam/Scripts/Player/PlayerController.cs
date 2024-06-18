@@ -320,6 +320,7 @@ public class PlayerController : MonoBehaviour
                 startingInvisible = 0;
                 invisibilityAvailable = true;
                 invisibilityMeterFillingBackUp = true;
+                gameObject.tag = "Player";
             }
         }
         
@@ -337,7 +338,6 @@ public class PlayerController : MonoBehaviour
             {
                 startingInvisible = 7.5f;
                 invisibilityAvailable = true;
-                gameObject.tag = "Player";
                 invisibilityMeterFillingBackUp = false;
             }
         }
