@@ -393,8 +393,8 @@ MonoBehaviour:
   detectedEnemies: []
   enemyTags:
   - GroundBot
-  - FlyingBot
   - SpiderBot
+  - FlyingBot
 --- !u!114 &9090620449033406597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,7 +742,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718068011651104735}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c37958d7ca44e5f4aa303fe09e37da38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
