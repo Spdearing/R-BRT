@@ -28,7 +28,8 @@ public class FlyingBotHeadMovement : MonoBehaviour
     [SerializeField] private GameManager gameManager;
 
     [Header("Materials")]
-    [SerializeField] private Material green;
+    [SerializeField] private Material lightBlue;
+    [SerializeField] private Material yellow;
     [SerializeField] private Material red;
 
 
@@ -42,7 +43,7 @@ public class FlyingBotHeadMovement : MonoBehaviour
         robotIsActive = true;
         rotationAngle = 45f;
         rotationSpeed = 25f;
-        flyingBotHeadColor.material = green; 
+        flyingBotHeadColor.material = lightBlue; 
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
