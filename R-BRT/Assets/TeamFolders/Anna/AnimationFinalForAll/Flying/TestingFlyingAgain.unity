@@ -215,6 +215,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &751790845
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1589825374963478596, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f4b6c212375e2b4e83ed91622425610, type: 2}
+    - target: {fileID: 3753741693135067569, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f161f4a0ef56c1342aaa60f4ac730c79, type: 2}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.918
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.243
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.935
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.11297416
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.993598
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 167.026
+      objectReference: {fileID: 0}
+    - target: {fileID: 6329538197798236148, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673448270577530190, guid: 616201594b437c246a3f26acfce04082, type: 3}
+      propertyPath: m_Name
+      value: FlyinBotShowcase (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 616201594b437c246a3f26acfce04082, type: 3}
 --- !u!1001 &1192716054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -503,5 +568,6 @@ SceneRoots:
   - {fileID: 704155269}
   - {fileID: 1600565429}
   - {fileID: 1192716054}
+  - {fileID: 751790845}
   - {fileID: 1218183510}
   - {fileID: 1688538089}
