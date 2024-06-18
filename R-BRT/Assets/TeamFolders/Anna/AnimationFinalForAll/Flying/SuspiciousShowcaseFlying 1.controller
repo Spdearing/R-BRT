@@ -10,8 +10,8 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 418159509213485504}
-    m_Position: {x: 246.18271, y: 298.72986, z: 0}
+    m_State: {fileID: 928670424865549054}
+    m_Position: {x: 367.45932, y: 207.20898, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -21,7 +21,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 418159509213485504}
+  m_DefaultState: {fileID: 928670424865549054}
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -44,14 +44,14 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &418159509213485504
+--- !u!1102 &928670424865549054
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlyingBotSus
+  m_Name: FlyingSusColby
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -64,7 +64,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 86b26e39e2117b54580c7492a30dc8c7, type: 3}
+  m_Motion: {fileID: 7400000, guid: 94741db54149f914f85c3e0a65fd80c7, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
