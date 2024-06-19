@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4741367386009472818}
   m_Layer: 2
   m_Name: FOV
-  m_TagString: FlyingBot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -906,7 +906,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a100cf29a12af474fa82077cebbdca6f, type: 2}
     - target: {fileID: -259972160606440404, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
       propertyPath: m_TagString
-      value: FlyingBot
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
       propertyPath: m_Name
@@ -1039,8 +1039,8 @@ MonoBehaviour:
   flyingBotHeadColor: {fileID: 7893746361603777904}
   enemyFieldOfView: {fileID: 0}
   gameManager: {fileID: 0}
-  lightBlue: {fileID: 0}
-  yellow: {fileID: 0}
+  lightBlue: {fileID: 2100000, guid: bbe3763c62ac6df4cbe39e4ec9d243ed, type: 2}
+  yellow: {fileID: 2100000, guid: 4e84822a843f29a4ab0400e448436db1, type: 2}
   red: {fileID: 2100000, guid: 272ebf71be99ccf45b187a4b1b2af6e9, type: 2}
 --- !u!114 &9001754857413938775
 MonoBehaviour:

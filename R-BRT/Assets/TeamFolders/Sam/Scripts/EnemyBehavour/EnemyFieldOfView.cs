@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static FlyingBotStateMachine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class EnemyFieldOfView : MonoBehaviour
 {
@@ -10,13 +12,10 @@ public class EnemyFieldOfView : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
-    [SerializeField] private FlyingBotHeadMovement flyingBotHeadMovement;
+    [SerializeField] private FlyingBotStateMachine flyingBotStateMachine;
 
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
-
-    [Header("Transform")]
-    [SerializeField] private Transform fieldOfViewParent;
 
     private void Start()
     {
@@ -25,7 +24,6 @@ public class EnemyFieldOfView : MonoBehaviour
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingDetected = false;
-        fieldOfViewParent = transform.parent;
     }
 
     private void Update()
@@ -44,9 +42,9 @@ public class EnemyFieldOfView : MonoBehaviour
             {
                 groundBotHeadMovement.SetPlayerSpotted(true);
             }
-            else if (gameObject.transform.parent.parent.tag == "FlyingBot")
+            else if (gameObject.transform.parent.tag == "FlyingBot")
             {
-                flyingBotHeadMovement.SetPlayerSpotted(true);
+                flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
             }
         }
     }
@@ -81,11 +79,11 @@ public class EnemyFieldOfView : MonoBehaviour
             
             if (gameObject.transform.parent.parent.tag == "GroundBot")
             {
-                groundBotHeadMovement.SetPlayerSpotted(true);
+                groundBotHeadMovement.SetPlayerSpotted(false);
             }
-            else if (gameObject.transform.parent.parent.tag == "FlyingBot")
+            else if (gameObject.transform.parent.tag == "FlyingBot")
             {
-                flyingBotHeadMovement.SetPlayerSpotted(true);
+                flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
             }
         }
     }

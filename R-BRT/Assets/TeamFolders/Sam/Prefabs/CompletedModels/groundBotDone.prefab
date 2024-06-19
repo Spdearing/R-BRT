@@ -1055,9 +1055,14 @@ MonoBehaviour:
   rotationSpeed: 0
   player: {fileID: 0}
   groundBotHead: {fileID: 622786997081344798}
+  fieldOfView: {fileID: 1177509204288699627}
   groundBotHeadColor: {fileID: 3642690833534715753}
+  fieldOfViewRenderer: {fileID: 5199597494690532238}
   enemyFieldOfView: {fileID: 0}
   gameManager: {fileID: 0}
   yellow: {fileID: 2100000, guid: cc16cdcd39fe61b4b86876b69b275e97, type: 2}
   lightBlue: {fileID: 2100000, guid: bbe3763c62ac6df4cbe39e4ec9d243ed, type: 2}
   red: {fileID: 2100000, guid: 733e258a0728f414682b93cccd29bd8b, type: 2}
+  fieldOfViewLightBlue: {fileID: 2100000, guid: bf174fb1913b053458a82bedf2b2d071, type: 2}
+  fieldOfViewYellow: {fileID: 2100000, guid: 94428ebf8d70c954f96789e10c89952d, type: 2}
+  fieldOfViewRed: {fileID: 2100000, guid: 5284c31dd4c4b3947a5cf660ede19eea, type: 2}

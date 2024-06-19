@@ -5,14 +5,33 @@ using UnityEngine.AI;
 
 public class FlyingBotStateMachine : MonoBehaviour
 {
-    [Header("Nav Mesh")]
-    private NavMeshAgent navGhost;
+
+    [Header("")]
+    [SerializeField] private Transform playerCamera;
 
     [Header("GameObjects")]
-    [SerializeField] GameObject player;
-    
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject flyingBotHead;
+    [SerializeField] private GameObject fieldOfView;
+
+    [Header("Renderer")]
+    [SerializeField] private Renderer flyingBotHeadColor;
+    [SerializeField] private Renderer fieldOfViewRenderer;
+
+
     [Header("Scripts")]
-    [SerializeField] GameOverScreen gameOverScreen;
+    [SerializeField] private GameOverScreen gameOverScreen;
+    [SerializeField] private EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private PlayerController playerController;
+
+    [Header("Materials")]
+    [SerializeField] private Material lightBlue;
+    [SerializeField] private Material yellow;
+    [SerializeField] private Material red;
+    [SerializeField] private Material fieldOfViewLightBlue;
+    [SerializeField] private Material fieldOfViewYellow;
+    [SerializeField] private Material fieldOfViewRed;
 
 
     public FlyingState currentState;
@@ -28,6 +47,8 @@ public class FlyingBotStateMachine : MonoBehaviour
     void Start()
     {
         currentState = FlyingState.patrolling;
+        flyingBotHeadColor.material = lightBlue;
+        fieldOfViewRenderer.material = lightBlue;
     }
 
     // Update is called once per frame
@@ -48,18 +69,29 @@ public class FlyingBotStateMachine : MonoBehaviour
         {
             case FlyingState.patrolling:
 
+                flyingBotHeadColor.material = lightBlue;
+                fieldOfViewRenderer.material = lightBlue;
+
                 break;
 
             case FlyingState.scanning:
-               
+
+                flyingBotHeadColor.material = yellow;
+                fieldOfViewRenderer.material = yellow;
+
                 break;
 
             case FlyingState.playerCaught:
 
-            gameOverScreen.ReturnGameOverPanel().SetActive(true);
-            Time.timeScale = 0.0f;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+                flyingBotHeadColor.material = red;
+                fieldOfViewRenderer.material = red;
+
+                playerController.SetCameraLock(true);
+                playerCamera.LookAt(transform.position);
+
+                gameOverScreen.ReturnGameOverPanel().SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
 
 
                 break;
