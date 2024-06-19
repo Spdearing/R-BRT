@@ -20,9 +20,11 @@ public class GroundBotHeadMovement : MonoBehaviour
 
     [Header("Game Objects")]
     [SerializeField] private GameObject groundBotHead;
+    [SerializeField] private GameObject fieldOfView;
 
     [Header("Renderer")]
     [SerializeField] private Renderer groundBotHeadColor;
+    [SerializeField] private Renderer fieldOfViewRenderer;
 
     [Header("Scripts")]
     [SerializeField] private EnemyFieldOfView enemyFieldOfView;
@@ -32,6 +34,9 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private Material yellow;
     [SerializeField] private Material lightBlue;
     [SerializeField] private Material red;
+    [SerializeField] private Material fieldOfViewLightBlue;
+    [SerializeField] private Material fieldOfViewYellow;
+    [SerializeField] private Material fieldOfViewRed;
 
     void Start()
     {
@@ -40,7 +45,9 @@ public class GroundBotHeadMovement : MonoBehaviour
         robotIsActive = true;
         rotationAngle = 45f;
         rotationSpeed = 25f;
+        fieldOfViewRenderer = GameObject.FindWithTag("FOV").GetComponentInChildren<Renderer>();
         groundBotHeadColor.material = lightBlue;
+        fieldOfViewRenderer.material = lightBlue;
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -54,11 +61,14 @@ public class GroundBotHeadMovement : MonoBehaviour
             if (playerIsSpotted)
             {
                 RotateTowardsPlayer();
-                groundBotHeadColor.material = red;
+                groundBotHeadColor.material = yellow;
+                fieldOfViewRenderer.material = yellow;
             }
             else
             {
                 Patrol();
+                groundBotHeadColor.material = lightBlue;
+                fieldOfViewRenderer.material = lightBlue;
             }
         }
     }

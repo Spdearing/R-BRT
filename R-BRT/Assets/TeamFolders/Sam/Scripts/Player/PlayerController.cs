@@ -496,6 +496,11 @@ public class PlayerController : MonoBehaviour
         return this.invisibilityAvailable;
     }
 
+    public void SetCameraLock(bool value)
+    {
+        isCameraLocked = value;
+    }
+
     public void SetInvisibilityUnlock(bool value)
     {
         invisibilityUnlocked = value;

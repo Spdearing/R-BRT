@@ -2915,6 +2915,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3972313335355492504, guid: 8ee6af5106adf534b92ebb36f437c0a8, type: 3}
+      propertyPath: yellow
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e84822a843f29a4ab0400e448436db1, type: 2}
+    - target: {fileID: 3972313335355492504, guid: 8ee6af5106adf534b92ebb36f437c0a8, type: 3}
+      propertyPath: lightBlue
+      value: 
+      objectReference: {fileID: 2100000, guid: bbe3763c62ac6df4cbe39e4ec9d243ed, type: 2}
+    - target: {fileID: 3972313335355492504, guid: 8ee6af5106adf534b92ebb36f437c0a8, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 383400997}

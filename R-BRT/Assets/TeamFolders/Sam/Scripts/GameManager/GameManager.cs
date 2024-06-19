@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private DetectionMeter detectionMeter;
+    [SerializeField] private PlayerController playerController;
 
    
 
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindWithTag("Player");
             detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
             playerIsSpotted = false;
+            playerController.SetCameraLock(false);
         }
         else if (scene.name == "ChooseYourFriend")
         {
