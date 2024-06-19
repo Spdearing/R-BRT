@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4741367386009472818}
   m_Layer: 2
   m_Name: FOV
-  m_TagString: FOV
+  m_TagString: FlyingBot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4879019478756126523}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3244011, y: -0.60792065, z: 0.60153824, w: 0.40416363}
-  m_LocalPosition: {x: -0.0019997, y: 0.054000046, z: 0.038}
-  m_LocalScale: {x: 0.46616217, y: 0.33043015, z: 0.4933277}
+  m_LocalRotation: {x: -0.32440105, y: -0.60792065, z: 0.60153824, w: 0.4041636}
+  m_LocalPosition: {x: -0.001999738, y: 0.054000046, z: 0.037999943}
+  m_LocalScale: {x: 0.4661622, y: 0.3304301, z: 0.4933278}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3191645636289297088}
@@ -825,9 +825,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDetectionState: {fileID: 0}
+  player: {fileID: 0}
   gameManager: {fileID: 0}
   enemyProximity: {fileID: 0}
+  groundBotHeadMovement: {fileID: 0}
+  flyingBotHeadMovement: {fileID: 0}
   playerIsBeingDetected: 0
+  fieldOfViewParent: {fileID: 0}
 --- !u!1001 &3153005408446029099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -900,6 +904,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: a100cf29a12af474fa82077cebbdca6f, type: 2}
+    - target: {fileID: -259972160606440404, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
+      propertyPath: m_TagString
+      value: FlyingBot
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
       propertyPath: m_Name
       value: FlyinBotFinal
@@ -1031,7 +1039,8 @@ MonoBehaviour:
   flyingBotHeadColor: {fileID: 7893746361603777904}
   enemyFieldOfView: {fileID: 0}
   gameManager: {fileID: 0}
-  green: {fileID: 2100000, guid: bbe3763c62ac6df4cbe39e4ec9d243ed, type: 2}
+  lightBlue: {fileID: 0}
+  yellow: {fileID: 0}
   red: {fileID: 2100000, guid: 272ebf71be99ccf45b187a4b1b2af6e9, type: 2}
 --- !u!114 &9001754857413938775
 MonoBehaviour:
