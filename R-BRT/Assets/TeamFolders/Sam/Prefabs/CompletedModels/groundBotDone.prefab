@@ -705,7 +705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4018
+  m_VersionIndex: 4021
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -825,9 +825,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDetectionState: {fileID: 0}
+  player: {fileID: 0}
   gameManager: {fileID: 0}
   enemyProximity: {fileID: 0}
+  groundBotHeadMovement: {fileID: 697343153668334853}
+  flyingBotHeadMovement: {fileID: 0}
   playerIsBeingDetected: 0
+  fieldOfViewParent: {fileID: 0}
 --- !u!1001 &8412989961871818546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -838,19 +842,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -67.93
+      value: -5.8643947
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.5622516
+      value: 1.628291
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.07
+      value: -14.142977
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9997716
+      value: 0.4142689
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalRotation.x
@@ -858,7 +862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.021372082
+      value: 0.9101545
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalRotation.z
@@ -870,7 +874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 2.449
+      value: 131.053
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -900,6 +904,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: dd0781ea3a1616f4ab11c54a84a058ab, type: 2}
+    - target: {fileID: -259972160606440404, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_Name
       value: groundBotDone
@@ -961,11 +969,6 @@ Transform:
 --- !u!23 &3642690833534715753 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4157524182732408741, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
-  m_PrefabInstance: {fileID: 8412989961871818546}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8307532411826510041 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
   m_PrefabInstance: {fileID: 8412989961871818546}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8647359997036380771 stripped
@@ -1050,10 +1053,10 @@ MonoBehaviour:
   isPaused: 0
   rotationAngle: 0
   rotationSpeed: 0
-  player: {fileID: 8307532411826510041}
+  player: {fileID: 0}
   groundBotHead: {fileID: 622786997081344798}
   groundBotHeadColor: {fileID: 3642690833534715753}
-  enemyFieldOfView: {fileID: 2135621362713458595}
+  enemyFieldOfView: {fileID: 0}
   gameManager: {fileID: 0}
   yellow: {fileID: 2100000, guid: cc16cdcd39fe61b4b86876b69b275e97, type: 2}
   lightBlue: {fileID: 2100000, guid: bbe3763c62ac6df4cbe39e4ec9d243ed, type: 2}

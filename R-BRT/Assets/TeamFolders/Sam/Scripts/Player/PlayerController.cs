@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool invisibilityAvailable;
     [SerializeField] private bool jetPackUnlocked;
     [SerializeField] private bool invisibilityMeterFillingBackUp;
+    [SerializeField] private bool usingInvisibility;
 
     [Header("Vector3")]
     [SerializeField] private Vector3 originalCameraPosition;
@@ -90,12 +91,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        
-        
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.freezeRotation = true;
 
+        usingInvisibility = false;
         invisibilityAvailable = true;
         jetPackUnlocked = false;
         invisibilityUnlocked = false;
@@ -295,6 +295,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked && !invisibilityMeterFillingBackUp)
         {
             gameObject.tag = "Invisible";
+            usingInvisibility = true;
             StartCoroutine(InvisibilityTimer());
         }
     }
@@ -303,7 +304,7 @@ public class PlayerController : MonoBehaviour
     {
         invisibilityAvailable = false;
         yield return new WaitForSeconds(6.0f);
-        Debug.Log("Invisibility Over (Corotine)");
+        Debug.Log("Invisibility Over (Coroutine)");
     }
 
     public void InvisibilityMeter()
@@ -344,7 +345,7 @@ public class PlayerController : MonoBehaviour
      
     }
 
-        private void Jump()
+    private void Jump()
     {
         exitingSlope = true;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -528,5 +529,10 @@ public class PlayerController : MonoBehaviour
     public Image ReturnInvisibilityMeter()
     {
         return this.invisibleMeter;
+    }
+
+    public bool ReturnUsingInvisibility()
+    {
+        return this.usingInvisibility;
     }
 }

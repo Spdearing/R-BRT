@@ -54,6 +54,7 @@ public class GroundBotHeadMovement : MonoBehaviour
             if (playerIsSpotted)
             {
                 RotateTowardsPlayer();
+                groundBotHeadColor.material = red;
             }
             else
             {
