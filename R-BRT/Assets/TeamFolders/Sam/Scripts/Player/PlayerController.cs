@@ -95,13 +95,14 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
         rb.freezeRotation = true;
 
+        groundDrag = 5.0f;
+
         usingInvisibility = false;
         invisibilityAvailable = true;
         jetPackUnlocked = false;
         invisibilityUnlocked = false;
         readyToJump = true;
         gravity = -1.0f;
-
 
         maxInvisible = 7.5f;
         invisibleIncrement = .25f;
@@ -222,9 +223,13 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
 
-            if (rb.velocity.y > 0)
+            if (rb.velocity.y > 0 && !isGrounded)
             {
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 100f, ForceMode.Force);
+            }
+            if (rb.velocity.y > 0 && isGrounded)
+            {
+                rb.AddForce(Vector3.down * 30f, ForceMode.Force);
             }
         }
         else if (isGrounded)
