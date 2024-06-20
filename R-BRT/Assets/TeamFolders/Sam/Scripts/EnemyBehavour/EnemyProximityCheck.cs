@@ -76,8 +76,6 @@ public class EnemyProximityCheck : MonoBehaviour
 
         if (Physics.Raycast(rayOrigin, rayDirection, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
-            Debug.Log(enemyDetected.tag);
-
             if (IsTagInList(hitInfo.collider.tag))
             {
                 enemyWithinRange = true;
