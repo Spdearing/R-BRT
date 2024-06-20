@@ -20,6 +20,9 @@ public class EnemyFieldOfView : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private GameObject enemy;
 
+    [Header("Transform")]
+    [SerializeField] private Transform enemyGrandparentTransform;
+
 
 
     private void Start()
@@ -29,16 +32,19 @@ public class EnemyFieldOfView : MonoBehaviour
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingDetected = false;
-        
-        if(gameObject.transform.parent.parent.tag == "GroundBot")
-        {
-            enemy = transform.parent.parent.gameObject;
-        }
+        enemy = this.gameObject.transform.parent.parent.gameObject;
+        enemyGrandparentTransform = enemy.transform;
 
-        else if (gameObject.transform.parent.tag == "FlyingBot")
-        {
-            enemy = transform.parent.gameObject;
-        }
+        //if (gameObject.transform.parent.parent != null)
+        //{
+        //    string parentTag = gameObject.transform.parent.parent.tag;
+        //    if (parentTag == "GroundBot" || parentTag == "FlyingBot")
+        //    {
+        //        enemy = gameObject.transform.parent.parent.gameObject;
+        //        enemyGrandparentTransform = gameObject.transform.parent.parent;
+        //        Debug.Log(enemy.ToString());
+        //    }
+        //}
     }
 
     private void Update()
@@ -115,8 +121,8 @@ public class EnemyFieldOfView : MonoBehaviour
         }
     }
 
-    public GameObject ReturnThisEnemy()
+    public Transform ReturnThisEnemy()
     {
-        return this.enemy;
+        return this.enemyGrandparentTransform;
     }
 }

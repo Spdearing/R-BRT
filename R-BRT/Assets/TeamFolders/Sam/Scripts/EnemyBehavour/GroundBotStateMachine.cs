@@ -85,8 +85,9 @@ public class GroundBotStateMachine : MonoBehaviour
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
 
                 
+                
                 playerController.SetCameraLock(true);
-                playerCamera.LookAt(transform.position);
+                playerCamera.LookAt(enemyFieldOfView.ReturnThisEnemy());
 
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
