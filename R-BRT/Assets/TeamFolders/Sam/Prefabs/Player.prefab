@@ -319,6 +319,7 @@ MonoBehaviour:
   invisibilityAvailable: 1
   jetPackUnlocked: 0
   invisibilityMeterFillingBackUp: 0
+  usingInvisibility: 0
   originalCameraPosition: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   moveDirection: {x: 0, y: 0, z: 0}
@@ -813,8 +814,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7923742024970006504, guid: 9ecb40f16dfe32b4baa75f97b045b867, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5820268685247176695}
   m_SourcePrefab: {fileID: 100100000, guid: 9ecb40f16dfe32b4baa75f97b045b867, type: 3}
+--- !u!1 &287082812819638157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7923742024970006504, guid: 9ecb40f16dfe32b4baa75f97b045b867, type: 3}
+  m_PrefabInstance: {fileID: 7930035405969680485}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5820268685247176695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287082812819638157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e067f3cb21157a49a782702938aad21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinMeshRenderer: {fileID: 0}
+  originalMaterials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  red: {fileID: 2100000, guid: bef5258c733697c4aad2571c72c524c1, type: 2}
 --- !u!95 &4648077884393115918 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3354177981396171115, guid: 9ecb40f16dfe32b4baa75f97b045b867, type: 3}

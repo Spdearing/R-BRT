@@ -705,7 +705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4009
+  m_VersionIndex: 4012
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -829,9 +829,8 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   enemyProximity: {fileID: 0}
   groundBotHeadMovement: {fileID: 0}
-  flyingBotHeadMovement: {fileID: 0}
+  flyingBotStateMachine: {fileID: 9001754857413938775}
   playerIsBeingDetected: 0
-  fieldOfViewParent: {fileID: 0}
 --- !u!1001 &3153005408446029099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -963,9 +962,6 @@ PrefabInstance:
       addedObject: {fileID: 8084392809267517658}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3972313335355492504}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 9001754857413938775}
   m_SourcePrefab: {fileID: 100100000, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
 --- !u!1 &2810475309709828218 stripped
@@ -1015,33 +1011,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1230966
   m_Center: {x: 3.915363e-11, y: -0.0013298884, z: -0.0025730457}
---- !u!114 &3972313335355492504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2810475309709828218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a4c70f1296e2524a87ec284b049bce1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  robotIsActive: 0
-  playerIsSpotted: 0
-  rotatingLeft: 0
-  isPaused: 0
-  rotationAngle: 0
-  rotationSpeed: 0
-  startYRotation: 0
-  targetYRotation: 0
-  flyingBotHead: {fileID: 6315697062558066951}
-  flyingBotHeadColor: {fileID: 7893746361603777904}
-  enemyFieldOfView: {fileID: 0}
-  gameManager: {fileID: 0}
-  lightBlue: {fileID: 2100000, guid: bbe3763c62ac6df4cbe39e4ec9d243ed, type: 2}
-  yellow: {fileID: 2100000, guid: 4e84822a843f29a4ab0400e448436db1, type: 2}
-  red: {fileID: 2100000, guid: 272ebf71be99ccf45b187a4b1b2af6e9, type: 2}
 --- !u!114 &9001754857413938775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1054,8 +1023,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeaadb33322ef7947bd9dfe155f5a2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   player: {fileID: 0}
+  flyingBotHead: {fileID: 6315697062558066951}
+  fieldOfView: {fileID: 4879019478756126523}
+  flyingBotHeadColor: {fileID: 7893746361603777904}
+  fieldOfViewRenderer: {fileID: 5645821382852503768}
   gameOverScreen: {fileID: 0}
+  enemyFieldOfView: {fileID: 4741367386009472818}
+  gameManager: {fileID: 0}
+  playerController: {fileID: 0}
+  lightBlue: {fileID: 2100000, guid: ebc0c5f9ffb51a64c935f97c08060f06, type: 2}
+  yellow: {fileID: 2100000, guid: 8da4a29d6ea698f4d98e3982372e822b, type: 2}
+  red: {fileID: 2100000, guid: edabf50f645810d42a63fc757724fc7b, type: 2}
+  fieldOfViewLightBlue: {fileID: 2100000, guid: bf174fb1913b053458a82bedf2b2d071, type: 2}
+  fieldOfViewYellow: {fileID: 2100000, guid: 94428ebf8d70c954f96789e10c89952d, type: 2}
+  fieldOfViewRed: {fileID: 2100000, guid: 5284c31dd4c4b3947a5cf660ede19eea, type: 2}
   currentState: 0
 --- !u!4 &3191645636289297088 stripped
 Transform:

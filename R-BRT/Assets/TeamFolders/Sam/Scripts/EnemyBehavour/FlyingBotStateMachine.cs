@@ -48,7 +48,7 @@ public class FlyingBotStateMachine : MonoBehaviour
     {
         currentState = FlyingState.patrolling;
         flyingBotHeadColor.material = lightBlue;
-        fieldOfViewRenderer.material = lightBlue;
+        fieldOfViewRenderer.material = fieldOfViewLightBlue;
     }
 
     // Update is called once per frame
@@ -70,21 +70,21 @@ public class FlyingBotStateMachine : MonoBehaviour
             case FlyingState.patrolling:
 
                 flyingBotHeadColor.material = lightBlue;
-                fieldOfViewRenderer.material = lightBlue;
+                fieldOfViewRenderer.material = fieldOfViewLightBlue;
 
                 break;
 
             case FlyingState.scanning:
 
                 flyingBotHeadColor.material = yellow;
-                fieldOfViewRenderer.material = yellow;
+                fieldOfViewRenderer.material = fieldOfViewYellow;
 
                 break;
 
             case FlyingState.playerCaught:
 
                 flyingBotHeadColor.material = red;
-                fieldOfViewRenderer.material = red;
+                fieldOfViewRenderer.material = fieldOfViewRed;
 
                 playerController.SetCameraLock(true);
                 playerCamera.LookAt(transform.position);

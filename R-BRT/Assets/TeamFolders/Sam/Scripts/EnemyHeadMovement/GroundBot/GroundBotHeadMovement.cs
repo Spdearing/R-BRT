@@ -47,7 +47,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         rotationSpeed = 25f;
         fieldOfViewRenderer = GameObject.FindWithTag("FOV").GetComponentInChildren<Renderer>();
         groundBotHeadColor.material = lightBlue;
-        fieldOfViewRenderer.material = lightBlue;
+        fieldOfViewRenderer.material = fieldOfViewLightBlue;
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -62,13 +62,13 @@ public class GroundBotHeadMovement : MonoBehaviour
             {
                 RotateTowardsPlayer();
                 groundBotHeadColor.material = yellow;
-                fieldOfViewRenderer.material = yellow;
+                fieldOfViewRenderer.material = fieldOfViewYellow;
             }
             else
             {
                 Patrol();
                 groundBotHeadColor.material = lightBlue;
-                fieldOfViewRenderer.material = lightBlue;
+                fieldOfViewRenderer.material = fieldOfViewLightBlue;
             }
         }
     }
