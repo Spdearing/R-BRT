@@ -32,7 +32,9 @@ public class EnemyFieldOfView : MonoBehaviour
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingDetected = false;
-        enemyGrandparentTransform = this.gameObject.transform.parent.parent;
+        enemy = gameObject.transform.parent.parent.gameObject;
+        enemyGrandparentTransform = this.enemy.transform;
+        Debug.Log(enemyGrandparentTransform);
 
         //if (gameObject.transform.parent.parent != null)
         //{
