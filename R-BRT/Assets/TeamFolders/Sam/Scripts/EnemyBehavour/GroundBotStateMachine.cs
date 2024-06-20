@@ -11,6 +11,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] GameObject player;
 
     [Header("Transform")]
+    [SerializeField] private Transform playerCamera;
     //[SerializeField] private Transform[] patrolPoints;
 
 
@@ -21,6 +22,8 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] GameOverScreen gameOverScreen;
     [SerializeField] PlayerDetectionState playerDetectionState;
     [SerializeField] DetectionMeter detectionMeter;
+    [SerializeField] PlayerController playerController;
+    [SerializeField] EnemyFieldOfView enemyFieldOfView;
     
     public BehaviorState currentState;
 
@@ -78,8 +81,13 @@ public class GroundBotStateMachine : MonoBehaviour
 
             case BehaviorState.playerCaught:
 
+               
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
-                Time.timeScale = 0.0f;
+
+                
+                playerController.SetCameraLock(true);
+                playerCamera.LookAt(transform.position);
+
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
 

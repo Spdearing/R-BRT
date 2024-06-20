@@ -17,6 +17,11 @@ public class EnemyFieldOfView : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
 
+    [Header("Enemy")]
+    [SerializeField] private GameObject enemy;
+
+
+
     private void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -24,6 +29,16 @@ public class EnemyFieldOfView : MonoBehaviour
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingDetected = false;
+        
+        if(gameObject.transform.parent.parent.tag == "GroundBot")
+        {
+            enemy = transform.parent.parent.gameObject;
+        }
+
+        else if (gameObject.transform.parent.tag == "FlyingBot")
+        {
+            enemy = transform.parent.gameObject;
+        }
     }
 
     private void Update()
@@ -98,5 +113,10 @@ public class EnemyFieldOfView : MonoBehaviour
                 playerIsBeingDetected = false;
             }
         }
+    }
+
+    public GameObject ReturnThisEnemy()
+    {
+        return this.enemy;
     }
 }

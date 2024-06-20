@@ -56,9 +56,9 @@ public class PlayerDetectionState : MonoBehaviour
 
                 if (detection.ReturnStartingDetection() >= detection.GetDetectionMax())// checks to see if bar is full
                 {
-                    Debug.Log("Should have changed to GameOver");
+                    
                     ChangeDetectionState(DetectionState.detected);// sets the capped amount, and then changes the state
-                    Debug.Log("Should have changed the state");
+                    
 
                 }
 
@@ -79,7 +79,6 @@ public class PlayerDetectionState : MonoBehaviour
 
             case DetectionState.detected:
 
-                //detection.SetDetectionAmount(200);
                 groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
 
                 break;
