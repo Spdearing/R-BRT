@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float verticalInput;
 
     [Header("Bools")]
+    [SerializeField] private bool onSlope;
     [SerializeField] private bool isSprinting;
     [SerializeField] private bool readyToJump;
     [SerializeField] private bool isJumping;
@@ -151,19 +152,7 @@ public class PlayerController : MonoBehaviour
         InvisibilityMeter();
         InvisibilityMeterFillingBackUp();
 
-        // Handle drag
-        if (isGrounded)
-        {
-            rb.drag = groundDrag;
-        }
-        else if (OnSlope() && !exitingSlope)
-        {
-            rb.drag = groundDrag;
-        }
-        else
-        {
-            rb.drag = 0;
-        }
+        rb.drag = isGrounded ? groundDrag : (OnSlope() && !exitingSlope ? groundDrag : 0);
     }
 
     private void FixedUpdate()
@@ -221,22 +210,24 @@ public class PlayerController : MonoBehaviour
 
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+            Vector3 slopeMoveDirection = GetSlopeMoveDirection();
+            rb.AddForce(slopeMoveDirection * moveSpeed * 20f, ForceMode.Force);
 
-            if (rb.velocity.y > 0 && !isGrounded)
-            {
-                rb.AddForce(Vector3.down * 100f, ForceMode.Force);
-            }
-            if (rb.velocity.y > 0 && isGrounded)
+            // Apply additional downward force to ensure player stays grounded
+            if (rb.velocity.y > 0 )
             {
                 rb.AddForce(Vector3.down * 30f, ForceMode.Force);
+            }
+            else if (rb.velocity.y < 0)
+            {
+                rb.AddForce(Vector3.down * 100f, ForceMode.Force);
             }
         }
         else if (isGrounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
-        else if (!isGrounded)
+        else
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
@@ -246,108 +237,51 @@ public class PlayerController : MonoBehaviour
 
     private void ControlSpeed()
     {
+        
         if (OnSlope() && !exitingSlope)
         {
+            
             if (rb.velocity.magnitude > moveSpeed)
             {
+                
                 rb.velocity = rb.velocity.normalized * moveSpeed;
             }
         }
         else
         {
+            
             Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
+            
             if (flatVel.magnitude > moveSpeed)
             {
+                
                 Vector3 limitedVel = flatVel.normalized * moveSpeed;
+
+                
                 rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
             }
         }
     }
 
-    public void HideInvisibilityMeter()
+    private bool OnSlope()
     {
-        Color amountColor = invisibilityVisualAmount.color;
-        amountColor.a = 0.0f;
-        invisibilityVisualAmount.color = amountColor;
-
-        Color emptyColor = invisibilityVisualEmpty.color;
-        emptyColor.a = 0.0f;
-        invisibilityVisualEmpty.color = emptyColor;
-
-        Color meterColor = invisibilityVisualMeter.color;
-        meterColor.a = 0.0f;
-        invisibilityVisualMeter.color = meterColor;
-    }
-
-    public void DisplayInvisibilityMeter()
-    {
-        Color amountColor = invisibilityVisualAmount.color;
-        amountColor.a = 255.0f;
-        invisibilityVisualAmount.color = amountColor;
-
-        Color emptyColor = invisibilityVisualEmpty.color;
-        emptyColor.a = 255.0f;
-        invisibilityVisualEmpty.color = emptyColor;
-
-        Color meterColor = invisibilityVisualMeter.color;
-        meterColor.a = 255.0f;
-        invisibilityVisualMeter.color = meterColor;
-    }
-
-    public void HandleInvisibility()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked && !invisibilityMeterFillingBackUp)
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 2.0f))
         {
-            gameObject.tag = "Invisible";
-            usingInvisibility = true;
-            StartCoroutine(InvisibilityTimer());
-        }
-    }
-
-    private IEnumerator InvisibilityTimer()
-    {
-        invisibilityAvailable = false;
-        yield return new WaitForSeconds(6.0f);
-        Debug.Log("Invisibility Over (Coroutine)");
-    }
-
-    public void InvisibilityMeter()
-    {
-        if(!invisibilityAvailable) 
-        {
-            startingInvisible -= 5.0f * Time.deltaTime * invisibleIncrement;
-            startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
-            invisibleMeter.fillAmount = startingInvisible / maxInvisible;
-
-            if (startingInvisible <= 0)
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            if (angle < maxSlopeAngle && angle != 0)
             {
-                Debug.Log("Invisibility Over (decrement)");
-                startingInvisible = 0;
-                invisibilityAvailable = true;
-                invisibilityMeterFillingBackUp = true;
-                gameObject.tag = "Player";
+                onSlope = true;
+                return true;
             }
         }
-        
+        onSlope = false;
+        return false;
     }
 
-    public void InvisibilityMeterFillingBackUp()
+    private Vector3 GetSlopeMoveDirection()
     {
-        if(invisibilityMeterFillingBackUp)
-        {
-            startingInvisible += 2.5f * Time.deltaTime * invisibleIncrement;
-            startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
-            invisibleMeter.fillAmount = startingInvisible / maxInvisible;
-
-            if (startingInvisible >= 7.5f)
-            {
-                startingInvisible = 7.5f;
-                invisibilityAvailable = true;
-                invisibilityMeterFillingBackUp = false;
-            }
-        }
-     
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 
     private void Jump()
@@ -376,7 +310,7 @@ public class PlayerController : MonoBehaviour
 
             Sprint();
             HandleSprintAnimation();
-            
+
         }
         else if (Input.GetKeyUp(sprintKey))
         {
@@ -389,14 +323,14 @@ public class PlayerController : MonoBehaviour
 
     private void HandleSprintAnimation()
     {
-        if(isSprinting == true)
+        if (isSprinting == true)
         {
             playerAnimator.SetBool("isSprinting", true);
         }
         else if (isSprinting == false)
         {
             playerAnimator.SetBool("isSprinting", false);
-            
+
         }
     }
 
@@ -463,7 +397,7 @@ public class PlayerController : MonoBehaviour
 
                 moveSpeed = sprintSpeed;
 
-                
+
 
                 break;
 
@@ -476,20 +410,94 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool OnSlope()
+
+
+    public void HandleInvisibility()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 2.0f))
+        if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked && !invisibilityMeterFillingBackUp)
         {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle != 0;
+            gameObject.tag = "Invisible";
+            usingInvisibility = true;
+            StartCoroutine(InvisibilityTimer());
         }
-        return false;
     }
 
-    private Vector3 GetSlopeMoveDirection()
+    private IEnumerator InvisibilityTimer()
     {
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+        invisibilityAvailable = false;
+        yield return new WaitForSeconds(6.0f);
+        Debug.Log("Invisibility Over (Coroutine)");
     }
+
+    public void InvisibilityMeter()
+    {
+        if(!invisibilityAvailable) 
+        {
+            startingInvisible -= 5.0f * Time.deltaTime * invisibleIncrement;
+            startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
+            invisibleMeter.fillAmount = startingInvisible / maxInvisible;
+
+            if (startingInvisible <= 0)
+            {
+                Debug.Log("Invisibility Over (decrement)");
+                startingInvisible = 0;
+                invisibilityAvailable = true;
+                invisibilityMeterFillingBackUp = true;
+                gameObject.tag = "Player";
+            }
+        }
+        
+    }
+
+    public void HideInvisibilityMeter()
+    {
+        Color amountColor = invisibilityVisualAmount.color;
+        amountColor.a = 0.0f;
+        invisibilityVisualAmount.color = amountColor;
+
+        Color emptyColor = invisibilityVisualEmpty.color;
+        emptyColor.a = 0.0f;
+        invisibilityVisualEmpty.color = emptyColor;
+
+        Color meterColor = invisibilityVisualMeter.color;
+        meterColor.a = 0.0f;
+        invisibilityVisualMeter.color = meterColor;
+    }
+
+    public void DisplayInvisibilityMeter()
+    {
+        Color amountColor = invisibilityVisualAmount.color;
+        amountColor.a = 255.0f;
+        invisibilityVisualAmount.color = amountColor;
+
+        Color emptyColor = invisibilityVisualEmpty.color;
+        emptyColor.a = 255.0f;
+        invisibilityVisualEmpty.color = emptyColor;
+
+        Color meterColor = invisibilityVisualMeter.color;
+        meterColor.a = 255.0f;
+        invisibilityVisualMeter.color = meterColor;
+    }
+
+    public void InvisibilityMeterFillingBackUp()
+    {
+        if(invisibilityMeterFillingBackUp)
+        {
+            startingInvisible += 2.5f * Time.deltaTime * invisibleIncrement;
+            startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
+            invisibleMeter.fillAmount = startingInvisible / maxInvisible;
+
+            if (startingInvisible >= 7.5f)
+            {
+                startingInvisible = 7.5f;
+                invisibilityAvailable = true;
+                invisibilityMeterFillingBackUp = false;
+            }
+        }
+     
+    }
+
+   
 
     public bool ReturnIsGrounded()
     {
