@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (rb.velocity.y < 0)
             {
-                rb.AddForce(Vector3.down * 100f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 60f, ForceMode.Force);
             }
         }
         else if (isGrounded)
@@ -266,7 +266,7 @@ public class PlayerController : MonoBehaviour
 
     private bool OnSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 2.0f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.6f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             if (angle < maxSlopeAngle && angle != 0)
