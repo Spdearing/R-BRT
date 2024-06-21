@@ -23,6 +23,9 @@ public class EnemyFieldOfView : MonoBehaviour
     [Header("Transform")]
     [SerializeField] private Transform enemyGrandparentTransform;
 
+    [Header("GameObject")]
+    [SerializeField] GameObject flyingBot;
+
 
 
     private void Start()
@@ -34,6 +37,8 @@ public class EnemyFieldOfView : MonoBehaviour
         playerIsBeingDetected = false;
         enemy = gameObject.transform.parent.parent.gameObject;
         enemyGrandparentTransform = this.enemy.transform;
+        flyingBot = Resources.Load<GameObject>("Sam's_Prefabs");
+        flyingBotStateMachine = flyingBot.GetComponent<FlyingBotStateMachine>();
         Debug.Log(enemyGrandparentTransform);
 
         //if (gameObject.transform.parent.parent != null)
