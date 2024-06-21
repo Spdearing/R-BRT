@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static FlyingBotStateMachine;
 using UnityEngine.InputSystem.LowLevel;
+using Unity.VisualScripting;
 
 public class EnemyFieldOfView : MonoBehaviour
 {
@@ -35,9 +36,8 @@ public class EnemyFieldOfView : MonoBehaviour
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingDetected = false;
-        enemy = gameObject.transform.parent.parent.gameObject;
-        enemyGrandparentTransform = this.enemy.transform;
-        flyingBot = Resources.Load<GameObject>("Sam's_Prefabs");
+        enemyGrandparentTransform = gameObject.transform.parent.parent;
+        flyingBot = Resources.Load<GameObject>("Sam's_Prefabs/FlyinBotFinal");
         flyingBotStateMachine = flyingBot.GetComponent<FlyingBotStateMachine>();
         Debug.Log(enemyGrandparentTransform);
 
