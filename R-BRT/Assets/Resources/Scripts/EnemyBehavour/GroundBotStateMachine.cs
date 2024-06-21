@@ -26,7 +26,15 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] EnemyFieldOfView enemyFieldOfView;
     [SerializeField] GroundBotSpawner groundBotSpawner;
-    
+
+
+    private Quaternion startRotation;
+    private Quaternion endRotation;
+    private float lerpTime = 0f;
+    private float lerpDuration = 2f;
+
+    private bool isLerping = false;
+
     public BehaviorState currentState;
 
     public enum BehaviorState
@@ -57,6 +65,20 @@ public class GroundBotStateMachine : MonoBehaviour
     void Update()
     {
         UpdateBehavior();
+
+
+        if (isLerping)
+        {
+            lerpTime += Time.deltaTime;
+            float lerpFactor = lerpTime / lerpDuration;
+            playerCameraTransform.rotation = Quaternion.Slerp(startRotation, endRotation, lerpFactor);
+
+            // Stop lerping after the duration is complete
+            if (lerpTime >= lerpDuration)
+            {
+                isLerping = false;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -96,7 +118,16 @@ public class GroundBotStateMachine : MonoBehaviour
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
 
                 playerController.SetCameraLock(true);
-                playerCameraTransform.LookAt(enemyFieldOfView.ReturnThisEnemy());
+
+                startRotation = playerCameraTransform.rotation;
+
+                if (enemyFieldOfView != null)
+                {
+                    Vector3 directionToEnemy = enemyFieldOfView.ReturnThisEnemy().position - playerCameraTransform.position;
+                    endRotation = Quaternion.LookRotation(directionToEnemy);
+                }
+                lerpTime = 0f;
+                isLerping = true;
 
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
