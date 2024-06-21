@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
 
     [Header("EnemyGroups")]
-    [SerializeField] GameObject[] enemyGroup1 = new GameObject[3];
+    [SerializeField] GameObject[] group1 = new GameObject[3];
 
     [Header("EnemyGroupLocations")]
     [SerializeField] Transform[] enemyGroupLocations = new Transform[3];
+
+    
 
 
     // Start is called before the first frame update
@@ -26,11 +29,11 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnGroup1()
     {
-        for (int i = 0; i < enemyGroup1.Length; i++)
+        for (int i = 0; i < group1.Length; i++)
         {
             if (i < enemyGroupLocations.Length)
             {
-                GameObject enemy = Instantiate(enemyGroup1[i], enemyGroupLocations[i].position, enemyGroupLocations[i].rotation);
+                GameObject enemy = Instantiate(group1[i], enemyGroupLocations[i].position, enemyGroupLocations[i].rotation);
             }
             else
             {

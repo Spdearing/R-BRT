@@ -85,6 +85,7 @@ public class PlayerDetectionState : MonoBehaviour
             case DetectionState.detected:
 
                 Debug.Log("Detected");
+                Debug.Log(groundBotStateMachine);
                 groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
 
                 break;

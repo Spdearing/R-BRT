@@ -111,6 +111,6 @@ public class GroundBotStateMachine : MonoBehaviour
 
     public GroundBotStateMachine ReturnThisScript()
     {
-        return this.GetComponent<GroundBotStateMachine>();
+        return this;
     }
 }
