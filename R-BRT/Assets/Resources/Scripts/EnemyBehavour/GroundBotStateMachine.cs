@@ -25,6 +25,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] DetectionMeter detectionMeter;
     [SerializeField] PlayerController playerController;
     [SerializeField] EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] GroundBotSpawner groundBotSpawner;
     
     public BehaviorState currentState;
 
@@ -43,6 +44,7 @@ public class GroundBotStateMachine : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
+        groundBotSpawner = GameObject.FindWithTag("GroundBotSpawner").GetComponent<GroundBotSpawner>();
         gameOverScreen = GameObject.Find("Canvas").GetComponentInChildren<GameOverScreen>();
         detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponentInChildren<DetectionMeter>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -107,10 +109,5 @@ public class GroundBotStateMachine : MonoBehaviour
 
                 break;
         }
-    }
-
-    public GroundBotStateMachine ReturnThisScript()
-    {
-        return this;
     }
 }

@@ -39,7 +39,6 @@ public class EnemyFieldOfView : MonoBehaviour
         enemyGrandparentTransform = gameObject.transform.parent.parent;
         flyingBot = Resources.Load<GameObject>("Sam's_Prefabs/FlyinBotFinal");
         flyingBotStateMachine = flyingBot.GetComponent<FlyingBotStateMachine>();
-        Debug.Log(enemyGrandparentTransform);
 
         //if (gameObject.transform.parent.parent != null)
         //{
@@ -65,10 +64,25 @@ public class EnemyFieldOfView : MonoBehaviour
             gameManager.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
 
-            if(gameObject.transform.parent.parent.tag == "GroundBot")
+            
+            Transform grandparentTransform = gameObject.transform.parent.parent;
+
+            GroundBotStateMachine groundBotStateMachine = grandparentTransform.GetComponent<GroundBotStateMachine>();
+            
+            EnemyFieldOfView enemyFieldOfView = gameObject.GetComponent<EnemyFieldOfView>();
+            Debug.Log(enemyFieldOfView);
+
+            if (groundBotStateMachine != null && enemyFieldOfView != null)
             {
-                groundBotHeadMovement.SetPlayerSpotted(true);
+                playerDetectionState.SetGroundBotStateMachine(groundBotStateMachine);
+                playerDetectionState.SetEnemyFieldOfView(enemyFieldOfView);
             }
+
+            if (groundBotHeadMovement != null)
+            {
+                groundBotHeadMovement.SetPlayerSpotted(true); // Assuming this method exists
+            }
+
             else if (gameObject.transform.parent.tag == "FlyingBot")
             {
                 flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
