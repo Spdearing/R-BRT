@@ -45,6 +45,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         robotIsActive = true;
         rotationAngle = 45f;
         rotationSpeed = 25f;
+        enemyFieldOfView = groundBotHead.GetComponentInChildren<EnemyFieldOfView>();
         fieldOfViewRenderer = GameObject.FindWithTag("FOV").GetComponentInChildren<Renderer>();
         groundBotHeadColor.material = lightBlue;
         fieldOfViewRenderer.material = fieldOfViewLightBlue;

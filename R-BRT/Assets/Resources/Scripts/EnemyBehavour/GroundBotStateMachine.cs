@@ -9,9 +9,10 @@ public class GroundBotStateMachine : MonoBehaviour
 
     [Header("GameObjects")]
     [SerializeField] GameObject player;
+    [SerializeField] GameObject playerCamera;
 
     [Header("Transform")]
-    [SerializeField] private Transform playerCamera;
+    [SerializeField] private Transform playerCameraTransform;
     //[SerializeField] private Transform[] patrolPoints;
 
 
@@ -38,8 +39,16 @@ public class GroundBotStateMachine : MonoBehaviour
     void Start()
     {
         //navRobot = GetComponent<NavMeshAgent>();
-        currentState = BehaviorState.patrolling;
+        
+        player = GameObject.FindWithTag("Player");
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        playerCameraTransform = playerCamera.transform;
+        gameOverScreen = GameObject.Find("Canvas").GetComponentInChildren<GameOverScreen>();
+        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponentInChildren<DetectionMeter>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        enemyFieldOfView = GetComponentInChildren<EnemyFieldOfView>(); 
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
+        currentState = BehaviorState.patrolling;
     }
 
     // Update is called once per frame
@@ -87,7 +96,7 @@ public class GroundBotStateMachine : MonoBehaviour
                 
                 
                 playerController.SetCameraLock(true);
-                playerCamera.LookAt(enemyFieldOfView.ReturnThisEnemy());
+                playerCameraTransform.LookAt(enemyFieldOfView.ReturnThisEnemy());
 
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
