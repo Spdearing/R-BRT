@@ -21,10 +21,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DetectionMeter detectionMeter;
     [SerializeField] private PlayerController playerController;
 
-   
-
-
-
     void Awake()
     {
         if (Instance == null)
