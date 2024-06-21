@@ -16,6 +16,7 @@ TagManager:
   - Death
   - FlyingBot
   - SpiderBot
+  - GroundBotSpawner
   layers:
   - Default
   - TransparentFX

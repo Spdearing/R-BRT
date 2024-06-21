@@ -4181,7 +4181,7 @@ GameObject:
   - component: {fileID: 1800587696}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: GroundBotSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4206,6 +4206,9 @@ MonoBehaviour:
   - {fileID: 241340237}
   - {fileID: 837775130}
   - {fileID: 90263074}
+  groundBotStateInstance: {fileID: 0}
+  groundBotHeadMovementInstance: {fileID: 0}
+  enemyFieldViewInstance: {fileID: 0}
 --- !u!4 &1800587697
 Transform:
   m_ObjectHideFlags: 0
