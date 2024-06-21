@@ -7,8 +7,9 @@ public class PlayerDetectionState : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] DetectionMeter detection;
-    [SerializeField] GroundBotStateMachine groundBotReference; // orginal instance of prefab script
     [SerializeField] GroundBotStateMachine groundBotStateMachine; // instantiated script
+    [SerializeField] GroundBotSpawner groundBotSpawner;
+    [SerializeField] EnemyFieldOfView enemyFieldOfView;
 
     [Header("Floats")]
     [SerializeField] private float detectionIncreaseRate;
@@ -32,12 +33,12 @@ public class PlayerDetectionState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        groundBotSpawner = GameObject.FindWithTag("GroundBotSpawner").GetComponent<GroundBotSpawner>();
         currentState = DetectionState.exploring;
         detectionIncreaseRate = 5.0f;
         detectionDecreaseRate = 25.0f;
-        groundBot = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
-        groundBotReference = groundBot.GetComponent<GroundBotStateMachine>();
-        groundBotStateMachine = groundBotReference.ReturnThisScript();
+        
+        
     }
 
     // Update is called once per frame
@@ -84,8 +85,6 @@ public class PlayerDetectionState : MonoBehaviour
 
             case DetectionState.detected:
 
-                Debug.Log("Detected");
-                Debug.Log(groundBotStateMachine);
                 groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
 
                 break;
@@ -97,5 +96,15 @@ public class PlayerDetectionState : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void SetGroundBotStateMachine(GroundBotStateMachine value)
+    {
+        this.groundBotStateMachine = value;
+    }
+
+    public void SetEnemyFieldOfView(EnemyFieldOfView value)
+    {
+        this.enemyFieldOfView = value;
     }
 }
