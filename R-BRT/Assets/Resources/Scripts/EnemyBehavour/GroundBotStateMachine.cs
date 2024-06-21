@@ -90,11 +90,9 @@ public class GroundBotStateMachine : MonoBehaviour
 
             case BehaviorState.playerCaught:
 
-               
+                Debug.Log("inside player Caught");
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
 
-                
-                
                 playerController.SetCameraLock(true);
                 playerCameraTransform.LookAt(enemyFieldOfView.ReturnThisEnemy());
 
@@ -109,5 +107,10 @@ public class GroundBotStateMachine : MonoBehaviour
 
                 break;
         }
+    }
+
+    public GroundBotStateMachine ReturnThisScript()
+    {
+        return this.GetComponent<GroundBotStateMachine>();
     }
 }

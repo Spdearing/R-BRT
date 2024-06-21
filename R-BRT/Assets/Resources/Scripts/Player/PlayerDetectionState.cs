@@ -7,11 +7,15 @@ public class PlayerDetectionState : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] DetectionMeter detection;
-    [SerializeField] GroundBotStateMachine groundBotStateMachine;
+    [SerializeField] GroundBotStateMachine groundBotReference; // orginal instance of prefab script
+    [SerializeField] GroundBotStateMachine groundBotStateMachine; // instantiated script
 
     [Header("Floats")]
     [SerializeField] private float detectionIncreaseRate;
     [SerializeField] private float detectionDecreaseRate;
+
+    [Header("GameObject")]
+    [SerializeField] GameObject groundBot;
 
 
     public DetectionState currentState;
@@ -31,6 +35,9 @@ public class PlayerDetectionState : MonoBehaviour
         currentState = DetectionState.exploring;
         detectionIncreaseRate = 5.0f;
         detectionDecreaseRate = 25.0f;
+        groundBot = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
+        groundBotReference = groundBot.GetComponent<GroundBotStateMachine>();
+        groundBotStateMachine = groundBotReference.ReturnThisScript();
     }
 
     // Update is called once per frame
@@ -56,10 +63,8 @@ public class PlayerDetectionState : MonoBehaviour
 
                 if (detection.ReturnStartingDetection() >= detection.GetDetectionMax())// checks to see if bar is full
                 {
-                    
+                    Debug.Log("Max Detection");
                     ChangeDetectionState(DetectionState.detected);// sets the capped amount, and then changes the state
-                    
-
                 }
 
                 break;
@@ -79,6 +84,7 @@ public class PlayerDetectionState : MonoBehaviour
 
             case DetectionState.detected:
 
+                Debug.Log("Detected");
                 groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
 
                 break;
