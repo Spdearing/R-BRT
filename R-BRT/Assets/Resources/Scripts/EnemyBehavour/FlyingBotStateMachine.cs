@@ -5,12 +5,9 @@ using UnityEngine.AI;
 
 public class FlyingBotStateMachine : MonoBehaviour
 {
-
-    [Header("")]
-    [SerializeField] private Transform playerCamera;
-
     [Header("GameObjects")]
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject flyingBotHead;
     [SerializeField] private GameObject fieldOfView;
 
@@ -57,9 +54,14 @@ public class FlyingBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentState = FlyingState.patrolling;
+        
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        playerCameraTransform = playerCamera.transform;
+        enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
         flyingBotHeadColor.material = lightBlue;
         fieldOfViewRenderer.material = fieldOfViewLightBlue;
+        currentState = FlyingState.patrolling;
     }
 
     // Update is called once per frame

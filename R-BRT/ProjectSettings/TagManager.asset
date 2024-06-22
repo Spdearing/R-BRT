@@ -17,6 +17,7 @@ TagManager:
   - FlyingBot
   - SpiderBot
   - GroundBotSpawner
+  - Canvas
   layers:
   - Default
   - TransparentFX
