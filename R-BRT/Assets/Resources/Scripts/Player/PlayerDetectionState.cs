@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using static FlyingBotStateMachine;
 using static GroundBotStateMachine;
+using static SpiderBotStateMachine;
 
 public class PlayerDetectionState : MonoBehaviour
 {
@@ -25,6 +28,11 @@ public class PlayerDetectionState : MonoBehaviour
     [SerializeField] private float detectionIncreaseRate;
     [SerializeField] private float detectionDecreaseRate;
 
+    [Header("Bools")]
+    [SerializeField] private bool detectedByGroundBot;
+    [SerializeField] private bool detectedByFlyingBot;
+    [SerializeField] private bool detectedBySpiderBot;
+
     public DetectionState currentState;
 
     public enum DetectionState
@@ -42,6 +50,9 @@ public class PlayerDetectionState : MonoBehaviour
         //groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
         //flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
         //spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
+        detectedByGroundBot = false;
+        detectedByFlyingBot = false;
+        detectedBySpiderBot = false;
         currentState = DetectionState.exploring;
         detectionIncreaseRate = 5.0f;
         detectionDecreaseRate = 25.0f;
@@ -93,7 +104,22 @@ public class PlayerDetectionState : MonoBehaviour
 
             case DetectionState.detected:
 
-                groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
+                if(detectedByGroundBot)
+                {
+                    groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
+                }
+
+                if(detectedByFlyingBot)
+                {
+                    flyingBotStateMachine.ChangeBehavior(FlyingState.playerCaught);
+                }
+
+                if (detectedBySpiderBot)
+                {
+                    spiderBotStateMachine.ChangeBehavior(SpiderState.playerCaught);
+                }
+
+
 
                 break;
 
@@ -134,5 +160,20 @@ public class PlayerDetectionState : MonoBehaviour
     public void SetSpiderBotFieldOfView(EnemySpiderBotFieldOfView value)
     {
         this.enemySpiderBotFieldOfView = value;
+    }
+
+    public void SetDetectedByGroundBot(bool value)
+    {
+        detectedByGroundBot = value;
+    }
+
+    public void SetDetectedByFlyingBot(bool value)
+    {
+        detectedByFlyingBot = value;
+    }
+
+    public void SetDetectedBySpiderBot(bool value)
+    {
+        detectedBySpiderBot = true;
     }
 }

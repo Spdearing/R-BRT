@@ -1,7 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
-using static FlyingBotStateMachine;
 
 public class SpiderBotStateMachine : MonoBehaviour
 {
@@ -43,9 +40,9 @@ public class SpiderBotStateMachine : MonoBehaviour
     [SerializeField] private bool isLerping = false;
 
 
-    public BehaviorState currentState;
+    public SpiderState currentState;
 
-    public enum BehaviorState
+    public enum SpiderState
     {
         patrolling,
         scanning,
@@ -63,7 +60,7 @@ public class SpiderBotStateMachine : MonoBehaviour
         playerCameraTransform = playerCamera.transform;
         spiderBotEyeColor.material = lightBlue;
         fieldOfViewRenderer.material = fieldOfViewLightBlue;
-        currentState = BehaviorState.patrolling;
+        currentState = SpiderState.patrolling;
     }
 
     // Update is called once per frame
@@ -90,7 +87,7 @@ public class SpiderBotStateMachine : MonoBehaviour
         UpdateBehavior();
     }
 
-    public void ChangeBehavior(BehaviorState newState)
+    public void ChangeBehavior(SpiderState newState)
     {
         currentState = newState;
     }
@@ -99,17 +96,17 @@ public class SpiderBotStateMachine : MonoBehaviour
     {
         switch (currentState)
         {
-            case BehaviorState.patrolling:
+            case SpiderState.patrolling:
 
                 break;
 
-            case BehaviorState.scanning:
+            case SpiderState.scanning:
 
                 playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
 
                 break;
 
-            case BehaviorState.playerCaught:
+            case SpiderState.playerCaught:
 
                 Debug.Log("inside player Caught");
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
@@ -133,7 +130,7 @@ public class SpiderBotStateMachine : MonoBehaviour
 
             default:
 
-                currentState = BehaviorState.patrolling;
+                currentState = SpiderState.patrolling;
 
                 break;
         }

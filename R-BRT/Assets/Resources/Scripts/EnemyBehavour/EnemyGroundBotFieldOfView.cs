@@ -61,6 +61,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
             if (groundBotHeadMovement != null)
             {
                 groundBotHeadMovement.SetPlayerSpotted(true); // Assuming this method exists
+                playerDetectionState.SetDetectedByGroundBot(true);
             }
         }
     }
@@ -96,6 +97,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
             if (gameObject.transform.parent.parent.tag == "GroundBot")
             {
                 groundBotHeadMovement.SetPlayerSpotted(false);
+                playerDetectionState.SetDetectedByGroundBot(false);
             }
         }
     }
