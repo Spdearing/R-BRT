@@ -25,6 +25,7 @@ public class PickUpObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gameObject.tag = "PickUpItem";
         holdPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
+        playerAnimator = GameObject.FindWithTag("Body").GetComponent<Animator>();
         holding = false;
     }
 

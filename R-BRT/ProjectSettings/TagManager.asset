@@ -21,6 +21,7 @@ TagManager:
   - GameManager
   - EnemySpawner
   - DetectionMeter
+  - Body
   layers:
   - Default
   - TransparentFX
