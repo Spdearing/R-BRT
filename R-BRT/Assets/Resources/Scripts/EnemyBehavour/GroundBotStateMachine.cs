@@ -31,7 +31,7 @@ public class GroundBotStateMachine : MonoBehaviour
     private Quaternion startRotation;
     private Quaternion endRotation;
     private float lerpTime = 0f;
-    private float lerpDuration = 2f;
+    private float lerpDuration = .25f;
 
     private bool isLerping = false;
 
