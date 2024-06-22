@@ -18,7 +18,7 @@ public class FlyingBotSpawner : MonoBehaviour
 
     [Header("References")]
     [SerializeField] FlyingBotStateMachine flyingBotStateInstance;
-    [SerializeField] EnemyFlyingBotFieldOfView enemyFlyingBotFieldViewInstance;
+    [SerializeField] EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfViewInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +42,7 @@ public class FlyingBotSpawner : MonoBehaviour
 
 
                 if (stateMachine != null) flyingBotStateInstance = stateMachine;
-                if (fieldOfView != null) enemyFlyingBotFieldViewInstance = fieldOfView;
+                if (fieldOfView != null) enemyFlyingBotFieldOfViewInstance = fieldOfView;
 
                 enemy.name = "FlyingBotGroup1";
             }
@@ -60,7 +60,7 @@ public class FlyingBotSpawner : MonoBehaviour
 
     public EnemyFlyingBotFieldOfView ReturnEnemyFieldOfViewInstance()
     {
-        return this.enemyFlyingBotFieldViewInstance;
+        return this.enemyFlyingBotFieldOfViewInstance;
     }
 }
 

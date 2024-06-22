@@ -54,10 +54,12 @@ public class FlyingBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        player = GameObject.FindWithTag("Player");
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
+        gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();   
         enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
         flyingBotHeadColor.material = lightBlue;
         fieldOfViewRenderer.material = fieldOfViewLightBlue;
