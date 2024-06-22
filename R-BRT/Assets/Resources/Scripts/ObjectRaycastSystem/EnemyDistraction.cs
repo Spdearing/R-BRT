@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyDistraction : MonoBehaviour
 {
     [Header("Floats")]
-    [SerializeField] private float expansionRate;
-    [SerializeField] private float maxRadius;
-    [SerializeField] private float initialRadius;
+    [SerializeField] private float expansionRate = 30.0f;
+    [SerializeField] private float maxRadius = 10.0f;
+    [SerializeField] private float initialRadius = 0.5f;
 
     [Header("Colliders")]
     [SerializeField] private SphereCollider sphereCollider;
@@ -26,6 +26,8 @@ public class EnemyDistraction : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private ThrowObject throwObject;
+    [SerializeField] private PickUpObject pickUpObject;
+    [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
 
     private void Start()
     {
@@ -36,9 +38,8 @@ public class EnemyDistraction : MonoBehaviour
         sphereCollider.isTrigger = true; // Ensure the collider is a trigger
         sphereCollider.radius = initialRadius;
 
-        maxRadius = 10.0f;
-        expansionRate = 30.0f;
-        initialRadius = 0.5f;
+        throwObject = GetComponent<ThrowObject>();
+        pickUpObject = GetComponent<PickUpObject>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +47,7 @@ public class EnemyDistraction : MonoBehaviour
         if (!isExpanding && throwObject.ReturnThrowStatus() == true && !other.CompareTag("Player"))
         {
             Debug.Log("Trigger entered and expanding sphere collider");
-            // Start expanding the sphere
+
             isExpanding = true;
             targetTransform = other.transform;
             StartCoroutine(ExpandSphere());
@@ -78,6 +79,12 @@ public class EnemyDistraction : MonoBehaviour
             {
                 if (IsTagDetectable(enemy.tag))
                 {
+                    if (enemy.tag == "GroundBot")
+                    {
+                        groundBotHeadMovement = enemy.gameObject.GetComponent<GroundBotHeadMovement>();
+                        groundBotHeadMovement.SetPlayerSpotted(true);
+                    }
+
                     StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 5.0f));
                 }
             }
@@ -100,6 +107,11 @@ public class EnemyDistraction : MonoBehaviour
             enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * 2.5f);
             timeElapsed += Time.deltaTime;
             yield return null;
+        }
+
+        if (groundBotHeadMovement != null)
+        {
+            groundBotHeadMovement.SetPlayerSpotted(false);
         }
     }
 
