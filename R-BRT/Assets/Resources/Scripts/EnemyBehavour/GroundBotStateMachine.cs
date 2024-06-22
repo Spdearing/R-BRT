@@ -24,7 +24,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] PlayerDetectionState playerDetectionState;
     [SerializeField] DetectionMeter detectionMeter;
     [SerializeField] PlayerController playerController;
-    [SerializeField] EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
     [SerializeField] GroundBotSpawner groundBotSpawner;
 
 
@@ -56,7 +56,7 @@ public class GroundBotStateMachine : MonoBehaviour
         gameOverScreen = GameObject.Find("Canvas").GetComponentInChildren<GameOverScreen>();
         detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponentInChildren<DetectionMeter>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        enemyFieldOfView = GetComponentInChildren<EnemyFieldOfView>(); 
+        enemyGroundBotFieldOfView = GetComponentInChildren<EnemyGroundBotFieldOfView>(); 
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         currentState = BehaviorState.patrolling;
     }
@@ -121,9 +121,9 @@ public class GroundBotStateMachine : MonoBehaviour
 
                 startRotation = playerCameraTransform.rotation;
 
-                if (enemyFieldOfView != null)
+                if (enemyGroundBotFieldOfView != null)
                 {
-                    Vector3 directionToEnemy = enemyFieldOfView.ReturnThisEnemy().position - playerCameraTransform.position;
+                    Vector3 directionToEnemy = enemyGroundBotFieldOfView.ReturnThisEnemy().position - playerCameraTransform.position;
                     endRotation = Quaternion.LookRotation(directionToEnemy);
                 }
                 lerpTime = 0f;

@@ -18,10 +18,13 @@ public class FlyingBotStateMachine : MonoBehaviour
     [SerializeField] private Renderer flyingBotHeadColor;
     [SerializeField] private Renderer fieldOfViewRenderer;
 
+    [Header("Transform")]
+    [SerializeField] private Transform playerCameraTransform;
+
 
     [Header("Scripts")]
     [SerializeField] private GameOverScreen gameOverScreen;
-    [SerializeField] private EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] private EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController playerController;
 
@@ -32,6 +35,14 @@ public class FlyingBotStateMachine : MonoBehaviour
     [SerializeField] private Material fieldOfViewLightBlue;
     [SerializeField] private Material fieldOfViewYellow;
     [SerializeField] private Material fieldOfViewRed;
+
+
+    private Quaternion startRotation;
+    private Quaternion endRotation;
+    private float lerpTime = 0f;
+    private float lerpDuration = .25f;
+
+    private bool isLerping = false;
 
 
     public FlyingState currentState;
@@ -55,6 +66,19 @@ public class FlyingBotStateMachine : MonoBehaviour
     void Update()
     {
         UpdateBehavior();
+
+        if (isLerping)
+        {
+            lerpTime += Time.deltaTime;
+            float lerpFactor = lerpTime / lerpDuration;
+            playerCameraTransform.rotation = Quaternion.Slerp(startRotation, endRotation, lerpFactor);
+
+            // Stop lerping after the duration is complete
+            if (lerpTime >= lerpDuration)
+            {
+                isLerping = false;
+            }
+        }
     }
 
 
@@ -83,13 +107,21 @@ public class FlyingBotStateMachine : MonoBehaviour
 
             case FlyingState.playerCaught:
 
-                flyingBotHeadColor.material = red;
-                fieldOfViewRenderer.material = fieldOfViewRed;
+                Debug.Log("inside player Caught");
+                gameOverScreen.ReturnGameOverPanel().SetActive(true);
 
                 playerController.SetCameraLock(true);
-                playerCamera.LookAt(transform.position);
 
-                gameOverScreen.ReturnGameOverPanel().SetActive(true);
+                startRotation = playerCameraTransform.rotation;
+
+                if (enemyFlyingBotFieldOfView != null)
+                {
+                    Vector3 directionToEnemy = enemyFlyingBotFieldOfView.ReturnThisEnemy().position - playerCameraTransform.position;
+                    endRotation = Quaternion.LookRotation(directionToEnemy);
+                }
+                lerpTime = 0f;
+                isLerping = true;
+
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
 

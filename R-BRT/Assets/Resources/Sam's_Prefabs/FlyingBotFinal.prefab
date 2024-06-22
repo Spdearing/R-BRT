@@ -705,7 +705,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4012
+  m_VersionIndex: 4015
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -831,7 +831,9 @@ MonoBehaviour:
   groundBotHeadMovement: {fileID: 0}
   flyingBotStateMachine: {fileID: 9001754857413938775}
   playerIsBeingDetected: 0
-  enemy: {fileID: 0}
+  enemy: {fileID: 2810475309709828218}
+  enemyGrandparentTransform: {fileID: 0}
+  flyingBot: {fileID: 0}
 --- !u!1001 &3153005408446029099
 PrefabInstance:
   m_ObjectHideFlags: 0

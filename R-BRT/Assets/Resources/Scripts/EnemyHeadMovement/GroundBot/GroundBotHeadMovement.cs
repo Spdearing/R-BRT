@@ -27,7 +27,7 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private Renderer fieldOfViewRenderer;
 
     [Header("Scripts")]
-    [SerializeField] private EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] private EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
     [SerializeField] private GameManager gameManager;
 
     [Header("Materials")]
@@ -45,7 +45,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         robotIsActive = true;
         rotationAngle = 45f;
         rotationSpeed = 25f;
-        enemyFieldOfView = groundBotHead.GetComponentInChildren<EnemyFieldOfView>();
+        enemyGroundBotFieldOfView = groundBotHead.GetComponentInChildren<EnemyGroundBotFieldOfView>();
         fieldOfViewRenderer = GameObject.FindWithTag("FOV").GetComponentInChildren<Renderer>();
         groundBotHeadColor.material = lightBlue;
         fieldOfViewRenderer.material = fieldOfViewLightBlue;

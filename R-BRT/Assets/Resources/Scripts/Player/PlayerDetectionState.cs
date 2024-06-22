@@ -6,18 +6,21 @@ using static GroundBotStateMachine;
 public class PlayerDetectionState : MonoBehaviour
 {
     [Header("Scripts")]
+    [SerializeField] GameManager gameManager;
     [SerializeField] DetectionMeter detection;
     [SerializeField] GroundBotStateMachine groundBotStateMachine; // instantiated script
+    [SerializeField] FlyingBotStateMachine flyingBotStateMachine; // instantiated script
+    [SerializeField] SpiderBotStateMachine spiderBotStateMachine; // instantiated script
     [SerializeField] GroundBotSpawner groundBotSpawner;
-    [SerializeField] EnemyFieldOfView enemyFieldOfView;
+    [SerializeField] FlyingBotSpawner flyingBotSpawner;
+    [SerializeField] SpiderBotSpawner spiderBotSpawner;
+    [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
+    [SerializeField] EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
+    [SerializeField] EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
 
     [Header("Floats")]
     [SerializeField] private float detectionIncreaseRate;
     [SerializeField] private float detectionDecreaseRate;
-
-    [Header("GameObject")]
-    [SerializeField] GameObject groundBot;
-
 
     public DetectionState currentState;
 
@@ -103,8 +106,28 @@ public class PlayerDetectionState : MonoBehaviour
         this.groundBotStateMachine = value;
     }
 
-    public void SetEnemyFieldOfView(EnemyFieldOfView value)
+    public void SetGroundBotFieldOfView(EnemyGroundBotFieldOfView value)
     {
-        this.enemyFieldOfView = value;
+        this.enemyGroundBotFieldOfView = value;
+    }
+
+    public void SetFlyingBotStateMachine(FlyingBotStateMachine value)
+    {
+        this.flyingBotStateMachine = value;
+    }
+
+    public void SetFlyingBotFieldOfView(EnemyFlyingBotFieldOfView value)
+    {
+        this.enemyFlyingBotFieldOfView = value;
+    }
+
+    public void SetSpiderBotStateMachine(SpiderBotStateMachine value)
+    {
+        this.spiderBotStateMachine = value;
+    }
+
+    public void SetSpiderBotFieldOfView(EnemySpiderBotFieldOfView value)
+    {
+        this.enemySpiderBotFieldOfView = value;
     }
 }
