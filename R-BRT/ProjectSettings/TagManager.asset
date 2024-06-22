@@ -20,6 +20,7 @@ TagManager:
   - Canvas
   - GameManager
   - EnemySpawner
+  - DetectionMeter
   layers:
   - Default
   - TransparentFX
