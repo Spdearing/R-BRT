@@ -36,7 +36,9 @@ public class PlayerDetectionState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        groundBotSpawner = GameObject.FindWithTag("GroundBotSpawner").GetComponent<GroundBotSpawner>();
+        groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
+        flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
+        spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
         currentState = DetectionState.exploring;
         detectionIncreaseRate = 5.0f;
         detectionDecreaseRate = 25.0f;
