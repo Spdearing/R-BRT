@@ -1,30 +1,48 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static FlyingBotStateMachine;
 
 public class SpiderBotStateMachine : MonoBehaviour
 {
-    [Header("GameObjects")]
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject playerCamera;
-
-    [Header("Scripts")]
-    [SerializeField] GameOverScreen gameOverScreen;
-    [SerializeField] PlayerDetectionState playerDetectionState;
-    [SerializeField] DetectionMeter detectionMeter;
-    [SerializeField] EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
-    [SerializeField] PlayerController playerController;
-
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
 
+    [Header("GameObjects")]
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerCamera;
 
-    private Quaternion startRotation;
-    private Quaternion endRotation;
-    private float lerpTime = 0f;
-    private float lerpDuration = .25f;
+    [Header("Scripts")]
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerDetectionState playerDetectionState;
+    [SerializeField] private GameOverScreen gameOverScreen;
+    [SerializeField] private EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
+    [SerializeField] private GameManager gameManager;
 
-    private bool isLerping = false;
+
+
+    [Header("Renderer")]
+    [SerializeField] private Renderer spiderBotEyeColor;
+    [SerializeField] private Renderer fieldOfViewRenderer;
+
+    [Header("Materials")]
+    [SerializeField] private Material lightBlue;
+    [SerializeField] private Material yellow;
+    [SerializeField] private Material red;
+    [SerializeField] private Material fieldOfViewLightBlue;
+    [SerializeField] private Material fieldOfViewYellow;
+    [SerializeField] private Material fieldOfViewRed;
+
+    [Header("Quaternions")]
+    [SerializeField] private Quaternion startRotation;
+    [SerializeField] private Quaternion endRotation;
+
+    [Header("Floats")]
+    [SerializeField] private float lerpTime = 0f;
+    [SerializeField] private float lerpDuration = .25f;
+
+    [Header("Bools")]
+    [SerializeField] private bool isLerping = false;
 
 
     public BehaviorState currentState;
@@ -40,12 +58,15 @@ public class SpiderBotStateMachine : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        playerDetectionState = GameObject.FindWithTag("Player").GetComponent<PlayerDetectionState>();
+        playerController = player.GetComponent<PlayerController>();
+        gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();
+        playerDetectionState = player.GetComponent<PlayerDetectionState>();
+        enemySpiderBotFieldOfView = GetComponentInChildren<EnemySpiderBotFieldOfView>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
-        gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();
-        enemySpiderBotFieldOfView = GetComponentInChildren<EnemySpiderBotFieldOfView>();
+        spiderBotEyeColor.material = lightBlue;
+        fieldOfViewRenderer.material = fieldOfViewLightBlue;
         currentState = BehaviorState.patrolling;
     }
 

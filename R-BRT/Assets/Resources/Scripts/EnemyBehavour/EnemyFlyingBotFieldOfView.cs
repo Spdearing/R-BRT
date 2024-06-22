@@ -13,6 +13,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private FlyingBotStateMachine flyingBotStateMachine;
+    [SerializeField] private FlyingBotSpawner flyingBotSpawner;
 
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
@@ -27,6 +28,8 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
+        flyingBotStateMachine = flyingBotSpawner.ReturnFlyingBotStateInstance();
         playerIsBeingDetected = false;
         enemyGrandparentTransform = gameObject.transform.parent.parent;
     }

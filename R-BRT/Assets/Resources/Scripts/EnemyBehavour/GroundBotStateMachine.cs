@@ -24,6 +24,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] PlayerDetectionState playerDetectionState;
     [SerializeField] PlayerController playerController;
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
+    [SerializeField] GameManager gameManager;
 
 
     private Quaternion startRotation;
@@ -46,7 +47,7 @@ public class GroundBotStateMachine : MonoBehaviour
     void Start()
     {
         //navRobot = GetComponent<NavMeshAgent>();
-        
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindWithTag("Player");
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;

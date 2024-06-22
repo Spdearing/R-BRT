@@ -18,6 +18,8 @@ TagManager:
   - SpiderBot
   - GroundBotSpawner
   - Canvas
+  - GameManager
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,7 @@ public class SpiderBotSpawner : MonoBehaviour
 
     [Header("References")]
     [SerializeField] SpiderBotStateMachine spiderBotStateInstance;
-    [SerializeField] EnemyFlyingBotFieldOfView enemyFlyingBotFieldViewInstance;
+    [SerializeField] EnemySpiderBotFieldOfView enemySpiderBotFieldOfViewInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -37,10 +37,10 @@ public class SpiderBotSpawner : MonoBehaviour
                 GameObject enemy = Instantiate(enemyPrefab, enemyGroupLocations[i].position, enemyGroupLocations[i].rotation);
                 group1[i] = enemy;
                 SpiderBotStateMachine stateMachine = enemy.GetComponent<SpiderBotStateMachine>();
-                EnemyFlyingBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyFlyingBotFieldOfView>();
+                EnemySpiderBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemySpiderBotFieldOfView>();
 
                 if (stateMachine != null) spiderBotStateInstance = stateMachine;
-                if (fieldOfView != null) enemyFlyingBotFieldViewInstance = fieldOfView;
+                if (fieldOfView != null) enemySpiderBotFieldOfViewInstance = fieldOfView;
 
                 enemy.name = "SpiderBotGroup1";
             }
@@ -51,14 +51,14 @@ public class SpiderBotSpawner : MonoBehaviour
         }
     }
 
-    public SpiderBotStateMachine ReturnGroundBotStateInstance()
+    public SpiderBotStateMachine ReturnSpiderBotStateInstance()
     {
         return this.spiderBotStateInstance;
     }
 
-    public EnemyFlyingBotFieldOfView ReturnEnemyFieldOfViewInstance()
+    public EnemySpiderBotFieldOfView ReturnEnemySpiderBotFieldOfViewInstance()
     {
-        return this.enemyFlyingBotFieldViewInstance;
+        return this.enemySpiderBotFieldOfViewInstance;
     }
 }
 
