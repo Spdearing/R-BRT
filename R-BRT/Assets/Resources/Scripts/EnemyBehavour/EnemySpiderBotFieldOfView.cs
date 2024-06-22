@@ -54,6 +54,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
             SpiderBotStateMachine spiderBotStateMachine = grandparentTransform.GetComponent<SpiderBotStateMachine>();
             
             EnemySpiderBotFieldOfView enemyFieldOfView = gameObject.GetComponent<EnemySpiderBotFieldOfView>();
+
             
 
             if (spiderBotStateMachine != null && enemyFieldOfView != null)
@@ -61,6 +62,8 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
                 playerDetectionState.SetSpiderBotStateMachine(spiderBotStateMachine);
                 playerDetectionState.SetSpiderBotFieldOfView(enemyFieldOfView);
             }
+
+            playerDetectionState.SetDetectedBySpiderBot(true);
         }
     }
 
@@ -91,6 +94,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
             playerIsBeingDetected = false;
 
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+            playerDetectionState.SetDetectedBySpiderBot(false);
         }
     }
 

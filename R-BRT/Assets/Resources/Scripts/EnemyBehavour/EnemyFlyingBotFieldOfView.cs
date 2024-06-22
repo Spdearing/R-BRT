@@ -60,6 +60,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
                 playerDetectionState.SetFlyingBotFieldOfView(enemyFieldOfView);
             }
 
+            playerDetectionState.SetDetectedByFlyingBot(true);
             flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
         }
     }
@@ -91,6 +92,8 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
             playerIsBeingDetected = false;
 
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+
+            playerDetectionState.SetDetectedByFlyingBot(false);
             
  
             if (gameObject.transform.parent.tag == "FlyingBot")
