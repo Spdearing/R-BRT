@@ -19,7 +19,7 @@ public class GroundBotSpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] GroundBotStateMachine groundBotStateInstance;
     [SerializeField] GroundBotHeadMovement groundBotHeadMovementInstance;
-    [SerializeField] EnemyFieldOfView      enemyFieldViewInstance;
+    [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldViewInstance;
     
     // Start is called before the first frame update
     void Start()
@@ -39,12 +39,12 @@ public class GroundBotSpawner : MonoBehaviour
                 group1[i] = enemy;
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
-                EnemyFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyFieldOfView>();
+                EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
 
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
-                if (fieldOfView != null) enemyFieldViewInstance = fieldOfView;
+                if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
 
                 enemy.name = "GroundBotGroup1";
             }
@@ -65,9 +65,9 @@ public class GroundBotSpawner : MonoBehaviour
         return this.groundBotHeadMovementInstance;
     }    
 
-    public EnemyFieldOfView ReturnEnemyFieldOfViewInstance() 
+    public EnemyGroundBotFieldOfView ReturnEnemyFieldOfViewInstance() 
     { 
-        return this.enemyFieldViewInstance;
+        return this.enemyGroundBotFieldViewInstance;
     }
 }
 
