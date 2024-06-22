@@ -9,7 +9,6 @@ public class SpiderBotStateMachine : MonoBehaviour
     [SerializeField] private Transform playerCameraTransform;
 
     [Header("GameObjects")]
-    [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerCamera;
 
     [Header("Scripts")]
@@ -17,7 +16,6 @@ public class SpiderBotStateMachine : MonoBehaviour
     [SerializeField] private PlayerDetectionState playerDetectionState;
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
-    [SerializeField] private GameManager gameManager;
 
 
 
@@ -57,12 +55,10 @@ public class SpiderBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        playerController = player.GetComponent<PlayerController>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();
-        playerDetectionState = player.GetComponent<PlayerDetectionState>();
         enemySpiderBotFieldOfView = GetComponentInChildren<EnemySpiderBotFieldOfView>();
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
         spiderBotEyeColor.material = lightBlue;

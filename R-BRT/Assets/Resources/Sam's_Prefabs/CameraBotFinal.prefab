@@ -336,15 +336,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815af03a23b1714469b4188ce5a1df76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCameraTransform: {fileID: 0}
   player: {fileID: 0}
   playerCamera: {fileID: 0}
-  gameOverScreen: {fileID: 0}
-  playerDetectionState: {fileID: 0}
-  detectionMeter: {fileID: 0}
-  enemySpiderBotFieldOfView: {fileID: 0}
   playerController: {fileID: 0}
+  playerDetectionState: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  enemySpiderBotFieldOfView: {fileID: 0}
   gameManager: {fileID: 0}
-  playerCameraTransform: {fileID: 0}
   spiderBotEyeColor: {fileID: 8146041121221052507}
   fieldOfViewRenderer: {fileID: 2533211617910399917}
   lightBlue: {fileID: 2100000, guid: a086cd85d6083c24ab02c5c6f8e93de4, type: 2}
@@ -353,6 +352,11 @@ MonoBehaviour:
   fieldOfViewLightBlue: {fileID: 2100000, guid: bf174fb1913b053458a82bedf2b2d071, type: 2}
   fieldOfViewYellow: {fileID: 2100000, guid: 94428ebf8d70c954f96789e10c89952d, type: 2}
   fieldOfViewRed: {fileID: 2100000, guid: 5284c31dd4c4b3947a5cf660ede19eea, type: 2}
+  startRotation: {x: 0, y: 0, z: 0, w: 0}
+  endRotation: {x: 0, y: 0, z: 0, w: 0}
+  lerpTime: 0
+  lerpDuration: 0.25
+  isLerping: 0
   currentState: 0
 --- !u!135 &5757618385227129380
 SphereCollider:

@@ -1756,7 +1756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &847784634
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4138,7 +4138,7 @@ MonoBehaviour:
   - {fileID: 1414331218}
   - {fileID: 597640127}
   flyingBotStateInstance: {fileID: 0}
-  enemyFlyingBotFieldViewInstance: {fileID: 0}
+  enemyFlyingBotFieldOfViewInstance: {fileID: 0}
 --- !u!114 &1800587699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4161,7 +4161,7 @@ MonoBehaviour:
   - {fileID: 1449404437}
   - {fileID: 1346797308}
   spiderBotStateInstance: {fileID: 0}
-  enemyFlyingBotFieldViewInstance: {fileID: 0}
+  enemySpiderBotFieldOfViewInstance: {fileID: 0}
 --- !u!1 &1828584665
 GameObject:
   m_ObjectHideFlags: 0
@@ -4628,6 +4628,10 @@ PrefabInstance:
     - target: {fileID: 8173771870081069443, guid: e1f11a64442f4b04cb159a4d7c21f17f, type: 3}
       propertyPath: m_Name
       value: EnemyDetectionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8173771870081069443, guid: e1f11a64442f4b04cb159a4d7c21f17f, type: 3}
+      propertyPath: m_TagString
+      value: DetectionMeter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
