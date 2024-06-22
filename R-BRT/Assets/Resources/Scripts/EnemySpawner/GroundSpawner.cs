@@ -7,6 +7,9 @@ using UnityEngine;
 public class GroundBotSpawner : MonoBehaviour
 {
 
+    [Header("Enemy")]
+    [SerializeField] GameObject enemyPrefab;
+
     [Header("EnemyGroups")]
     [SerializeField] GameObject[] group1 = new GameObject[3];
 
@@ -21,6 +24,7 @@ public class GroundBotSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         SpawnGroup1();
     }
 
@@ -30,7 +34,9 @@ public class GroundBotSpawner : MonoBehaviour
         {
             if (i < enemyGroupLocations.Length)
             {
-                GameObject enemy = Instantiate(group1[i], enemyGroupLocations[i].position, enemyGroupLocations[i].rotation);
+                
+                GameObject enemy = Instantiate(enemyPrefab, enemyGroupLocations[i].position, enemyGroupLocations[i].rotation);
+                group1[i] = enemy;
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyFieldOfView>();
@@ -40,7 +46,7 @@ public class GroundBotSpawner : MonoBehaviour
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyFieldViewInstance = fieldOfView;
 
-                enemy.name = "GroundBotGroup1" + i;
+                enemy.name = "GroundBotGroup1";
             }
             else
             {
