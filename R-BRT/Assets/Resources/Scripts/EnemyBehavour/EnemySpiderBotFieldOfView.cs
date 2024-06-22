@@ -13,7 +13,8 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private SpiderBotStateMachine spiderBotStateMachine;
-
+    [SerializeField] private SpiderBotSpawner spiderBotSpawner;
+ 
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
 
@@ -29,6 +30,8 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
+        spiderBotStateMachine = spiderBotSpawner.ReturnSpiderBotStateInstance();
         playerIsBeingDetected = false;
         enemyGrandparentTransform = gameObject.transform.parent;
     }

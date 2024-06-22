@@ -8,15 +8,18 @@ public class PlayerDetectionState : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] GameManager gameManager;
     [SerializeField] DetectionMeter detection;
+
     [SerializeField] GroundBotStateMachine groundBotStateMachine; // instantiated script
-    [SerializeField] FlyingBotStateMachine flyingBotStateMachine; // instantiated script
-    [SerializeField] SpiderBotStateMachine spiderBotStateMachine; // instantiated script
-    [SerializeField] GroundBotSpawner groundBotSpawner;
-    [SerializeField] FlyingBotSpawner flyingBotSpawner;
-    [SerializeField] SpiderBotSpawner spiderBotSpawner;
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
+    //[SerializeField] GroundBotSpawner groundBotSpawner;
+
+    [SerializeField] FlyingBotStateMachine flyingBotStateMachine; // instantiated script
     [SerializeField] EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
+    //[SerializeField] FlyingBotSpawner flyingBotSpawner;
+
+    [SerializeField] SpiderBotStateMachine spiderBotStateMachine; // instantiated script
     [SerializeField] EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
+    //[SerializeField] SpiderBotSpawner spiderBotSpawner;
 
     [Header("Floats")]
     [SerializeField] private float detectionIncreaseRate;
@@ -36,7 +39,9 @@ public class PlayerDetectionState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        groundBotSpawner = GameObject.FindWithTag("GroundBotSpawner").GetComponent<GroundBotSpawner>();
+        //groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
+        //flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
+        //spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
         currentState = DetectionState.exploring;
         detectionIncreaseRate = 5.0f;
         detectionDecreaseRate = 25.0f;
