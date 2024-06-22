@@ -17,9 +17,6 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
 
-    [Header("Enemy")]
-    [SerializeField] private GameObject enemy;
-
     [Header("Transform")]
     [SerializeField] private Transform enemyGrandparentTransform;
 
@@ -33,7 +30,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerIsBeingDetected = false;
-        enemyGrandparentTransform = gameObject.transform.parent.parent;
+        enemyGrandparentTransform = gameObject.transform.parent;
     }
 
     private void Update()
@@ -49,7 +46,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
             playerIsBeingDetected = true;
 
             
-            Transform grandparentTransform = gameObject.transform.parent.parent;
+            Transform grandparentTransform = gameObject.transform.parent;
 
             SpiderBotStateMachine spiderBotStateMachine = grandparentTransform.GetComponent<SpiderBotStateMachine>();
             

@@ -22,10 +22,8 @@ public class GroundBotStateMachine : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
     [SerializeField] PlayerDetectionState playerDetectionState;
-    [SerializeField] DetectionMeter detectionMeter;
     [SerializeField] PlayerController playerController;
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
-    [SerializeField] GroundBotSpawner groundBotSpawner;
 
 
     private Quaternion startRotation;
@@ -52,9 +50,7 @@ public class GroundBotStateMachine : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
-        groundBotSpawner = GameObject.FindWithTag("GroundBotSpawner").GetComponent<GroundBotSpawner>();
         gameOverScreen = GameObject.Find("Canvas").GetComponentInChildren<GameOverScreen>();
-        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponentInChildren<DetectionMeter>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         enemyGroundBotFieldOfView = GetComponentInChildren<EnemyGroundBotFieldOfView>(); 
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
