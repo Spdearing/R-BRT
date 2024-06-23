@@ -13,7 +13,7 @@ public class EnemyDistraction : MonoBehaviour
     [SerializeField] private SphereCollider sphereCollider;
 
     [Header("Bools")]
-    [SerializeField] private bool isExpanding = false;
+    [SerializeField] private bool isExpanding;
 
     [Header("Transforms")]
     [SerializeField] private Transform targetTransform;
@@ -27,6 +27,7 @@ public class EnemyDistraction : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private ThrowObject throwObject;
     [SerializeField] private PickUpObject pickUpObject;
+    [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class EnemyDistraction : MonoBehaviour
             sphereCollider = GetComponent<SphereCollider>();
         }
 
+        isExpanding = false;
         expansionRate = 30.0f;
         maxRadius = 10.0f;
         initialRadius = 0.15f;
@@ -87,12 +89,15 @@ public class EnemyDistraction : MonoBehaviour
                 if (IsTagDetectable(enemy.tag))
                 {
                     Debug.Log("Detected enemy: " + enemy.name);
+
                     if (enemy.tag == "GroundBot")
                     {
-                        GroundBotHeadMovement groundBotHeadMovement = enemy.gameObject.GetComponent<GroundBotHeadMovement>();
+                        groundBotHeadMovement = enemy.gameObject.GetComponent<GroundBotHeadMovement>();
+
                         if (groundBotHeadMovement != null)
                         {
                             groundBotHeadMovement.SetPlayerSpotted(true);
+                            targetTransform = enemy.transform;
                             StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 5.0f));
                         }
                     }
@@ -119,10 +124,13 @@ public class EnemyDistraction : MonoBehaviour
             yield return null;
         }
 
-        GroundBotHeadMovement groundBotHeadMovement = enemy.GetComponent<GroundBotHeadMovement>();
         if (groundBotHeadMovement != null)
         {
             groundBotHeadMovement.SetPlayerSpotted(false);
+        }
+        else if(groundBotHeadMovement == null)
+        {
+            Debug.Log("no groundbot script to be found");
         }
     }
 
