@@ -22,6 +22,7 @@ TagManager:
   - EnemySpawner
   - DetectionMeter
   - Body
+  - Rock
   layers:
   - Default
   - TransparentFX

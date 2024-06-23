@@ -211,16 +211,19 @@ public class PlayerController : MonoBehaviour
         if (OnSlope() && !exitingSlope)
         {
             Vector3 slopeMoveDirection = GetSlopeMoveDirection();
+
+            // Apply movement force on slopes
             rb.AddForce(slopeMoveDirection * moveSpeed * 20f, ForceMode.Force);
 
-            // Apply additional downward force to ensure player stays grounded
-            if (rb.velocity.y > 0 )
+            // Apply additional force to keep player grounded
+            if (moveDirection == Vector3.zero)
+            {
+                // Apply counter force to prevent sliding
+                rb.AddForce(-slopeMoveDirection * moveSpeed * 20f, ForceMode.Force);
+            }
+            else
             {
                 rb.AddForce(Vector3.down * 30f, ForceMode.Force);
-            }
-            else if (rb.velocity.y < 0)
-            {
-                rb.AddForce(Vector3.down * 60f, ForceMode.Force);
             }
         }
         else if (isGrounded)
@@ -269,6 +272,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.6f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+
             if (angle < maxSlopeAngle && angle != 0)
             {
                 onSlope = true;
