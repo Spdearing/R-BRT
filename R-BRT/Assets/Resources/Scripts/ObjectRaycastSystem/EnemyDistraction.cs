@@ -125,6 +125,7 @@ public class EnemyDistraction : MonoBehaviour
         direction.y = 0; // Ensure the enemy looks horizontally
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
+        // Rotate to target
         while (timeElapsed < duration)
         {
             enemy.rotation = Quaternion.Lerp(initialRotation, targetRotation, timeElapsed / duration);
@@ -134,16 +135,20 @@ public class EnemyDistraction : MonoBehaviour
 
         enemy.rotation = targetRotation; // Ensure the rotation is set to the target rotation at the end
 
+        // Wait at the target for 3 seconds
         yield return new WaitForSeconds(3.0f);
 
-        while (timeElapsed >= duration)
+        timeElapsed = 0f; // Reset timeElapsed for returning to the initial rotation
+
+        // Rotate back to initial rotation
+        while (timeElapsed < duration)
         {
             enemy.rotation = Quaternion.Lerp(targetRotation, initialRotation, timeElapsed / duration);
-            timeElapsed -= Time.deltaTime;
+            timeElapsed += Time.deltaTime;
             yield return null;
         }
 
-        enemy.rotation = initialRotation;
+        enemy.rotation = initialRotation; // Ensure the rotation is set back to the initial rotation at the end
 
         if (groundBotHeadMovement != null)
         {
@@ -154,7 +159,6 @@ public class EnemyDistraction : MonoBehaviour
             Debug.Log("No GroundBotHeadMovement script found on " + enemy.name);
         }
     }
-
 
     private void ResetExpansion()
     {
