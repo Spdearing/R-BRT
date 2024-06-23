@@ -8,6 +8,10 @@ public class Jetpack : MonoBehaviour
         public bool canUseJetpack;
         public float jetpackAcceleration = 15f;
 
+        public float delayBetweenPress = 0.25f;
+        public bool pressedFirstTime = false;
+        public float lastPressedTime;
+
         [Range(0f, 1f)]
         public float jetpackDownwardVelocity = 0.75f;
 
@@ -43,6 +47,33 @@ public class Jetpack : MonoBehaviour
             else if (Input.GetKey(KeyCode.Space)) 
             {
                 canUseJetpack = true;
+            }
+
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                if(pressedFirstTime)
+                {
+                    bool isDoubledPress = Time.time -lastPressedTime <= delayBetweenPress;
+
+                    if(isDoubledPress)
+                    {
+                        Debug.Log("See if Jetpack Activated");
+                        pressedFirstTime = false;
+                    }
+                }
+
+                else
+                {
+                    pressedFirstTime = true;
+                }
+
+                lastPressedTime = Time.time;
+            }
+
+            if(pressedFirstTime && Time.time - lastPressedTime > delayBetweenPress)
+            {
+                Debug.Log("Jetpack On");
+                pressedFirstTime = false;
             }
 
 
