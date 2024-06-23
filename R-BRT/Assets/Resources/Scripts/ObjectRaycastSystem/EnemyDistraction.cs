@@ -52,6 +52,13 @@ public class EnemyDistraction : MonoBehaviour
         {
             pickUpObject = GetComponent<PickUpObject>();
         }
+
+        if (targetTransform == null)
+        {
+            targetTransform = gameObject.GetComponent<Transform>();
+            
+
+        }
     }
 
     private void OnCollisionEnter(Collision other)
@@ -96,9 +103,8 @@ public class EnemyDistraction : MonoBehaviour
 
                         if (groundBotHeadMovement != null)
                         {
-                            groundBotHeadMovement.SetPlayerSpotted(true);
-                            targetTransform = enemy.transform;
-                            StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 5.0f));
+                            groundBotHeadMovement.SetPlayerIsDistracted(true);
+                            StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 3.0f));
                         }
                     }
                 }
@@ -113,24 +119,29 @@ public class EnemyDistraction : MonoBehaviour
     private IEnumerator EnemyLookAtForDuration(Transform enemy, Vector3 targetPosition, float duration)
     {
         float timeElapsed = 0f;
+        Quaternion initialRotation = enemy.rotation;
         Vector3 direction = (targetPosition - enemy.position).normalized;
         direction.y = 0; // Ensure the enemy looks horizontally
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
 
         while (timeElapsed < duration)
         {
-            enemy.rotation = Quaternion.Slerp(enemy.rotation, lookRotation, Time.deltaTime * 2.5f);
+            enemy.rotation = Quaternion.Lerp(initialRotation, targetRotation, timeElapsed / duration);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
+        enemy.rotation = targetRotation; // Ensure the rotation is set to the target rotation at the end
+
+        yield return new WaitForSeconds(3.0f);
+
         if (groundBotHeadMovement != null)
         {
-            groundBotHeadMovement.SetPlayerSpotted(false);
+            groundBotHeadMovement.SetPlayerIsDistracted(false);
         }
-        else if(groundBotHeadMovement == null)
+        else
         {
-            Debug.Log("no groundbot script to be found");
+            Debug.Log("No GroundBotHeadMovement script found on " + enemy.name);
         }
     }
 

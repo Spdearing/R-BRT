@@ -8,6 +8,7 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private bool playerIsSpotted;
     [SerializeField] private bool rotatingLeft;
     [SerializeField] private bool isPaused;
+    [SerializeField] private bool isDistracted;
 
     [Header("Floats")]
     [SerializeField] private float rotationAngle;
@@ -59,13 +60,13 @@ public class GroundBotHeadMovement : MonoBehaviour
     {
         if (robotIsActive && !isPaused)
         {
-            if (playerIsSpotted)
+            if (playerIsSpotted && !isDistracted)
             {
                 RotateTowardsPlayer();
                 groundBotHeadColor.material = yellow;
                 fieldOfViewRenderer.material = fieldOfViewYellow;
             }
-            else
+            else if(!isDistracted)
             {
                 Patrol();
                 groundBotHeadColor.material = lightBlue;
@@ -118,5 +119,10 @@ public class GroundBotHeadMovement : MonoBehaviour
     public void SetPlayerSpotted(bool value)
     {
         this.playerIsSpotted = value;
+    }
+
+    public void SetPlayerIsDistracted(bool value)
+    {
+        this.isDistracted = value;
     }
 }
