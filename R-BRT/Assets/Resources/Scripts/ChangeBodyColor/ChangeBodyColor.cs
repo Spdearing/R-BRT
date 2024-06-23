@@ -6,22 +6,18 @@ using UnityEngine;
 public class ChangeBodyColor : MonoBehaviour
 {
 
-    [SerializeField] private SkinnedMeshRenderer skinMeshRenderer;
-    [SerializeField] private Material[] originalMaterials;
-    [SerializeField] private Material red;
+    [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
+    [SerializeField] private SkinnedMeshRenderer skinMeshRenderer2;
+    //[SerializeField] private Material[] originalMaterials;
+    //[SerializeField] private GameObject[] bodyParts;
+    //[SerializeField] private Material red;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        skinMeshRenderer = gameObject.GetComponent<SkinnedMeshRenderer>();
-        originalMaterials[0] = skinMeshRenderer.materials[0];
-        originalMaterials[1] = skinMeshRenderer.materials[1];
-        originalMaterials[2] = skinMeshRenderer.materials[2];
-        originalMaterials[3] = skinMeshRenderer.materials[3];
-        originalMaterials[4] = skinMeshRenderer.materials[4];
-        originalMaterials[5] = skinMeshRenderer.materials[5];
-
+        skinMeshRenderer1 = GameObject.Find("LeftArm_RightArm5").GetComponent<SkinnedMeshRenderer>();
+        skinMeshRenderer2 = GameObject.Find("LeftArm_RightArm5 (Copy)").GetComponent<SkinnedMeshRenderer>();
     }
 
     // Update is called once per frame
@@ -32,23 +28,15 @@ public class ChangeBodyColor : MonoBehaviour
 
     public void ChangeColors()
     {
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            skinMeshRenderer.materials[0] = red;
-            skinMeshRenderer.materials[1] = red;
-            skinMeshRenderer.materials[2] = red;
-            skinMeshRenderer.materials[3] = red;
-            skinMeshRenderer.materials[4] = red;
-            skinMeshRenderer.materials[5] = red;
+            skinMeshRenderer1.enabled = false;
+            skinMeshRenderer2.enabled = true;
         }
-        else if (Input.GetKeyDown(KeyCode.F))
+        else if (Input.GetKeyUp(KeyCode.F))
         {
-            skinMeshRenderer.materials[0] = originalMaterials[0];
-            skinMeshRenderer.materials[1] = originalMaterials[1];
-            skinMeshRenderer.materials[2] = originalMaterials[2];
-            skinMeshRenderer.materials[3] = originalMaterials[3];
-            skinMeshRenderer.materials[4] = originalMaterials[4];
-            skinMeshRenderer.materials[5] = originalMaterials[5];
+            skinMeshRenderer1.enabled = true;
+            skinMeshRenderer2.enabled = false;
         }
     }
 }
