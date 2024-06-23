@@ -22,7 +22,7 @@ public class PickUpObject : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = gameObject.GetComponent<Rigidbody>();
         gameObject.tag = "PickUpItem";
         holdPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
         playerAnimator = GameObject.FindWithTag("Body").GetComponent<Animator>();
