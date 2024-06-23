@@ -33,7 +33,7 @@ public class EnemyDistraction : MonoBehaviour
     {
         if (sphereCollider == null)
         {
-            sphereCollider = GetComponent<SphereCollider>();
+            sphereCollider = gameObject.GetComponent<SphereCollider>();
         }
 
         isExpanding = false;

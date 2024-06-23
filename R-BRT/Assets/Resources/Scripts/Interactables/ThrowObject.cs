@@ -27,6 +27,7 @@ public class ThrowObject : MonoBehaviour
         shootForce = 10.0f;
         upwardForce = 5.0f;
         pickUpObject = GetComponent<PickUpObject>();
+        playerAnimator = GameObject.FindWithTag("Body").GetComponent<Animator>();
     }
 
 
