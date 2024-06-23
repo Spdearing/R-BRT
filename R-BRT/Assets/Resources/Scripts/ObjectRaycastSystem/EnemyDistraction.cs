@@ -107,6 +107,7 @@ public class EnemyDistraction : MonoBehaviour
                             StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 3.0f));
                         }
                     }
+                    StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 3.0f));
                 }
             }
 
@@ -135,6 +136,15 @@ public class EnemyDistraction : MonoBehaviour
 
         yield return new WaitForSeconds(3.0f);
 
+        while (timeElapsed >= duration)
+        {
+            enemy.rotation = Quaternion.Lerp(targetRotation, initialRotation, timeElapsed / duration);
+            timeElapsed -= Time.deltaTime;
+            yield return null;
+        }
+
+        enemy.rotation = initialRotation;
+
         if (groundBotHeadMovement != null)
         {
             groundBotHeadMovement.SetPlayerIsDistracted(false);
@@ -144,6 +154,7 @@ public class EnemyDistraction : MonoBehaviour
             Debug.Log("No GroundBotHeadMovement script found on " + enemy.name);
         }
     }
+
 
     private void ResetExpansion()
     {
