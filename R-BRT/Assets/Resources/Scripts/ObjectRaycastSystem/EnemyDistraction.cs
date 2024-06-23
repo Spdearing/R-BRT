@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyDistraction : MonoBehaviour
 {
     [Header("Floats")]
-    [SerializeField] private float expansionRate = 30.0f;
-    [SerializeField] private float maxRadius = 10.0f;
-    [SerializeField] private float initialRadius = 0.5f;
+    [SerializeField] private float expansionRate;
+    [SerializeField] private float maxRadius;
+    [SerializeField] private float initialRadius;
 
     [Header("Colliders")]
     [SerializeField] private SphereCollider sphereCollider;
@@ -27,7 +27,6 @@ public class EnemyDistraction : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private ThrowObject throwObject;
     [SerializeField] private PickUpObject pickUpObject;
-    [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
 
     private void Start()
     {
@@ -35,21 +34,29 @@ public class EnemyDistraction : MonoBehaviour
         {
             sphereCollider = GetComponent<SphereCollider>();
         }
+
+        expansionRate = 30.0f;
+        maxRadius = 10.0f;
+        initialRadius = 0.15f;
         sphereCollider.isTrigger = true; // Ensure the collider is a trigger
         sphereCollider.radius = initialRadius;
 
-        throwObject = GetComponent<ThrowObject>();
-        pickUpObject = GetComponent<PickUpObject>();
+        if (throwObject == null)
+        {
+            throwObject = GetComponent<ThrowObject>();
+        }
+
+        if (pickUpObject == null)
+        {
+            pickUpObject = GetComponent<PickUpObject>();
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (!isExpanding && throwObject.ReturnThrowStatus() == true && !other.CompareTag("Player"))
+        if (!isExpanding && throwObject.ReturnThrowStatus() && !other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Trigger entered and expanding sphere collider");
-
             isExpanding = true;
-            targetTransform = other.transform;
             StartCoroutine(ExpandSphere());
         }
     }
@@ -79,13 +86,16 @@ public class EnemyDistraction : MonoBehaviour
             {
                 if (IsTagDetectable(enemy.tag))
                 {
+                    Debug.Log("Detected enemy: " + enemy.name);
                     if (enemy.tag == "GroundBot")
                     {
-                        groundBotHeadMovement = enemy.gameObject.GetComponent<GroundBotHeadMovement>();
-                        groundBotHeadMovement.SetPlayerSpotted(true);
+                        GroundBotHeadMovement groundBotHeadMovement = enemy.gameObject.GetComponent<GroundBotHeadMovement>();
+                        if (groundBotHeadMovement != null)
+                        {
+                            groundBotHeadMovement.SetPlayerSpotted(true);
+                            StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 5.0f));
+                        }
                     }
-
-                    StartCoroutine(EnemyLookAtForDuration(enemy.transform, targetTransform.position, 5.0f));
                 }
             }
 
@@ -109,6 +119,7 @@ public class EnemyDistraction : MonoBehaviour
             yield return null;
         }
 
+        GroundBotHeadMovement groundBotHeadMovement = enemy.GetComponent<GroundBotHeadMovement>();
         if (groundBotHeadMovement != null)
         {
             groundBotHeadMovement.SetPlayerSpotted(false);
