@@ -4596,6 +4596,22 @@ PrefabInstance:
       propertyPath: holdPosition
       value: 
       objectReference: {fileID: 1002316532}
+    - target: {fileID: 3644127050545816337, guid: 848e81e6bd8fd124cb6a3dd46b1a7203, type: 3}
+      propertyPath: enemyTags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3644127050545816337, guid: 848e81e6bd8fd124cb6a3dd46b1a7203, type: 3}
+      propertyPath: enemyTags.Array.data[0]
+      value: GroundBot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3644127050545816337, guid: 848e81e6bd8fd124cb6a3dd46b1a7203, type: 3}
+      propertyPath: enemyTags.Array.data[1]
+      value: FlyingBot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3644127050545816337, guid: 848e81e6bd8fd124cb6a3dd46b1a7203, type: 3}
+      propertyPath: enemyTags.Array.data[2]
+      value: SpiderBot
+      objectReference: {fileID: 0}
     - target: {fileID: 5611155476215349757, guid: 848e81e6bd8fd124cb6a3dd46b1a7203, type: 3}
       propertyPath: playerAnimator
       value: 
@@ -4603,6 +4619,10 @@ PrefabInstance:
     - target: {fileID: 8444829814019913431, guid: 848e81e6bd8fd124cb6a3dd46b1a7203, type: 3}
       propertyPath: m_Name
       value: Rock_Medium
+      objectReference: {fileID: 0}
+    - target: {fileID: 8444829814019913431, guid: 848e81e6bd8fd124cb6a3dd46b1a7203, type: 3}
+      propertyPath: m_TagString
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 9113560880346868845, guid: 848e81e6bd8fd124cb6a3dd46b1a7203, type: 3}
       propertyPath: m_LocalPosition.x
