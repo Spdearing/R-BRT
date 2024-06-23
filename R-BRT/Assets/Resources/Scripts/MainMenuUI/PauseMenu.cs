@@ -17,6 +17,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject screenPrompt;
     [SerializeField] bool isPaused;
 
+    [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject objectivePanel;
     [SerializeField] GameObject itemsPanel;
     [SerializeField] GameObject pauseMenuPanel;
@@ -30,6 +31,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         panels.Add("PauseMenuPanel", pauseMenuPanel);
+        panels.Add("OptionsPanel", optionsPanel);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
@@ -97,6 +99,11 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
+    public void SwitchToHelpPanel()
+    {
+        SwitchPanel("OptionsPanel");
+    }
+
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
