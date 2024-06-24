@@ -13,14 +13,9 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject crosshair;
-    [SerializeField] GameObject screenPrompt;
     [SerializeField] bool isPaused;
-
     [SerializeField] GameObject optionsPanel;
-    [SerializeField] GameObject objectivePanel;
-    [SerializeField] GameObject itemsPanel;
-    [SerializeField] GameObject pauseMenuPanel;
+
 
     private GameManager gameManager;
 
@@ -29,8 +24,9 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pauseMenu = GameObject.FindWithTag("PauseMenu");
         pauseMenu.SetActive(false);
-        panels.Add("PauseMenuPanel", pauseMenuPanel);
+        panels.Add("PauseMenuPanel", pauseMenu);
         panels.Add("OptionsPanel", optionsPanel);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
@@ -54,8 +50,6 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
-        crosshair.SetActive(false);
-        screenPrompt.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
         EnableCursor();
@@ -64,8 +58,6 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        crosshair.SetActive(true);
-        screenPrompt.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
         DisableCursor();
@@ -99,7 +91,7 @@ public class PauseMenu : MonoBehaviour
             }
         }
     }
-    public void SwitchToHelpPanel()
+    public void SwitchToOptionsPanel()
     {
         SwitchPanel("OptionsPanel");
     }
@@ -107,7 +99,7 @@ public class PauseMenu : MonoBehaviour
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     public void BackToMainPanel()
