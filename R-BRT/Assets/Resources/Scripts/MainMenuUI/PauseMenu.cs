@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-// Assignment/Lab/Project: Portal
+// Assignment/Lab/Project: R-BRT
 // Name: Nasim Issa
 // Section: SGD285.4171
 // Instructor: Aurore Locklear
