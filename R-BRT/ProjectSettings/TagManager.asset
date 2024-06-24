@@ -23,6 +23,8 @@ TagManager:
   - DetectionMeter
   - Body
   - Rock
+  - PhoenixChipMenu
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

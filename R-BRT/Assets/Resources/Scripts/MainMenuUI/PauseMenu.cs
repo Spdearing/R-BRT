@@ -106,4 +106,9 @@ public class PauseMenu : MonoBehaviour
     {
         SwitchPanel("PauseMenuPanel");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
