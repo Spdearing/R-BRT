@@ -446,6 +446,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Invisibility Over (decrement)");
                 startingInvisible = 0;
                 invisibilityAvailable = true;
+                usingInvisibility = false;
                 invisibilityMeterFillingBackUp = true;
                 gameObject.tag = "Player";
             }
