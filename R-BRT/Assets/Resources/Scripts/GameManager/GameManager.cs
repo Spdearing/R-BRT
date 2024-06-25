@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>(); 
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>(); 
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
