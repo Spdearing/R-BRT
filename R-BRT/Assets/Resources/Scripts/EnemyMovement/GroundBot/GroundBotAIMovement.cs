@@ -10,7 +10,7 @@ public class GroundBotAIMovement : MonoBehaviour
     [SerializeField] private NavMeshAgent groundBotAI;
 
     [Header("Transform")]
-    [SerializeField] static private Transform[] patrolPoints1;
+    [SerializeField] private Transform[] patrolPoints1;
 
     [Header("Int")]
     [SerializeField] private int currentWaypointIndex;
@@ -20,19 +20,23 @@ public class GroundBotAIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //groundBotAI = gameObject.GetComponent<NavMeshAgent>();
+        groundBotAI = GetComponent<NavMeshAgent>();
+        if (groundBotAI != null)
+        {
+            groundBotAI = GetComponent<NavMeshAgent>();
+        }
+        else if(groundBotAI == null)
+        {
+            Debug.Log("There is no AI");
+        }
+
+            
         patrolPoints1 = new Transform[4];   
         patrolPoints1[0] = GameObject.FindWithTag("PatrolPoint1").transform;
         patrolPoints1[1] = GameObject.FindWithTag("PatrolPoint2").transform;
         patrolPoints1[2] = GameObject.FindWithTag("PatrolPoint3").transform;
         patrolPoints1[3] = GameObject.FindWithTag("PatrolPoint4").transform;
        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Patrolling()
