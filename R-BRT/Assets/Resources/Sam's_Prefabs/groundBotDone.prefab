@@ -1043,6 +1043,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   enemyGroundBotFieldOfView: {fileID: 0}
   gameManager: {fileID: 0}
+  groundBotAIMovement: {fileID: 0}
   currentState: 0
 --- !u!114 &697343153668334853
 MonoBehaviour:
@@ -1083,7 +1084,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8647359997036380771}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 533ed02661809534ba90297acdead5c9, type: 3}
   m_Name: 

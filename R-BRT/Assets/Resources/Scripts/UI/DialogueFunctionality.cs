@@ -6,6 +6,7 @@ public class DialogueFunctionality : MonoBehaviour
 {
     [SerializeField] private Text uiText;
     [SerializeField] private string fullText;
+    [SerializeField] private string fullText2;
     [SerializeField] private float delay;
 
     [SerializeField] private string currentText = "";
