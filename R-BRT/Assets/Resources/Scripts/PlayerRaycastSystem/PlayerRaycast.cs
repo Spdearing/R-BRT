@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEditor.PackageManager;
 
 public class PlayerRaycast : MonoBehaviour
 {
 
     [Header("Game Objects")]
-    [SerializeField] GameObject lastHitObject;
-    [SerializeField] GameObject heldObject;
-    [SerializeField] GameObject heldPosition;
+    [SerializeField] private GameObject lastHitObject;
+    [SerializeField] private GameObject heldObject;
+    [SerializeField] private GameObject heldPosition;
 
     [Header("Floats")]
     [SerializeField] private float interactDistance;
@@ -18,17 +19,18 @@ public class PlayerRaycast : MonoBehaviour
     [SerializeField] private float pickUpTime;
 
     [Header("Bool")]
-    [SerializeField] bool holding;
+    [SerializeField] private bool holding;
 
     [Header("Transform")]
-    [SerializeField] Transform holdingPosition;
+    [SerializeField] private Transform holdingPosition;
 
     [Header("Scripts")]
-    [SerializeField] PickUpObject pickUpObject;
-    [SerializeField] UIController uI;
+    [SerializeField] private PickUpObject pickUpObject;
+    [SerializeField] private UIController uI;
+    [SerializeField] private Battery battery;
 
     [Header("UI Elements")]
-    [SerializeField] TMP_Text interactableText;
+    [SerializeField] private TMP_Text interactableText;
 
     void Start()
     {
@@ -37,11 +39,13 @@ public class PlayerRaycast : MonoBehaviour
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;
         holding = false;
-        interactableText = GameObject.Find("InteractableText").GetComponent<TMP_Text>();
+        interactableText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
         pickUpObject = GameObject.Find("Rocks").GetComponent<PickUpObject>();
         holdingPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
         heldPosition = GameObject.Find("HoldPosition");
         uI = GameObject.Find("Canvas").GetComponent<UIController>();
+        //battery = GameObject.FindWithTag("Battery").GetComponent<Battery>();
+
 
     }
 
@@ -52,7 +56,7 @@ public class PlayerRaycast : MonoBehaviour
 
         RaycastHit hitInfo;
 
-       
+
         if (Physics.Raycast(ray, out hitInfo))
         {
             string objectHit = hitInfo.collider.gameObject.tag;
@@ -61,7 +65,7 @@ public class PlayerRaycast : MonoBehaviour
 
             if (hitInfo.distance < interactDistance)
             {
-               
+                Debug.Log(hitInfo.collider.tag);
 
                 if (hitInfo.collider.tag == "PickUpItem")
                 {
@@ -86,26 +90,34 @@ public class PlayerRaycast : MonoBehaviour
                     }
 
                 }
-            }
 
+                if (hitInfo.collider.tag == "Battery")
+                {
+                    interactableText.text = "Press (E) to pick up the Battery";
 
-            else
-            {
-                interactableText.text = " ";
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        battery.OpenAbilitiesSelection();
+                    }
 
-            }
-
-            pickUpTime += Time.deltaTime;
-
-            if (Input.GetKeyDown(KeyCode.E) && holding && pickUpTime >= pickUpCooldown)
-            {
-                holding = false;
-                heldObject.GetComponent<PickUpObject>().PutDown();
-                heldObject = null;
+                }
             }
         }
-    }
 
+        else
+        {
+            interactableText.text = " ";
+        }
+
+        pickUpTime += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.E) && holding && pickUpTime >= pickUpCooldown)
+        {
+            holding = false;
+            heldObject.GetComponent<PickUpObject>().PutDown();
+            heldObject = null;
+        }
+    }
 
     //bool ContainsTag(string tag)
     //{

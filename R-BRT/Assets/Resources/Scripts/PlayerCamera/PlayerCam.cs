@@ -3,19 +3,24 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
-    public float sensX;
-    public float sensY;
+    [Header("Floats")]
+    [SerializeField] private float sensX;
+    [SerializeField] private float sensY;
+    [SerializeField] private float xRotation;
+    [SerializeField] private float yRotation;
 
-    public Transform orientation;
+    [Header("Transform")]
+    [SerializeField] private Transform orientation;
 
-    public PlayerController playerCharacterController;
+    [Header("Scripts")]
+    [SerializeField] private PlayerController playerController;
 
-    float xRotation;
-    float yRotation;
+    
 
     // Start is called before the first frame update
     private void Start()
     {
+        playerController = transform.parent.parent.GetComponent<PlayerController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -23,7 +28,7 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(!playerCharacterController.isCameraLocked)
+        if(!playerController.isCameraLocked)
         {
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;

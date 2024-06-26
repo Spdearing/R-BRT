@@ -29,6 +29,12 @@ TagManager:
   - PatrolPoint2
   - PatrolPoint3
   - PatrolPoint4
+  - InteractableText
+  - AbilitySelectionPanel
+  - JetPackButton
+  - StealthButton
+  - FuelMeter
+  - InvisibilityMeter
   layers:
   - Default
   - TransparentFX

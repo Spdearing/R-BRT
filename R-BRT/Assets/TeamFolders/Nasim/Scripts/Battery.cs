@@ -2,60 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Battery : MonoBehaviour
 {
 
     [Header("Game Objects")]
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject interactableText;
     [SerializeField] private GameObject abilitySelectionPanel;
-    [SerializeField] private GameObject jetpackButton;
-    [SerializeField] private GameObject stealthButton;
     [SerializeField] private GameObject battery;
+    [SerializeField] private GameObject fuelMeter;
+
+    [Header("Buttons")]
+    [SerializeField] private Button jetpackButton;
+    [SerializeField] private Button stealthButton;
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Jetpack jetPack;
 
-    [SerializeField] private GameObject fuelMeter;
-    [SerializeField] private GameObject invisibleMeter;
+    [Header("TMP_Text")]
+    [SerializeField] private TMP_Text interactableText;
+
+
+
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    { 
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        interactableText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
+        abilitySelectionPanel = GameObject.FindWithTag("AbilitySelectionPanel");
+        jetpackButton = GameObject.FindWithTag("JetPackButton").GetComponent <Button>();
+        stealthButton = GameObject.FindWithTag("StealthButton").GetComponent<Button>();
+        battery = GameObject.FindWithTag("Battery");
+        fuelMeter = GameObject.FindWithTag("FuelMeter");
         gameObject.tag = "Battery";
         abilitySelectionPanel.SetActive(false);
         fuelMeter.SetActive(false);
-        //invisibleMeter.SetActive(false);
         jetPack = GameObject.Find("Player").GetComponent<Jetpack>();
-        
     }
 
-
-    private void OnTriggerEnter(Collider col)
+    public void OpenAbilitiesSelection()
     {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            Time.timeScale = 0;
-            abilitySelectionPanel.SetActive(true);
-            interactableText.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
+        Time.timeScale = 0;
+        abilitySelectionPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
+
+
 
     public void OnClickJetpackButton()
     {
-        
         jetPack.enabled = true;
-        
         fuelMeter.SetActive(true);
         abilitySelectionPanel.SetActive(false);
-        interactableText.SetActive(false);
-
-        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
@@ -67,8 +68,6 @@ public class Battery : MonoBehaviour
         playerController.SetInvisibilityUnlock(true);
         playerController.DisplayInvisibilityMeter();
         abilitySelectionPanel.SetActive(false);
-        interactableText.SetActive(false);
-        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Time.timeScale = 1;
