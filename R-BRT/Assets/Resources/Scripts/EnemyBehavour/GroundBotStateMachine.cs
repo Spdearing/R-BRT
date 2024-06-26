@@ -4,20 +4,13 @@ using UnityEngine.AI;
 
 public class GroundBotStateMachine : MonoBehaviour
 {
-    [Header("Nav Mesh")]
-    //[SerializeField] private NavMeshAgent navRobot;
-
     [Header("GameObjects")]
     [SerializeField] GameObject player;
     [SerializeField] GameObject playerCamera;
 
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
-    //[SerializeField] private Transform[] patrolPoints;
 
-
-    [Header("Int")]
-    //[SerializeField] private int currentWaypointIndex;
 
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
@@ -25,6 +18,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
     [SerializeField] GameManager gameManager;
+    [SerializeField] GroundBotAIMovement groundBotAIMovement;
 
 
     private Quaternion startRotation;
@@ -46,7 +40,7 @@ public class GroundBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //navRobot = GetComponent<NavMeshAgent>();
+        groundBotAIMovement = GetComponent<GroundBotAIMovement>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindWithTag("Player");
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -62,7 +56,6 @@ public class GroundBotStateMachine : MonoBehaviour
     void Update()
     {
         UpdateBehavior();
-
 
         if (isLerping)
         {
@@ -94,12 +87,7 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviorState.patrolling:
 
-                //if (navRobot.remainingDistance < 0.1f)
-                //{
-                //    currentWaypointIndex = UnityEngine.Random.Range(0,patrolPoints.Length); 
-
-                //    navRobot.SetDestination(patrolPoints[currentWaypointIndex].position);
-                //}
+                groundBotAIMovement.Patrolling();
 
                 break;
 

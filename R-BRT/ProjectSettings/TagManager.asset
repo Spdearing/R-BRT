@@ -25,6 +25,10 @@ TagManager:
   - Rock
   - PhoenixChipMenu
   - PauseMenu
+  - PatrolPoint1
+  - PatrolPoint2
+  - PatrolPoint3
+  - PatrolPoint4
   layers:
   - Default
   - TransparentFX

@@ -1756,7 +1756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &847784634
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4097,13 +4097,18 @@ MonoBehaviour:
   - {fileID: 8647359997036380771, guid: b63bf0264648bf549bbd2aa208213058, type: 3}
   - {fileID: 8647359997036380771, guid: b63bf0264648bf549bbd2aa208213058, type: 3}
   - {fileID: 8647359997036380771, guid: b63bf0264648bf549bbd2aa208213058, type: 3}
-  enemyGroupLocations:
-  - {fileID: 241340237}
-  - {fileID: 837775130}
-  - {fileID: 90263074}
+  group2: []
+  group3: []
+  group4: []
+  enemyGroupLocations1: []
+  enemyGroupLocations2: []
+  enemyGroupLocations3: []
+  enemyGroupLocations4: []
   groundBotStateInstance: {fileID: 0}
   groundBotHeadMovementInstance: {fileID: 0}
   enemyGroundBotFieldViewInstance: {fileID: 0}
+  groundBotAIMovementInstance: {fileID: 0}
+  groundBotAI: {fileID: 0}
 --- !u!4 &1800587697
 Transform:
   m_ObjectHideFlags: 0

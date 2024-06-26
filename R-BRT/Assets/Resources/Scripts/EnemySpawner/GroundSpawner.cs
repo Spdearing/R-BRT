@@ -27,6 +27,7 @@ public class GroundBotSpawner : MonoBehaviour
     [SerializeField] GroundBotStateMachine groundBotStateInstance;
     [SerializeField] GroundBotHeadMovement groundBotHeadMovementInstance;
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldViewInstance;
+    [SerializeField] GroundBotAIMovement groundBotAIMovementInstance;
 
     [Header("Nav Mesh Agent")]
     [SerializeField] private NavMeshAgent groundBotAI;
@@ -56,11 +57,13 @@ public class GroundBotSpawner : MonoBehaviour
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
+                
 
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
+                
 
                 enemy.name = "GroundBotGroup1";
             }
@@ -83,11 +86,15 @@ public class GroundBotSpawner : MonoBehaviour
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
+                GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
+                NavMeshAgent navMeshAgent = enemy.GetComponent<NavMeshAgent>();
 
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
+                if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
+                if (navMeshAgent != null) groundBotAI = navMeshAgent;
 
                 enemy.name = "GroundBotGroup2";
             }
@@ -109,11 +116,13 @@ public class GroundBotSpawner : MonoBehaviour
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
+                
 
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
+                
 
                 enemy.name = "GroundBotGroup3";
             }
@@ -134,11 +143,16 @@ public class GroundBotSpawner : MonoBehaviour
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
+                GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
+                NavMeshAgent navMeshAgent = enemy.GetComponent<NavMeshAgent>();
+
 
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
+                if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
+                if (navMeshAgent != null) groundBotAI = navMeshAgent;
 
                 enemy.name = "GroundBotGroup4";
             }
