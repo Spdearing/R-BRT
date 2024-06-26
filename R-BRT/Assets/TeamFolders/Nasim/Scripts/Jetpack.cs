@@ -38,8 +38,8 @@ public class Jetpack : MonoBehaviour
 
         pressedFirstTime = false;
         playerCharacterController = GetComponent<PlayerController>();
-        fuelMeter = GameObject.FindWithTag("Canvas").GetComponentInChildren<Slider>();
-        tr = GetComponent<TrailRenderer>();
+        //fuelMeter = GameObject.Find("Fuel Meter").GetComponent<Slider>();
+        tr = gameObject.GetComponent<TrailRenderer>();
 
         currentFillRatio = 1f;
         tr.emitting = false;

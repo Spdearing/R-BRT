@@ -18,7 +18,6 @@ public class Battery : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private Jetpack jetPack;
 
     [Header("TMP_Text")]
     [SerializeField] private TMP_Text interactableText;
@@ -30,16 +29,14 @@ public class Battery : MonoBehaviour
     void Start()
     { 
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        interactableText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
-        abilitySelectionPanel = GameObject.FindWithTag("AbilitySelectionPanel");
-        jetpackButton = GameObject.FindWithTag("JetPackButton").GetComponent <Button>();
-        stealthButton = GameObject.FindWithTag("StealthButton").GetComponent<Button>();
         battery = GameObject.FindWithTag("Battery");
         fuelMeter = GameObject.FindWithTag("FuelMeter");
         gameObject.tag = "Battery";
-        abilitySelectionPanel.SetActive(false);
         fuelMeter.SetActive(false);
-        jetPack = GameObject.Find("Player").GetComponent<Jetpack>();
+        abilitySelectionPanel.SetActive(false);
+        //playerController.TurnJetPackoff();
+        
+        
     }
 
     public void OpenAbilitiesSelection()
@@ -54,7 +51,7 @@ public class Battery : MonoBehaviour
 
     public void OnClickJetpackButton()
     {
-        jetPack.enabled = true;
+        //playerController.TurnJetPackOn();
         fuelMeter.SetActive(true);
         abilitySelectionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
