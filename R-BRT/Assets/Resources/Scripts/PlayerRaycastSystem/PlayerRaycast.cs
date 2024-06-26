@@ -39,7 +39,7 @@ public class PlayerRaycast : MonoBehaviour
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;
         holding = false;
-        interactableText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
+        interactableText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
         pickUpObject = GameObject.Find("Rocks").GetComponent<PickUpObject>();
         holdingPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
         heldPosition = GameObject.Find("HoldPosition");

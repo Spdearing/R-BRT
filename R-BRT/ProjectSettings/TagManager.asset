@@ -35,6 +35,7 @@ TagManager:
   - StealthButton
   - FuelMeter
   - InvisibilityMeter
+  - InteractableUIText
   layers:
   - Default
   - TransparentFX

@@ -82,6 +82,9 @@ public class PlayerController : MonoBehaviour
     [Header("Animator")]
     [SerializeField] private Animator playerAnimator;
 
+    [Header("Scripts")]
+    [SerializeField] private Jetpack jetPack;
+
     public enum MovementState
     {
         walking,
@@ -98,18 +101,6 @@ public class PlayerController : MonoBehaviour
 
         groundDrag = 5.0f;
 
-        usingInvisibility = false;
-        invisibilityAvailable = true;
-        jetPackUnlocked = false;
-        invisibilityUnlocked = false;
-        readyToJump = true;
-        gravity = -1.0f;
-
-        maxInvisible = 7.5f;
-        invisibleIncrement = .25f;
-        startingInvisible = 7.5f;
-        invisibilityMeterFillingBackUp = false;
-
         if (playerCollider == null)
         {
             playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
@@ -125,6 +116,23 @@ public class PlayerController : MonoBehaviour
             playerAnimator = GameObject.Find("R-BRT-UI-Done").GetComponent<Animator>();
         }
 
+        jetPack = gameObject.GetComponent<Jetpack>();
+
+        usingInvisibility = false;
+        invisibilityAvailable = true;
+        jetPackUnlocked = false;
+        invisibilityUnlocked = false;
+        readyToJump = true;
+        gravity = -1.0f;
+
+        maxInvisible = 7.5f;
+        invisibleIncrement = .25f;
+        startingInvisible = 7.5f;
+        invisibilityMeterFillingBackUp = false;
+
+        
+        
+
         if (playerCollider != null)
         {
             originalHeight = playerCollider.height;
@@ -136,7 +144,10 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CapsuleCollider not assigned!");
         }
 
+        
+
         HideInvisibilityMeter();
+        Debug.Log("invis bar should be gone");
     }
 
     private void Update()
@@ -527,6 +538,15 @@ public class PlayerController : MonoBehaviour
     public void SetJetPackUnlock(bool value)
     {
         jetPackUnlocked = value;
+    }
+
+    public void TurnJetPackOn()
+    {
+        jetPack.enabled = true;    
+    }
+    public void TurnJetPackoff()
+    {
+        jetPack.enabled = false;
     }
 
     public GameObject ReturnThisPlayer()
