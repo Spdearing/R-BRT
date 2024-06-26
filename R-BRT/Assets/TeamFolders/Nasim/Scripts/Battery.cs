@@ -34,7 +34,7 @@ public class Battery : MonoBehaviour
         gameObject.tag = "Battery";
         fuelMeter.SetActive(false);
         abilitySelectionPanel.SetActive(false);
-        //playerController.TurnJetPackoff();
+        
         
         
     }
@@ -51,7 +51,7 @@ public class Battery : MonoBehaviour
 
     public void OnClickJetpackButton()
     {
-        //playerController.TurnJetPackOn();
+        playerController.SetJetPackUnlock(true);
         fuelMeter.SetActive(true);
         abilitySelectionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;

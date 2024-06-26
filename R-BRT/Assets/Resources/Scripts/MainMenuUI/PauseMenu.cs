@@ -12,12 +12,18 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
-    [SerializeField] bool isPaused;
-    [SerializeField] GameObject optionsPanel;
 
+    [Header("Game Objects")]
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private GameObject fuelMeter;
+    [SerializeField] private GameObject invisbilityMeter;
 
-    private GameManager gameManager;
+    [Header("Bools")]
+    [SerializeField] private bool isPaused;
+
+    [Header("GameManager")]
+    [SerializeField] private GameManager gameManager;
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
 
