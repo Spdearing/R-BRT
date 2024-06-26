@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
         }
 
         jetPack = gameObject.GetComponent<Jetpack>();
+        
 
         usingInvisibility = false;
         invisibilityAvailable = true;
@@ -162,6 +163,11 @@ public class PlayerController : MonoBehaviour
         HandleInvisibility();
         InvisibilityMeter();
         InvisibilityMeterFillingBackUp();
+
+        if(jetPackUnlocked)
+        {
+            jetPack.enabled = true;
+        }
 
         rb.drag = isGrounded ? groundDrag : (OnSlope() && !exitingSlope ? groundDrag : 0);
     }
@@ -539,16 +545,6 @@ public class PlayerController : MonoBehaviour
     {
         jetPackUnlocked = value;
     }
-
-    public void TurnJetPackOn()
-    {
-        jetPack.enabled = true;    
-    }
-    public void TurnJetPackoff()
-    {
-        jetPack.enabled = false;
-    }
-
     public GameObject ReturnThisPlayer()
     {
         return this.gameObject;
