@@ -65,14 +65,13 @@ public class PlayerRaycast : MonoBehaviour
 
             if (hitInfo.distance < interactDistance)
             {
-                Debug.Log(hitInfo.collider.tag);
-
                 if (hitInfo.collider.tag == "PickUpItem")
                 {
                     interactableText.text = "Press (E) to pick up the rock";
 
                     if (Input.GetKeyDown(KeyCode.E) && !holding)
                     {
+                        interactableText.text = "";
                         holding = true;
                         hitInfo.collider.gameObject.GetComponent<PickUpObject>().PickUp();
                         heldObject = hitInfo.collider.gameObject;
@@ -86,6 +85,7 @@ public class PlayerRaycast : MonoBehaviour
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        interactableText.text = "";
                         uI.PhoenixChipDecision();
                     }
 
@@ -97,25 +97,26 @@ public class PlayerRaycast : MonoBehaviour
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        interactableText.text = "";
                         battery.OpenAbilitiesSelection();
                     }
 
                 }
             }
-        }
 
-        else
-        {
-            interactableText.text = " ";
-        }
+            else
+            {
+                interactableText.text = " ";
+            }
 
-        pickUpTime += Time.deltaTime;
+            pickUpTime += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.E) && holding && pickUpTime >= pickUpCooldown)
-        {
-            holding = false;
-            heldObject.GetComponent<PickUpObject>().PutDown();
-            heldObject = null;
+            if (Input.GetKeyDown(KeyCode.E) && holding && pickUpTime >= pickUpCooldown)
+            {
+                holding = false;
+                heldObject.GetComponent<PickUpObject>().PutDown();
+                heldObject = null;
+            }
         }
     }
 
@@ -141,6 +142,11 @@ public class PlayerRaycast : MonoBehaviour
             return null;
         }
         return lastHitObject;
+    }
+
+    public void SetInteractableText(string value)
+    {
+        interactableText.text = value;
     }
 
 

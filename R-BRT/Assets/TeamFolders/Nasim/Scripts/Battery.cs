@@ -18,6 +18,7 @@ public class Battery : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerRaycast playerRayCast;
 
     [Header("TMP_Text")]
     [SerializeField] private TMP_Text interactableText;
@@ -34,15 +35,15 @@ public class Battery : MonoBehaviour
         gameObject.tag = "Battery";
         fuelMeter.SetActive(false);
         abilitySelectionPanel.SetActive(false);
-        
-        
-        
+        playerRayCast = GameObject.FindWithTag("MainCamera").GetComponent<PlayerRaycast>();
     }
 
     public void OpenAbilitiesSelection()
     {
-        Time.timeScale = 0;
+        playerController.SetPlayerActivity(false);
         abilitySelectionPanel.SetActive(true);
+        playerRayCast.SetInteractableText("");
+        playerController.isCameraLocked = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -51,23 +52,27 @@ public class Battery : MonoBehaviour
 
     public void OnClickJetpackButton()
     {
+        playerController.SetPlayerActivity(true);
+        playerController.isCameraLocked = false;
+        playerRayCast.SetInteractableText("");
         playerController.SetJetPackUnlock(true);
         fuelMeter.SetActive(true);
         abilitySelectionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Time.timeScale = 1;
         Destroy(battery);
     }
 
     public void OnClickInvisibleButton()
     {
+        playerController.SetPlayerActivity(true);
+        playerController.isCameraLocked = false;
+        playerRayCast.SetInteractableText("");
         playerController.SetInvisibilityUnlock(true);
         playerController.DisplayInvisibilityMeter();
         abilitySelectionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Time.timeScale = 1;
         Destroy(battery);
     }
 }

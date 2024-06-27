@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float verticalInput;
 
     [Header("Bools")]
+    [SerializeField] private bool playerIsActive;
     [SerializeField] private bool onSlope;
     [SerializeField] private bool isSprinting;
     [SerializeField] private bool readyToJump;
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        playerIsActive = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.freezeRotation = true;
@@ -153,28 +155,35 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Ground check
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.6f, groundMask);
-
-        HandleInput();
-        ControlSpeed();
-        HandleSprint();
-        UpdateState();
-        HandleInvisibility();
-        InvisibilityMeter();
-        InvisibilityMeterFillingBackUp();
-
-        if(jetPackUnlocked)
+        if (playerIsActive)
         {
-            jetPack.enabled = true;
-        }
+            // Ground check
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.6f, groundMask);
 
-        rb.drag = isGrounded ? groundDrag : (OnSlope() && !exitingSlope ? groundDrag : 0);
+            HandleInput();
+            ControlSpeed();
+            HandleSprint();
+            UpdateState();
+            HandleInvisibility();
+            InvisibilityMeter();
+            InvisibilityMeterFillingBackUp();
+
+            if (jetPackUnlocked)
+            {
+                jetPack.enabled = true;
+            }
+
+            rb.drag = isGrounded ? groundDrag : (OnSlope() && !exitingSlope ? groundDrag : 0);
+        }
+        
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if(playerIsActive) 
+        {
+            MovePlayer();
+        }
     }
 
     private void HandleInput()
@@ -573,5 +582,15 @@ public class PlayerController : MonoBehaviour
     public bool ReturnUsingInvisibility()
     {
         return this.usingInvisibility;
+    }
+
+    public bool ReturnPlayerActivity()
+    {
+        return this.playerIsActive;
+    }
+
+    public void SetPlayerActivity(bool value)
+    {
+       playerIsActive = value;
     }
 }
