@@ -36,6 +36,14 @@ TagManager:
   - FuelMeter
   - InvisibilityMeter
   - InteractableUIText
+  - PatrolPoint5
+  - PatrolPoint6
+  - PatrolPoint7
+  - PatrolPoint8
+  - PatrolPoint9
+  - PatrolPoint10
+  - PatrolPoint11
+  - PointPoint12
   layers:
   - Default
   - TransparentFX
