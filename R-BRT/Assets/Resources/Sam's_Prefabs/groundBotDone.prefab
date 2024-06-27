@@ -954,12 +954,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 697343153668334853}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8001597905060468008}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3305871640111539400}
   m_SourcePrefab: {fileID: 100100000, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
 --- !u!1 &622786997081344798 stripped
 GameObject:
@@ -1077,40 +1071,3 @@ MonoBehaviour:
   fieldOfViewLightBlue: {fileID: 2100000, guid: bf174fb1913b053458a82bedf2b2d071, type: 2}
   fieldOfViewYellow: {fileID: 2100000, guid: 94428ebf8d70c954f96789e10c89952d, type: 2}
   fieldOfViewRed: {fileID: 2100000, guid: 5284c31dd4c4b3947a5cf660ede19eea, type: 2}
---- !u!114 &8001597905060468008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8647359997036380771}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 533ed02661809534ba90297acdead5c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundBotAI: {fileID: 0}
-  patrolPoints1: []
-  currentWaypointIndex: 0
---- !u!195 &3305871640111539400
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8647359997036380771}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4

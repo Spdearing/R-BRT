@@ -87,8 +87,10 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviorState.patrolling:
 
-                groundBotAIMovement.Patrolling();
-
+                if (gameObject.name == "GroundBotGroup2" || gameObject.name == "GroundBotGroup4")
+                {
+                    groundBotAIMovement.Patrolling();
+                }
                 break;
 
             case BehaviorState.scanning:
