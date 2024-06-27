@@ -22,8 +22,9 @@ public class PauseMenu : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool isPaused;
 
-    [Header("GameManager")]
+    [Header("Scripts")]
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private PlayerController playerController;
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
 
@@ -35,20 +36,24 @@ public class PauseMenu : MonoBehaviour
         panels.Add("PauseMenuPanel", pauseMenu);
         panels.Add("OptionsPanel", optionsPanel);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(playerController.ReturnPlayerActivity() == true)
         {
-            if(isPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
+                if (isPaused)
+                {
+                    ResumeGame();
+                }
+                else
+                {
+                    PauseGame();
+                }
             }
         }
     }
