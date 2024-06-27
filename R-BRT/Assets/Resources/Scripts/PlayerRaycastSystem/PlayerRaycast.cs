@@ -44,7 +44,7 @@ public class PlayerRaycast : MonoBehaviour
         holdingPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
         heldPosition = GameObject.Find("HoldPosition");
         uI = GameObject.Find("Canvas").GetComponent<UIController>();
-        //battery = GameObject.FindWithTag("Battery").GetComponent<Battery>();
+        battery = GameObject.FindWithTag("Battery").GetComponent<Battery>();
 
 
     }
