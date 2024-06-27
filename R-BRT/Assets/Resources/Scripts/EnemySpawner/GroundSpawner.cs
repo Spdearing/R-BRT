@@ -94,7 +94,7 @@ public class GroundBotSpawner : MonoBehaviour
                 enemy.AddComponent<NavMeshAgent>();
                 NavMeshAgent navMeshAgent = enemy.GetComponent<NavMeshAgent>();
                 navMeshAgent.baseOffset = .5f;
-                navMeshAgent.height = .5f;
+                navMeshAgent.height = 1.0f;
                 enemy.AddComponent<GroundBotAIMovement>();
                 GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
                 
@@ -161,7 +161,7 @@ public class GroundBotSpawner : MonoBehaviour
                 enemy.AddComponent<NavMeshAgent>();
                 NavMeshAgent navMeshAgent = enemy.GetComponent<NavMeshAgent>();
                 navMeshAgent.baseOffset = .5f;
-                navMeshAgent.height = .5f;
+                navMeshAgent.height = 1.0f;
                 enemy.AddComponent<GroundBotAIMovement>();
                 GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
 
