@@ -461,7 +461,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator InvisibilityTimer()
     {
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.875f);
         invisibilityCloak.TurnInvisible();
         invisibilityAvailable = false;
         yield return new WaitForSeconds(6.0f);
