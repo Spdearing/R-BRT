@@ -36,14 +36,14 @@ public class GroundBotSpawner : MonoBehaviour
     void Start()
     {
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
-        group1 = new GameObject[1];
-        group2 = new GameObject[4];
-        group3 = new GameObject[6];
-        group4 = new GameObject[8];
+        group1 = new GameObject[3];
+        //group2 = new GameObject[4];
+        //group3 = new GameObject[6];
+        //group4 = new GameObject[8];
         SpawnGroup1();
-        SpawnGroup2();
-        SpawnGroup3();
-        SpawnGroup4();
+        //SpawnGroup2();
+        //SpawnGroup3();
+        //SpawnGroup4();
     }
 
     void SpawnGroup1()
@@ -57,18 +57,10 @@ public class GroundBotSpawner : MonoBehaviour
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
-                
-                
-
-
-
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
-                
-               
-
 
                 enemy.name = "GroundBotGroup1";
             }
