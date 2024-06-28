@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 3001296285487943445}
   - component: {fileID: 2337215869573568991}
   - component: {fileID: 6419028404292639107}
+  - component: {fileID: 7736776365293704415}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -267,8 +268,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 400
   sensY: 400
+  xRotation: 0
+  yRotation: 0
   orientation: {fileID: 159131420631619943}
-  playerCharacterController: {fileID: 7008604672352831750}
+  playerController: {fileID: 0}
 --- !u!114 &2337215869573568991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +339,20 @@ MonoBehaviour:
   holdingPosition: {fileID: 9171299991702683578}
   pickUpObject: {fileID: 0}
   uI: {fileID: 0}
+  battery: {fileID: 0}
   interactableText: {fileID: 0}
+--- !u!114 &7736776365293704415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2317045244121699543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e963b8e24d7b8e64492ad2e741b3ed5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2673026289010004462
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +449,7 @@ MonoBehaviour:
   playerHeight: 0.96
   horizontalInput: 0
   verticalInput: 0
+  playerIsActive: 0
   onSlope: 0
   isSprinting: 0
   readyToJump: 0
@@ -468,6 +485,8 @@ MonoBehaviour:
   startingInvisible: 0
   tr: {fileID: 5209847220083871333}
   playerAnimator: {fileID: 4648077884393115918}
+  jetPack: {fileID: 0}
+  invisibilityCloak: {fileID: 0}
 --- !u!114 &7319206003921998239
 MonoBehaviour:
   m_ObjectHideFlags: 0
