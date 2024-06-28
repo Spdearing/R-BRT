@@ -337,23 +337,26 @@ public class PlayerController : MonoBehaviour
 
     private void HandleSprint()
     {
-        if (Input.GetKeyDown(sprintKey))
+       
+        if (Input.GetKey(sprintKey) && (horizontalInput != 0f || verticalInput != 0))
         {
-            if (isSprinting == false)
+            // Start sprinting
+            if (!isSprinting)
             {
                 isSprinting = true;
+                Sprint();
+                HandleSprintAnimation();
             }
-
-            Sprint();
-            HandleSprintAnimation();
-
         }
-        else if (Input.GetKeyUp(sprintKey))
+        else
         {
-            Walk();
-            isSprinting = false;
-            HandleSprintAnimation();
-
+            
+            if (isSprinting)
+            {
+                isSprinting = false;
+                Walk();
+                HandleSprintAnimation();
+            }
         }
     }
 
