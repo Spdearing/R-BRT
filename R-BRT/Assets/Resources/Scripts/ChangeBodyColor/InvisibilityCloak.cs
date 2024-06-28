@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ChangeBodyColor : MonoBehaviour
+public class InvisibilityCloak : MonoBehaviour
 {
 
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
@@ -20,23 +20,16 @@ public class ChangeBodyColor : MonoBehaviour
         skinMeshRenderer2 = GameObject.Find("LeftArm_RightArm5 (Copy)").GetComponent<SkinnedMeshRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void TurnInvisible()
     {
-        ChangeColors();
+        skinMeshRenderer1.enabled = false;
+        skinMeshRenderer2.enabled = true;
     }
 
-    public void ChangeColors()
+    public void TurnVisible() 
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            skinMeshRenderer1.enabled = false;
-            skinMeshRenderer2.enabled = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.F))
-        {
-            skinMeshRenderer1.enabled = true;
-            skinMeshRenderer2.enabled = false;
-        }
+        skinMeshRenderer1.enabled = true;
+        skinMeshRenderer2.enabled = false;
     }
 }

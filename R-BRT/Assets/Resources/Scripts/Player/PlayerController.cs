@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private Jetpack jetPack;
+    [SerializeField] private InvisibilityCloak invisibilityCloak;
 
     public enum MovementState
     {
@@ -116,6 +117,11 @@ public class PlayerController : MonoBehaviour
         if (playerAnimator == null)
         {
             playerAnimator = GameObject.Find("R-BRT-UI-Done").GetComponent<Animator>();
+        }
+
+        if (invisibilityCloak == null)
+        {
+            invisibilityCloak = GameObject.Find("LeftArm_RightArm5").GetComponent<InvisibilityCloak>();
         }
 
         jetPack = gameObject.GetComponent<Jetpack>();
@@ -448,15 +454,18 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.tag = "Invisible";
             usingInvisibility = true;
+            playerAnimator.SetTrigger("usingInvisibility 0");
             StartCoroutine(InvisibilityTimer());
         }
     }
 
     private IEnumerator InvisibilityTimer()
     {
+        yield return new WaitForSeconds(.25f);
+        invisibilityCloak.TurnInvisible();
         invisibilityAvailable = false;
         yield return new WaitForSeconds(6.0f);
-        Debug.Log("Invisibility Over (Coroutine)");
+        invisibilityCloak.TurnVisible();
     }
 
     public void InvisibilityMeter()
@@ -469,7 +478,6 @@ public class PlayerController : MonoBehaviour
 
             if (startingInvisible <= 0)
             {
-                Debug.Log("Invisibility Over (decrement)");
                 startingInvisible = 0;
                 invisibilityAvailable = true;
                 usingInvisibility = false;
