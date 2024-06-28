@@ -3,7 +3,27 @@ guid: 84824f788fc812f4dba09599eb241d48
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BrokenFloor
+    second: {fileID: 2100000, guid: dafc735ed55f40d468311a154daac3e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ceiling
+    second: {fileID: 3069082147569485441, guid: 032b41e01905c7b40b6a10f0511bd994, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor
+    second: {fileID: 3876542345217667742, guid: f2b62e13c435a754dacca27c796f0246, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall
+    second: {fileID: -1255982633427224767, guid: 1ccdbbce1c30304429cbb8976ff6c550, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
