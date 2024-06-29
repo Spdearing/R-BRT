@@ -87,6 +87,7 @@ public class PlayerDetectionState : MonoBehaviour
                 break;
 
             case DetectionState.beingDetected:
+
                 if (playerController.ReturnCrouchingStatus(true))
                 {
                     // Decrease detection increase rate when crouching
