@@ -29,6 +29,9 @@ public class EnemyDistraction : MonoBehaviour
     [SerializeField] private PickUpObject pickUpObject;
     [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
 
+    [Header("Audio Sources")]
+    [SerializeField] private AudioSource rockHit;
+
     private void Start()
     {
         if (sphereCollider == null)
@@ -84,6 +87,7 @@ public class EnemyDistraction : MonoBehaviour
 
     private IEnumerator ExpandSphere()
     {
+        rockHit.Play();
         while (isExpanding && sphereCollider.radius < maxRadius)
         {
             sphereCollider.radius += expansionRate * Time.deltaTime;
