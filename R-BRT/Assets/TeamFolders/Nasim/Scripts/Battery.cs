@@ -29,13 +29,14 @@ public class Battery : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        
+        playerRayCast = GameObject.FindWithTag("MainCamera").GetComponent<PlayerRaycast>();
+        interactableText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
         battery = GameObject.FindWithTag("Battery");
         fuelMeter = GameObject.FindWithTag("FuelMeter");
         gameObject.tag = "Battery";
         fuelMeter.SetActive(false);
         abilitySelectionPanel.SetActive(false);
-        playerRayCast = GameObject.FindWithTag("MainCamera").GetComponent<PlayerRaycast>();
     }
 
     public void OpenAbilitiesSelection()
@@ -48,12 +49,11 @@ public class Battery : MonoBehaviour
         Cursor.visible = true;
     }
 
-
-
     public void OnClickJetpackButton()
     {
+        playerController.ReturnPlayerActivity();
         playerController.SetPlayerActivity(true);
-        playerController.isCameraLocked = false;
+        playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");
         playerController.SetJetPackUnlock(true);
         fuelMeter.SetActive(true);
@@ -66,7 +66,7 @@ public class Battery : MonoBehaviour
     public void OnClickInvisibleButton()
     {
         playerController.SetPlayerActivity(true);
-        playerController.isCameraLocked = false;
+        playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");
         playerController.SetInvisibilityUnlock(true);
         playerController.DisplayInvisibilityMeter();

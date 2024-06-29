@@ -9,22 +9,25 @@ using static SpiderBotStateMachine;
 public class PlayerDetectionState : MonoBehaviour
 {
     [Header("Scripts")]
-    [SerializeField] GameManager gameManager;
-    [SerializeField] DetectionMeter detection;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private DetectionMeter detection;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private Jetpack jetpack;
 
-    [SerializeField] GroundBotStateMachine groundBotStateMachine; // instantiated script
-    [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
+    [SerializeField] private GroundBotStateMachine groundBotStateMachine; // instantiated script
+    [SerializeField] private EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
     //[SerializeField] GroundBotSpawner groundBotSpawner;
 
-    [SerializeField] FlyingBotStateMachine flyingBotStateMachine; // instantiated script
-    [SerializeField] EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
+    [SerializeField] private FlyingBotStateMachine flyingBotStateMachine; // instantiated script
+    [SerializeField] private EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
     //[SerializeField] FlyingBotSpawner flyingBotSpawner;
 
-    [SerializeField] SpiderBotStateMachine spiderBotStateMachine; // instantiated script
-    [SerializeField] EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
+    [SerializeField] private SpiderBotStateMachine spiderBotStateMachine; // instantiated script
+    [SerializeField] private EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
     //[SerializeField] SpiderBotSpawner spiderBotSpawner;
 
     [Header("Floats")]
+    [SerializeField] private float crouchingDetectionIncrease;
     [SerializeField] private float detectionIncreaseRate;
     [SerializeField] private float detectionDecreaseRate;
 
@@ -47,6 +50,10 @@ public class PlayerDetectionState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerController = gameObject.GetComponent<PlayerController>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        detection = GameObject.FindWithTag("DetectionMeter").GetComponent<DetectionMeter>();
+        jetpack = gameObject.GetComponent<Jetpack>();
         //groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
         //flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
         //spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
@@ -54,7 +61,8 @@ public class PlayerDetectionState : MonoBehaviour
         detectedByFlyingBot = false;
         detectedBySpiderBot = false;
         currentState = DetectionState.exploring;
-        detectionIncreaseRate = 5.0f;
+        crouchingDetectionIncrease = 1.0f;
+        detectionIncreaseRate = 7.5f;
         detectionDecreaseRate = 25.0f;
         
         
@@ -76,17 +84,28 @@ public class PlayerDetectionState : MonoBehaviour
         switch (currentState)
         {
             case DetectionState.beingDetected:
-
+                // Increase detection based on player actions
+                if (playerController.ReturnCrouchingStatus(true))
+                {
+                    detection.IncreaseDetection(crouchingDetectionIncrease);
+                    detectionIncreaseRate += 0.5f;
+                }
+                else if (jetpack.IsUsingJetpack(true))
+                {
+                    detection.IncreaseDetection(detectionIncreaseRate * 2);
+                    detectionIncreaseRate += 0.5f;
+                }
+                
                 detection.IncreaseDetection(detectionIncreaseRate);
-                detectionIncreaseRate += .5f;
+                detectionIncreaseRate += 0.5f;
                 
 
-                if (detection.ReturnStartingDetection() >= detection.GetDetectionMax())// checks to see if bar is full
+                // Check if detection has reached maximum
+                if (detection.ReturnStartingDetection() >= detection.GetDetectionMax())
                 {
                     Debug.Log("Max Detection");
-                    ChangeDetectionState(DetectionState.detected);// sets the capped amount, and then changes the state
+                    ChangeDetectionState(DetectionState.detected);
                 }
-
                 break;
 
             case DetectionState.meterRepleneshing:
