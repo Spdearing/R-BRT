@@ -21,11 +21,7 @@ public class SpiderBotStateMachine : MonoBehaviour
     [SerializeField] private Renderer fieldOfViewRenderer;
 
     [Header("Materials")]
-    [SerializeField] private Material lightBlue;
-    [SerializeField] private Material yellow;
     [SerializeField] private Material red;
-    [SerializeField] private Material fieldOfViewLightBlue;
-    [SerializeField] private Material fieldOfViewYellow;
     [SerializeField] private Material fieldOfViewRed;
 
     [Header("Quaternions")]
@@ -58,8 +54,8 @@ public class SpiderBotStateMachine : MonoBehaviour
         enemySpiderBotFieldOfView = GetComponentInChildren<EnemySpiderBotFieldOfView>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
-        spiderBotEyeColor.material = lightBlue;
-        fieldOfViewRenderer.material = fieldOfViewLightBlue;
+        spiderBotEyeColor.material = red;
+        fieldOfViewRenderer.material = fieldOfViewRed;
         currentState = SpiderState.patrolling;
     }
 
@@ -74,7 +70,7 @@ public class SpiderBotStateMachine : MonoBehaviour
             float lerpFactor = lerpTime / lerpDuration;
             playerCameraTransform.rotation = Quaternion.Slerp(startRotation, endRotation, lerpFactor);
 
-            // Stop lerping after the duration is complete
+            
             if (lerpTime >= lerpDuration)
             {
                 isLerping = false;

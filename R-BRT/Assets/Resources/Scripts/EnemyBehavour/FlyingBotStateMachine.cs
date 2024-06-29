@@ -26,11 +26,7 @@ public class FlyingBotStateMachine : MonoBehaviour
     [SerializeField] private PlayerController playerController;
 
     [Header("Materials")]
-    [SerializeField] private Material lightBlue;
-    [SerializeField] private Material yellow;
     [SerializeField] private Material red;
-    [SerializeField] private Material fieldOfViewLightBlue;
-    [SerializeField] private Material fieldOfViewYellow;
     [SerializeField] private Material fieldOfViewRed;
 
 
@@ -61,8 +57,8 @@ public class FlyingBotStateMachine : MonoBehaviour
         playerCameraTransform = playerCamera.transform;
         gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();   
         enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
-        flyingBotHeadColor.material = lightBlue;
-        fieldOfViewRenderer.material = fieldOfViewLightBlue;
+        flyingBotHeadColor.material = red;
+        fieldOfViewRenderer.material = fieldOfViewRed;
         currentState = FlyingState.patrolling;
     }
 
@@ -97,15 +93,13 @@ public class FlyingBotStateMachine : MonoBehaviour
         {
             case FlyingState.patrolling:
 
-                flyingBotHeadColor.material = lightBlue;
-                fieldOfViewRenderer.material = fieldOfViewLightBlue;
+
 
                 break;
 
             case FlyingState.scanning:
 
-                flyingBotHeadColor.material = yellow;
-                fieldOfViewRenderer.material = fieldOfViewYellow;
+
 
                 break;
 
