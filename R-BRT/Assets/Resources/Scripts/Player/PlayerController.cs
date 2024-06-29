@@ -269,10 +269,12 @@ public class PlayerController : MonoBehaviour
         else if (isGrounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            walkingSound.Play();
         }
         else
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            walkingSound.Play();
         }
 
         rb.useGravity = !OnSlope();
