@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
     [Header("Audio Source")]
     [SerializeField] private AudioSource activatingInvisibility;
     [SerializeField] private AudioSource invisiblityDuration;
+    [SerializeField] private AudioSource walkingSound;
+    [SerializeField] private AudioSource sprintingSound;
 
     [Header("Scripts")]
     [SerializeField] private Jetpack jetPack;
