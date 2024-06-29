@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour
 {
@@ -83,6 +84,9 @@ public class PlayerController : MonoBehaviour
     [Header("Animator")]
     [SerializeField] private Animator playerAnimator;
 
+    [Header("Audio Source")]
+    [SerializeField] private AudioSource activatingInvisibility;
+
     [Header("Scripts")]
     [SerializeField] private Jetpack jetPack;
     [SerializeField] private InvisibilityCloak invisibilityCloak;
@@ -125,6 +129,7 @@ public class PlayerController : MonoBehaviour
         }
 
         jetPack = gameObject.GetComponent<Jetpack>();
+        
         
 
         usingInvisibility = false;
@@ -458,7 +463,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked && !invisibilityMeterFillingBackUp)
         {
             gameObject.tag = "Invisible";
-            
             playerAnimator.SetTrigger("usingInvisibility 0");
             StartCoroutine(InvisibilityTimer());
         }
@@ -467,6 +471,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator InvisibilityTimer()
     {
         yield return new WaitForSeconds(.875f);
+        activatingInvisibility.Play();
         invisibilityCloak.TurnInvisible();
         usingInvisibility = true;
         invisibilityAvailable = false;
