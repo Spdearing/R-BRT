@@ -19,6 +19,9 @@ public class ThrowObject : MonoBehaviour
     [Header("Animator")]
     [SerializeField] private Animator playerAnimator;
 
+    [Header("Audio Source")]
+    [SerializeField] private AudioSource rockThrowing;
+
 
 
     private void Start()
@@ -37,6 +40,7 @@ public class ThrowObject : MonoBehaviour
         {
             Shoot();
             threwObject = true;
+            
             StartCoroutine(ResetThrowStatus());
         }
     }
@@ -57,6 +61,7 @@ public class ThrowObject : MonoBehaviour
             pickUpObject.GetComponent<PickUpObject>().PutDown();
             rb.AddForce(shootDirection * shootForce, ForceMode.Impulse);
             rb.AddForce(shootDirection * upwardForce);
+            rockThrowing.Play();
             playerAnimator.SetBool("holdingRock", false);
             playerAnimator.SetBool("pickingUpRock", false);
         }
