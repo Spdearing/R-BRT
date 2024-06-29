@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Audio Source")]
     [SerializeField] private AudioSource activatingInvisibility;
+    [SerializeField] private AudioSource invisiblityDuration;
 
     [Header("Scripts")]
     [SerializeField] private Jetpack jetPack;
@@ -473,9 +474,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(.875f);
         activatingInvisibility.Play();
         invisibilityCloak.TurnInvisible();
+        yield return new WaitForSeconds(.1f);
+        invisiblityDuration.Play();
+        
         usingInvisibility = true;
         invisibilityAvailable = false;
         yield return new WaitForSeconds(6.0f);
+        invisiblityDuration.Stop();
         invisibilityCloak.TurnVisible();
     }
 
