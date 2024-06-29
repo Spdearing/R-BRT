@@ -514,12 +514,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   detection: {fileID: 0}
+  playerController: {fileID: 0}
+  jetpack: {fileID: 9090620449033406597}
   groundBotStateMachine: {fileID: 0}
   enemyGroundBotFieldOfView: {fileID: 0}
   flyingBotStateMachine: {fileID: 0}
   enemyFlyingBotFieldOfView: {fileID: 0}
   spiderBotStateMachine: {fileID: 0}
   enemySpiderBotFieldOfView: {fileID: 0}
+  crouchingDetectionIncrease: 0
   detectionIncreaseRate: 0
   detectionDecreaseRate: 0
   detectedByGroundBot: 0
@@ -577,6 +580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressedFirstTime: 0
   canUseJetpack: 0
+  isUsingJetpack: 0
   jetpackAcceleration: 15
   delayBetweenPress: 0.25
   lastPressedTime: 0
