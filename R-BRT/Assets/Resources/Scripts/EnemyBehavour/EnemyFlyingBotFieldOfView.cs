@@ -87,6 +87,12 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
                 playerIsBeingDetected = true;
             }
         }
+        else
+        {
+            gameManager.SetPlayerIsSpotted(false);
+            playerIsBeingDetected = false;
+            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+        }
     }
 
     private void OnTriggerExit(Collider other)
