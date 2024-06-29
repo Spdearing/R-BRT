@@ -63,6 +63,7 @@ public class PickUpObject : MonoBehaviour
         pickingUp = false;
         rb.isKinematic = false;
         playerAnimator.SetBool("holdingRock", false);
+        playerAnimator.SetBool("pickingUpRock", false);
 
         if (moveCoroutine != null)
         {
