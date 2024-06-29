@@ -119,6 +119,10 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
                 playerIsBeingDetected = false;
             }
         }
+        else
+        
+            playerIsBeingDetected = false;
+        
     }
 
     public Transform ReturnThisEnemy()
