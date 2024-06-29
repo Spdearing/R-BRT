@@ -53,19 +53,18 @@ public class PlayerDetectionState : MonoBehaviour
         playerController = gameObject.GetComponent<PlayerController>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         detection = GameObject.FindWithTag("DetectionMeter").GetComponent<DetectionMeter>();
-        jetpack = gameObject.GetComponent<Jetpack>();
         //groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
         //flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
         //spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
         detectedByGroundBot = false;
         detectedByFlyingBot = false;
         detectedBySpiderBot = false;
-        currentState = DetectionState.exploring;
         crouchingDetectionIncrease = 1.0f;
         detectionIncreaseRate = 7.5f;
         detectionDecreaseRate = 25.0f;
-        
-        
+        currentState = DetectionState.exploring;
+
+
     }
 
     // Update is called once per frame
@@ -83,22 +82,29 @@ public class PlayerDetectionState : MonoBehaviour
     {
         switch (currentState)
         {
+            case DetectionState.exploring:
+                // Handle exploring state logic here if needed
+                break;
+
             case DetectionState.beingDetected:
-                // Increase detection based on player actions
                 if (playerController.ReturnCrouchingStatus(true))
                 {
+                    // Decrease detection increase rate when crouching
                     detection.IncreaseDetection(crouchingDetectionIncrease);
                     detectionIncreaseRate += 0.5f;
                 }
                 else if (jetpack.IsUsingJetpack(true))
                 {
+                    // Increase detection faster when using jetpack
                     detection.IncreaseDetection(detectionIncreaseRate * 2);
                     detectionIncreaseRate += 0.5f;
                 }
-                
-                detection.IncreaseDetection(detectionIncreaseRate);
-                detectionIncreaseRate += 0.5f;
-                
+                else
+                {
+                    // Default detection increase rate
+                    detection.IncreaseDetection(detectionIncreaseRate);
+                    detectionIncreaseRate += 0.5f;
+                }
 
                 // Check if detection has reached maximum
                 if (detection.ReturnStartingDetection() >= detection.GetDetectionMax())
@@ -109,26 +115,25 @@ public class PlayerDetectionState : MonoBehaviour
                 break;
 
             case DetectionState.meterRepleneshing:
-
+                // Decrease detection level over time
                 detection.DecreaseDetection(detectionDecreaseRate);
                 detectionIncreaseRate = 5.0f;
 
-                if(detection.ReturnStartingDetection() <= 0)
+                // Transition to exploring state when detection is replenished
+                if (detection.ReturnStartingDetection() <= 0)
                 {
                     ChangeDetectionState(DetectionState.exploring);
                 }
-
                 break;
 
-
             case DetectionState.detected:
-
-                if(detectedByGroundBot)
+                // Trigger behavior changes in bots when player is detected
+                if (detectedByGroundBot)
                 {
                     groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
                 }
 
-                if(detectedByFlyingBot)
+                if (detectedByFlyingBot)
                 {
                     flyingBotStateMachine.ChangeBehavior(FlyingState.playerCaught);
                 }
@@ -137,16 +142,12 @@ public class PlayerDetectionState : MonoBehaviour
                 {
                     spiderBotStateMachine.ChangeBehavior(SpiderState.playerCaught);
                 }
-
-
-
                 break;
 
             default:
-
+                // Handle any unexpected state transitions gracefully
                 currentState = DetectionState.exploring;
                 detectionIncreaseRate = 5.0f;
-
                 break;
         }
     }
