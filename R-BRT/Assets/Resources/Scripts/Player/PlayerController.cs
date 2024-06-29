@@ -461,7 +461,7 @@ public class PlayerController : MonoBehaviour
 
     public void HandleInvisibility()
     {
-        if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked && !invisibilityMeterFillingBackUp)
+        if (Input.GetKeyDown(KeyCode.Q) && invisibilityAvailable && invisibilityUnlocked && !invisibilityMeterFillingBackUp)
         {
             gameObject.tag = "Invisible";
             playerAnimator.SetTrigger("usingInvisibility 0");

@@ -20,6 +20,9 @@ public class PickUpObject : MonoBehaviour
     [Header("Animator")]
     [SerializeField] private Animator playerAnimator;
 
+    [Header("Audio Source")]
+    [SerializeField] private AudioSource rockHolding;
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -38,7 +41,6 @@ public class PickUpObject : MonoBehaviour
                 float moveDuration = pickingUp ? 0.5f : 0.05f;
                 moveCoroutine = StartCoroutine(MoveObjectSmoothly(holdPosition.position, moveDuration));
                 playerAnimator.SetBool("holdingRock", true);
-
             }
         }
     }
@@ -55,6 +57,7 @@ public class PickUpObject : MonoBehaviour
         }
 
         moveCoroutine = StartCoroutine(MoveObjectSmoothly(holdPosition.position, 0.25f));
+        rockHolding.Play();
     }
 
     public void PutDown()
@@ -70,6 +73,7 @@ public class PickUpObject : MonoBehaviour
             StopCoroutine(moveCoroutine);
             moveCoroutine = null;
         }
+        rockHolding.Stop();
     }
 
     IEnumerator MoveObjectSmoothly(Vector3 end, float duration)
