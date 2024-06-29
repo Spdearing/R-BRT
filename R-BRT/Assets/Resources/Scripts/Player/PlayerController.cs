@@ -458,7 +458,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && invisibilityAvailable && invisibilityUnlocked && !invisibilityMeterFillingBackUp)
         {
             gameObject.tag = "Invisible";
-            usingInvisibility = true;
+            
             playerAnimator.SetTrigger("usingInvisibility 0");
             StartCoroutine(InvisibilityTimer());
         }
@@ -468,6 +468,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(.875f);
         invisibilityCloak.TurnInvisible();
+        usingInvisibility = true;
         invisibilityAvailable = false;
         yield return new WaitForSeconds(6.0f);
         invisibilityCloak.TurnVisible();
