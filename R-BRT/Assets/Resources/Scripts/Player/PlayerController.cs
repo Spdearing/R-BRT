@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
     [Header("Audio Source")]
     [SerializeField] private AudioSource activatingInvisibility;
     [SerializeField] private AudioSource invisiblityDuration;
+    [SerializeField] private AudioSource walkingSound;
+    [SerializeField] private AudioSource sprintingSound;
 
     [Header("Scripts")]
     [SerializeField] private Jetpack jetPack;
@@ -267,10 +269,12 @@ public class PlayerController : MonoBehaviour
         else if (isGrounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            walkingSound.Play();
         }
         else
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            walkingSound.Play();
         }
 
         rb.useGravity = !OnSlope();
