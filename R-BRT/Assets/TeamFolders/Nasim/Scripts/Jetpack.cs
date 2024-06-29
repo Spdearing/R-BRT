@@ -8,6 +8,7 @@ public class Jetpack : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool pressedFirstTime;
     [SerializeField] private bool canUseJetpack;
+    [SerializeField] private bool isUsingJetpack;
 
     [Header("Floats")]
     [SerializeField] private float jetpackAcceleration = 15f;
@@ -38,7 +39,7 @@ public class Jetpack : MonoBehaviour
 
         pressedFirstTime = false;
         playerCharacterController = GetComponent<PlayerController>();
-        //fuelMeter = GameObject.Find("Fuel Meter").GetComponent<Slider>();
+        fuelMeter = GameObject.Find("Fuel Meter").GetComponent<Slider>();
         tr = gameObject.GetComponent<TrailRenderer>();
 
         currentFillRatio = 1f;
@@ -66,7 +67,7 @@ public class Jetpack : MonoBehaviour
 
                 if (isDoubledPress)
                 {
-                    Debug.Log("See if Jetpack Activated");
+                    
                     pressedFirstTime = false;
                 }
             }
@@ -76,7 +77,7 @@ public class Jetpack : MonoBehaviour
 
         if (pressedFirstTime && Time.time - lastPressedTime > delayBetweenPress)
         {
-            Debug.Log("Jetpack On");
+            
             pressedFirstTime = false;
         }
 
@@ -85,7 +86,7 @@ public class Jetpack : MonoBehaviour
 
         if (jetpackIsInUse)
         {
-
+            isUsingJetpack = true;
             tr.emitting = true;
 
             lastTimeOfUse = Time.time;
@@ -107,6 +108,7 @@ public class Jetpack : MonoBehaviour
         }
         else
         {
+            isUsingJetpack = false;
             tr.emitting = false;
 
             if (Time.time - lastTimeOfUse >= refuelDelay)
@@ -120,5 +122,10 @@ public class Jetpack : MonoBehaviour
 
         fuelMeter.value = currentFillRatio;
 
+    }
+
+    public bool IsUsingJetpack(bool value)
+    {
+        return this.isUsingJetpack;
     }
 }

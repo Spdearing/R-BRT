@@ -76,12 +76,19 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
             if (!withinRange)
             {
                 playerIsBeingDetected = false;
-                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing); 
             }
             else
             {
                 playerIsBeingDetected = true;
             }
+        }
+        else
+        {
+            groundBotHeadMovement.SetPlayerSpotted(false);
+            gameManager.SetPlayerIsSpotted(false);
+            playerIsBeingDetected = false;
+            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing); 
         }
     }
 

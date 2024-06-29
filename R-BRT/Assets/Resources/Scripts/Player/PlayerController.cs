@@ -423,26 +423,28 @@ public class PlayerController : MonoBehaviour
             case MovementState.crouching:
 
                 moveSpeed = crouchSpeed;
+                isCrouching = true;
 
                 break;
 
             case MovementState.walking:
 
+                isCrouching = false;
                 moveSpeed = walkSpeed;
 
                 break;
 
             case MovementState.sprinting:
 
+                isCrouching = false;
                 moveSpeed = sprintSpeed;
-
-
 
                 break;
 
             default:
                 if (isGrounded)
                 {
+                    isCrouching = false;
                     currentState = MovementState.walking;
                 }
                 break;
@@ -539,7 +541,10 @@ public class PlayerController : MonoBehaviour
      
     }
 
-   
+    public bool ReturnCrouchingStatus(bool value)
+    {
+        return this.isCrouching;
+    }
 
     public bool ReturnIsGrounded()
     {
