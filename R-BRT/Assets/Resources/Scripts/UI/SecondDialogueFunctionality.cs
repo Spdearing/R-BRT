@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class FirstDialogueFunctionality : MonoBehaviour
+public class SecondDialogueFunctionality : MonoBehaviour
 {
     [Header("TMP_Text")]
     [SerializeField] private TMP_Text uiText;
@@ -13,9 +13,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private string[] fullTexts;
     [SerializeField] private string fullText;
     [SerializeField] private string fullText2;
-    [SerializeField] private string fullText3;
-    [SerializeField] private string fullText4;
-    [SerializeField] private string fullText5;
+    
 
     [Header("Floats")]
     [SerializeField] private float delay;
@@ -33,12 +31,9 @@ public class FirstDialogueFunctionality : MonoBehaviour
     {
         gameManger = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        fullTexts = new string[5];
+        fullTexts = new string[2];
         fullTexts[0] = fullText;
         fullTexts[1] = fullText2;
-        fullTexts[2] = fullText3;
-        fullTexts[3] = fullText4;
-        fullTexts[4] = fullText5;
         delay = .035f;
         StartCoroutine(ShowDialogue());
     }
@@ -60,9 +55,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
         gameManger.SetDialogueTriggerOne(false);
-        gameManger.SetFirstDialogueHit(true);
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
-        
     }
 }

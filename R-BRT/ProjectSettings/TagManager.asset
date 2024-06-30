@@ -44,6 +44,8 @@ TagManager:
   - PatrolPoint10
   - PatrolPoint11
   - PointPoint12
+  - SecondDialogueEncounter
+  - Group1Enemy
   layers:
   - Default
   - TransparentFX
