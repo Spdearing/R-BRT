@@ -12,6 +12,106 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: CornerPillar
+    second: {fileID: 2100000, guid: f5bcf3d4386ecc54590d1435013a9d31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EntranceCover
+    second: {fileID: 2100000, guid: 10dce6652bc783d429b5b4d69c5daada, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EntranceDoorHandle
+    second: {fileID: 2100000, guid: 9e097e5cd2995d24f835613c2fec3170, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EntranceDoorLeft
+    second: {fileID: 2100000, guid: 9cac1827a3abdd84c9039d420a3ac812, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EntranceDoorRight
+    second: {fileID: 2100000, guid: a7775cfb3ea51ac488c9ef759676c22d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EntrancePillar
+    second: {fileID: 2100000, guid: 18811c95c2e5e814ba9c8016131f8a55, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: 411e4f6cb1942114ebb5089f8b74610c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightBroken
+    second: {fileID: 2100000, guid: 1e1cc8aab6091dc44894062f1ead4a1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LobbyBackWall
+    second: {fileID: 2100000, guid: 4237326c85a7d9942b7edb7098d923c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LobbyCeiling
+    second: {fileID: 2100000, guid: 932cea650c814124f889ac339961dc46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LobbyWindow
+    second: {fileID: 2100000, guid: 2e804f63b37e57c44974047a675ff72b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarbleFloor
+    second: {fileID: 2100000, guid: e0a0652e41c84f64eb4a05abb1c00ba0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MiddlePillarsUndamaged
+    second: {fileID: 2100000, guid: c865a5c563ec4f0468cb67f09610d203, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Monitors
+    second: {fileID: 2100000, guid: 85d5ab06c7875ba43a40f60832578299, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PillarBackWall
+    second: {fileID: 2100000, guid: 31521231b06e4724799504f9990bb6ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PillarReception
+    second: {fileID: 2100000, guid: da9b8b55d666480408dcc48a2cd9a8c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RightMolding
+    second: {fileID: 2100000, guid: 0f497a3a7a8795245a1b566dcf94b4d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RightWall
+    second: {fileID: 2100000, guid: c2c2c8ed75d6784428dc4b9d818778a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SecondFloor
+    second: {fileID: 2100000, guid: 45ba083b3f01a4746845cb0f8545ea1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SecondFloorMold
+    second: {fileID: 2100000, guid: fab0a64102bc21741ade95b6a927eb2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: SecondFloorPane
     second: {fileID: 2100000, guid: f84bfab2d38f798458b88f0e4afa101e, type: 2}
   - first:
@@ -24,6 +124,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: WindowBorder
     second: {fileID: 2100000, guid: 4fd6ed3d874d43a4d8155611aa7b84e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wires
+    second: {fileID: 2100000, guid: 3c3ffbd37016fe14c8d5e6cfa68506bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WiresLong
+    second: {fileID: 2100000, guid: 10624bcce8a0d0343bc1cee97600434d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
