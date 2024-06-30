@@ -112,8 +112,13 @@ public class GameManager : MonoBehaviour
             StartCoroutine(SmoothCameraRotationToFriend(mainCamera, friendLocation.position, 2));
             playerController.SetCameraLock(true);
             dialogueTriggerOne.SetActive(true);
+            
             groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
-            enemyNumberOne = groundBotSpawner.ReturnEnemyOne();
+            groundBotSpawner.SpawnGroup1();
+            groundBotSpawner.SpawnGroup2();
+            groundBotSpawner.SpawnGroup3();
+            groundBotSpawner.SpawnGroup4();
+            enemyNumberOne = GameObject.FindWithTag("GroundBotGroup1").GetComponent<GameObject>();
             enemyOneTransform = enemyNumberOne.transform;
         }
     }
