@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: CeilingBeam
+    second: {fileID: 2100000, guid: 92a10cdd08ccad9448609e8e77d155a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: SecondFloorPane
     second: {fileID: 2100000, guid: f84bfab2d38f798458b88f0e4afa101e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SecondFloorPaneBorder
+    second: {fileID: 2100000, guid: 649bb6083fa32f54f8c0f5efe08e0e6a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
