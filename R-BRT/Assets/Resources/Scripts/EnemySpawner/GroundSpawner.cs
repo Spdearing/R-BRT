@@ -36,14 +36,14 @@ public class GroundBotSpawner : MonoBehaviour
     void Start()
     {
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
-        group1 = new GameObject[3];
-        //group2 = new GameObject[4];
-        //group3 = new GameObject[6];
-        //group4 = new GameObject[8];
+        group1 = new GameObject[1];
+        group2 = new GameObject[4];
+        group3 = new GameObject[6];
+        group4 = new GameObject[8];
         SpawnGroup1();
-        //SpawnGroup2();
-        //SpawnGroup3();
-        //SpawnGroup4();
+        SpawnGroup2();
+        SpawnGroup3();
+        SpawnGroup4();
     }
 
     void SpawnGroup1()
@@ -63,6 +63,7 @@ public class GroundBotSpawner : MonoBehaviour
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
 
                 enemy.name = "GroundBotGroup1";
+                enemy.tag = "Group1Enemy";
             }
             else
             {
@@ -90,8 +91,6 @@ public class GroundBotSpawner : MonoBehaviour
                 enemy.AddComponent<GroundBotAIMovement>();
                 GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
                 
-
-
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
@@ -119,18 +118,11 @@ public class GroundBotSpawner : MonoBehaviour
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
-                
-               
-
-
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
                 
-                
-
-
                 enemy.name = "GroundBotGroup3";
             }
             else
@@ -158,8 +150,6 @@ public class GroundBotSpawner : MonoBehaviour
                 GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
 
 
-
-
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
@@ -174,6 +164,11 @@ public class GroundBotSpawner : MonoBehaviour
                 Debug.LogWarning("Index out of bounds for enemyGroupLocations array.");
             }
         }
+    }
+
+    public GameObject ReturnEnemyOne()
+    {
+        return group1[0];
     }
 
     public GroundBotStateMachine ReturnGroundBotStateInstance()

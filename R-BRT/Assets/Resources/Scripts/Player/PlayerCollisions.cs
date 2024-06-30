@@ -13,5 +13,10 @@ public class PlayerCollisions : MonoBehaviour
         {
             transform.position = destinationA.transform.position;
         }
+
+        else if(other.gameObject.tag == "SecondDialogueEncounter")
+        {
+            GameManager.Instance.StartSecondDialogue();
+        }
     }
 }

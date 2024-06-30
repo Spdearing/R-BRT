@@ -10,14 +10,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool hasStealth;
     [SerializeField] private bool playerIsSpotted;
     [SerializeField] private bool firstPlaythrough;
+    [SerializeField] private bool firstDialogueHit;
+    [SerializeField] private bool secondDialogueHit;
 
     [Header("Game Objects")]
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject dialogueTriggerOne;
+    [SerializeField] private GameObject dialogueTriggerTwo;
+    [SerializeField] private GameObject enemyNumberOne;
 
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform mainCamera;
+    [SerializeField] private Transform enemyOneTransform;
+
 
     [Header("GameManager Instance")]
     public static GameManager Instance;
@@ -25,6 +31,7 @@ public class GameManager : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private DetectionMeter detectionMeter;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private GroundBotSpawner groundBotSpawner;
 
     void Awake()
     {
@@ -33,6 +40,8 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             firstPlaythrough = true;
+            firstDialogueHit = false;
+            secondDialogueHit = false;
             Instance = this;
             DontDestroyOnLoad(gameObject); // This makes the GameObject persistent across scenes
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
@@ -63,9 +72,16 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "GameScene":
-                Debug.Log("Handling Game Scene");
-                HandleGameSceneLoad();
-                playerController.SetPlayerActivity(false);
+                if(firstPlaythrough && !firstDialogueHit)
+                {
+                    HandleGameSceneLoad();
+                    playerController.SetPlayerActivity(false);
+                }
+                else
+                {
+                    LoadLevel();
+                }
+                
                 break;
             case "ChooseYourFriend":
             case "SaveTheWorld":
@@ -93,10 +109,21 @@ public class GameManager : MonoBehaviour
         if (firstPlaythrough)
         {
             Debug.Log("First playthrough setup");
-            StartCoroutine(SmoothCameraRotation(mainCamera, friendLocation.position, 2));
+            StartCoroutine(SmoothCameraRotationToFriend(mainCamera, friendLocation.position, 2));
             playerController.SetCameraLock(true);
             dialogueTriggerOne.SetActive(true);
+            groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
+            enemyNumberOne = groundBotSpawner.ReturnEnemyOne();
+            enemyOneTransform = enemyNumberOne.transform;
         }
+    }
+    
+    private void LoadLevel()
+    {
+        InitializePlayerAndDetectionMeter();
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
+        friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
+        playerIsSpotted = false;
     }
 
     private void InitializePlayerAndDetectionMeter()
@@ -107,7 +134,7 @@ public class GameManager : MonoBehaviour
         detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
     }
 
-    private IEnumerator SmoothCameraRotation(Transform cameraTransform, Vector3 targetPosition, float duration)
+    private IEnumerator SmoothCameraRotationToFriend(Transform cameraTransform, Vector3 targetPosition, float duration)
     {
         Debug.Log("Starting Smooth Camera Rotation");
         Quaternion startRotation = cameraTransform.rotation;
@@ -124,7 +151,37 @@ public class GameManager : MonoBehaviour
         Debug.Log("Smooth Camera Rotation Completed");
     }
 
+    private IEnumerator SmoothCameraRotationToFirstEnemy(Transform cameraTransform, Vector3 targetPosition, float duration)
+    {
+        Debug.Log("Starting Smooth Camera Rotation");
+        Quaternion startRotation = cameraTransform.rotation;
+        Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
+        float elapsedTime = 0;
 
+        while (elapsedTime < duration)
+        {
+            cameraTransform.rotation = Quaternion.Lerp(startRotation, endRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        cameraTransform.rotation = endRotation;
+        Debug.Log("Smooth Camera Rotation Completed");
+    }
+
+    public void StartSecondDialogue()
+    {
+        StartCoroutine(SmoothCameraRotationToFirstEnemy(mainCamera, enemyOneTransform.position, 2));
+        playerController.SetCameraLock(true);
+        dialogueTriggerOne.SetActive(true);
+
+    }
+
+
+
+    public void SetFirstDialogueHit(bool value)
+    {
+        firstDialogueHit = value;
+    }
     public void SetDialogueTriggerOne(bool value)
     {
         dialogueTriggerOne.SetActive (value);
