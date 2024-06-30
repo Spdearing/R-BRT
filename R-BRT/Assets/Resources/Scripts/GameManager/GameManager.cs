@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameSceneLoad()
     {
+
         Debug.Log("Initializing GameScene");
         InitializePlayerAndDetectionMeter();
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
@@ -108,18 +109,11 @@ public class GameManager : MonoBehaviour
 
         if (firstPlaythrough)
         {
+            
             Debug.Log("First playthrough setup");
             StartCoroutine(SmoothCameraRotationToFriend(mainCamera, friendLocation.position, 2));
             playerController.SetCameraLock(true);
             dialogueTriggerOne.SetActive(true);
-            
-            groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
-            groundBotSpawner.SpawnGroup1();
-            groundBotSpawner.SpawnGroup2();
-            groundBotSpawner.SpawnGroup3();
-            groundBotSpawner.SpawnGroup4();
-            enemyNumberOne = GameObject.FindWithTag("GroundBotGroup1").GetComponent<GameObject>();
-            enemyOneTransform = enemyNumberOne.transform;
         }
     }
     
@@ -182,7 +176,10 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    public void SetEnemyOne(GameObject gameObject)
+    {
+        this.enemyNumberOne = gameObject;
+    }
     public void SetFirstDialogueHit(bool value)
     {
         firstDialogueHit = value;
