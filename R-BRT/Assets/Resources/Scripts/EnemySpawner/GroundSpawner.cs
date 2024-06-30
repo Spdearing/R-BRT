@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -68,7 +67,7 @@ public class GroundBotSpawner : MonoBehaviour
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
 
                 enemy.name = "GroundBotGroup1";
-                enemy.tag = "Group1Enemy";
+                enemy.tag = "GroundBot";
                 gameManager.SetEnemyOne(group1[0]);
             }
             else
@@ -105,6 +104,7 @@ public class GroundBotSpawner : MonoBehaviour
 
 
                 enemy.name = "GroundBotGroup2";
+                enemy.tag = "GroundBot";
             }
             else
             {
@@ -130,6 +130,7 @@ public class GroundBotSpawner : MonoBehaviour
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
 
                 enemy.name = "GroundBotGroup3";
+                enemy.tag = "GroundBot";
             }
             else
             {
@@ -164,6 +165,7 @@ public class GroundBotSpawner : MonoBehaviour
 
 
                 enemy.name = "GroundBotGroup4";
+                enemy.tag = "GroundBot";
             }
             else
             {

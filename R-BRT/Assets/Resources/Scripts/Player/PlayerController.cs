@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-            walkingSound.Play();
+            
         }
 
         rb.useGravity = !OnSlope();

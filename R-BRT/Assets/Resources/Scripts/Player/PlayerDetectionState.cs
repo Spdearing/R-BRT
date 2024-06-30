@@ -36,6 +36,9 @@ public class PlayerDetectionState : MonoBehaviour
     [SerializeField] private bool detectedByFlyingBot;
     [SerializeField] private bool detectedBySpiderBot;
 
+    [Header("Game Object")]
+    [SerializeField] private GameObject DetectionMeter;
+
     public DetectionState currentState;
 
     public enum DetectionState
@@ -90,19 +93,19 @@ public class PlayerDetectionState : MonoBehaviour
 
                 if (playerController.ReturnCrouchingStatus(true))
                 {
-                    // Decrease detection increase rate when crouching
+                    
                     detection.IncreaseDetection(crouchingDetectionIncrease);
                     detectionIncreaseRate += 0.5f;
                 }
                 else if (jetpack.IsUsingJetpack(true))
                 {
-                    // Increase detection faster when using jetpack
+                    
                     detection.IncreaseDetection(detectionIncreaseRate * 2);
                     detectionIncreaseRate += 0.5f;
                 }
                 else
                 {
-                    // Default detection increase rate
+                    
                     detection.IncreaseDetection(detectionIncreaseRate);
                     detectionIncreaseRate += 0.5f;
                 }
@@ -111,6 +114,7 @@ public class PlayerDetectionState : MonoBehaviour
                 if (detection.ReturnStartingDetection() >= detection.GetDetectionMax())
                 {
                     Debug.Log("Max Detection");
+
                     ChangeDetectionState(DetectionState.detected);
                 }
                 break;
@@ -123,6 +127,7 @@ public class PlayerDetectionState : MonoBehaviour
                 // Transition to exploring state when detection is replenished
                 if (detection.ReturnStartingDetection() <= 0)
                 {
+                    
                     ChangeDetectionState(DetectionState.exploring);
                 }
                 break;
