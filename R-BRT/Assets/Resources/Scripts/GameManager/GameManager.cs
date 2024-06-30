@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializePlayerAndDetectionMeter()
     {
-        Debug.Log("Initializing Player and Detection Meter");
+        
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SmoothCameraRotationToFriend(Transform cameraTransform, Vector3 targetPosition, float duration)
     {
-        Debug.Log("Starting Smooth Camera Rotation");
+        
         Quaternion startRotation = cameraTransform.rotation;
         Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
         float elapsedTime = 0;
@@ -147,12 +147,12 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         cameraTransform.rotation = endRotation;
-        Debug.Log("Smooth Camera Rotation Completed");
+        
     }
 
     private IEnumerator SmoothCameraRotationToFirstEnemy(Transform cameraTransform, Vector3 targetPosition, float duration)
     {
-        Debug.Log("Starting Smooth Camera Rotation");
+        
         Quaternion startRotation = cameraTransform.rotation;
         Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
         float elapsedTime = 0;
@@ -164,13 +164,14 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         cameraTransform.rotation = endRotation;
-        Debug.Log("Smooth Camera Rotation Completed");
+        
     }
 
     public void StartSecondDialogue()
     {
         enemyOneTransform = enemyNumberOne.transform;
         StartCoroutine(SmoothCameraRotationToFirstEnemy(mainCamera, enemyOneTransform.position, 2));
+        playerController.SetPlayerActivity(false);
         playerController.SetCameraLock(true);
         dialogueTriggerTwo.SetActive(true);
 
