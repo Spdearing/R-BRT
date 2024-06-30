@@ -3,7 +3,47 @@ guid: 7c0640914e1ee7a4a858892dbf26ccc6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConcreteWall
+    second: {fileID: 2100000, guid: d8c957f81e9b3d7468748b3cadf518dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Directory
+    second: {fileID: 2100000, guid: 5c62658a3f624914f9bcbda1e4511f87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DirectoryScreen
+    second: {fileID: 2100000, guid: 3ee448d52c14b2a4eaa92fe2e29283f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ElevatorDoor
+    second: {fileID: 2100000, guid: 3f1a2046f00c84743aabc4133031e2e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Marble
+    second: {fileID: 2100000, guid: e43a98b4b8d311940acded1cf9669544, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Marble_2
+    second: {fileID: 2100000, guid: b33bdbf267e15c645bea906095bca980, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalPanel
+    second: {fileID: 2100000, guid: 9b3b9bf4a07ecbc48a90be647915b009, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalTrim
+    second: {fileID: 2100000, guid: 056c14814fb5ee54fa36d90ab903f839, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
