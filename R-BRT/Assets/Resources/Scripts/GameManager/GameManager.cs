@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
             case "GameScene":
                 Debug.Log("Handling Game Scene");
                 HandleGameSceneLoad();
+                playerController.SetPlayerActivity(false);
                 break;
             case "ChooseYourFriend":
             case "SaveTheWorld":
@@ -89,6 +90,7 @@ public class GameManager : MonoBehaviour
         friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
         playerIsSpotted = false;
         
+
 
         if (firstPlaythrough)
         {
@@ -120,7 +122,7 @@ public class GameManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        cameraTransform.rotation = endRotation;
+        
         Debug.Log("Smooth Camera Rotation Completed");
     }
 
@@ -129,8 +131,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Activating First Dialogue");
         yield return new WaitForSeconds(1.0f);
         dialogueTriggerOne.SetActive(true);
-        yield return new WaitForSeconds(25.0f);
+        yield return new WaitForSeconds(21.5f);
+        dialogueTriggerOne.SetActive(false);
         playerController.SetCameraLock(false);
+        playerController.SetPlayerActivity(true);
     }
 
     public void SetJetPackStatus(bool value)
