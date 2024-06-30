@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4850800433760982595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2423846155112669467}
+  - component: {fileID: 2754917353182667894}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2423846155112669467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4850800433760982595}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.000015258789, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2754917353182667894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4850800433760982595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e3651045226414390285fd02961e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasJetPack: 0
+  hasStealth: 0
+  playerIsSpotted: 0
+  firstPlaythrough: 0
+  firstDialogueHit: 0
+  secondDialogueHit: 0
+  player: {fileID: 0}
+  dialogueTriggerOne: {fileID: 0}
+  dialogueTriggerTwo: {fileID: 0}
+  dialogueTriggerThree: {fileID: 0}
+  enemyNumberOne: {fileID: 0}
+  DialogueTwoHitBox: {fileID: 0}
+  friendLocation: {fileID: 0}
+  mainCamera: {fileID: 0}
+  enemyOneTransform: {fileID: 0}
+  detectionMeter: {fileID: 0}
+  playerController: {fileID: 0}
+  groundBotSpawner: {fileID: 0}

@@ -234,11 +234,11 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        // Use the camera's forward and right vectors for movement direction
+        
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
-        // Remove the y component to keep the movement horizontal
+        
         forward.y = 0;
         right.y = 0;
 
@@ -251,13 +251,13 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 slopeMoveDirection = GetSlopeMoveDirection();
 
-            // Apply movement force on slopes
+            
             rb.AddForce(slopeMoveDirection * moveSpeed * 20f, ForceMode.Force);
 
-            // Apply additional force to keep player grounded
+            
             if (moveDirection == Vector3.zero)
             {
-                // Apply counter force to prevent sliding
+                
                 rb.AddForce(-slopeMoveDirection * moveSpeed * 20f, ForceMode.Force);
             }
             else
@@ -268,12 +268,16 @@ public class PlayerController : MonoBehaviour
         else if (isGrounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            walkingSound.Play();
+
+            
+            if (moveDirection != Vector3.zero && !walkingSound.isPlaying && !isCrouching)
+            {
+                walkingSound.Play();
+            }
         }
         else
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-            
         }
 
         rb.useGravity = !OnSlope();
