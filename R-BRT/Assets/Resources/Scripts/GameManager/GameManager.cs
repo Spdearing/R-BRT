@@ -89,8 +89,6 @@ public class GameManager : MonoBehaviour
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
         playerIsSpotted = false;
-        
-
 
         if (firstPlaythrough)
         {
@@ -122,7 +120,7 @@ public class GameManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+        cameraTransform.rotation = endRotation;
         Debug.Log("Smooth Camera Rotation Completed");
     }
 
@@ -131,7 +129,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Activating First Dialogue");
         yield return new WaitForSeconds(1.0f);
         dialogueTriggerOne.SetActive(true);
-        yield return new WaitForSeconds(21.5f);
+        yield return new WaitForSeconds(21.5f); // Duration for which the dialogue is active
         dialogueTriggerOne.SetActive(false);
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
