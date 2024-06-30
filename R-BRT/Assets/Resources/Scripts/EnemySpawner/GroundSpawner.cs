@@ -40,13 +40,10 @@ public class GroundBotSpawner : MonoBehaviour
         group2 = new GameObject[4];
         group3 = new GameObject[6];
         group4 = new GameObject[8];
-        SpawnGroup1();
-        SpawnGroup2();
-        SpawnGroup3();
-        SpawnGroup4();
+
     }
 
-    void SpawnGroup1()
+    public void SpawnGroup1()
     {
         for (int i = 0; i < group1.Length; i++)
         {
@@ -72,7 +69,7 @@ public class GroundBotSpawner : MonoBehaviour
         }
     }
 
-    void SpawnGroup2()
+    public void SpawnGroup2()
     {
         for (int i = 0; i < group2.Length; i++)
         {
@@ -107,7 +104,7 @@ public class GroundBotSpawner : MonoBehaviour
         }
     }
 
-    void SpawnGroup3()
+    public void SpawnGroup3()
     {
         for (int i = 0; i < group3.Length; i++)
         {
@@ -131,7 +128,7 @@ public class GroundBotSpawner : MonoBehaviour
             }
         }
     }
-    void SpawnGroup4()
+    public void SpawnGroup4()
     {
         for (int i = 0; i < group4.Length; i++)
         {
