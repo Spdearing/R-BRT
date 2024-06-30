@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ElevatorCeiling
+    second: {fileID: 2100000, guid: eb528768e0d943c4f8729aec8f540d3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorTiles
+    second: {fileID: 2100000, guid: 36ff7c5027d775c46a1c3e4d3f21286e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: FloorTilesBrown
-    second: {fileID: 2100000, guid: 78a89520d8acd164b991088a665b759e, type: 2}
+    second: {fileID: 2100000, guid: 9b4d0f5e19d2655448c7b349a8f1a5ab, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
