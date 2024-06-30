@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource invisiblityDuration;
     [SerializeField] private AudioSource walkingSound;
     [SerializeField] private AudioSource sprintingSound;
+    [SerializeField] private AudioSource jumpingSound;
 
     [Header("Scripts")]
     [SerializeField] private Jetpack jetPack;
@@ -207,6 +208,7 @@ public class PlayerController : MonoBehaviour
         // Jump
         if (Input.GetKey(jumpKey) && readyToJump && isGrounded)
         {
+            jumpingSound.Play();
             readyToJump = false;
             Jump();
             playerAnimator.SetBool("isJumping", true);
