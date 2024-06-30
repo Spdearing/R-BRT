@@ -24,6 +24,9 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private GameManager gameManger;
     [SerializeField] private PlayerController playerController;
 
+    [Header("GameObject")]
+    [SerializeField] private GameObject continueText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
     {
         for (int j = 0; j < fullTexts.Length; j++)
         {
+            continueText.SetActive(false);
             uiText.text = "";
             string fullText = fullTexts[j];
 
@@ -52,8 +56,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
                 uiText.text = fullText.Substring(0, i);
                 yield return new WaitForSeconds(delay);
             }
-
-            
+            continueText.SetActive(true);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
         gameManger.SetDialogueTriggerOne(false);
