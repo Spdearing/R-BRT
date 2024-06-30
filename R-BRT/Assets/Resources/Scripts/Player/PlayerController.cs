@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        playerIsActive = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.freezeRotation = true;
