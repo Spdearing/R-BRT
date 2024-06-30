@@ -169,6 +169,7 @@ public class GameManager : MonoBehaviour
 
     public void StartSecondDialogue()
     {
+        enemyOneTransform = enemyNumberOne.transform;
         StartCoroutine(SmoothCameraRotationToFirstEnemy(mainCamera, enemyOneTransform.position, 2));
         playerController.SetCameraLock(true);
         dialogueTriggerOne.SetActive(true);
