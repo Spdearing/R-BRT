@@ -19,11 +19,6 @@ public class UIController : MonoBehaviour
         phoenixChipMenu.SetActive(false);
     }
 
-    private void Update()
-    {
-
-    }
-
     public void EnableCursor()
     {
         Cursor.visible = true;

@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("First playthrough setup");
             StartCoroutine(SmoothCameraRotation(mainCamera, friendLocation.position, 2));
             playerController.SetCameraLock(true);
-            StartCoroutine(ActivateFirstDialogue());
+            dialogueTriggerOne.SetActive(true);
         }
     }
 
@@ -124,17 +124,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Smooth Camera Rotation Completed");
     }
 
-    private IEnumerator ActivateFirstDialogue()
-    {
-        Debug.Log("Activating First Dialogue");
-        yield return new WaitForSeconds(1.0f);
-        dialogueTriggerOne.SetActive(true);
-        yield return new WaitForSeconds(21.5f); // Duration for which the dialogue is active
-        dialogueTriggerOne.SetActive(false);
-        playerController.SetCameraLock(false);
-        playerController.SetPlayerActivity(true);
-    }
 
+    public void SetDialogueTriggerOne(bool value)
+    {
+        dialogueTriggerOne.SetActive (value);
+    }
     public void SetJetPackStatus(bool value)
     {
         hasJetPack = value;
