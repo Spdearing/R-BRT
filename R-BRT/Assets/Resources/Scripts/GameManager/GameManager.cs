@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
         enemyOneTransform = enemyNumberOne.transform;
         StartCoroutine(SmoothCameraRotationToFirstEnemy(mainCamera, enemyOneTransform.position, 2));
         playerController.SetCameraLock(true);
-        dialogueTriggerOne.SetActive(true);
+        dialogueTriggerTwo.SetActive(true);
 
     }
 
@@ -188,6 +188,10 @@ public class GameManager : MonoBehaviour
     public void SetDialogueTriggerOne(bool value)
     {
         dialogueTriggerOne.SetActive (value);
+    }
+    public void SetDialogueTriggerTwo(bool value)
+    {
+        dialogueTriggerTwo.SetActive(value);
     }
     public void SetJetPackStatus(bool value)
     {

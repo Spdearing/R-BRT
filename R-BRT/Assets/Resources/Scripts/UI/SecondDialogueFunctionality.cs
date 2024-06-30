@@ -54,7 +54,7 @@ public class SecondDialogueFunctionality : MonoBehaviour
             continueText.SetActive(true);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
-        gameManger.SetDialogueTriggerOne(false);
+        gameManger.SetDialogueTriggerTwo(false);
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
     }
