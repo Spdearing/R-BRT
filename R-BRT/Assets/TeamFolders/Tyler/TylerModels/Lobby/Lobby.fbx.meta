@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: SecondFloorPane
+    second: {fileID: 2100000, guid: f84bfab2d38f798458b88f0e4afa101e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: WindowBorder
     second: {fileID: 2100000, guid: 4fd6ed3d874d43a4d8155611aa7b84e3, type: 2}
   materials:
