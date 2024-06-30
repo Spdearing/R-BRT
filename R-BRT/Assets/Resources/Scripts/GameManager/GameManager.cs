@@ -17,7 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject dialogueTriggerOne;
     [SerializeField] private GameObject dialogueTriggerTwo;
+    [SerializeField] private GameObject dialogueTriggerThree;
     [SerializeField] private GameObject enemyNumberOne;
+    [SerializeField] private GameObject DialogueTwoHitBox;
 
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
@@ -174,6 +176,7 @@ public class GameManager : MonoBehaviour
         playerController.SetPlayerActivity(false);
         playerController.SetCameraLock(true);
         dialogueTriggerTwo.SetActive(true);
+        DialogueTwoHitBox.gameObject.SetActive(false);
 
     }
 
