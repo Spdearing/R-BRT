@@ -9,7 +9,6 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private TMP_Text uiText;
 
     [Header("Strings")]
-    [SerializeField] private string currentText = "";
     [SerializeField] private string[] fullTexts;
     [SerializeField] private string fullText;
     [SerializeField] private string fullText2;
@@ -18,7 +17,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private string fullText5;
 
     [Header("Floats")]
-    [SerializeField] private float delay;
+    [SerializeField] private float delay = 0.035f;
 
     [Header("Scripts")]
     [SerializeField] private GameManager gameManger;
@@ -27,19 +26,30 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [Header("GameObject")]
     [SerializeField] private GameObject continueText;
 
+    private bool skipText;
 
-    // Start is called before the first frame update
     void Start()
     {
-        gameManger = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        // Initialize GameManager and PlayerController references if not set in Inspector
+        if (gameManger == null)
+        {
+            gameManger = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        }
+
+        if (playerController == null)
+        {
+            playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        }
+
+        // Initialize fullTexts array with provided text
         fullTexts = new string[5];
         fullTexts[0] = fullText;
         fullTexts[1] = fullText2;
         fullTexts[2] = fullText3;
         fullTexts[3] = fullText4;
         fullTexts[4] = fullText5;
-        delay = .035f;
+
+        // Start the dialogue coroutine
         StartCoroutine(ShowDialogue());
     }
 
@@ -51,18 +61,33 @@ public class FirstDialogueFunctionality : MonoBehaviour
             uiText.text = "";
             string fullText = fullTexts[j];
 
+            skipText = false;
             for (int i = 0; i <= fullText.Length; i++)
             {
-                uiText.text = fullText.Substring(0, i);
-                yield return new WaitForSeconds(delay);
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    skipText = true;
+                }
+
+                if (skipText)
+                {
+                    uiText.text = fullText;
+                    break;
+                }
+                else
+                {
+                    uiText.text = fullText.Substring(0, i);
+                    yield return new WaitForSeconds(delay);
+                }
             }
+
             continueText.SetActive(true);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
+
         gameManger.SetDialogueTriggerOne(false);
         gameManger.SetFirstDialogueHit(true);
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
-        
     }
 }
