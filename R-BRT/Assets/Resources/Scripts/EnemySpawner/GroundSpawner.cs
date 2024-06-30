@@ -31,15 +31,23 @@ public class GroundBotSpawner : MonoBehaviour
 
     [Header("Nav Mesh Agent")]
     [SerializeField] private NavMeshAgent groundBotAI;
-    
+
+    [Header("Script")]
+    [SerializeField] private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.Instance;
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         group1 = new GameObject[1];
         group2 = new GameObject[4];
         group3 = new GameObject[6];
         group4 = new GameObject[8];
+        SpawnGroup1();
+        SpawnGroup2();
+        SpawnGroup3(); 
+        SpawnGroup4();
 
     }
 
@@ -61,6 +69,7 @@ public class GroundBotSpawner : MonoBehaviour
 
                 enemy.name = "GroundBotGroup1";
                 enemy.tag = "Group1Enemy";
+                gameManager.SetEnemyOne(group1[0]);
             }
             else
             {
@@ -87,13 +96,13 @@ public class GroundBotSpawner : MonoBehaviour
                 navMeshAgent.height = 1.0f;
                 enemy.AddComponent<GroundBotAIMovement>();
                 GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
-                
+
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
                 if (navMeshAgent != null) groundBotAI = navMeshAgent;
                 if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
-                
+
 
                 enemy.name = "GroundBotGroup2";
             }
@@ -119,7 +128,7 @@ public class GroundBotSpawner : MonoBehaviour
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
-                
+
                 enemy.name = "GroundBotGroup3";
             }
             else
@@ -152,7 +161,7 @@ public class GroundBotSpawner : MonoBehaviour
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
                 if (navMeshAgent != null) groundBotAI = navMeshAgent;
                 if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
-                
+
 
                 enemy.name = "GroundBotGroup4";
             }
@@ -176,10 +185,10 @@ public class GroundBotSpawner : MonoBehaviour
     public GroundBotHeadMovement ReturnBotHeadMovement()
     {
         return this.groundBotHeadMovementInstance;
-    }    
+    }
 
-    public EnemyGroundBotFieldOfView ReturnEnemyFieldOfViewInstance() 
-    { 
+    public EnemyGroundBotFieldOfView ReturnEnemyFieldOfViewInstance()
+    {
         return this.enemyGroundBotFieldViewInstance;
     }
 
