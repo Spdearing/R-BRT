@@ -13,10 +13,9 @@ public class SecondDialogueFunctionality : MonoBehaviour
     [SerializeField] private string[] fullTexts;
     [SerializeField] private string fullText;
     [SerializeField] private string fullText2;
-    
 
     [Header("Floats")]
-    [SerializeField] private float delay;
+    [SerializeField] private float delay = 0.035f;
 
     [Header("Scripts")]
     [SerializeField] private GameManager gameManger;
@@ -25,6 +24,7 @@ public class SecondDialogueFunctionality : MonoBehaviour
     [Header("GameObject")]
     [SerializeField] private GameObject continueText;
 
+    private bool skipText;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,6 @@ public class SecondDialogueFunctionality : MonoBehaviour
         fullTexts = new string[2];
         fullTexts[0] = fullText;
         fullTexts[1] = fullText2;
-        delay = .035f;
         StartCoroutine(ShowDialogue());
     }
 
@@ -46,14 +45,30 @@ public class SecondDialogueFunctionality : MonoBehaviour
             uiText.text = "";
             string fullText = fullTexts[j];
 
+            skipText = false;
             for (int i = 0; i <= fullText.Length; i++)
             {
-                uiText.text = fullText.Substring(0, i);
-                yield return new WaitForSeconds(delay);
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    skipText = true;
+                }
+
+                if (skipText)
+                {
+                    uiText.text = fullText;
+                    break;
+                }
+                else
+                {
+                    uiText.text = fullText.Substring(0, i);
+                    yield return new WaitForSeconds(delay);
+                }
             }
+
             continueText.SetActive(true);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
+
         gameManger.SetDialogueTriggerTwo(false);
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
