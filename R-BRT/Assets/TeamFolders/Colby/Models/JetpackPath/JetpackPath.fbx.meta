@@ -3,7 +3,27 @@ guid: 82c71a3ec043ae04fa81e64d8ca07676
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ceiling_Tileable
+    second: {fileID: 2100000, guid: a953361ca4ca9ae45b8365436b164212, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete
+    second: {fileID: 2100000, guid: 7535d61f7e7abd44190070ba25076020, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorTiles
+    second: {fileID: 2100000, guid: 36ff7c5027d775c46a1c3e4d3f21286e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lvl2_Wall2
+    second: {fileID: 2100000, guid: 6dbf1d9b65b315c4c83f08e96db54238, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
