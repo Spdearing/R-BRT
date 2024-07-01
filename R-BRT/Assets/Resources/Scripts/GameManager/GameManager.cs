@@ -189,6 +189,11 @@ public class GameManager : MonoBehaviour
         dialogueTwoHitBox.SetActive(false);
     }
 
+    public void SetDialogueTwoHit(bool value)
+    {
+        secondDialogueHit = value;
+    }
+
     public void TurnOffSecondDialogueHitBox()
     {
         dialogueTwoHitBox.SetActive(false);
