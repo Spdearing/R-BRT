@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,13 +18,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueTriggerTwo;
     [SerializeField] private GameObject dialogueTriggerThree;
     [SerializeField] private GameObject enemyNumberOne;
-    [SerializeField] private GameObject DialogueTwoHitBox;
+    [SerializeField] private GameObject dialogueTwoHitBox;
 
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform mainCamera;
     [SerializeField] private Transform enemyOneTransform;
-
 
     [Header("GameManager Instance")]
     public static GameManager Instance;
@@ -37,34 +35,29 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("GameManager Awake");
-
         if (Instance == null)
         {
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
             firstPlaythrough = true;
             firstDialogueHit = false;
             secondDialogueHit = false;
             Instance = this;
             DontDestroyOnLoad(gameObject); // This makes the GameObject persistent across scenes
-           
-            Debug.Log("GameManager Instance Created");
         }
         else
         {
-            Debug.Log("Duplicate GameManager Destroyed");
             Destroy(gameObject); // Destroy duplicate GameManager instances
         }
     }
 
     void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
-        Debug.Log("GameManager Start");
+        
     }
+
 
     void OnDestroy()
     {
-        Debug.Log("GameManager OnDestroy");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -75,19 +68,8 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "GameScene":
-
-                if(firstPlaythrough && !firstDialogueHit)
-                {
-                    Debug.Log("first Playthrough");
-                    HandleGameSceneLoad();
-                    playerController.SetPlayerActivity(false);
-                }
-                else
-                {
-                    Debug.Log("Doing this instead");
-                    LoadLevel();
-                }
-                
+                Debug.Log("First playtrhough");
+                HandleGameSceneLoad();
                 break;
 
             case "ChooseYourFriend":
@@ -95,10 +77,12 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 StartCoroutine(TransitionBackToStart());
                 break;
+
             case "Player_Enemy_TestScene":
                 Time.timeScale = 1.0f;
                 InitializePlayerAndDetectionMeter();
                 break;
+
             default:
                 Debug.LogWarning($"Scene '{scene.name}' not handled in OnSceneLoaded");
                 break;
@@ -107,13 +91,29 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameSceneLoad()
     {
-        Debug.Log("Initializing GameScene");
+        if (firstPlaythrough && !firstDialogueHit)
+        {
+            InitializeGameScene();
+            playerController.SetPlayerActivity(false);
+        }
+        else
+        {
+            LoadLevel();
+        }
+    }
+
+    private void InitializeGameScene()
+    {
         dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
-        dialogueTriggerTwo = GameObject.FindWithTag("DialogieTriggerTwo");
-        DialogueTwoHitBox = GameObject.FindWithTag("DialogueSecondEncounter");
-        dialogueTriggerOne.SetActive(true);
+        dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
+        dialogueTwoHitBox = GameObject.FindWithTag("SecondDialogueEncounter");
+        Debug.Log("turning second text ");
         dialogueTriggerTwo.SetActive(false);
-        DialogueTwoHitBox.SetActive(true);
+        Debug.Log("turning first text on");
+        dialogueTriggerOne.SetActive(true);
+        Debug.Log("turning hit box on");
+        dialogueTwoHitBox.SetActive(true);
+
         InitializePlayerAndDetectionMeter();
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
@@ -121,22 +121,22 @@ public class GameManager : MonoBehaviour
 
         if (firstPlaythrough)
         {
-            Debug.Log("First playthrough setup");
-
             StartCoroutine(SmoothCameraRotationToFriend(mainCamera, friendLocation.position, 2));
-            playerController.SetCameraLock(true);  
+            playerController.SetCameraLock(true);
         }
     }
-    
+
     private void LoadLevel()
     {
         InitializePlayerAndDetectionMeter();
         dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
-        dialogueTriggerTwo = GameObject.FindWithTag("DialogieTriggerTwo");
-        DialogueTwoHitBox = GameObject.FindWithTag("DialogueSecondEncounter");
+        dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
+        dialogueTwoHitBox = GameObject.FindWithTag("DialogueSecondEncounter");
+
         dialogueTriggerOne.SetActive(false);
         dialogueTriggerTwo.SetActive(false);
-        DialogueTwoHitBox.SetActive(false);
+        dialogueTwoHitBox.SetActive(false);
+
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
         playerIsSpotted = false;
@@ -144,16 +144,13 @@ public class GameManager : MonoBehaviour
 
     private void InitializePlayerAndDetectionMeter()
     {
-        
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
-        
     }
 
     private IEnumerator SmoothCameraRotationToFriend(Transform cameraTransform, Vector3 targetPosition, float duration)
     {
-        
         Quaternion startRotation = cameraTransform.rotation;
         Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
         float elapsedTime = 0;
@@ -165,12 +162,10 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         cameraTransform.rotation = endRotation;
-        
     }
 
     private IEnumerator SmoothCameraRotationToFirstEnemy(Transform cameraTransform, Vector3 targetPosition, float duration)
     {
-        
         Quaternion startRotation = cameraTransform.rotation;
         Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
         float elapsedTime = 0;
@@ -182,7 +177,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         cameraTransform.rotation = endRotation;
-        
     }
 
     public void StartSecondDialogue()
@@ -192,32 +186,34 @@ public class GameManager : MonoBehaviour
         playerController.SetPlayerActivity(false);
         playerController.SetCameraLock(true);
         dialogueTriggerTwo.SetActive(true);
-        DialogueTwoHitBox.gameObject.SetActive(false);
-
+        dialogueTwoHitBox.SetActive(false);
     }
 
     public void TurnOffSecondDialogueHitBox()
     {
-        DialogueTwoHitBox.SetActive(false);
+        dialogueTwoHitBox.SetActive(false);
     }
-
 
     public void SetEnemyOne(GameObject gameObject)
     {
         this.enemyNumberOne = gameObject;
     }
+
     public void SetFirstDialogueHit(bool value)
     {
         firstDialogueHit = value;
     }
+
     public void SetDialogueTriggerOne(bool value)
     {
-        dialogueTriggerOne.SetActive (value);
+        dialogueTriggerOne.SetActive(value);
     }
+
     public void SetDialogueTriggerTwo(bool value)
     {
         dialogueTriggerTwo.SetActive(value);
     }
+
     public void SetJetPackStatus(bool value)
     {
         hasJetPack = value;
@@ -260,7 +256,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator TransitionBackToStart()
     {
-        Debug.Log("Transitioning Back to Start");
         yield return new WaitForSeconds(7.5f);
         SceneManager.LoadScene("MainMenuScene");
     }
