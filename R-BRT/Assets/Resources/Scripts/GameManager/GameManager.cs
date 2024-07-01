@@ -37,14 +37,14 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
         {
-            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // This makes the GameObject persistent across scenes
             firstPlaythrough = true;
             firstDialogueHit = false;
             secondDialogueHit = false;
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // This makes the GameObject persistent across scenes
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject); // Destroy duplicate GameManager instances
         }
@@ -52,13 +52,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
+        }
     }
-
 
     void OnDestroy()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -68,7 +73,7 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "GameScene":
-                Debug.Log("First playtrhough");
+                Debug.Log("First playthrough");
                 HandleGameSceneLoad();
                 break;
 
@@ -132,22 +137,17 @@ public class GameManager : MonoBehaviour
     {
         InitializePlayerAndDetectionMeter();
         Debug.Log("LoadLevel");
-        //dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
-        //dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
-        //dialogueTwoHitBox = GameObject.FindWithTag("SecondDialogueEncounter");
-
-        //dialogueTriggerOne.SetActive(false);
-        //dialogueTriggerTwo.SetActive(false);
-        //dialogueTwoHitBox.SetActive(false);
 
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
-        friendLocation = GameObject.Find("S-4MTired").GetComponent<Transform>();  // look at friend 
+        friendLocation = GameObject.Find("S-4MTired").GetComponent<Transform>();
         playerIsSpotted = false;
     }
 
     private void InitializePlayerAndDetectionMeter()
     {
-
+        player = GameObject.Find("Player");
+        playerController = player.GetComponent<PlayerController>();
+        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
     }
 
     private IEnumerator SmoothCameraRotationToFriend(Transform cameraTransform, Vector3 targetPosition, float duration)
