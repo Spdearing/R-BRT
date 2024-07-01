@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6355352016086587148}
   m_Layer: 0
   m_Name: RoamingPoint12
-  m_TagString: PatrolPoint10
+  m_TagString: PointPoint12
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 3736677939695112708}
   m_Layer: 0
   m_Name: RoamingPoint11
-  m_TagString: PatrolPoint10
+  m_TagString: PatrolPoint11
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
