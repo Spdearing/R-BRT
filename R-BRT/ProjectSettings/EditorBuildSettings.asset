@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: 851b43a7f2ee45a4186b06beb18337d2
   - enabled: 1
-    path: Assets/Scenes/ChooseYourFriend.unity
-    guid: 9fdd778ed20e6204cba699daa97381df
+    path: Assets/Scenes/SamDies.unity
+    guid: 820e578546b180946ad7b5d197c4d4be
   - enabled: 1
-    path: Assets/Scenes/SaveTheWorld.unity
-    guid: e939968c562a4e341b7724d40ac0b4e8
+    path: Assets/Scenes/VictorySamLives.unity
+    guid: e6dc0f022d26b7740af255f58fd73950
   m_configObjects: {}
