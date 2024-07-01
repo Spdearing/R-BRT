@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
             secondDialogueHit = false;
             Instance = this;
             DontDestroyOnLoad(gameObject); // This makes the GameObject persistent across scenes
-            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
+           
             Debug.Log("GameManager Instance Created");
         }
         else
@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
         Debug.Log("GameManager Start");
     }
 
@@ -74,17 +75,21 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "GameScene":
+
                 if(firstPlaythrough && !firstDialogueHit)
                 {
+                    Debug.Log("first Playthrough");
                     HandleGameSceneLoad();
                     playerController.SetPlayerActivity(false);
                 }
                 else
                 {
+                    Debug.Log("Doing this instead");
                     LoadLevel();
                 }
                 
                 break;
+
             case "ChooseYourFriend":
             case "SaveTheWorld":
                 Time.timeScale = 1;
@@ -102,8 +107,13 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameSceneLoad()
     {
-
         Debug.Log("Initializing GameScene");
+        dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
+        dialogueTriggerTwo = GameObject.FindWithTag("DialogieTriggerTwo");
+        DialogueTwoHitBox = GameObject.FindWithTag("DialogueSecondEncounter");
+        dialogueTriggerOne.SetActive(true);
+        dialogueTriggerTwo.SetActive(false);
+        DialogueTwoHitBox.SetActive(true);
         InitializePlayerAndDetectionMeter();
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
@@ -111,17 +121,22 @@ public class GameManager : MonoBehaviour
 
         if (firstPlaythrough)
         {
-            
             Debug.Log("First playthrough setup");
+
             StartCoroutine(SmoothCameraRotationToFriend(mainCamera, friendLocation.position, 2));
-            playerController.SetCameraLock(true);
-            dialogueTriggerOne.SetActive(true);
+            playerController.SetCameraLock(true);  
         }
     }
     
     private void LoadLevel()
     {
         InitializePlayerAndDetectionMeter();
+        dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
+        dialogueTriggerTwo = GameObject.FindWithTag("DialogieTriggerTwo");
+        DialogueTwoHitBox = GameObject.FindWithTag("DialogueSecondEncounter");
+        dialogueTriggerOne.SetActive(false);
+        dialogueTriggerTwo.SetActive(false);
+        DialogueTwoHitBox.SetActive(false);
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
         playerIsSpotted = false;
@@ -133,6 +148,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
         detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
+        
     }
 
     private IEnumerator SmoothCameraRotationToFriend(Transform cameraTransform, Vector3 targetPosition, float duration)
@@ -178,6 +194,11 @@ public class GameManager : MonoBehaviour
         dialogueTriggerTwo.SetActive(true);
         DialogueTwoHitBox.gameObject.SetActive(false);
 
+    }
+
+    public void TurnOffSecondDialogueHitBox()
+    {
+        DialogueTwoHitBox.SetActive(false);
     }
 
 

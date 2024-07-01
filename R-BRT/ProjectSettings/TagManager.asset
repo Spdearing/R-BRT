@@ -46,6 +46,8 @@ TagManager:
   - PointPoint12
   - SecondDialogueEncounter
   - Group1Enemy
+  - DialogueTriggerOne
+  - DialogueTriggerTwo
   layers:
   - Default
   - TransparentFX
