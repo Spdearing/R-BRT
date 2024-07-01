@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
@@ -358,6 +359,7 @@ public class PlayerController : MonoBehaviour
             // Start sprinting
             if (!isSprinting)
             {
+                walkingSound.pitch = 2.5f;
                 isSprinting = true;
                 Sprint();
                 HandleSprintAnimation();
@@ -368,6 +370,7 @@ public class PlayerController : MonoBehaviour
             
             if (isSprinting)
             {
+                walkingSound.pitch = 1.0f;
                 isSprinting = false;
                 Walk();
                 HandleSprintAnimation();
