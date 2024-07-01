@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
     private void LoadLevel()
     {
         InitializePlayerAndDetectionMeter();
+        Debug.Log("LoadLevel");
         //dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
         //dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
         //dialogueTwoHitBox = GameObject.FindWithTag("SecondDialogueEncounter");
