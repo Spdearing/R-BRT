@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
     }
 
 
@@ -129,13 +129,13 @@ public class GameManager : MonoBehaviour
     private void LoadLevel()
     {
         InitializePlayerAndDetectionMeter();
-        dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
-        dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
-        dialogueTwoHitBox = GameObject.FindWithTag("DialogueSecondEncounter");
+        //dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
+        //dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
+        //dialogueTwoHitBox = GameObject.FindWithTag("SecondDialogueEncounter");
 
-        dialogueTriggerOne.SetActive(false);
-        dialogueTriggerTwo.SetActive(false);
-        dialogueTwoHitBox.SetActive(false);
+        //dialogueTriggerOne.SetActive(false);
+        //dialogueTriggerTwo.SetActive(false);
+        //dialogueTwoHitBox.SetActive(false);
 
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
