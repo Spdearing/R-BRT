@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
 
         InitializePlayerAndDetectionMeter();
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
-        friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
+        friendLocation = GameObject.Find("S-4MTired").GetComponent<Transform>();
         playerIsSpotted = false;
 
         if (firstPlaythrough)
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         //dialogueTwoHitBox.SetActive(false);
 
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
-        friendLocation = GameObject.Find("S-4MTiredShowcase").GetComponent<Transform>();
+        friendLocation = GameObject.Find("S-4MTired").GetComponent<Transform>();  // look at friend 
         playerIsSpotted = false;
     }
 
