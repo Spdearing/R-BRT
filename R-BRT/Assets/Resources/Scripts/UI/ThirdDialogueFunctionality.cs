@@ -31,9 +31,7 @@ public class ThirdDialogueFunctionality : MonoBehaviour
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        fullTexts = new string[2];
-        fullTexts[0] = fullText;
-        fullTexts[1] = fullText2;
+        fullTexts = new string[2] { fullText, fullText2 };
         StartCoroutine(ShowDialogue());
     }
 
@@ -69,6 +67,11 @@ public class ThirdDialogueFunctionality : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
+        EndDialogue();
+    }
+
+    private void EndDialogue()
+    {
         gameManager.SetDialogueTriggerThree(false);
         gameManager.SetDialogueThreeHit(true);
         gameManager.TurnOffThirdDialogueHitBox();

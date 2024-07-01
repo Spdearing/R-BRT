@@ -118,39 +118,16 @@ public class GameManager : MonoBehaviour
 
     private void InitializeGameScene()
     {
-        dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
-        dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
-        dialogueTriggerThree = GameObject.FindWithTag("DialogueTriggerThree");
-        dialogueTwoHitBox = GameObject.FindWithTag("SecondDialogueEncounter");
-        dialogueThreeHitBox = GameObject.FindWithTag("ThirdDialogueEncounter");
-        Debug.Log("turning second text ");
-        dialogueTriggerTwo.SetActive(false);
-        Debug.Log("turning Off Third Dialogue");
-        dialogueTriggerThree.SetActive(false);
-        Debug.Log("turning first text on");
-        dialogueTriggerOne.SetActive(true);
-        Debug.Log("turning hit box on");
-        dialogueTwoHitBox.SetActive(true);
-        Debug.Log("turning hit box 3 on");
-        dialogueThreeHitBox.SetActive(true);
-
-        hallwayViewPoint = GameObject.Find("HallwayViewPoint");
-        elevatorViewPoint = GameObject.Find("ElevatorViewPoint");
-        janitorClosetViewPoint = GameObject.Find("JanitorViewPoint");
-        hallwayTransform = hallwayViewPoint.GetComponent<Transform>();
-        elevatorTransform = elevatorViewPoint.GetComponent<Transform>();
-        janitorClosetTransform = janitorClosetViewPoint.GetComponent<Transform>();
-
-        player = GameObject.Find("Player");
-        playerController = player.GetComponent<PlayerController>();
-        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
+        InitializeTextBoxes();
+        InitializeViewPoints();
+        InitializePlayerAndDetectionMeter();
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTired").GetComponent<Transform>();
         playerIsSpotted = false;
 
         if (firstPlaythrough)
         {
-            StartCoroutine(SmoothCameraRotationToFriend(mainCamera, friendLocation.position, 2));
+            StartCoroutine(SmoothCameraRotation(mainCamera, friendLocation.position, 2));
             playerController.SetCameraLock(true);
         }
     }
@@ -165,17 +142,52 @@ public class GameManager : MonoBehaviour
         playerIsSpotted = false;
     }
 
+    private void InitializeTextBoxes()
+    {
+        dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
+        dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
+        dialogueTriggerThree = GameObject.FindWithTag("DialogueTriggerThree");
+        dialogueTwoHitBox = GameObject.FindWithTag("SecondDialogueEncounter");
+        dialogueThreeHitBox = GameObject.FindWithTag("ThirdDialogueEncounter");
+
+        if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(true);
+        if (dialogueTriggerTwo != null) dialogueTriggerTwo.SetActive(false);
+        if (dialogueTriggerThree != null) dialogueTriggerThree.SetActive(false);
+        if (dialogueTwoHitBox != null) dialogueTwoHitBox.SetActive(true);
+        if (dialogueThreeHitBox != null) dialogueThreeHitBox.SetActive(true);
+    }
+
+    private void InitializeViewPoints()
+    {
+        hallwayViewPoint = GameObject.Find("HallwayViewPoint");
+        elevatorViewPoint = GameObject.Find("ElevatorViewPoint");
+        janitorClosetViewPoint = GameObject.Find("JanitorViewPoint");
+
+        hallwayTransform = hallwayViewPoint != null ? hallwayViewPoint.GetComponent<Transform>() : null;
+        elevatorTransform = elevatorViewPoint != null ? elevatorViewPoint.GetComponent<Transform>() : null;
+        janitorClosetTransform = janitorClosetViewPoint != null ? janitorClosetViewPoint.GetComponent<Transform>() : null;
+    }
+
     private void InitializePlayerAndDetectionMeter()
     {
         player = GameObject.Find("Player");
-        playerController = player.GetComponent<PlayerController>();
-        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
+        if (player != null)
+        {
+            playerController = player.GetComponent<PlayerController>();
+        }
+
+        detectionMeter = GameObject.Find("EnemyDetectionManager")?.GetComponent<DetectionMeter>();
     }
 
-    private IEnumerator SmoothCameraRotationToFriend(Transform cameraTransform, Vector3 targetPosition, float duration)
+    private IEnumerator SmoothCameraRotation(Transform cameraTransform, Vector3 targetPosition, float duration, bool inverse = false)
     {
         Quaternion startRotation = cameraTransform.rotation;
-        Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
+        Vector3 direction = targetPosition - cameraTransform.position;
+        if (inverse)
+        {
+            direction = -direction;
+        }
+        Quaternion endRotation = Quaternion.LookRotation(direction);
         float elapsedTime = 0;
 
         while (elapsedTime < duration)
@@ -183,36 +195,6 @@ public class GameManager : MonoBehaviour
             cameraTransform.rotation = Quaternion.Lerp(startRotation, endRotation, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
-        }
-        cameraTransform.rotation = endRotation;
-    }
-
-    private IEnumerator SmoothCameraRotationToFirstEnemy(Transform cameraTransform, Vector3 targetPosition, float duration)
-    {
-        Quaternion startRotation = cameraTransform.rotation;
-        Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
-        float elapsedTime = 0;
-
-        while (elapsedTime < duration)
-        {
-            cameraTransform.rotation = Quaternion.Lerp(startRotation, endRotation, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        cameraTransform.rotation = endRotation;
-    }
-
-    private IEnumerator SmoothCameraRotationHallway(Transform cameraTransform, Vector3 targetPosition, float duration)
-    {
-        Quaternion startRotation = cameraTransform.rotation;
-        Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
-        float elapsedTime = 0;
-
-        while (elapsedTime < duration)
-        {
-            cameraTransform.rotation = Quaternion.Lerp(startRotation, endRotation, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForSeconds(2.0f);
         }
         cameraTransform.rotation = endRotation;
     }
@@ -220,7 +202,7 @@ public class GameManager : MonoBehaviour
     public void StartSecondDialogue()
     {
         enemyOneTransform = enemyNumberOne.transform;
-        StartCoroutine(SmoothCameraRotationToFirstEnemy(mainCamera, enemyOneTransform.position, 2));
+        StartCoroutine(SmoothCameraRotation(mainCamera, enemyOneTransform.position, 2));
         playerController.SetPlayerActivity(false);
         playerController.SetCameraLock(true);
         dialogueTriggerTwo.SetActive(true);
@@ -229,13 +211,25 @@ public class GameManager : MonoBehaviour
 
     public void StartThirdDialogue()
     {
-        StartCoroutine(SmoothCameraRotationHallway(mainCamera, hallwayTransform.position, 2));
-        StartCoroutine(SmoothCameraRotationHallway(mainCamera, elevatorTransform.position, 2));
-        StartCoroutine(SmoothCameraRotationHallway(mainCamera, janitorClosetTransform.position, 2));
+        StartCoroutine(StartThirdDialogueSequence());
+    }
+
+    private IEnumerator StartThirdDialogueSequence()
+    {
         playerController.SetPlayerActivity(false);
         playerController.SetCameraLock(true);
         dialogueTriggerThree.SetActive(true);
         dialogueThreeHitBox.SetActive(false);
+        StartCoroutine(SmoothCameraRotation(mainCamera, hallwayTransform.position, 2));
+        yield return new WaitForSeconds(4f);
+
+        StartCoroutine(SmoothCameraRotation(mainCamera, elevatorTransform.position, 2, true)); // Lerp in the opposite direction
+        yield return new WaitForSeconds(4f);
+
+        StartCoroutine(SmoothCameraRotation(mainCamera, janitorClosetTransform.position, 2));
+        yield return new WaitForSeconds(4f);
+
+        
     }
 
     public void SetDialogueThreeHit(bool value)
@@ -270,17 +264,17 @@ public class GameManager : MonoBehaviour
 
     public void SetDialogueTriggerOne(bool value)
     {
-        dialogueTriggerOne.SetActive(value);
+        if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(value);
     }
 
     public void SetDialogueTriggerTwo(bool value)
     {
-        dialogueTriggerTwo.SetActive(value);
+        if (dialogueTriggerTwo != null) dialogueTriggerTwo.SetActive(value);
     }
 
     public void SetDialogueTriggerThree(bool value)
     {
-        dialogueTriggerThree.SetActive(value);
+        if (dialogueTriggerThree != null) dialogueTriggerThree.SetActive(value);
     }
 
     public void SetJetPackStatus(bool value)
