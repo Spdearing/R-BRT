@@ -18,7 +18,7 @@ public class SecondDialogueFunctionality : MonoBehaviour
     [SerializeField] private float delay = 0.035f;
 
     [Header("Scripts")]
-    [SerializeField] private GameManager gameManger;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController playerController;
 
     [Header("GameObject")]
@@ -29,7 +29,7 @@ public class SecondDialogueFunctionality : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManger = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         fullTexts = new string[2];
         fullTexts[0] = fullText;
@@ -69,7 +69,8 @@ public class SecondDialogueFunctionality : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
-        gameManger.SetDialogueTriggerTwo(false);
+        gameManager.SetDialogueTriggerTwo(false);
+        gameManager.TurnOffSecondDialogueHitBox();
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
     }
