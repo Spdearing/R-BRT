@@ -72,8 +72,8 @@ public class GameManager : MonoBehaviour
                 HandleGameSceneLoad();
                 break;
 
-            case "ChooseYourFriend":
-            case "SaveTheWorld":
+            case "SamDies":
+            case "VictorySamLives":
                 Time.timeScale = 1;
                 StartCoroutine(TransitionBackToStart());
                 break;
@@ -114,7 +114,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("turning hit box on");
         dialogueTwoHitBox.SetActive(true);
 
-        InitializePlayerAndDetectionMeter();
+        player = GameObject.Find("Player");
+        playerController = player.GetComponent<PlayerController>();
+        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTired").GetComponent<Transform>();
         playerIsSpotted = false;
@@ -145,9 +147,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializePlayerAndDetectionMeter()
     {
-        player = GameObject.Find("Player");
-        playerController = player.GetComponent<PlayerController>();
-        detectionMeter = GameObject.Find("EnemyDetectionManager").GetComponent<DetectionMeter>();
+
     }
 
     private IEnumerator SmoothCameraRotationToFriend(Transform cameraTransform, Vector3 targetPosition, float duration)
