@@ -47,10 +47,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // This makes the GameObject persistent across scenes
-            firstPlaythrough = true;
-            firstDialogueHit = false;
-            secondDialogueHit = false;
-            thirdDialogueHit = false;
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
         }
         else if (Instance != this)
@@ -59,20 +55,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    void OnEnable()
     {
-        if (Instance == this)
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
-        }
+        InitializeGameData();
+        SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
-        if (Instance == this)
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void InitializeGameData()
+    {
+        firstPlaythrough = true;
+        firstDialogueHit = false;
+        secondDialogueHit = false;
+        thirdDialogueHit = false;
+
+        hasJetPack = false;
+        hasStealth = false;
+        playerIsSpotted = false;
+
+        InitializeTextBoxes();
+        InitializeViewPoints();
+        InitializePlayerAndDetectionMeter();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -140,6 +147,17 @@ public class GameManager : MonoBehaviour
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
         friendLocation = GameObject.Find("S-4MTired").GetComponent<Transform>();
         playerIsSpotted = false;
+
+        TurnOffTextBoxes(); // Turn off all text boxes when loading the level
+    }
+
+    private void TurnOffTextBoxes()
+    {
+        if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(false);
+        if (dialogueTriggerTwo != null) dialogueTriggerTwo.SetActive(false);
+        if (dialogueTriggerThree != null) dialogueTriggerThree.SetActive(false);
+        if (dialogueTwoHitBox != null) dialogueTwoHitBox.SetActive(false);
+        if (dialogueThreeHitBox != null) dialogueThreeHitBox.SetActive(false);
     }
 
     private void InitializeTextBoxes()
@@ -217,19 +235,24 @@ public class GameManager : MonoBehaviour
     private IEnumerator StartThirdDialogueSequence()
     {
         playerController.SetPlayerActivity(false);
+        dialogueThreeHitBox.SetActive(false);
         playerController.SetCameraLock(true);
         dialogueTriggerThree.SetActive(true);
-        dialogueThreeHitBox.SetActive(false);
-        StartCoroutine(SmoothCameraRotation(mainCamera, hallwayTransform.position, 2));
-        yield return new WaitForSeconds(4f);
 
-        StartCoroutine(SmoothCameraRotation(mainCamera, elevatorTransform.position, 2, true)); // Lerp in the opposite direction
-        yield return new WaitForSeconds(4f);
+        // Smooth camera rotation to hallwayTransform
+        yield return SmoothCameraRotation(mainCamera, hallwayTransform.position, 2);
+        yield return new WaitForSeconds(2.0f);  // Wait for 2 seconds
 
-        StartCoroutine(SmoothCameraRotation(mainCamera, janitorClosetTransform.position, 2));
-        yield return new WaitForSeconds(4f);
+        // Smooth camera rotation to elevatorTransform with inverse direction
+        yield return SmoothCameraRotation(mainCamera, elevatorTransform.position, 3, true);
+        yield return new WaitForSeconds(2.0f);  // Wait for 2 seconds
 
-        
+        // Smooth camera rotation to janitorClosetTransform
+        yield return SmoothCameraRotation(mainCamera, janitorClosetTransform.position, 2);
+        yield return new WaitForSeconds(2.0f);  // Wait for 2 seconds
+
+        playerController.SetPlayerActivity(true);
+        playerController.SetCameraLock(false);
     }
 
     public void SetDialogueThreeHit(bool value)
