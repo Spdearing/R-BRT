@@ -48,6 +48,7 @@ TagManager:
   - Group1Enemy
   - DialogueTriggerOne
   - DialogueTriggerTwo
+  - PatrolPoint12
   layers:
   - Default
   - TransparentFX
