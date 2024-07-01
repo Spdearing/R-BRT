@@ -18,5 +18,10 @@ public class PlayerCollisions : MonoBehaviour
         {
             GameManager.Instance.StartSecondDialogue();
         }
+
+        if(other.gameObject.tag == "ThirdDialogueEncounter")
+        {
+            GameManager.Instance.StartThirdDialogue();
+        }
     }
 }

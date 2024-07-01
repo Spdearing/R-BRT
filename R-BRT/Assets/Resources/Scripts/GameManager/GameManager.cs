@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool firstPlaythrough;
     [SerializeField] private bool firstDialogueHit;
     [SerializeField] private bool secondDialogueHit;
+    [SerializeField] private bool thirdDialogueHit;
 
     [Header("Game Objects")]
     [SerializeField] private GameObject player;
@@ -19,11 +20,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueTriggerThree;
     [SerializeField] private GameObject enemyNumberOne;
     [SerializeField] private GameObject dialogueTwoHitBox;
+    [SerializeField] private GameObject dialogueThreeHitBox;
+    [SerializeField] private GameObject hallwayViewPoint;
+    [SerializeField] private GameObject elevatorViewPoint;
+    [SerializeField] private GameObject janitorClosetViewPoint;
 
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform mainCamera;
     [SerializeField] private Transform enemyOneTransform;
+    [SerializeField] private Transform hallwayTransform;
+    [SerializeField] private Transform elevatorTransform;
+    [SerializeField] private Transform janitorClosetTransform;
 
     [Header("GameManager Instance")]
     public static GameManager Instance;
@@ -42,6 +50,7 @@ public class GameManager : MonoBehaviour
             firstPlaythrough = true;
             firstDialogueHit = false;
             secondDialogueHit = false;
+            thirdDialogueHit = false;
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
         }
         else if (Instance != this)
@@ -111,13 +120,26 @@ public class GameManager : MonoBehaviour
     {
         dialogueTriggerOne = GameObject.FindWithTag("DialogueTriggerOne");
         dialogueTriggerTwo = GameObject.FindWithTag("DialogueTriggerTwo");
+        dialogueTriggerThree = GameObject.FindWithTag("DialogueTriggerThree");
         dialogueTwoHitBox = GameObject.FindWithTag("SecondDialogueEncounter");
+        dialogueThreeHitBox = GameObject.FindWithTag("ThirdDialogueEncounter");
         Debug.Log("turning second text ");
         dialogueTriggerTwo.SetActive(false);
+        Debug.Log("turning Off Third Dialogue");
+        dialogueTriggerThree.SetActive(false);
         Debug.Log("turning first text on");
         dialogueTriggerOne.SetActive(true);
         Debug.Log("turning hit box on");
         dialogueTwoHitBox.SetActive(true);
+        Debug.Log("turning hit box 3 on");
+        dialogueThreeHitBox.SetActive(true);
+
+        hallwayViewPoint = GameObject.Find("HallwayViewPoint");
+        elevatorViewPoint = GameObject.Find("ElevatorViewPoint");
+        janitorClosetViewPoint = GameObject.Find("JanitorViewPoint");
+        hallwayTransform = hallwayViewPoint.GetComponent<Transform>();
+        elevatorTransform = elevatorViewPoint.GetComponent<Transform>();
+        janitorClosetTransform = janitorClosetViewPoint.GetComponent<Transform>();
 
         player = GameObject.Find("Player");
         playerController = player.GetComponent<PlayerController>();
@@ -180,6 +202,21 @@ public class GameManager : MonoBehaviour
         cameraTransform.rotation = endRotation;
     }
 
+    private IEnumerator SmoothCameraRotationHallway(Transform cameraTransform, Vector3 targetPosition, float duration)
+    {
+        Quaternion startRotation = cameraTransform.rotation;
+        Quaternion endRotation = Quaternion.LookRotation(targetPosition - cameraTransform.position);
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            cameraTransform.rotation = Quaternion.Lerp(startRotation, endRotation, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForSeconds(2.0f);
+        }
+        cameraTransform.rotation = endRotation;
+    }
+
     public void StartSecondDialogue()
     {
         enemyOneTransform = enemyNumberOne.transform;
@@ -190,6 +227,22 @@ public class GameManager : MonoBehaviour
         dialogueTwoHitBox.SetActive(false);
     }
 
+    public void StartThirdDialogue()
+    {
+        StartCoroutine(SmoothCameraRotationHallway(mainCamera, hallwayTransform.position, 2));
+        StartCoroutine(SmoothCameraRotationHallway(mainCamera, elevatorTransform.position, 2));
+        StartCoroutine(SmoothCameraRotationHallway(mainCamera, janitorClosetTransform.position, 2));
+        playerController.SetPlayerActivity(false);
+        playerController.SetCameraLock(true);
+        dialogueTriggerThree.SetActive(true);
+        dialogueThreeHitBox.SetActive(false);
+    }
+
+    public void SetDialogueThreeHit(bool value)
+    {
+        thirdDialogueHit = value;
+    }
+
     public void SetDialogueTwoHit(bool value)
     {
         secondDialogueHit = value;
@@ -198,6 +251,11 @@ public class GameManager : MonoBehaviour
     public void TurnOffSecondDialogueHitBox()
     {
         dialogueTwoHitBox.SetActive(false);
+    }
+
+    public void TurnOffThirdDialogueHitBox()
+    {
+        dialogueThreeHitBox.SetActive(false);
     }
 
     public void SetEnemyOne(GameObject gameObject)
@@ -218,6 +276,11 @@ public class GameManager : MonoBehaviour
     public void SetDialogueTriggerTwo(bool value)
     {
         dialogueTriggerTwo.SetActive(value);
+    }
+
+    public void SetDialogueTriggerThree(bool value)
+    {
+        dialogueTriggerThree.SetActive(value);
     }
 
     public void SetJetPackStatus(bool value)
