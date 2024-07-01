@@ -25,15 +25,15 @@ public class SecondDialogueFunctionality : MonoBehaviour
     [SerializeField] private GameObject continueText;
 
     private bool skipText;
+    private bool canSkip;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        fullTexts = new string[2];
-        fullTexts[0] = fullText;
-        fullTexts[1] = fullText2;
+        fullTexts = new string[2] { fullText, fullText2 };
+        canSkip = true; // Initially, skipping is allowed
         StartCoroutine(ShowDialogue());
     }
 
@@ -48,9 +48,11 @@ public class SecondDialogueFunctionality : MonoBehaviour
             skipText = false;
             for (int i = 0; i <= fullText.Length; i++)
             {
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (canSkip && Input.GetKeyDown(KeyCode.Return))
                 {
                     skipText = true;
+                    canSkip = false; // Disable skipping temporarily
+                    StartCoroutine(EnableSkippingAfterDelay(0.5f)); // Re-enable skipping after 0.5 seconds
                 }
 
                 if (skipText)
@@ -69,6 +71,17 @@ public class SecondDialogueFunctionality : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
+        EndDialogue();
+    }
+
+    private IEnumerator EnableSkippingAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canSkip = true;
+    }
+
+    private void EndDialogue()
+    {
         gameManager.SetDialogueTriggerTwo(false);
         gameManager.SetDialogueTwoHit(true);
         gameManager.TurnOffSecondDialogueHitBox();
@@ -76,3 +89,4 @@ public class SecondDialogueFunctionality : MonoBehaviour
         playerController.SetPlayerActivity(true);
     }
 }
+
