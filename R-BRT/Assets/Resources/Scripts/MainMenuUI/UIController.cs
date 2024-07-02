@@ -40,11 +40,11 @@ public class UIController : MonoBehaviour
 
     public void ChooseYourFriend()
     {
-        SceneManager.LoadScene("ChooseYourFriend");
+        SceneManager.LoadScene("VictorySamLives");
     }
 
     public void SaveTheWorld()
     {
-        SceneManager.LoadScene("SaveTheWorld");
+        SceneManager.LoadScene("SamDies");
     }
 }

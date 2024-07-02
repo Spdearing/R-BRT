@@ -33,10 +33,12 @@ public class GroundBotSpawner : MonoBehaviour
 
     [Header("Script")]
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private SceneActivity sceneActivity; 
 
     // Start is called before the first frame update
     void Start()
     {
+        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         gameManager = GameManager.Instance;
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         group1 = new GameObject[1];
@@ -68,7 +70,7 @@ public class GroundBotSpawner : MonoBehaviour
 
                 enemy.name = "GroundBotGroup1";
                 enemy.tag = "GroundBot";
-                gameManager.SetEnemyOne(group1[0]);
+                sceneActivity.SetEnemyOne(group1[0]);
             }
             else
             {
