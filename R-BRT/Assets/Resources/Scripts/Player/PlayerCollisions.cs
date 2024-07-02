@@ -7,6 +7,14 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] GameObject destinationA;
     [SerializeField] GameObject destinationB;
 
+
+    [SerializeField] private SceneActivity sceneActivity;
+
+    private void Start()
+    {
+        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Death")
@@ -16,12 +24,12 @@ public class PlayerCollisions : MonoBehaviour
 
         else if(other.gameObject.tag == "SecondDialogueEncounter")
         {
-            GameManager.Instance.StartSecondDialogue();
+            sceneActivity.StartSecondDialogue();
         }
 
         if(other.gameObject.tag == "ThirdDialogueEncounter")
         {
-            GameManager.Instance.StartThirdDialogue();
+            sceneActivity.StartThirdDialogue();
         }
     }
 }

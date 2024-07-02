@@ -18,6 +18,7 @@ public class SecondDialogueFunctionality : MonoBehaviour
     [SerializeField] private float delay = 0.035f;
 
     [Header("Scripts")]
+    [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController playerController;
 
@@ -30,6 +31,7 @@ public class SecondDialogueFunctionality : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         fullTexts = new string[2] { fullText, fullText2 };
@@ -82,9 +84,9 @@ public class SecondDialogueFunctionality : MonoBehaviour
 
     private void EndDialogue()
     {
-        gameManager.SetDialogueTriggerTwo(false);
-        gameManager.SetDialogueTwoHit(true);
-        gameManager.TurnOffSecondDialogueHitBox();
+        sceneActivity.SetDialogueTriggerTwo(false);
+        sceneActivity.SetDialogueTwoHit(true);
+        sceneActivity.TurnOffSecondDialogueHitBox();
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
     }

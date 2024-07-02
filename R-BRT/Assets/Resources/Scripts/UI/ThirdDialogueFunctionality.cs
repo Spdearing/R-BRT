@@ -18,6 +18,7 @@ public class ThirdDialogueFunctionality : MonoBehaviour
     [SerializeField] private float delay = 0.035f;
 
     [Header("Scripts")]
+    [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController playerController;
 
@@ -29,6 +30,7 @@ public class ThirdDialogueFunctionality : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         fullTexts = new string[2] { fullText, fullText2 };
@@ -72,10 +74,8 @@ public class ThirdDialogueFunctionality : MonoBehaviour
 
     private void EndDialogue()
     {
-        gameManager.SetDialogueTriggerThree(false);
-        gameManager.SetDialogueThreeHit(true);
-        gameManager.TurnOffThirdDialogueHitBox();
-        playerController.SetCameraLock(false);
-        playerController.SetPlayerActivity(true);
+        sceneActivity.SetDialogueTriggerThree(false);
+        sceneActivity.SetDialogueThreeHit(true);
+        sceneActivity.TurnOffThirdDialogueHitBox();
     }
 }
