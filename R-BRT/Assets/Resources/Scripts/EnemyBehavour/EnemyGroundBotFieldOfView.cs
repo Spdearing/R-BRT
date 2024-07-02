@@ -26,6 +26,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("GroundBotFOV");
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();

@@ -25,6 +25,7 @@ public class PickUpObject : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Pickup is popping");
         rb = gameObject.GetComponent<Rigidbody>();
         gameObject.tag = "PickUpItem";
         holdPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();

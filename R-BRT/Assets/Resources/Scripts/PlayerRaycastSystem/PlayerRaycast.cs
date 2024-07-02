@@ -33,7 +33,7 @@ public class PlayerRaycast : MonoBehaviour
 
     void Start()
     {
-
+        Debug.Log("Player Raycast is popping");
         interactDistance = 4;
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;

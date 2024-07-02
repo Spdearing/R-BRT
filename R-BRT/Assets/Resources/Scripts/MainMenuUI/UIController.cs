@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(" UI is popping");
         phoenixChipMenu = GameObject.FindWithTag("PhoenixChipMenu"); 
         Time.timeScale = 1.0f;
         phoenixChipMenu.SetActive(false);
