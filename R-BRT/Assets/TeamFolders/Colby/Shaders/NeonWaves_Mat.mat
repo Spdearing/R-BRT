@@ -47,7 +47,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WaveSpeed: 1
+    - _WaveSpeed: 0.3
     - _WaveStrength: 3
     m_Colors: []
   m_BuildTextureStacks: []
