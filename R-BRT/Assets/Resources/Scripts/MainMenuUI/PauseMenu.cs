@@ -31,6 +31,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("PauseMenu is popping");
         isPaused = false;
         pauseMenu.SetActive(false);
         optionsPanel.SetActive(false);

@@ -22,6 +22,7 @@ public class FlyingBotSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("FlyingBotSpawner popping");
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/FlyingBotFinal");
         group1 = new GameObject[4];
         SpawnGroup1();

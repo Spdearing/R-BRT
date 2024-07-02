@@ -9,6 +9,7 @@ public class RockCollision : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Rock Collision is popping");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 

@@ -31,6 +31,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("First Dialogue functionality is popping");
         // Initialize GameManager and PlayerController references if not set in Inspector
         if (gameManger == null)
         {
