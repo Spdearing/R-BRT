@@ -22,6 +22,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private GameManager gameManger;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private SceneActivity sceneActivity;
 
     [Header("GameObject")]
     [SerializeField] private GameObject continueText;
@@ -39,6 +40,10 @@ public class FirstDialogueFunctionality : MonoBehaviour
         if (playerController == null)
         {
             playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        }
+        if (sceneActivity == null)
+        {
+            sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         }
 
         // Initialize fullTexts array with provided text
@@ -85,8 +90,8 @@ public class FirstDialogueFunctionality : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
-        gameManger.SetDialogueTriggerOne(false);
-        gameManger.SetFirstDialogueHit(true);
+        sceneActivity.SetDialogueTriggerOne(false);
+        sceneActivity.SetFirstDialogueHit(true);
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
     }

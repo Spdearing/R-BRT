@@ -10,10 +10,10 @@ public class FlyingBotSpawner : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
 
     [Header("EnemyGroups")]
-    [SerializeField] GameObject[] group1 = new GameObject[3];
+    [SerializeField] GameObject[] group1;
 
     [Header("EnemyGroupLocations")]
-    [SerializeField] Transform[] enemyGroupLocations = new Transform[3];
+    [SerializeField] Transform[] enemyGroupLocations;
 
     [Header("References")]
     [SerializeField] FlyingBotStateMachine flyingBotStateInstance;
@@ -23,6 +23,7 @@ public class FlyingBotSpawner : MonoBehaviour
     void Start()
     {
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/FlyingBotFinal");
+        group1 = new GameObject[4];
         SpawnGroup1();
     }
 

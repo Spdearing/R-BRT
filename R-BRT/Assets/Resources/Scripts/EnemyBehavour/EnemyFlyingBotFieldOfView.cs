@@ -14,6 +14,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private FlyingBotStateMachine flyingBotStateMachine;
     [SerializeField] private FlyingBotSpawner flyingBotSpawner;
+    [SerializeField] private SceneActivity sceneActivity;
 
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
@@ -24,6 +25,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     private void Start()
     {
+        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
@@ -45,7 +47,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         {
             if (!player.ReturnUsingInvisibility())
             {
-                gameManager.SetPlayerIsSpotted(true);
+                sceneActivity.SetPlayerIsSpotted(true);
                 playerIsBeingDetected = true;
 
 
@@ -65,7 +67,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
                 playerDetectionState.SetDetectedByFlyingBot(true);
                 flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
             }
-            gameManager.SetPlayerIsSpotted(false);
+            sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
         }
     }
@@ -75,7 +77,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
         {
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
-            gameManager.SetPlayerIsSpotted(withinRange);
+            sceneActivity.SetPlayerIsSpotted(withinRange);
 
             if (!withinRange)
             {
@@ -89,7 +91,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         }
         else
         {
-            gameManager.SetPlayerIsSpotted(false);
+            sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
         }
@@ -99,7 +101,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
     {
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange())
         {
-            gameManager.SetPlayerIsSpotted(false);
+            sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
 
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
@@ -116,7 +118,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     private void DetectingPlayer()
     {
-        if (enemyProximity.ReturnEnemyWithinRange() && gameManager.ReturnPlayerSpotted())
+        if (enemyProximity.ReturnEnemyWithinRange() && sceneActivity.ReturnPlayerSpotted())
         {
             if (playerIsBeingDetected)
             {

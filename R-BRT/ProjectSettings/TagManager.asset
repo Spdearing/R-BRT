@@ -49,6 +49,12 @@ TagManager:
   - DialogueTriggerOne
   - DialogueTriggerTwo
   - PatrolPoint12
+  - ThirdDialogueEncounter
+  - Hallway
+  - Elevator
+  - JanitorCloset
+  - Janitor
+  - DialogueTriggerThree
   layers:
   - Default
   - TransparentFX

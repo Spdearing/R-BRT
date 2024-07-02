@@ -18,6 +18,7 @@ public class SecondDialogueFunctionality : MonoBehaviour
     [SerializeField] private float delay = 0.035f;
 
     [Header("Scripts")]
+    [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController playerController;
 
@@ -25,15 +26,16 @@ public class SecondDialogueFunctionality : MonoBehaviour
     [SerializeField] private GameObject continueText;
 
     private bool skipText;
+    private bool canSkip;
 
     // Start is called before the first frame update
     void Start()
     {
+        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        fullTexts = new string[2];
-        fullTexts[0] = fullText;
-        fullTexts[1] = fullText2;
+        fullTexts = new string[2] { fullText, fullText2 };
+        canSkip = true; // Initially, skipping is allowed
         StartCoroutine(ShowDialogue());
     }
 
@@ -48,9 +50,11 @@ public class SecondDialogueFunctionality : MonoBehaviour
             skipText = false;
             for (int i = 0; i <= fullText.Length; i++)
             {
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (canSkip && Input.GetKeyDown(KeyCode.Return))
                 {
                     skipText = true;
+                    canSkip = false; // Disable skipping temporarily
+                    StartCoroutine(EnableSkippingAfterDelay(0.5f)); // Re-enable skipping after 0.5 seconds
                 }
 
                 if (skipText)
@@ -69,10 +73,22 @@ public class SecondDialogueFunctionality : MonoBehaviour
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
 
-        gameManager.SetDialogueTriggerTwo(false);
-        gameManager.SetDialogueTwoHit(true);
-        gameManager.TurnOffSecondDialogueHitBox();
+        EndDialogue();
+    }
+
+    private IEnumerator EnableSkippingAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canSkip = true;
+    }
+
+    private void EndDialogue()
+    {
+        sceneActivity.SetDialogueTriggerTwo(false);
+        sceneActivity.SetDialogueTwoHit(true);
+        sceneActivity.TurnOffSecondDialogueHitBox();
         playerController.SetCameraLock(false);
         playerController.SetPlayerActivity(true);
     }
 }
+

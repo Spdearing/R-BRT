@@ -13,6 +13,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
+    [SerializeField] private SceneActivity sceneActivity;
 
 
     [Header("Bools")]
@@ -25,6 +26,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void Start()
     {
+        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
@@ -42,7 +44,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
     {
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
         {
-            gameManager.SetPlayerIsSpotted(true);
+            sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
 
             
@@ -71,7 +73,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
         {
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
-            gameManager.SetPlayerIsSpotted(withinRange);
+            sceneActivity.SetPlayerIsSpotted(withinRange);
 
             if (!withinRange)
             {
@@ -86,7 +88,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
         else
         {
             groundBotHeadMovement.SetPlayerSpotted(false);
-            gameManager.SetPlayerIsSpotted(false);
+            sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing); 
         }
@@ -96,7 +98,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
     {
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
         {
-            gameManager.SetPlayerIsSpotted(false);
+            sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
 
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
@@ -111,7 +113,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void DetectingPlayer()
     {
-        if (enemyProximity.ReturnEnemyWithinRange() && gameManager.ReturnPlayerSpotted())
+        if (enemyProximity.ReturnEnemyWithinRange() && sceneActivity.ReturnPlayerSpotted())
         {
             if (playerIsBeingDetected)
             {
