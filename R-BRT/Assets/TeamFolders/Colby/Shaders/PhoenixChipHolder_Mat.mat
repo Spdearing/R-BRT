@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-817787550762042944
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PhoenixChipHolder_Mat
+  m_Shader: {fileID: -6465566751694194690, guid: abfbba53ba3aaf44c9961517830af43a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_082af5bdfebe46108fe4d50aff6169ae_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 40573604a8ed75440a7bf4b50c2077e7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_3f77102fd47b4975a343a4896f829a5c_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 8d91f44e0ad711947bf66d84d145d855, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_79dc3dae17464cb897f3f03ddfe42a13_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: e1d939f4495b92f4191e229f112136f3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7ce8da8963d441418c3bd1ba66a58621_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: eb158430ecde83e42ae832cbbc2675ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_83718cd34053412a9b88a3d291ae6d39_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: d72b40a16dfe4f34985504d62e2d1cf2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_a49a62dffa424b30af4e6da3212e0215_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: e581f9331cf121d4196d7205fbddd764, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _SecondaryBrightness: 10
+    - _TilingSize: 0.01
+    - _TilingSpeed: 1
+    m_Colors:
+    - _MainColor: {r: 1, g: 0.47457004, b: 0, a: 0}
+    - _SecondaryColor: {r: 1, g: 0.6116452, b: 0, a: 0}
+    - _TilingDirection: {r: 0.2, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
