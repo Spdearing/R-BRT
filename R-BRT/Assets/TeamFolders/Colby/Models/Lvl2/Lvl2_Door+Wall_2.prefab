@@ -52,9 +52,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3357037809688669164, guid: 2c833d6d1cdb6694faff940b05d9b473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -2818631016347784500, guid: 2c833d6d1cdb6694faff940b05d9b473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2c833d6d1cdb6694faff940b05d9b473, type: 3}
       propertyPath: m_Name
       value: PatientDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2c833d6d1cdb6694faff940b05d9b473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -117,6 +129,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 15e246239e3756142af26b67745e5d34, type: 3}
       propertyPath: m_Name
       value: Lvl2_Door+Wall_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 15e246239e3756142af26b67745e5d34, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
