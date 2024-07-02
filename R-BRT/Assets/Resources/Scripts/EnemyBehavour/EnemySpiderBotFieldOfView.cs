@@ -14,6 +14,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private SpiderBotStateMachine spiderBotStateMachine;
     [SerializeField] private SpiderBotSpawner spiderBotSpawner;
+    [SerializeField] private SceneActivity sceneActivity;
  
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
@@ -26,6 +27,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     private void Start()
     {
+        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
@@ -45,7 +47,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
     {
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
         {
-            gameManager.SetPlayerIsSpotted(true);
+            sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
 
             
@@ -72,7 +74,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
         {
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
-            gameManager.SetPlayerIsSpotted(withinRange);
+            sceneActivity.SetPlayerIsSpotted(withinRange);
 
             if (!withinRange)
             {
@@ -90,7 +92,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
     {
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange())
         {
-            gameManager.SetPlayerIsSpotted(false);
+            sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
 
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
@@ -100,7 +102,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     private void DetectingPlayer()
     {
-        if (enemyProximity.ReturnEnemyWithinRange() && gameManager.ReturnPlayerSpotted())
+        if (enemyProximity.ReturnEnemyWithinRange() && sceneActivity.ReturnPlayerSpotted())
         {
             if (playerIsBeingDetected)
             {
