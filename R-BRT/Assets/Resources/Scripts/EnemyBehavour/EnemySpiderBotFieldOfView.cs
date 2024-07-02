@@ -27,6 +27,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("SpiderBotFOV Popping");
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();

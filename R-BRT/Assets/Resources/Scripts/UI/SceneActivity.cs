@@ -40,6 +40,7 @@ public class SceneActivity : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Scene Activity is popping");
         InitializeGameData();
     }
 
@@ -54,7 +55,6 @@ public class SceneActivity : MonoBehaviour
         hasStealth = false;
         playerIsSpotted = false;
 
-        //InitializeTextBoxes();
         InitializeViewPoints();
         InitializePlayerAndDetectionMeter();
         HandleGameSceneLoad();
@@ -68,7 +68,6 @@ public class SceneActivity : MonoBehaviour
             if (playerController != null)
             {
                 playerController.SetPlayerActivity(false);
-
             }
         }
     }

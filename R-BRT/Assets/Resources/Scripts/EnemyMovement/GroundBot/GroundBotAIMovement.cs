@@ -21,6 +21,7 @@ public class GroundBotAIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("GroundBotAI popping");
         InitializePatrolPoints();
 
         groundBotAI = GetComponent<NavMeshAgent>();

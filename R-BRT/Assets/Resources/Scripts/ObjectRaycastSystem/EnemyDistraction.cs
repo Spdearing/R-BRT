@@ -34,6 +34,7 @@ public class EnemyDistraction : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Enemy Distractions is popping");
         if (sphereCollider == null)
         {
             sphereCollider = gameObject.GetComponent<SphereCollider>();

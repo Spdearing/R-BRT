@@ -15,6 +15,7 @@ public class DetectionMeter : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("DetectionMeter is popping");
         startingDetection = 0.0f;
         detectionIncrement = .75f;
         maxDetection = 201.0f;

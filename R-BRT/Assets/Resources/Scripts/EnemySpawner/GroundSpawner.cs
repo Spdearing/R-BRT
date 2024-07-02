@@ -38,6 +38,7 @@ public class GroundBotSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("GroundBotSpawner popping");
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         gameManager = GameManager.Instance;
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");

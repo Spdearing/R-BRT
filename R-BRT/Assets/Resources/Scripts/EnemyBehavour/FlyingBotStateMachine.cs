@@ -50,6 +50,7 @@ public class FlyingBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("FlyingBotStateMaching popping");
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindWithTag("Player");
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();

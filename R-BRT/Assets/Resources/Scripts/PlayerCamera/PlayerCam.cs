@@ -20,6 +20,7 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        Debug.Log("PlayerCam is popping");
         playerController = transform.parent.parent.GetComponent<PlayerController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -28,20 +29,20 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(!playerController.isCameraLocked)
+        if (!playerController.isCameraLocked)
         {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
 
-        yRotation += mouseX;
+            yRotation += mouseX;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        // rotate cam and orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+            // rotate cam and orientation
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         }
     }
 }

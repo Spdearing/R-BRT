@@ -40,6 +40,7 @@ public class GroundBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("GroundBotStateMachine popping");
         groundBotAIMovement = GetComponent<GroundBotAIMovement>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindWithTag("Player");

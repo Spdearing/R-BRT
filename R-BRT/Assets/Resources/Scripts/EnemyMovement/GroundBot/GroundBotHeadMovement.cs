@@ -37,6 +37,7 @@ public class GroundBotHeadMovement : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("GroundBotHeadMovement popping");
         isPaused = false;
         rotatingLeft = true;
         robotIsActive = true;

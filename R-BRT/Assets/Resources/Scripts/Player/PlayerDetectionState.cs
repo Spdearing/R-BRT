@@ -53,12 +53,11 @@ public class PlayerDetectionState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Debug.Log("PlayerDetection is popping");
         playerController = gameObject.GetComponent<PlayerController>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         detection = GameObject.FindWithTag("DetectionMeter").GetComponent<DetectionMeter>();
-        //groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
-        //flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
-        //spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
         detectedByGroundBot = false;
         detectedByFlyingBot = false;
         detectedBySpiderBot = false;
