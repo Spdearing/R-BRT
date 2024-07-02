@@ -24,6 +24,7 @@ public class SpiderBotSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("SpiderBotSpawner popping");
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/CameraBotFinal");
         SpawnGroup1();
     }

@@ -25,6 +25,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("FlyingBotFOVPopping");
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();

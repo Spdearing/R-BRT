@@ -26,6 +26,7 @@ public class ThrowObject : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("ThrowObject is popping");
         threwObject = false;
         shootForce = 10.0f;
         upwardForce = 5.0f;
