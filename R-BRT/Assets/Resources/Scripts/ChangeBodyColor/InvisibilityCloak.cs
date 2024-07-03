@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class InvisibilityCloak : MonoBehaviour
 {
+    [Header("Game Manager")]
+    [SerializeField] private GameManager gameManager;
 
+    [Header("Renderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer2;
-    //[SerializeField] private Material[] originalMaterials;
-    //[SerializeField] private GameObject[] bodyParts;
-    //[SerializeField] private Material red;
-
 
     // Start is called before the first frame update
     void Start()

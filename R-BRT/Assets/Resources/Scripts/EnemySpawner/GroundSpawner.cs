@@ -40,7 +40,7 @@ public class GroundBotSpawner : MonoBehaviour
     {
         Debug.Log("GroundBotSpawner popping");
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
-        gameManager = GameManager.Instance;
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         group1 = new GameObject[1];
         group2 = new GameObject[4];
