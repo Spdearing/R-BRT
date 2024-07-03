@@ -10,11 +10,17 @@ public class GameManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableText;
 
+    [Header("Transform")]
+    [SerializeField] private Transform holdPosition;
+
 
     [Header("Scripts")]
     [SerializeField] private PickUpObject pickUpObject;
     [SerializeField] private UIController uI;
     [SerializeField] private Battery battery;
+
+    [Header("Animator")]
+    [SerializeField] private Animator playerAnimator;
 
 
     private void Awake()
@@ -73,7 +79,8 @@ public class GameManager : MonoBehaviour
 
     public void GrabAllTheTools()
     {
-
+        holdPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
+        playerAnimator = GameObject.FindWithTag("Body").GetComponent<Animator>();
     }
 
     private IEnumerator TransitionBackToStart()
@@ -83,4 +90,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenuScene");
        
     }
+
+    public Transform ReturnHoldPosition()
+    {
+        return this.holdPosition;
+    }
+
+    public Animator ReturnAnimator()
+    {
+        return this.playerAnimator;
+    }    
 }
