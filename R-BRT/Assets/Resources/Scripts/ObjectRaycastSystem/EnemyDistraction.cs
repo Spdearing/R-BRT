@@ -35,35 +35,23 @@ public class EnemyDistraction : MonoBehaviour
     private void Start()
     {
         Debug.Log("Enemy Distractions is popping");
-        if (sphereCollider == null)
-        {
-            sphereCollider = gameObject.GetComponent<SphereCollider>();
-        }
+        SetUp();
+    }
 
+    void SetUp()
+    {
+        sphereCollider = gameObject.GetComponent<SphereCollider>();
+        throwObject = GetComponent<ThrowObject>();
+        pickUpObject = GetComponent<PickUpObject>();
+        targetTransform = gameObject.GetComponent<Transform>();
         isExpanding = false;
         expansionRate = 30.0f;
         maxRadius = 10.0f;
         initialRadius = 0.15f;
-        sphereCollider.isTrigger = true; // Ensure the collider is a trigger
+        sphereCollider.isTrigger = true;
         sphereCollider.radius = initialRadius;
-
-        if (throwObject == null)
-        {
-            throwObject = GetComponent<ThrowObject>();
-        }
-
-        if (pickUpObject == null)
-        {
-            pickUpObject = GetComponent<PickUpObject>();
-        }
-
-        if (targetTransform == null)
-        {
-            targetTransform = gameObject.GetComponent<Transform>();
-            
-
-        }
     }
+
 
     private void OnCollisionEnter(Collision other)
     {

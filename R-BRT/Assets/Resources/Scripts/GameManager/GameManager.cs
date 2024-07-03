@@ -1,12 +1,20 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
+    [Header("UI Elements")]
+    [SerializeField] private TMP_Text interactableText;
 
+
+    [Header("Scripts")]
+    [SerializeField] private PickUpObject pickUpObject;
+    [SerializeField] private UIController uI;
+    [SerializeField] private Battery battery;
 
 
     private void Awake()
@@ -28,7 +36,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManger is popping");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
