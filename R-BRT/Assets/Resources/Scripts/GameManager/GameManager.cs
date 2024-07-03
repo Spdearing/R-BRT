@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
         {
             case "GameScene":
                 Debug.Log("First playthrough");
+                GrabAllTheTools();
+                break;
+
+            case "MainMenuScene":
+                Debug.Log("MainMenu");
                 break;
 
             case "SamDies":
@@ -57,6 +62,11 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning($"Scene '{scene.name}' not handled in OnSceneLoaded");
                 break;
         }
+    }
+
+    public void GrabAllTheTools()
+    {
+
     }
 
     private IEnumerator TransitionBackToStart()

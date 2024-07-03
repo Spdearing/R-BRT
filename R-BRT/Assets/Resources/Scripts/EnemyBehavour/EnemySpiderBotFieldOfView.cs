@@ -15,7 +15,9 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
     [SerializeField] private SpiderBotStateMachine spiderBotStateMachine;
     [SerializeField] private SpiderBotSpawner spiderBotSpawner;
     [SerializeField] private SceneActivity sceneActivity;
- 
+    [SerializeField] private PlayerAbilities ability;
+
+
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
 
@@ -30,6 +32,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
         Debug.Log("SpiderBotFOV Popping");
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        ability = GameObject.Find("Player").GetComponent<PlayerAbilities>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -46,7 +49,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
+        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
         {
             sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
@@ -72,7 +75,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
+        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
         {
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
             sceneActivity.SetPlayerIsSpotted(withinRange);

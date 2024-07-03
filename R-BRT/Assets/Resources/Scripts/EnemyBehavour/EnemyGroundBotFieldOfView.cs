@@ -14,6 +14,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
     [SerializeField] private SceneActivity sceneActivity;
+    [SerializeField] private PlayerAbilities ability;
 
 
     [Header("Bools")]
@@ -29,6 +30,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
         Debug.Log("GroundBotFOV");
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        ability = GameObject.Find("Player").GetComponent<PlayerAbilities>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -43,7 +45,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
+        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
         {
             sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
@@ -71,7 +73,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
+        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
         {
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
             sceneActivity.SetPlayerIsSpotted(withinRange);
@@ -97,7 +99,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !player.ReturnUsingInvisibility())
+        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
         {
             sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;

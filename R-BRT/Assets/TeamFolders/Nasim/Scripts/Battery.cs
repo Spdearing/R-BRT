@@ -19,6 +19,7 @@ public class Battery : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerRaycast playerRayCast;
+    [SerializeField] private PlayerAbilities abilities;
 
     [Header("TMP_Text")]
     [SerializeField] private TMP_Text interactableText;
@@ -55,7 +56,7 @@ public class Battery : MonoBehaviour
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");
-        playerController.SetJetPackUnlock(true);
+        abilities.SetJetPackUnlock(true);
         fuelMeter.SetActive(true);
         abilitySelectionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
@@ -68,8 +69,8 @@ public class Battery : MonoBehaviour
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");
-        playerController.SetInvisibilityUnlock(true);
-        playerController.DisplayInvisibilityMeter();
+        abilities.SetInvisibilityUnlock(true);
+        abilities.DisplayInvisibilityMeter();
         abilitySelectionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

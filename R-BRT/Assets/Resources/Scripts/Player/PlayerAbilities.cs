@@ -179,6 +179,11 @@ public class PlayerAbilities : MonoBehaviour
         return this.invisibilityAvailable;
     }
 
+    public void SetJetPackUnlock(bool value)
+    {
+        jetPackUnlocked = value;
+    }
+
     public void SetInvisibilityUnlock(bool value)
     {
         invisibilityUnlocked = value;
@@ -202,4 +207,5 @@ public class PlayerAbilities : MonoBehaviour
     {
         return this.usingInvisibility;
     }
+
 }
