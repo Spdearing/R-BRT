@@ -26,11 +26,7 @@ public class PickUpObject : MonoBehaviour
     void Start()
     {
         Debug.Log("Pickup is popping");
-        rb = gameObject.GetComponent<Rigidbody>();
-        gameObject.tag = "PickUpItem";
-        holdPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
-        playerAnimator = GameObject.FindWithTag("Body").GetComponent<Animator>();
-        holding = false;
+        Setup();
     }
 
     void Update()
@@ -44,6 +40,15 @@ public class PickUpObject : MonoBehaviour
                 playerAnimator.SetBool("holdingRock", true);
             }
         }
+    }
+
+    void Setup()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+        gameObject.tag = "PickUpItem";
+        holdPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
+        playerAnimator = GameObject.FindWithTag("Body").GetComponent<Animator>();
+        holding = false;
     }
 
     public void PickUp()

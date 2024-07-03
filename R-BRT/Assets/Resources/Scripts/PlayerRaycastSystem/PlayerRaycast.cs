@@ -20,11 +20,7 @@ public class PlayerRaycast : MonoBehaviour
     [Header("Bool")]
     [SerializeField] private bool holding;
 
-    [Header("Transform")]
-    [SerializeField] private Transform holdingPosition;
-
     [Header("Scripts")]
-    [SerializeField] private PickUpObject pickUpObject;
     [SerializeField] private UIController uI;
     [SerializeField] private Battery battery;
 
@@ -34,18 +30,7 @@ public class PlayerRaycast : MonoBehaviour
     void Start()
     {
         Debug.Log("Player Raycast is popping");
-        interactDistance = 4;
-        raycastDistance = interactDistance;
-        pickUpCooldown = 0.5f;
-        holding = false;
-        interactableText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
-        pickUpObject = GameObject.Find("Rocks").GetComponent<PickUpObject>();
-        holdingPosition = GameObject.Find("HoldPosition").GetComponent<Transform>();
-        heldPosition = GameObject.Find("HoldPosition");
-        uI = GameObject.Find("Canvas").GetComponent<UIController>();
-        battery = GameObject.FindWithTag("Battery").GetComponent<Battery>();
-
-
+        Setup();
     }
 
     // Update is called once per frame
@@ -119,28 +104,16 @@ public class PlayerRaycast : MonoBehaviour
         }
     }
 
-    //bool ContainsTag(string tag)
-    //{
-    //    foreach (string t in tagsToCheck)
-    //    {
-    //        if (t == tag)
-    //        {
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
-
-    public GameObject ReturnObjectHit()
+    void Setup()
     {
-
-        if(lastHitObject == null)
-        {
-            Debug.Log("no object was hit");
-            return null;
-        }
-        return lastHitObject;
+        interactDistance = 4;
+        raycastDistance = interactDistance;
+        pickUpCooldown = 0.5f;
+        holding = false;
+        interactableText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
+        heldPosition = GameObject.Find("HoldPosition");
+        uI = GameObject.Find("Canvas").GetComponent<UIController>();
+        battery = GameObject.FindWithTag("Battery").GetComponent<Battery>();
     }
 
     public void SetInteractableText(string value)

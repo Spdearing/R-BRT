@@ -27,11 +27,7 @@ public class ThrowObject : MonoBehaviour
     private void Start()
     {
         Debug.Log("ThrowObject is popping");
-        threwObject = false;
-        shootForce = 10.0f;
-        upwardForce = 5.0f;
-        pickUpObject = GetComponent<PickUpObject>();
-        playerAnimator = GameObject.FindWithTag("Body").GetComponent<Animator>();
+        Setup();
     }
 
 
@@ -44,6 +40,15 @@ public class ThrowObject : MonoBehaviour
             
             StartCoroutine(ResetThrowStatus());
         }
+    }
+
+    void Setup()
+    {
+        threwObject = false;
+        shootForce = 10.0f;
+        upwardForce = 5.0f;
+        pickUpObject = GetComponent<PickUpObject>();
+        playerAnimator = GameObject.FindWithTag("Body").GetComponent<Animator>();
     }
 
     private void Shoot()
