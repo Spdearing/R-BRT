@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour
 
     void Setup()
     {
-        Debug.Log("PlayerController is popping");
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.freezeRotation = true;

@@ -34,7 +34,6 @@ public class DetectionMeter : MonoBehaviour
 
     public void Setup()
     {
-        Debug.Log("DetectionMeter is popping");
         detectionMeter = GameManager.instance.ReturnDetectionAmountImage();
         startingDetection = 0.0f;
         detectionIncrement = .75f;

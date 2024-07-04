@@ -73,7 +73,6 @@ public class FlyingBotStateMachine : MonoBehaviour
 
     void Setup()
     {
-        Debug.Log("FlyingBotStateMaching popping");
         player = GameObject.FindWithTag("Player");
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");

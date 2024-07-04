@@ -48,13 +48,12 @@ public class SpiderBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("SpiderBotStateMachine popping");
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
-        gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();
+        playerController = GameManager.instance.ReturnPlayerController();
+        playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
+        gameOverScreen = GameManager.instance.ReturnGameOver();
         enemySpiderBotFieldOfView = GetComponentInChildren<EnemySpiderBotFieldOfView>();
-        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        playerCameraTransform = playerCamera.transform;
+        playerCamera = GameManager.instance.ReturnPlayerCamera();
+        playerCameraTransform = GameManager.instance.ReturnCameraTransform();
         spiderBotEyeColor.material = red;
         fieldOfViewRenderer.material = fieldOfViewRed;
         currentState = SpiderState.patrolling;

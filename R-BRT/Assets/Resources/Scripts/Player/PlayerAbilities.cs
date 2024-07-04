@@ -56,7 +56,6 @@ public class PlayerAbilities : MonoBehaviour
 
     void Setup()
     {
-        Debug.Log("Player Ability is popping");
         invisibilityCloak = GameManager.instance.ReturnInvisibilityCloak();
         jetPack = gameObject.GetComponent<Jetpack>();
         playerAnimator = GameManager.instance.ReturnAnimator();

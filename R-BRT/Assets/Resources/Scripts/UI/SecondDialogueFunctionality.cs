@@ -19,7 +19,6 @@ public class SecondDialogueFunctionality : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private SceneActivity sceneActivity;
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController playerController;
 
     [Header("GameObject")]
@@ -31,9 +30,8 @@ public class SecondDialogueFunctionality : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        sceneActivity = GameManager.instance.ReturnSceneActivity();
+        playerController = GameManager.instance.ReturnPlayerController();
         fullTexts = new string[2] { fullText, fullText2 };
         canSkip = true; // Initially, skipping is allowed
         StartCoroutine(ShowDialogue());

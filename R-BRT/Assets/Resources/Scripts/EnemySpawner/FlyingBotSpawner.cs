@@ -21,7 +21,6 @@ public class FlyingBotSpawner : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("FlyingBotSpawner popping");
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/FlyingBotFinal");
         group1 = new GameObject[4];
         SpawnGroup1();

@@ -5,12 +5,11 @@ using UnityEngine;
 public class RockCollision : MonoBehaviour
 {
     [SerializeField] bool makingSound;
-    [SerializeField] GameManager gameManager;
 
     private void Start()
     {
-        Debug.Log("Rock Collision is popping");
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -18,7 +17,6 @@ public class RockCollision : MonoBehaviour
         if(collision.gameObject.CompareTag("Ground"))
         {
             makingSound = true;
-            //gameManager.SendOutNoise();
         }
     }
 
