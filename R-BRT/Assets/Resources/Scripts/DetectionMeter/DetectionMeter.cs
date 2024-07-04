@@ -13,9 +13,6 @@ public class DetectionMeter : MonoBehaviour
     [SerializeField] float detectionIncrement;
     [SerializeField] float maxDetection;
 
-    [Header("GameManager")]
-    [SerializeField] private GameManager gameManager; 
-
     void Start()
     {
         Setup();
@@ -38,7 +35,7 @@ public class DetectionMeter : MonoBehaviour
     public void Setup()
     {
         Debug.Log("DetectionMeter is popping");
-        detectionMeter = gameManager.ReturnDetectionAmountImage();
+        detectionMeter = GameManager.instance.ReturnDetectionAmountImage();
         startingDetection = 0.0f;
         detectionIncrement = .75f;
         maxDetection = 201.0f;

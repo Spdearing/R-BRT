@@ -59,8 +59,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] float detectionIncrement;
     [SerializeField] float maxDetection;
 
+    [Header("Audio Source")]
+    [SerializeField] AudioSource activateInvisibility;
+    [SerializeField] AudioSource invisibilityDuration;
+    [SerializeField] AudioSource walkingSound;
+    [SerializeField] AudioSource jumpingSound;
 
+    [Header("Slider")]
+    [SerializeField] Slider fuelMeterSlider;
+
+    [Header("Capsule Collider")]
+    [SerializeField] CapsuleCollider playerCollider;
     
+
+
+
 
 
     private void Awake()
@@ -120,6 +133,7 @@ public class GameManager : MonoBehaviour
     public void GrabAllTheTools()
     {
         player = GameObject.FindWithTag("Player");
+        playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
         playerRaycast = GameObject.FindWithTag("MainCamera").GetComponent<PlayerRaycast>();
@@ -148,6 +162,11 @@ public class GameManager : MonoBehaviour
         battery = GameObject.FindWithTag("Battery");
         phoenixChipMenu = GameObject.FindWithTag("PhoenixChipMenu");
         fuelMeter = GameObject.FindWithTag("FuelMeter");
+        activateInvisibility = GameObject.Find("ActivatingInvisibility").GetComponent<AudioSource>();
+        invisibilityDuration = GameObject.Find("invisibilityDuration").GetComponent<AudioSource>();
+        walkingSound = GameObject.Find("WalkingSound").GetComponent<AudioSource>();
+        jumpingSound = GameObject.Find("JumpingSound").GetComponent<AudioSource>();
+        fuelMeterSlider = GameObject.Find("Fuel Meter").GetComponent<Slider>();
 
     }
 
@@ -159,6 +178,32 @@ public class GameManager : MonoBehaviour
        
     }
 
+    public CapsuleCollider ReturnPlayerCollider()
+    {
+        return this.playerCollider;
+    }
+
+    public Slider ReturnFuelMeterSlider()
+    {
+        return this.fuelMeterSlider;
+    }
+
+    public AudioSource ReturnWalkingSound()
+    {
+        return this.walkingSound;
+    }
+    public AudioSource ReturnJumpingSound()
+    {
+        return this.jumpingSound;
+    }
+    public AudioSource ReturnActivatingInvisibilitySound()
+    {
+        return this.activateInvisibility;
+    }
+    public AudioSource ReturnInvisibilityDurationSound()
+    {
+        return this.invisibilityDuration;
+    }
 
     public TMP_Text ReturnInteractableText()
     {
@@ -219,8 +264,6 @@ public class GameManager : MonoBehaviour
     {
         return this.groundBotSpawner;
     }
-
-    
 
     public FlyingBotSpawner ReturnFlyingBotSpawner()
     {

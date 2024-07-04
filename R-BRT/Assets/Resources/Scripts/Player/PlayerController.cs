@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
     [Header("Audio Source")]
 
     [SerializeField] private AudioSource walkingSound;
-    [SerializeField] private AudioSource sprintingSound;
     [SerializeField] private AudioSource jumpingSound;
 
     public enum MovementState
@@ -85,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
+        Setup();
     }
 
     private void Update()
@@ -120,9 +119,11 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
         rb.freezeRotation = true;
         groundDrag = 5.0f;
-        playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
+        playerCollider = GameManager.instance.ReturnPlayerCollider();
         cameraTransform = GameManager.instance.ReturnCameraTransform();
         playerAnimator = GameManager.instance.ReturnAnimator();
+        walkingSound = GameManager.instance.ReturnWalkingSound();
+        jumpingSound = GameManager.instance.ReturnJumpingSound();
         readyToJump = true;
         gravity = -1.0f;
 
