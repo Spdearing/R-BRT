@@ -26,7 +26,6 @@ public class EnemyDistraction : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private ThrowObject throwObject;
-    [SerializeField] private PickUpObject pickUpObject;
     [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
 
     [Header("Audio Sources")]
@@ -42,7 +41,6 @@ public class EnemyDistraction : MonoBehaviour
     {
         sphereCollider = gameObject.GetComponent<SphereCollider>();
         throwObject = GetComponent<ThrowObject>();
-        pickUpObject = GetComponent<PickUpObject>();
         targetTransform = gameObject.GetComponent<Transform>();
         isExpanding = false;
         expansionRate = 30.0f;

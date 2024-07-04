@@ -9,8 +9,6 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] private PlayerDetectionState playerDetectionState;
-    [SerializeField] private PlayerController player;
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private SpiderBotStateMachine spiderBotStateMachine;
     [SerializeField] private SpiderBotSpawner spiderBotSpawner;
@@ -30,13 +28,11 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
     private void Start()
     {
         Debug.Log("SpiderBotFOV Popping");
-        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
-        ability = GameObject.Find("Player").GetComponent<PlayerAbilities>();
-        enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
-        playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
+        sceneActivity = GameManager.instance.ReturnSceneActivity();
+        ability = GameManager.instance.ReturnPlayerAbilities();
+        enemyProximity = GameManager.instance.ReturnEnemyProximityCheck();
+        playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
+        spiderBotSpawner = GameManager.instance.ReturnSpiderBotSpawner();
         spiderBotStateMachine = spiderBotSpawner.ReturnSpiderBotStateInstance();
         playerIsBeingDetected = false;
         enemyGrandparentTransform = gameObject.transform.parent;

@@ -9,7 +9,7 @@ public class PlayerRaycast : MonoBehaviour
     [Header("Game Objects")]
     [SerializeField] private GameObject lastHitObject;
     [SerializeField] private GameObject heldObject;
-    [SerializeField] private GameObject heldPosition;
+
 
     [Header("Floats")]
     [SerializeField] private float interactDistance;
@@ -21,7 +21,7 @@ public class PlayerRaycast : MonoBehaviour
     [SerializeField] private bool holding;
 
     [Header("Scripts")]
-    [SerializeField] private UIController uI;
+    [SerializeField] private PhoenixChipDecision phoenixChipDecision;
     [SerializeField] private Battery battery;
 
     [Header("UI Elements")]
@@ -70,7 +70,7 @@ public class PlayerRaycast : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         interactableText.text = "";
-                        uI.PhoenixChipDecision();
+                        phoenixChipDecision.PlayerDecision();
                     }
 
                 }
@@ -110,10 +110,9 @@ public class PlayerRaycast : MonoBehaviour
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;
         holding = false;
-        interactableText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
-        heldPosition = GameObject.Find("HoldPosition");
-        uI = GameObject.Find("Canvas").GetComponent<UIController>();
-        battery = GameObject.FindWithTag("Battery").GetComponent<Battery>();
+        interactableText = GameManager.instance.ReturnInteractableText();
+        phoenixChipDecision = GameManager.instance.ReturnPhoenixChipDecision();
+        battery = GameManager.instance.ReturnBattery();
     }
 
     public void SetInteractableText(string value)

@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerAbilities : MonoBehaviour
 {
-    [SerializeField]  GameManager gameManager;
-    [SerializeField] HUD playerHud;
-
     [Header("bools")]
     [SerializeField] private bool invisibilityUnlocked;
     [SerializeField] private bool invisibilityAvailable;
@@ -41,32 +38,7 @@ public class PlayerAbilities : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Player Ability is popping");
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-
-        if (invisibilityCloak == null)
-        {
-            invisibilityCloak = GameObject.Find("LeftArm_RightArm5").GetComponent<InvisibilityCloak>();
-        }
-
-        jetPack = gameObject.GetComponent<Jetpack>();
-
-        if (playerAnimator == null)
-        {
-            playerAnimator = GameObject.Find("R-BRT-UI-Done").GetComponent<Animator>();
-        }
-
-        usingInvisibility = false;
-        invisibilityAvailable = true;
-        jetPackUnlocked = false;
-        invisibilityUnlocked = false;
-        maxInvisible = 7.5f;
-        invisibleIncrement = .25f;
-        startingInvisible = 7.5f;
-        invisibilityMeterFillingBackUp = false;
-
-        HideInvisibilityMeter();
-        Debug.Log("invis bar should be gone");
+        Setup();
     }
 
     private void Update()
@@ -79,6 +51,25 @@ public class PlayerAbilities : MonoBehaviour
         HandleInvisibility();
         InvisibilityMeter();
         InvisibilityMeterFillingBackUp();
+    }
+
+
+    void Setup()
+    {
+        Debug.Log("Player Ability is popping");
+        invisibilityCloak = GameManager.instance.ReturnInvisibilityCloak();
+        jetPack = gameObject.GetComponent<Jetpack>();
+        playerAnimator = GameManager.instance.ReturnAnimator();
+        usingInvisibility = false;
+        invisibilityAvailable = true;
+        jetPackUnlocked = false;
+        invisibilityUnlocked = false;
+        maxInvisible = 7.5f;
+        invisibleIncrement = .25f;
+        startingInvisible = 7.5f;
+        invisibilityMeterFillingBackUp = false;
+        HideInvisibilityMeter();
+        Debug.Log("invis bar should be gone");
     }
 
     public void HandleInvisibility()

@@ -13,13 +13,12 @@ public class DetectionMeter : MonoBehaviour
     [SerializeField] float detectionIncrement;
     [SerializeField] float maxDetection;
 
+    [Header("GameManager")]
+    [SerializeField] private GameManager gameManager; 
+
     void Start()
     {
-        Debug.Log("DetectionMeter is popping");
-        startingDetection = 0.0f;
-        detectionIncrement = .75f;
-        maxDetection = 201.0f;
-        detectionMeter.fillAmount = startingDetection / maxDetection;
+        Setup();
     }
 
     public void IncreaseDetection(float detection)
@@ -33,6 +32,16 @@ public class DetectionMeter : MonoBehaviour
     {
         startingDetection -= detectionLost * Time.deltaTime * detectionIncrement;
         startingDetection = Mathf.Clamp(startingDetection, 0, maxDetection);
+        detectionMeter.fillAmount = startingDetection / maxDetection;
+    }
+
+    public void Setup()
+    {
+        Debug.Log("DetectionMeter is popping");
+        detectionMeter = gameManager.ReturnDetectionAmountImage();
+        startingDetection = 0.0f;
+        detectionIncrement = .75f;
+        maxDetection = 201.0f;
         detectionMeter.fillAmount = startingDetection / maxDetection;
     }
 

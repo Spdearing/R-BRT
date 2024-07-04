@@ -9,18 +9,17 @@ using static SpiderBotStateMachine;
 public class PlayerDetectionState : MonoBehaviour
 {
     [Header("Scripts")]
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private DetectionMeter detection;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private Jetpack jetpack;
 
     [SerializeField] private GroundBotStateMachine groundBotStateMachine; // instantiated script
     [SerializeField] private EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
-    //[SerializeField] GroundBotSpawner groundBotSpawner;
+
 
     [SerializeField] private FlyingBotStateMachine flyingBotStateMachine; // instantiated script
     [SerializeField] private EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
-    //[SerializeField] FlyingBotSpawner flyingBotSpawner;
+
 
     [SerializeField] private SpiderBotStateMachine spiderBotStateMachine; // instantiated script
     [SerializeField] private EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
@@ -35,9 +34,6 @@ public class PlayerDetectionState : MonoBehaviour
     [SerializeField] private bool detectedByGroundBot;
     [SerializeField] private bool detectedByFlyingBot;
     [SerializeField] private bool detectedBySpiderBot;
-
-    [Header("Game Object")]
-    [SerializeField] private GameObject DetectionMeter;
 
     public DetectionState currentState;
 
@@ -55,9 +51,8 @@ public class PlayerDetectionState : MonoBehaviour
     {
 
         Debug.Log("PlayerDetection is popping");
-        playerController = gameObject.GetComponent<PlayerController>();
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        detection = GameObject.FindWithTag("DetectionMeter").GetComponent<DetectionMeter>();
+        playerController = GameManager.instance.ReturnPlayerController();
+        detection = GameManager.instance.ReturnDetectionMeter();
         detectedByGroundBot = false;
         detectedByFlyingBot = false;
         detectedBySpiderBot = false;

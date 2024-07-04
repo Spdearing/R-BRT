@@ -85,41 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("PlayerController is popping");
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-        rb.freezeRotation = true;
 
-        groundDrag = 5.0f;
-
-        if (playerCollider == null)
-        {
-            playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
-        }
-
-        if (cameraTransform == null)
-        {
-            cameraTransform = GameObject.Find("Main Camera").GetComponent<Transform>();
-        }
-
-        if (playerAnimator == null)
-        {
-            playerAnimator = GameObject.Find("R-BRT-UI-Done").GetComponent<Animator>();
-        }
-
-        readyToJump = true;
-        gravity = -1.0f;
-
-        if (playerCollider != null)
-        {
-            originalHeight = playerCollider.height;
-            originalCameraPosition = cameraTransform.localPosition;
-            Debug.Log("CapsuleCollider successfully assigned.");
-        }
-        else
-        {
-            Debug.LogError("CapsuleCollider not assigned!");
-        }
     }
 
     private void Update()
@@ -144,6 +110,31 @@ public class PlayerController : MonoBehaviour
         if(playerIsActive) 
         {
             MovePlayer();
+        }
+    }
+
+    void Setup()
+    {
+        Debug.Log("PlayerController is popping");
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+        rb.freezeRotation = true;
+        groundDrag = 5.0f;
+        playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
+        cameraTransform = GameManager.instance.ReturnCameraTransform();
+        playerAnimator = GameManager.instance.ReturnAnimator();
+        readyToJump = true;
+        gravity = -1.0f;
+
+        if (playerCollider != null)
+        {
+            originalHeight = playerCollider.height;
+            originalCameraPosition = cameraTransform.localPosition;
+            Debug.Log("CapsuleCollider successfully assigned.");
+        }
+        else
+        {
+            Debug.LogError("CapsuleCollider not assigned!");
         }
     }
 

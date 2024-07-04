@@ -7,9 +7,6 @@ public class EnemyProximityCheck : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool enemyWithinRange;
 
-    [Header("Game Manager")]
-    [SerializeField] private GameManager gameManager;
-
     [Header("Floats")]
     [SerializeField] private float raycastDistance;
 
@@ -25,7 +22,6 @@ public class EnemyProximityCheck : MonoBehaviour
     private void Start()
     {
         Debug.Log("EnemyProximity Popping");
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         raycastDistance = 10.0f;
     }
 

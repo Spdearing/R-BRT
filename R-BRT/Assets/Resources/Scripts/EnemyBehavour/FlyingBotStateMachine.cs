@@ -22,7 +22,6 @@ public class FlyingBotStateMachine : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController playerController;
 
     [Header("Materials")]
@@ -50,17 +49,7 @@ public class FlyingBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("FlyingBotStateMaching popping");
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        player = GameObject.FindWithTag("Player");
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        playerCameraTransform = playerCamera.transform;
-        gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();   
-        enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
-        flyingBotHeadColor.material = red;
-        fieldOfViewRenderer.material = fieldOfViewRed;
-        currentState = FlyingState.patrolling;
+        Setup();
     }
 
     // Update is called once per frame
@@ -80,6 +69,20 @@ public class FlyingBotStateMachine : MonoBehaviour
                 isLerping = false;
             }
         }
+    }
+
+    void Setup()
+    {
+        Debug.Log("FlyingBotStateMaching popping");
+        player = GameObject.FindWithTag("Player");
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        playerCameraTransform = playerCamera.transform;
+        gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();
+        enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
+        flyingBotHeadColor.material = red;
+        fieldOfViewRenderer.material = fieldOfViewRed;
+        currentState = FlyingState.patrolling;
     }
 
 
