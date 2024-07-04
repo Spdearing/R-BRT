@@ -63,6 +63,7 @@ public class PlayerAbilities : MonoBehaviour
         invisibilityVisualMeter = GameManager.instance.ReturnInvisibilityMeter();
         invisibilityVisualEmpty = GameManager.instance.ReturnInvisibilityMeterEmpty();
         invisibilityVisualAmount = GameManager.instance.ReturnInvisibilityMeterAmount();
+        invisibleMeter = GameManager.instance.ReturnInvisibilityMeterAmount();
         activatingInvisibility = GameManager.instance.ReturnActivatingInvisibilitySound();
         invisiblityDuration = GameManager.instance.ReturnInvisibilityDurationSound();
         usingInvisibility = false;
