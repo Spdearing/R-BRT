@@ -26,7 +26,6 @@ public class ThrowObject : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("ThrowObject is popping");
         Setup();
     }
 

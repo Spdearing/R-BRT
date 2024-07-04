@@ -39,7 +39,6 @@ public class SceneActivity : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Scene Activity is popping");
         InitializeGameData();
     }
 

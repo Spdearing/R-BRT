@@ -20,8 +20,8 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("PlayerCam is popping");
-        playerController = transform.parent.parent.GetComponent<PlayerController>();
+
+        playerController = GameManager.instance.ReturnPlayerController();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

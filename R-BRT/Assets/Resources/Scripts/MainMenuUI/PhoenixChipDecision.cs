@@ -14,7 +14,6 @@ public class PhoenixChipDecision : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(" UI is popping");
         phoenixChipMenu = GameManager.instance.ReturnPhoenixChipMenu(); 
         Time.timeScale = 1.0f;
         phoenixChipMenu.SetActive(false);

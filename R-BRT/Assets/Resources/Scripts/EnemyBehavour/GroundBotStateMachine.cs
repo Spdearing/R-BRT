@@ -40,7 +40,6 @@ public class GroundBotStateMachine : MonoBehaviour
 
     void Setup()
     {
-        Debug.Log("GroundBotStateMachine popping");
         groundBotAIMovement = GetComponent<GroundBotAIMovement>();
         playerCameraTransform = GameManager.instance.ReturnCameraTransform();
         gameOverScreen = GameManager.instance.ReturnGameOver();
@@ -88,21 +87,26 @@ public class GroundBotStateMachine : MonoBehaviour
 
                 if (gameObject.name == "GroundBotGroup2" || gameObject.name == "GroundBotGroup4")
                 {
-                    groundBotAIMovement.Patrolling();
+                    groundBotAIMovement.SetRoamingStatus(true);
                 }
                 break;
 
             case BehaviorState.scanning:
 
+                Debug.Log("enemy state changed");
                 playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
-                groundBotHeadMovement.RotateTowardsPlayer();
                 
+                if (gameObject.name == "GroundBotGroup2" || gameObject.name == "GroundBotGroup4")
+                {
+                    groundBotAIMovement.SetRoamingStatus(false);
+                }
+
 
                 break;
 
             case BehaviorState.playerCaught:
 
-                Debug.Log("inside player Caught");
+                
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
 
                 playerController.SetCameraLock(true);

@@ -48,8 +48,6 @@ public class PlayerDetectionState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        Debug.Log("PlayerDetection is popping");
         playerController = GameManager.instance.ReturnPlayerController();
         detection = GameManager.instance.ReturnDetectionMeter();
         detectedByGroundBot = false;
