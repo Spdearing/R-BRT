@@ -77,8 +77,8 @@ public class SceneActivity : MonoBehaviour
         InitializeTextBoxes();
         InitializeViewPoints();
         InitializePlayerAndDetectionMeter();
-        mainCamera = GameObject.FindWithTag("MainCamera")?.transform;
-        friendLocation = GameObject.Find("S-4MTired")?.transform;
+        mainCamera = GameManager.instance.ReturnCameraTransform();
+        friendLocation = GameManager.instance.ReturnFriendsLocation();
         playerIsSpotted = false;
 
         if (firstPlaythrough)

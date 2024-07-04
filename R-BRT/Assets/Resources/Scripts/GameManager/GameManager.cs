@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform holdPosition;
     [SerializeField] private Transform playerCameraTransform;
+    [SerializeField] private Transform friendLocation;
 
 
     [Header("Scripts")]
@@ -119,6 +120,7 @@ public class GameManager : MonoBehaviour
         flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
         groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
         spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
+        friendLocation = GameObject.Find("S-4MTired")?.transform;
         ability = GameObject.Find("Player").GetComponent<PlayerAbilities>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
@@ -137,6 +139,7 @@ public class GameManager : MonoBehaviour
         phoenixChipDecision = GameObject.Find("Canvas").GetComponent<PhoenixChipDecision>();
         battery = GameObject.FindWithTag("Battery").GetComponent<Battery>();
         phoenixChipMenu = GameObject.FindWithTag("PhoenixChipMenu");
+        
     }
 
     private IEnumerator TransitionBackToStart()
@@ -221,6 +224,11 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnPlayer()
     {
         return this.player;
+    }
+
+    public Transform ReturnFriendsLocation()
+    {
+        return this.friendLocation;
     }
 
     public Transform ReturnPlayerTransform()
