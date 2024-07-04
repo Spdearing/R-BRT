@@ -26,7 +26,6 @@ public class CreditsUI : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("CreditsUi is popping");
         panels.Add("SamPanel", samPanel);
         panels.Add("AnnaPanel", annaPanel);
         panels.Add("NasimPanel", nasimPanel);

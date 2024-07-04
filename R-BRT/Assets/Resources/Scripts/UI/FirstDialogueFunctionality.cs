@@ -20,7 +20,6 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private float delay = 0.035f;
 
     [Header("Scripts")]
-    [SerializeField] private GameManager gameManger;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private SceneActivity sceneActivity;
 
@@ -31,23 +30,9 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("First Dialogue functionality is popping");
-        // Initialize GameManager and PlayerController references if not set in Inspector
-        if (gameManger == null)
-        {
-            gameManger = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        }
+        playerController = GameManager.instance.ReturnPlayerController();
+        sceneActivity = GameManager.instance.ReturnSceneActivity();
 
-        if (playerController == null)
-        {
-            playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        }
-        if (sceneActivity == null)
-        {
-            sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
-        }
-
-        // Initialize fullTexts array with provided text
         fullTexts = new string[5];
         fullTexts[0] = fullText;
         fullTexts[1] = fullText2;

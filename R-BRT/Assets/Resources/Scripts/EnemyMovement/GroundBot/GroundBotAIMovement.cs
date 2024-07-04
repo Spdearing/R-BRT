@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class GroundBotAIMovement : MonoBehaviour
 {
@@ -20,7 +19,14 @@ public class GroundBotAIMovement : MonoBehaviour
     [Header("Int")]
     [SerializeField] private int currentWaypointIndex;
 
-    private bool isWaiting;
+    [SerializeField] private bool isWaiting;
+
+    [Header("Detection")]
+    [SerializeField] private float detectionSpeed = 1.0f;
+    [SerializeField] private float crouchDetectionMultiplier = 0.5f; // Multiplier to reduce detection speed when crouching
+
+    [Header("Bools")]
+    [SerializeField] private bool isRoaming;
 
     // Start is called before the first frame update
     void Start()
@@ -28,22 +34,28 @@ public class GroundBotAIMovement : MonoBehaviour
         Setup();
     }
 
+    private void Update()
+    {
+        if (groundBotHeadMovement.ReturnPlayerIsSpotted())
+        {
+            isRoaming = false;
+            StopBot();
+        }
+        else
+        {
+            isRoaming = true;
+            ResumePatrolling();
+        }
+    }
+
     void Setup()
     {
-        Debug.Log("GroundBotAI popping");
+        isRoaming = true;
         InitializePatrolPoints();
-
         groundBotAI = GetComponent<NavMeshAgent>();
-        if (groundBotAI == null)
-        {
-            Debug.LogError("There is no AI attached to this GameObject");
-            return;
-        }
-
         isWaiting = false;
         currentWaypointIndex = 0;
-
-        Patrolling();
+        StartCoroutine(Patrolling());
     }
 
     private void InitializePatrolPoints()
@@ -80,60 +92,60 @@ public class GroundBotAIMovement : MonoBehaviour
         }
     }
 
-    public void Patrolling()
+    private void StopBot()
     {
-        if(groundBotHeadMovement.ReturnPlayerIsSpotted() == false)
+        isWaiting = true;
+        groundBotAI.isStopped = true;
+        groundBotAI.velocity = Vector3.zero;
+    }
+
+    public void ResumePatrolling()
+    {
+        if (!isWaiting) return;
+
+        isWaiting = false;
+        groundBotAI.isStopped = false;
+        StartCoroutine(Patrolling());
+    }
+
+    private IEnumerator Patrolling()
+    {
+        if(isRoaming)
         {
-            List<Transform> patrolPoints = null;
+            List<Transform> patrolPoints = gameObject.name == "GroundBotGroup2" ? patrolPoints1 : patrolPoints2;
 
-            if (gameObject.name == "GroundBotGroup2")
+            if (patrolPoints != null && patrolPoints.Count > 0)
             {
-                patrolPoints = patrolPoints1;
-            }
-            else if (gameObject.name == "GroundBotGroup4")
-            {
-                patrolPoints = patrolPoints2;
-            }
+                while (!isWaiting)
+                {
+                    groundBotAI.SetDestination(patrolPoints[currentWaypointIndex].position);
 
-            if (patrolPoints != null && patrolPoints.Count > 0 && !isWaiting)
-            {
-                StartCoroutine(MoveToNextWaypoint(patrolPoints));
+                    // Wait until the bot reaches the waypoint
+                    while (!isWaiting && groundBotAI.remainingDistance > groundBotAI.stoppingDistance)
+                    {
+                        yield return null;
+                    }
+
+                    yield return new WaitForSeconds(5.0f); // Wait at the waypoint
+
+                    currentWaypointIndex = (currentWaypointIndex + 1) % patrolPoints.Count;
+                }
             }
             else
             {
                 Debug.LogError("Patrol points not properly set or empty.");
             }
         }
-    }
 
-        
-       
-
-    private IEnumerator MoveToNextWaypoint(List<Transform> patrolPoints)
-    {
-        while (true)
-        {
-            isWaiting = true;
-
-            if (currentWaypointIndex < patrolPoints.Count)
-            {
-                groundBotAI.SetDestination(patrolPoints[currentWaypointIndex].position);
-            }
-            else
-            {
-                Debug.LogError("currentWaypointIndex out of range.");
-            }
-
-            yield return new WaitForSeconds(3.5f);
-
-            currentWaypointIndex = (currentWaypointIndex + 1) % patrolPoints.Count;
-
-            isWaiting = false;
-        }
     }
 
     public void SetGroundBotHeadMovement(GroundBotHeadMovement value)
     {
         this.groundBotHeadMovement = value;
+    }
+
+    public void SetRoamingStatus(bool value)
+    {
+        isRoaming = value;
     }
 }

@@ -34,7 +34,6 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     void Setup()
     {
-        Debug.Log("FlyingBotFOVPopping");
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         ability = GameManager.instance.ReturnPlayerAbilities();
         enemyProximity = GameManager.instance.ReturnEnemyProximityCheck();
