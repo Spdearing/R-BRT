@@ -330,15 +330,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastHitObject: {fileID: 0}
   heldObject: {fileID: 0}
-  heldPosition: {fileID: 0}
   interactDistance: 4
   raycastDistance: 0
   pickUpCooldown: 0.5
   pickUpTime: 0
   holding: 0
-  holdingPosition: {fileID: 9171299991702683578}
-  pickUpObject: {fileID: 0}
-  uI: {fileID: 0}
+  phoenixChipDecision: {fileID: 0}
   battery: {fileID: 0}
   interactableText: {fileID: 0}
 --- !u!114 &7736776365293704415
@@ -458,11 +455,6 @@ MonoBehaviour:
   exitingSlope: 0
   isGrounded: 0
   isCameraLocked: 0
-  invisibilityUnlocked: 0
-  invisibilityAvailable: 1
-  jetPackUnlocked: 0
-  invisibilityMeterFillingBackUp: 0
-  usingInvisibility: 0
   originalCameraPosition: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   moveDirection: {x: 0, y: 0, z: 0}
@@ -476,22 +468,10 @@ MonoBehaviour:
     m_Bits: 64
   playerCollider: {fileID: 9124633717863209405}
   currentState: 0
-  invisibilityVisualMeter: {fileID: 0}
-  invisibilityVisualEmpty: {fileID: 0}
-  invisibilityVisualAmount: {fileID: 0}
-  invisibleMeter: {fileID: 0}
-  maxInvisible: 0
-  invisibleIncrement: 0
-  startingInvisible: 0
   tr: {fileID: 5209847220083871333}
   playerAnimator: {fileID: 4648077884393115918}
-  activatingInvisibility: {fileID: 0}
-  invisiblityDuration: {fileID: 0}
   walkingSound: {fileID: 0}
-  sprintingSound: {fileID: 0}
   jumpingSound: {fileID: 0}
-  jetPack: {fileID: 0}
-  invisibilityCloak: {fileID: 0}
 --- !u!114 &7319206003921998239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a88111a6c7b269e469bdd10328996432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   detection: {fileID: 0}
   playerController: {fileID: 0}
   jetpack: {fileID: 9090620449033406597}
@@ -520,7 +499,6 @@ MonoBehaviour:
   detectedByGroundBot: 0
   detectedByFlyingBot: 0
   detectedBySpiderBot: 0
-  DetectionMeter: {fileID: 0}
   currentState: 0
 --- !u!114 &3887827219048110652
 MonoBehaviour:
@@ -550,7 +528,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyWithinRange: 0
-  gameManager: {fileID: 0}
   raycastDistance: 0
   ignoreLayerMask:
     serializedVersion: 2
@@ -586,7 +563,6 @@ MonoBehaviour:
   currentFillRatio: 0
   lastTimeOfUse: 0
   playerCharacterController: {fileID: 0}
-  tr: {fileID: 5209847220083871333}
   fuelMeter: {fileID: 0}
 --- !u!96 &5209847220083871333
 TrailRenderer:
