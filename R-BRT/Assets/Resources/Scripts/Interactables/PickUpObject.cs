@@ -25,7 +25,6 @@ public class PickUpObject : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Pickup is popping");
         Setup();
     }
 
