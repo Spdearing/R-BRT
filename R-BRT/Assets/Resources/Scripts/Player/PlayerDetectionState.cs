@@ -23,7 +23,6 @@ public class PlayerDetectionState : MonoBehaviour
 
     [SerializeField] private SpiderBotStateMachine spiderBotStateMachine; // instantiated script
     [SerializeField] private EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
-    //[SerializeField] SpiderBotSpawner spiderBotSpawner;
 
     [Header("Floats")]
     [SerializeField] private float crouchingDetectionIncrease;

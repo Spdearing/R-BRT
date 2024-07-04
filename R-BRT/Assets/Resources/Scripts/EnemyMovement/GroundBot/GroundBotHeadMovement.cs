@@ -84,7 +84,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         }
     }
 
-    private void RotateTowardsPlayer()
+    public void RotateTowardsPlayer()
     {
         Vector3 direction = playerTransform.position - transform.position;
         direction.y = 0;
@@ -111,6 +111,11 @@ public class GroundBotHeadMovement : MonoBehaviour
         {
             targetYRotation = startYRotation + rotationAngle;
         }
+    }
+
+    public bool ReturnPlayerIsSpotted()
+    {
+        return this.playerIsSpotted;
     }
 
     public void SetPlayerSpotted(bool value)

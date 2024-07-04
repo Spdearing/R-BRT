@@ -98,6 +98,7 @@ public class GroundBotSpawner : MonoBehaviour
                 navMeshAgent.height = 1.0f;
                 enemy.AddComponent<GroundBotAIMovement>();
                 GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
+                
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
@@ -105,7 +106,7 @@ public class GroundBotSpawner : MonoBehaviour
                 if (navMeshAgent != null) groundBotAI = navMeshAgent;
                 if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
 
-
+                groundBotAIMovement.SetGroundBotHeadMovement(headMovement);
                 enemy.name = "GroundBotGroup2";
                 enemy.tag = "GroundBot";
             }
@@ -166,7 +167,7 @@ public class GroundBotSpawner : MonoBehaviour
                 if (navMeshAgent != null) groundBotAI = navMeshAgent;
                 if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
 
-
+                groundBotAIMovement.SetGroundBotHeadMovement(headMovement);
                 enemy.name = "GroundBotGroup4";
                 enemy.tag = "GroundBot";
             }

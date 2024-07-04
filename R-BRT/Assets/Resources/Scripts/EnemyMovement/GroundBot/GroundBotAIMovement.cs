@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class GroundBotAIMovement : MonoBehaviour
 {
     [Header("Nav Mesh")]
     [SerializeField] private NavMeshAgent groundBotAI;
+
+    [Header("Scripts")]
+    [SerializeField] GroundBotHeadMovement groundBotHeadMovement;
 
     [Header("Transforms")]
     [SerializeField] private List<Transform> patrolPoints1 = new List<Transform>();
@@ -20,6 +24,11 @@ public class GroundBotAIMovement : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+    {
+        Setup();
+    }
+
+    void Setup()
     {
         Debug.Log("GroundBotAI popping");
         InitializePatrolPoints();
@@ -34,7 +43,6 @@ public class GroundBotAIMovement : MonoBehaviour
         isWaiting = false;
         currentWaypointIndex = 0;
 
-        // Start the patrolling process
         Patrolling();
     }
 
@@ -74,26 +82,32 @@ public class GroundBotAIMovement : MonoBehaviour
 
     public void Patrolling()
     {
-        List<Transform> patrolPoints = null;
+        if(groundBotHeadMovement.ReturnPlayerIsSpotted() == false)
+        {
+            List<Transform> patrolPoints = null;
 
-        if (gameObject.name == "GroundBotGroup2")
-        {
-            patrolPoints = patrolPoints1;
-        }
-        else if (gameObject.name == "GroundBotGroup4")
-        {
-            patrolPoints = patrolPoints2;
-        }
+            if (gameObject.name == "GroundBotGroup2")
+            {
+                patrolPoints = patrolPoints1;
+            }
+            else if (gameObject.name == "GroundBotGroup4")
+            {
+                patrolPoints = patrolPoints2;
+            }
 
-        if (patrolPoints != null && patrolPoints.Count > 0 && !isWaiting)
-        {
-            StartCoroutine(MoveToNextWaypoint(patrolPoints));
-        }
-        else
-        {
-            Debug.LogError("Patrol points not properly set or empty.");
+            if (patrolPoints != null && patrolPoints.Count > 0 && !isWaiting)
+            {
+                StartCoroutine(MoveToNextWaypoint(patrolPoints));
+            }
+            else
+            {
+                Debug.LogError("Patrol points not properly set or empty.");
+            }
         }
     }
+
+        
+       
 
     private IEnumerator MoveToNextWaypoint(List<Transform> patrolPoints)
     {
@@ -116,5 +130,10 @@ public class GroundBotAIMovement : MonoBehaviour
 
             isWaiting = false;
         }
+    }
+
+    public void SetGroundBotHeadMovement(GroundBotHeadMovement value)
+    {
+        this.groundBotHeadMovement = value;
     }
 }

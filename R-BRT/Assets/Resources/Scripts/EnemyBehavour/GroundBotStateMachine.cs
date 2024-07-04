@@ -12,6 +12,7 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] PlayerDetectionState playerDetectionState;
     [SerializeField] PlayerController playerController;
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
+    [SerializeField] GroundBotHeadMovement groundBotHeadMovement;
     [SerializeField] GroundBotAIMovement groundBotAIMovement;
 
 
@@ -45,6 +46,7 @@ public class GroundBotStateMachine : MonoBehaviour
         gameOverScreen = GameManager.instance.ReturnGameOver();
         playerController = GameManager.instance.ReturnPlayerController();
         enemyGroundBotFieldOfView = GetComponentInChildren<EnemyGroundBotFieldOfView>();
+        groundBotHeadMovement = gameObject.GetComponent<GroundBotHeadMovement>();
         playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
         currentState = BehaviorState.patrolling;
     }
@@ -93,6 +95,8 @@ public class GroundBotStateMachine : MonoBehaviour
             case BehaviorState.scanning:
 
                 playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+                groundBotHeadMovement.RotateTowardsPlayer();
+                
 
                 break;
 

@@ -11,6 +11,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
     [SerializeField] private PlayerDetectionState playerDetectionState;
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
+    [SerializeField] private GroundBotStateMachine groundBotStateMachine;
     [SerializeField] private GroundBotSpawner groundBotSpawner;
     [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private PlayerAbilities ability;
@@ -43,6 +44,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
         playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
         groundBotSpawner = GameManager.instance.ReturnGroundBotSpawner();
         groundBotHeadMovement = transform.parent.parent.GetComponent<GroundBotHeadMovement>();
+        groundBotStateMachine = transform.parent.parent.GetComponent<GroundBotStateMachine>();
         playerIsBeingDetected = false;
         enemyGrandparentTransform = gameObject.transform.parent.parent;
     }
@@ -54,7 +56,8 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
             sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
 
-            
+
+
             Transform grandparentTransform = gameObject.transform.parent.parent;
 
             GroundBotStateMachine groundBotStateMachine = grandparentTransform.GetComponent<GroundBotStateMachine>();
@@ -65,6 +68,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
             {
                 playerDetectionState.SetGroundBotStateMachine(groundBotStateMachine);
                 playerDetectionState.SetGroundBotFieldOfView(enemyFieldOfView);
+                groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.scanning);
             }
 
             if (groundBotHeadMovement != null)
@@ -108,6 +112,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
             sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
 
+            groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.patrolling);
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
             
             if (gameObject.transform.parent.parent.tag == "GroundBot")
