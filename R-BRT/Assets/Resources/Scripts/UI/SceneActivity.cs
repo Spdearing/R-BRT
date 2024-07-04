@@ -36,7 +36,6 @@ public class SceneActivity : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private DetectionMeter detectionMeter;
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private GroundBotSpawner groundBotSpawner;
 
     void Start()
     {

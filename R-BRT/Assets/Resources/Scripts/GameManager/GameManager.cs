@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject phoenixChipMenu;
+    [SerializeField] private GameObject battery;
+    [SerializeField] private GameObject fuelMeter;
 
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableUIText;
+    [SerializeField] private TMP_Text interactableBatteryText;
 
     [Header("Transform")]
     [SerializeField] private Transform playerTransform;
@@ -30,11 +33,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private PhoenixChipDecision phoenixChipDecision;
-    [SerializeField] private Battery battery;
+    [SerializeField] private Battery batteryScript;
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private PlayerDetectionState playerDetectionState;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerAbilities ability;
+    [SerializeField] private PlayerRaycast playerRaycast;
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private FlyingBotSpawner flyingBotSpawner;
     [SerializeField] private GroundBotSpawner groundBotSpawner;
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private InvisibilityCloak invisibilityCloak;
     [SerializeField] private DetectionMeter detection;
+
 
     [Header("Animator")]
     [SerializeField] private Animator playerAnimator;
@@ -117,10 +122,11 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
+        playerRaycast = GameObject.FindWithTag("MainCamera").GetComponent<PlayerRaycast>();
         flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
         groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
         spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
-        friendLocation = GameObject.Find("S-4MTired")?.transform;
+        friendLocation = GameObject.Find("S-4MTiredShowcase")?.transform;
         ability = GameObject.Find("Player").GetComponent<PlayerAbilities>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
@@ -136,10 +142,13 @@ public class GameManager : MonoBehaviour
         invisibilityCloak = GameObject.Find("LeftArm_RightArm5").GetComponent<InvisibilityCloak>();
         detection = GameObject.FindWithTag("DetectionMeter").GetComponent<DetectionMeter>();
         interactableUIText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
+        interactableBatteryText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
         phoenixChipDecision = GameObject.Find("Canvas").GetComponent<PhoenixChipDecision>();
-        battery = GameObject.FindWithTag("Battery").GetComponent<Battery>();
+        batteryScript = GameObject.FindWithTag("Battery").GetComponent<Battery>();
+        battery = GameObject.FindWithTag("Battery");
         phoenixChipMenu = GameObject.FindWithTag("PhoenixChipMenu");
-        
+        fuelMeter = GameObject.FindWithTag("FuelMeter");
+
     }
 
     private IEnumerator TransitionBackToStart()
@@ -156,9 +165,19 @@ public class GameManager : MonoBehaviour
         return this.interactableUIText;
     }
 
-    public Battery ReturnBattery() 
+    public TMP_Text ReturnInteractableBatteryText()
     {
-        return this.battery;
+        return this.interactableBatteryText;
+    }
+
+    public PlayerRaycast ReturnPlayerRaycast() 
+    {
+        return this.playerRaycast;
+    }
+
+    public Battery ReturnBatteryScript() 
+    {
+        return this.batteryScript;
     }
 
     public PhoenixChipDecision ReturnPhoenixChipDecision()
@@ -201,6 +220,8 @@ public class GameManager : MonoBehaviour
         return this.groundBotSpawner;
     }
 
+    
+
     public FlyingBotSpawner ReturnFlyingBotSpawner()
     {
         return this.flyingBotSpawner;
@@ -216,9 +237,19 @@ public class GameManager : MonoBehaviour
         return this.playerDetectionState;
     }
 
+    public GameObject ReturnFuelMeter()
+    {
+        return this.fuelMeter;
+    }
+
     public GameObject ReturnPhoenixChipMenu()
     {
         return this.phoenixChipMenu;
+    }
+
+    public GameObject ReturnBatteryObject()
+    {
+        return this.battery;
     }
 
     public GameObject ReturnPlayer()
