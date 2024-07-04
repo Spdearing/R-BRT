@@ -21,8 +21,6 @@ public class Battery : MonoBehaviour
     [SerializeField] private PlayerRaycast playerRayCast;
     [SerializeField] private PlayerAbilities abilities;
 
-    [Header("TMP_Text")]
-    [SerializeField] private TMP_Text interactableText;
 
 
 
@@ -31,10 +29,10 @@ public class Battery : MonoBehaviour
     void Start()
     { 
         
-        playerRayCast = GameObject.FindWithTag("MainCamera").GetComponent<PlayerRaycast>();
-        interactableText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
-        battery = GameObject.FindWithTag("Battery");
-        fuelMeter = GameObject.FindWithTag("FuelMeter");
+        playerRayCast = GameManager.instance.ReturnPlayerRaycast();
+        battery = GameManager.instance.ReturnBatteryObject();
+        fuelMeter = GameManager.instance.ReturnFuelMeter();
+        abilities = GameManager.instance.ReturnPlayerAbilities();
         gameObject.tag = "Battery";
         fuelMeter.SetActive(false);
         abilitySelectionPanel.SetActive(false);

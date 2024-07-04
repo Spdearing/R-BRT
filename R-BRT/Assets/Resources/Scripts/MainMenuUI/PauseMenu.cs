@@ -23,7 +23,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private bool isPaused;
 
     [Header("Scripts")]
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerController playerController;
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
@@ -37,7 +36,6 @@ public class PauseMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         panels.Add("PauseMenuPanel", pauseMenu);
         panels.Add("OptionsPanel", optionsPanel);
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
