@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class InvisibilityCloak : MonoBehaviour
 {
-    [Header("Game Manager")]
-    [SerializeField] private GameManager gameManager;
-
     [Header("Renderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer2;
@@ -15,9 +12,9 @@ public class InvisibilityCloak : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        skinMeshRenderer1 = gameManager.ReturnRendererOne();
-        skinMeshRenderer2 = gameManager.ReturnRendererTwo();
+        
+        skinMeshRenderer1 = GameManager.instance.ReturnRendererOne();
+        skinMeshRenderer2 = GameManager.instance.ReturnRendererTwo();
     }
 
 
