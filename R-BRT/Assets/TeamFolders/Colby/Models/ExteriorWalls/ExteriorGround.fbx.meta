@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a04a218c5c448524f99d522a06fef849
+guid: 49327858fff58d74f90154a0a89d379b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ExteriorWallTrimsheet
-    second: {fileID: 2100000, guid: f16a94608616747409ed6ee2ce370c26, type: 2}
+      name: DeadGrass
+    second: {fileID: 2100000, guid: f6040740373491040b083ad5b62ec31c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
