@@ -19,7 +19,6 @@ public class MainMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Main Menu UI is popping");
         panels.Add("MainMenuPanel", mainMenuPanel);
         panels.Add("InstructionsPanel", instructionsPanel);
         panels.Add("OptionsPanel", optionsPanel);

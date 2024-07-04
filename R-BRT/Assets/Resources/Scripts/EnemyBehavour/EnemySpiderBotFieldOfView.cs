@@ -27,7 +27,16 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("SpiderBotFOV Popping");
+        Setup();
+    }
+
+    private void Update()
+    {
+        DetectingPlayer();
+    }
+
+    void Setup()
+    {
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         ability = GameManager.instance.ReturnPlayerAbilities();
         enemyProximity = GameManager.instance.ReturnEnemyProximityCheck();
@@ -36,11 +45,6 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
         spiderBotStateMachine = spiderBotSpawner.ReturnSpiderBotStateInstance();
         playerIsBeingDetected = false;
         enemyGrandparentTransform = gameObject.transform.parent;
-    }
-
-    private void Update()
-    {
-        DetectingPlayer();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -12,7 +12,6 @@ public class PlayerCollisions : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Player Collisions is popping");
         sceneActivity = GameManager.instance.ReturnSceneActivity();
     }
 

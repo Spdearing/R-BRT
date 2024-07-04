@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class FlyingBotAIMovement : MonoBehaviour
 {
     [Header("Nav Mesh")]
-    [SerializeField] private NavMeshAgent groundBotAI;
+    [SerializeField] private NavMeshAgent flyingBotAI;
 
     [Header("Transforms")]
     [SerializeField] private List<Transform> patrolPoints1 = new List<Transform>();
@@ -21,20 +21,12 @@ public class FlyingBotAIMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("GroundBotAI popping");
+        
         InitializePatrolPoints();
 
-        groundBotAI = GetComponent<NavMeshAgent>();
-        if (groundBotAI == null)
-        {
-            Debug.LogError("There is no AI attached to this GameObject");
-            return;
-        }
-
+        flyingBotAI = GetComponent<NavMeshAgent>();
         isWaiting = false;
         currentWaypointIndex = 0;
-
-        // Start the patrolling process
         Patrolling();
     }
 
@@ -80,7 +72,7 @@ public class FlyingBotAIMovement : MonoBehaviour
         {
             patrolPoints = patrolPoints1;
         }
-        else if (gameObject.name == "GroundBotGroup4")
+        else if (gameObject.name == "FlyingBotGroup4")
         {
             patrolPoints = patrolPoints2;
         }

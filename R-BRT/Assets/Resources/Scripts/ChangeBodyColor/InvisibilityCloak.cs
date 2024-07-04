@@ -12,7 +12,6 @@ public class InvisibilityCloak : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         skinMeshRenderer1 = GameManager.instance.ReturnRendererOne();
         skinMeshRenderer2 = GameManager.instance.ReturnRendererTwo();
     }

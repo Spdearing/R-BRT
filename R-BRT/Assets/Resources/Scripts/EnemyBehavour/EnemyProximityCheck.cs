@@ -21,7 +21,6 @@ public class EnemyProximityCheck : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("EnemyProximity Popping");
         raycastDistance = 10.0f;
     }
 

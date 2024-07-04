@@ -95,7 +95,6 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("GameManger is popping");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnDisable()
@@ -111,12 +110,12 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "GameScene":
-                Debug.Log("First playthrough");
+                
                 GrabAllTheTools();
                 break;
 
             case "MainMenuScene":
-                Debug.Log("MainMenu");
+                
                 break;
 
             case "SamDies":
@@ -304,6 +303,11 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnPlayer()
     {
         return this.player;
+    }
+
+    public GameObject ReturnPlayerCamera() 
+    {
+        return this.playerCamera;
     }
 
     public Transform ReturnFriendsLocation()

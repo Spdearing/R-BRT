@@ -29,7 +29,6 @@ public class PlayerRaycast : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Player Raycast is popping");
         Setup();
     }
 
