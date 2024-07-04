@@ -4,12 +4,8 @@ using UnityEngine.AI;
 
 public class GroundBotStateMachine : MonoBehaviour
 {
-    [Header("GameObjects")]
-    [SerializeField] GameObject playerCamera;
-
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
-
 
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
