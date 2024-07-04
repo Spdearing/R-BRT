@@ -28,8 +28,6 @@ public class Jetpack : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PlayerController playerCharacterController;
 
-    [Header("Trail Renderer")]
-    [SerializeField] private TrailRenderer tr;
 
     [Header("Slider")]
     [SerializeField] private Slider fuelMeter;
@@ -38,12 +36,12 @@ public class Jetpack : MonoBehaviour
     {
 
         pressedFirstTime = false;
-        playerCharacterController = GetComponent<PlayerController>();
-        fuelMeter = GameObject.Find("Fuel Meter").GetComponent<Slider>();
-        tr = gameObject.GetComponent<TrailRenderer>();
+        playerCharacterController = GameManager.instance.ReturnPlayerController();
+        fuelMeter = GameManager.instance.ReturnFuelMeterSlider();
+
 
         currentFillRatio = 1f;
-        tr.emitting = false;
+
     }
 
     void Update()
@@ -87,7 +85,7 @@ public class Jetpack : MonoBehaviour
         if (jetpackIsInUse)
         {
             isUsingJetpack = true;
-            tr.emitting = true;
+ 
 
             lastTimeOfUse = Time.time;
 
@@ -109,7 +107,7 @@ public class Jetpack : MonoBehaviour
         else
         {
             isUsingJetpack = false;
-            tr.emitting = false;
+
 
             if (Time.time - lastTimeOfUse >= refuelDelay)
             {
