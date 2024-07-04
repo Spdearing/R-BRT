@@ -9,10 +9,9 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] private PlayerDetectionState playerDetectionState;
-    [SerializeField] private PlayerController player;
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemyProximityCheck enemyProximity;
     [SerializeField] private GroundBotHeadMovement groundBotHeadMovement;
+    [SerializeField] private GroundBotSpawner groundBotSpawner;
     [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private PlayerAbilities ability;
 
@@ -27,20 +26,25 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("GroundBotFOV");
-        sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
-        ability = GameObject.Find("Player").GetComponent<PlayerAbilities>();
-        enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
-        playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        playerIsBeingDetected = false;
-        enemyGrandparentTransform = gameObject.transform.parent.parent;
+        Setup();
     }
 
     private void Update()
     {
         DetectingPlayer();
+    }
+
+    void Setup()
+    {
+        Debug.Log("GroundBotFOV");
+        sceneActivity = GameManager.instance.ReturnSceneActivity();
+        ability = GameManager.instance.ReturnPlayerAbilities();
+        enemyProximity = GameManager.instance.ReturnEnemyProximityCheck();
+        playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
+        groundBotSpawner = GameManager.instance.ReturnGroundBotSpawner();
+        groundBotHeadMovement = groundBotSpawner.ReturnBotHeadMovement();
+        playerIsBeingDetected = false;
+        enemyGrandparentTransform = gameObject.transform.parent.parent;
     }
 
     private void OnTriggerEnter(Collider other)

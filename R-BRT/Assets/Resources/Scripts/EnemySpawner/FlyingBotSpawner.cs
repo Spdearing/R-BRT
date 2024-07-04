@@ -19,7 +19,6 @@ public class FlyingBotSpawner : MonoBehaviour
     [SerializeField] FlyingBotStateMachine flyingBotStateInstance;
     [SerializeField] EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfViewInstance;
 
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("FlyingBotSpawner popping");

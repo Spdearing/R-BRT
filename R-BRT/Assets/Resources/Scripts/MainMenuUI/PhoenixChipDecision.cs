@@ -4,7 +4,7 @@ using TMPro;
 
 
 
-public class UIController : MonoBehaviour
+public class PhoenixChipDecision : MonoBehaviour
 {
     [Header("Game Object")]
     [SerializeField] GameObject phoenixChipMenu;
@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         Debug.Log(" UI is popping");
-        phoenixChipMenu = GameObject.FindWithTag("PhoenixChipMenu"); 
+        phoenixChipMenu = GameManager.instance.ReturnPhoenixChipMenu(); 
         Time.timeScale = 1.0f;
         phoenixChipMenu.SetActive(false);
     }
@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void PhoenixChipDecision()
+    public void PlayerDecision()
     {
         phoenixChipMenu.SetActive(true);
         Time.timeScale = 0;

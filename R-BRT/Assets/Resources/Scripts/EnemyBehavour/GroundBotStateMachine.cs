@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class GroundBotStateMachine : MonoBehaviour
 {
     [Header("GameObjects")]
-    [SerializeField] GameObject player;
     [SerializeField] GameObject playerCamera;
 
     [Header("Transform")]
@@ -17,7 +16,6 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] PlayerDetectionState playerDetectionState;
     [SerializeField] PlayerController playerController;
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
-    [SerializeField] GameManager gameManager;
     [SerializeField] GroundBotAIMovement groundBotAIMovement;
 
 
@@ -40,16 +38,18 @@ public class GroundBotStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Setup();
+    }
+
+    void Setup()
+    {
         Debug.Log("GroundBotStateMachine popping");
         groundBotAIMovement = GetComponent<GroundBotAIMovement>();
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        player = GameObject.FindWithTag("Player");
-        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        playerCameraTransform = playerCamera.transform;
-        gameOverScreen = GameObject.Find("Canvas").GetComponentInChildren<GameOverScreen>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        enemyGroundBotFieldOfView = GetComponentInChildren<EnemyGroundBotFieldOfView>(); 
-        playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
+        playerCameraTransform = GameManager.instance.ReturnCameraTransform();
+        gameOverScreen = GameManager.instance.ReturnGameOver();
+        playerController = GameManager.instance.ReturnPlayerController();
+        enemyGroundBotFieldOfView = GetComponentInChildren<EnemyGroundBotFieldOfView>();
+        playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
         currentState = BehaviorState.patrolling;
     }
 

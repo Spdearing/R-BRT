@@ -49,8 +49,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         fieldOfViewRenderer.material = fieldOfViewRed;
         startYRotation = transform.eulerAngles.y;
         SetTargetYRotation();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        player = GameManager.instance.ReturnPlayerTransform();
     }
 
     void Update()
