@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GroundBotHeadMovement : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class GroundBotHeadMovement : MonoBehaviour
     private float targetYRotation;
 
     [Header("Transform")]
-    [SerializeField] private Transform player;
+    [SerializeField] private Transform playerTransform;
 
     [Header("Game Objects")]
     [SerializeField] private GameObject groundBotHead;
@@ -29,7 +30,6 @@ public class GroundBotHeadMovement : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
-    [SerializeField] private GameManager gameManager;
 
     [Header("Materials")]
     [SerializeField] private Material red;
@@ -37,10 +37,30 @@ public class GroundBotHeadMovement : MonoBehaviour
 
     void Start()
     {
+        Setup();
+    }
+
+    void Update()
+    {
+        if (playerIsSpotted && !isDistracted)
+        {
+            RotateTowardsPlayer();
+        }
+        else if (!isDistracted)
+        {
+            Patrol();
+        }
+
+    }
+
+    void Setup()
+    {
         Debug.Log("GroundBotHeadMovement popping");
+        robotIsActive = true;
         isPaused = false;
         rotatingLeft = true;
         robotIsActive = true;
+        isDistracted = false;
         rotationAngle = 45f;
         rotationSpeed = 25f;
         enemyGroundBotFieldOfView = groundBotHead.GetComponentInChildren<EnemyGroundBotFieldOfView>();
@@ -48,23 +68,8 @@ public class GroundBotHeadMovement : MonoBehaviour
         groundBotHeadColor.material = red;
         fieldOfViewRenderer.material = fieldOfViewRed;
         startYRotation = transform.eulerAngles.y;
+        playerTransform = GameManager.instance.ReturnPlayerTransform();
         SetTargetYRotation();
-        player = GameManager.instance.ReturnPlayerTransform();
-    }
-
-    void Update()
-    {
-        if (robotIsActive && !isPaused)
-        {
-            if (playerIsSpotted && !isDistracted)
-            {
-                RotateTowardsPlayer();
-            }
-            else if(!isDistracted)
-            {
-                Patrol();
-            }
-        }
     }
 
     private void Patrol()
@@ -81,7 +86,7 @@ public class GroundBotHeadMovement : MonoBehaviour
 
     private void RotateTowardsPlayer()
     {
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = playerTransform.position - transform.position;
         direction.y = 0;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);

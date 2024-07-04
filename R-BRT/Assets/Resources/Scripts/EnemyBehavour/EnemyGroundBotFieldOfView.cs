@@ -42,7 +42,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
         enemyProximity = GameManager.instance.ReturnEnemyProximityCheck();
         playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
         groundBotSpawner = GameManager.instance.ReturnGroundBotSpawner();
-        groundBotHeadMovement = groundBotSpawner.ReturnBotHeadMovement();
+        groundBotHeadMovement = transform.parent.parent.GetComponent<GroundBotHeadMovement>();
         playerIsBeingDetected = false;
         enemyGrandparentTransform = gameObject.transform.parent.parent;
     }
