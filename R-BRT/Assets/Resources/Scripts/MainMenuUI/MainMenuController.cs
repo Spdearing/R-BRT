@@ -9,7 +9,6 @@ public class MainMenuController : MonoBehaviour
 {
  
     [SerializeField] GameObject mainMenuPanel;
-    [SerializeField] GameObject playMenuPanel;
     [SerializeField] GameObject instructionsPanel;
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject creditsPanel;
@@ -23,7 +22,6 @@ public class MainMenuController : MonoBehaviour
         Debug.Log("Main Menu UI is popping");
         panels.Add("MainMenuPanel", mainMenuPanel);
         panels.Add("InstructionsPanel", instructionsPanel);
-        panels.Add("PlayMenuPanel", playMenuPanel);
         panels.Add("OptionsPanel", optionsPanel);
         panels.Add("CreditsPanel", creditsPanel);
 
@@ -67,12 +65,6 @@ public class MainMenuController : MonoBehaviour
     {
         SwitchPanel("InstructionsPanel");
     }
-
-    public void SwitchToPlayMenu()
-    {
-        SwitchPanel("PlayMenuPanel");
-    }
-
     public void PlayGame()
     {
         SceneManager.LoadScene("GameScene");
