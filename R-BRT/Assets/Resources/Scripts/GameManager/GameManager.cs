@@ -52,7 +52,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
 
     [Header("Image")]
-    [SerializeField] Image detectionMeter; 
+    [SerializeField] private Image detectionMeter;
+    [SerializeField] private Image invisibilityVisualMeter;
+    [SerializeField] private Image invisibilityVisualEmpty;
+    [SerializeField] private Image invisibilityVisualAmount;
 
     [Header("Floats")]
     [SerializeField] float startingDetection;
@@ -150,6 +153,9 @@ public class GameManager : MonoBehaviour
         skinMeshRenderer1 = GameObject.Find("LeftArm_RightArm5").GetComponent<SkinnedMeshRenderer>();
         skinMeshRenderer2 = GameObject.Find("LeftArm_RightArm5 (Copy)").GetComponent<SkinnedMeshRenderer>();
         detectionMeter = GameObject.Find("DetectionAmount").GetComponent<Image>();
+        invisibilityVisualAmount = GameObject.Find("InvisibleAmount").GetComponent<Image>();
+        invisibilityVisualEmpty = GameObject.Find("InvisibleEmpty").GetComponent<Image>();
+        invisibilityVisualMeter = GameObject.Find("InvisibleMeter").GetComponent<Image>();
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         gameOverScreen = GameObject.Find("Canvas").GetComponentInChildren<GameOverScreen>();
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
@@ -162,10 +168,10 @@ public class GameManager : MonoBehaviour
         battery = GameObject.FindWithTag("Battery");
         phoenixChipMenu = GameObject.FindWithTag("PhoenixChipMenu");
         fuelMeter = GameObject.FindWithTag("FuelMeter");
-        activateInvisibility = GameObject.Find("ActivatingInvisibility").GetComponent<AudioSource>();
-        invisibilityDuration = GameObject.Find("invisibilityDuration").GetComponent<AudioSource>();
+        activateInvisibility = GameObject.Find("ActivateInvisibility").GetComponent<AudioSource>();
+        invisibilityDuration = GameObject.Find("InvisibilityDuration").GetComponent<AudioSource>();
         walkingSound = GameObject.Find("WalkingSound").GetComponent<AudioSource>();
-        jumpingSound = GameObject.Find("JumpingSound").GetComponent<AudioSource>();
+        jumpingSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
         fuelMeterSlider = GameObject.Find("Fuel Meter").GetComponent<Slider>();
 
     }
@@ -313,6 +319,21 @@ public class GameManager : MonoBehaviour
     public Image ReturnDetectionAmountImage()
     {
         return this.detectionMeter;
+    }
+
+    public Image ReturnInvisibilityMeterAmount()
+    {
+        return this.invisibilityVisualAmount;
+    }
+
+    public Image ReturnInvisibilityMeter()
+    {
+        return this.invisibilityVisualMeter;
+    }
+
+    public Image ReturnInvisibilityMeterEmpty()
+    {
+        return this.invisibilityVisualEmpty;
     }
 
     public Transform ReturnHoldPosition()

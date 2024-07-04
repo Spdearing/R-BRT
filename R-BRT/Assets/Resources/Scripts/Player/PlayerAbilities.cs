@@ -60,6 +60,11 @@ public class PlayerAbilities : MonoBehaviour
         invisibilityCloak = GameManager.instance.ReturnInvisibilityCloak();
         jetPack = gameObject.GetComponent<Jetpack>();
         playerAnimator = GameManager.instance.ReturnAnimator();
+        invisibilityVisualMeter = GameManager.instance.ReturnInvisibilityMeter();
+        invisibilityVisualEmpty = GameManager.instance.ReturnInvisibilityMeterEmpty();
+        invisibilityVisualAmount = GameManager.instance.ReturnInvisibilityMeterAmount();
+        activatingInvisibility = GameManager.instance.ReturnActivatingInvisibilitySound();
+        invisiblityDuration = GameManager.instance.ReturnInvisibilityDurationSound();
         usingInvisibility = false;
         invisibilityAvailable = true;
         jetPackUnlocked = false;
