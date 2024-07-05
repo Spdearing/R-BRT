@@ -84,19 +84,16 @@ public class PlayerDetectionState : MonoBehaviour
 
                 if (playerController.ReturnCrouchingStatus(true))
                 {
-                    
                     detection.IncreaseDetection(crouchingDetectionIncrease);
                     detectionIncreaseRate += 0.5f;
                 }
                 else if (jetpack.IsUsingJetpack(true))
                 {
-                    
                     detection.IncreaseDetection(detectionIncreaseRate * 2);
                     detectionIncreaseRate += 0.5f;
                 }
                 else
                 {
-                    
                     detection.IncreaseDetection(detectionIncreaseRate);
                     detectionIncreaseRate += 0.5f;
                 }
@@ -104,9 +101,10 @@ public class PlayerDetectionState : MonoBehaviour
                 // Check if detection has reached maximum
                 if (detection.ReturnStartingDetection() >= detection.GetDetectionMax())
                 {
+                    ChangeDetectionState(DetectionState.detected);
                     Debug.Log("Max Detection");
 
-                    ChangeDetectionState(DetectionState.detected);
+                    
                 }
                 break;
 

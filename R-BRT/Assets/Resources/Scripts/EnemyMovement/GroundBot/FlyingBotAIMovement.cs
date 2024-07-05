@@ -95,7 +95,7 @@ public class FlyingBotAIMovement : MonoBehaviour
 
             if (currentWaypointIndex < patrolPoints.Count)
             {
-                groundBotAI.SetDestination(patrolPoints[currentWaypointIndex].position);
+                flyingBotAI.SetDestination(patrolPoints[currentWaypointIndex].position);
             }
             else
             {

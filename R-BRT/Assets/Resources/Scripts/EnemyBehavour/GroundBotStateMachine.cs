@@ -94,7 +94,7 @@ public class GroundBotStateMachine : MonoBehaviour
             case BehaviorState.scanning:
 
                 Debug.Log("enemy state changed");
-                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+                //playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
                 
                 if (gameObject.name == "GroundBotGroup2" || gameObject.name == "GroundBotGroup4")
                 {
