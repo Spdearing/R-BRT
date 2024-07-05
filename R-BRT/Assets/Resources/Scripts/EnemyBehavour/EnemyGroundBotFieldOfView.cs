@@ -55,8 +55,6 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
             sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
 
-
-
             Transform grandparentTransform = gameObject.transform.parent.parent;
 
             GroundBotStateMachine groundBotStateMachine = grandparentTransform.GetComponent<GroundBotStateMachine>();
