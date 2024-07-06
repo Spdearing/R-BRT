@@ -825,10 +825,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDetectionState: {fileID: 0}
-  player: {fileID: 0}
-  gameManager: {fileID: 0}
   enemyProximity: {fileID: 0}
   groundBotHeadMovement: {fileID: 697343153668334853}
+  groundBotStateMachine: {fileID: 0}
+  groundBotSpawner: {fileID: 0}
+  sceneActivity: {fileID: 0}
+  ability: {fileID: 0}
   playerIsBeingDetected: 0
   enemyGrandparentTransform: {fileID: 0}
 --- !u!1 &4603296728881768110
@@ -873,7 +875,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 4c5d6a008e6faa841a611df52049e8e6, type: 2}
-  m_audioClip: {fileID: 8300000, guid: ae707716b9f86c646bd7d88c28051a87, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d54cacd4277944d4c934453be2909c5f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1174,14 +1176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c397b37cc8fda48891b8e3e47cec57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerCamera: {fileID: 0}
   playerCameraTransform: {fileID: 0}
   gameOverScreen: {fileID: 0}
   playerDetectionState: {fileID: 0}
   playerController: {fileID: 0}
   enemyGroundBotFieldOfView: {fileID: 0}
-  gameManager: {fileID: 0}
+  groundBotHeadMovement: {fileID: 0}
   groundBotAIMovement: {fileID: 0}
   currentState: 0
 --- !u!114 &697343153668334853
@@ -1203,12 +1203,11 @@ MonoBehaviour:
   isDistracted: 0
   rotationAngle: 0
   rotationSpeed: 0
-  player: {fileID: 0}
+  playerTransform: {fileID: 0}
   groundBotHead: {fileID: 622786997081344798}
   fieldOfView: {fileID: 1177509204288699627}
   groundBotHeadColor: {fileID: 3642690833534715753}
   fieldOfViewRenderer: {fileID: 5199597494690532238}
   enemyGroundBotFieldOfView: {fileID: 0}
-  gameManager: {fileID: 0}
   red: {fileID: 2100000, guid: bef5258c733697c4aad2571c72c524c1, type: 2}
   fieldOfViewRed: {fileID: 2100000, guid: 5284c31dd4c4b3947a5cf660ede19eea, type: 2}
