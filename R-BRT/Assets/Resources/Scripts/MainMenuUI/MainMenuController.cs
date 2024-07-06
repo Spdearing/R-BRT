@@ -51,7 +51,7 @@ public class MainMenuController : MonoBehaviour
         SwitchPanel("MainMenuPanel");
     }
 
-    public void SwitchToHelpPanel()
+    public void SwitchToOptionsPanel()
     {
         SwitchPanel("OptionsPanel");
     }
