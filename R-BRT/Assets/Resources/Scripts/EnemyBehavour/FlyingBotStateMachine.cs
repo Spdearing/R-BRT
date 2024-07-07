@@ -1,7 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
-
 
 public class FlyingBotStateMachine : MonoBehaviour
 {
@@ -17,7 +15,11 @@ public class FlyingBotStateMachine : MonoBehaviour
 
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
+    [SerializeField] private Transform flyingBotOnePatrolPointA;
+    [SerializeField] private Transform flyingBotOnePatrolPointB;
 
+    [Header("Patrol Speed")]
+    [SerializeField] private float patrolSpeed;
 
     [Header("Scripts")]
     [SerializeField] private GameOverScreen gameOverScreen;
@@ -28,14 +30,11 @@ public class FlyingBotStateMachine : MonoBehaviour
     [SerializeField] private Material red;
     [SerializeField] private Material fieldOfViewRed;
 
-
     private Quaternion startRotation;
     private Quaternion endRotation;
     private float lerpTime = 0f;
     private float lerpDuration = .25f;
-
     private bool isLerping = false;
-
 
     public FlyingState currentState;
 
@@ -46,13 +45,12 @@ public class FlyingBotStateMachine : MonoBehaviour
         playerCaught,
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         Setup();
+        StartCoroutine(PatrolRoutine());
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateBehavior();
@@ -63,7 +61,6 @@ public class FlyingBotStateMachine : MonoBehaviour
             float lerpFactor = lerpTime / lerpDuration;
             playerCameraTransform.rotation = Quaternion.Slerp(startRotation, endRotation, lerpFactor);
 
-            // Stop lerping after the duration is complete
             if (lerpTime >= lerpDuration)
             {
                 isLerping = false;
@@ -73,17 +70,87 @@ public class FlyingBotStateMachine : MonoBehaviour
 
     void Setup()
     {
-        player = GameObject.FindWithTag("Player");
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        patrolSpeed = 3.5f;
+        player = GameManager.instance.ReturnPlayer();
+        playerController = GameManager.instance.ReturnPlayerController();
+        playerCamera = GameManager.instance.ReturnPlayerCamera();
         playerCameraTransform = playerCamera.transform;
-        gameOverScreen = GameObject.FindWithTag("Canvas").GetComponent<GameOverScreen>();
+        gameOverScreen = GameManager.instance.ReturnGameOver();
         enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
+
+        string botName = gameObject.name;
+
+        switch (botName)
+        {
+            case "FlyingBotGroup1Lobby1":
+                AssignPatrolPoints("FlyingBotOnePatrolPointA", "FlyingBotOnePatrolPointB");
+                break;
+            case "FlyingBotGroup1Lobby2":
+                AssignPatrolPoints("FlyingBotOnePatrolPointC", "FlyingBotOnePatrolPointD");
+                break;
+            case "FlyingBotGroup1Lobby3":
+                AssignPatrolPoints("FlyingBotOnePatrolPointE", "FlyingBotOnePatrolPointF");
+                break;
+            case "FlyingBotGroup1Lobby4":
+                AssignPatrolPoints("FlyingBotOnePatrolPointH", "FlyingBotOnePatrolPointG");
+                break;
+        }
+
         flyingBotHeadColor.material = red;
         fieldOfViewRenderer.material = fieldOfViewRed;
         currentState = FlyingState.patrolling;
     }
 
+    private void AssignPatrolPoints(string pointAName, string pointBName)
+    {
+        flyingBotOnePatrolPointA = GameObject.Find(pointAName).transform;
+        flyingBotOnePatrolPointB = GameObject.Find(pointBName).transform;
+    }
+
+    private IEnumerator PatrolRoutine()
+    {
+        while (true)
+        {
+            if (currentState == FlyingState.patrolling)
+            {
+                yield return MoveToPoint(flyingBotOnePatrolPointA.position);
+                yield return new WaitForSeconds(2.5f);
+                yield return RotateBotGlobal(180);
+                yield return MoveToPoint(flyingBotOnePatrolPointB.position);
+                yield return new WaitForSeconds(2.5f);
+                yield return RotateBotGlobal(180);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
+
+    private IEnumerator MoveToPoint(Vector3 target)
+    {
+        while (Vector3.Distance(transform.position, target) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target, patrolSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    private IEnumerator RotateBotGlobal(float angle)
+    {
+        Quaternion initialRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + angle, transform.eulerAngles.z);
+        float rotateTime = 0f;
+        float rotateDuration = 0.5f;
+
+        while (rotateTime < rotateDuration)
+        {
+            rotateTime += Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, rotateTime / rotateDuration);
+            yield return null;
+        }
+        transform.rotation = targetRotation;
+    }
 
     public void ChangeBehavior(FlyingState newState)
     {
@@ -95,45 +162,35 @@ public class FlyingBotStateMachine : MonoBehaviour
         switch (currentState)
         {
             case FlyingState.patrolling:
-
-
-
+                // Patrolling logic is handled by the coroutine
                 break;
-
             case FlyingState.scanning:
-
-
-
+                // Scanning behavior logic
                 break;
-
             case FlyingState.playerCaught:
-
-                Debug.Log("inside player Caught");
-                gameOverScreen.ReturnGameOverPanel().SetActive(true);
-
-                playerController.SetCameraLock(true);
-
-                startRotation = playerCameraTransform.rotation;
-
-                if (enemyFlyingBotFieldOfView != null)
-                {
-                    Vector3 directionToEnemy = enemyFlyingBotFieldOfView.ReturnThisEnemy().position - playerCameraTransform.position;
-                    endRotation = Quaternion.LookRotation(directionToEnemy);
-                }
-                lerpTime = 0f;
-                isLerping = true;
-
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-
-
+                HandlePlayerCaught();
                 break;
-
             default:
-             
-                    currentState = FlyingState.patrolling;
-               
+                currentState = FlyingState.patrolling;
                 break;
         }
+    }
+
+    private void HandlePlayerCaught()
+    {
+        gameOverScreen.ReturnGameOverPanel().SetActive(true);
+        playerController.SetCameraLock(true);
+        startRotation = playerCameraTransform.rotation;
+
+        if (enemyFlyingBotFieldOfView != null)
+        {
+            Vector3 directionToEnemy = enemyFlyingBotFieldOfView.ReturnThisEnemy().position - playerCameraTransform.position;
+            endRotation = Quaternion.LookRotation(directionToEnemy);
+        }
+        lerpTime = 0f;
+        isLerping = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
