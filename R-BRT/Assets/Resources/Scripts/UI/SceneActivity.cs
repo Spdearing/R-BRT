@@ -112,7 +112,7 @@ public class SceneActivity : MonoBehaviour
 
     private void InitializeTextBoxes()
     {
-        dialogueTriggerOne = GameObject.Find("FirstDialogueTriggerBorder");
+        dialogueTriggerOne = GameObject.Find("DialoguePanel");
         dialogueTriggerTwo = GameObject.Find("SecondDialogueTrigger");
         dialogueTriggerThree = GameObject.Find("ThirdDialogueTrigger");
         dialogueTwoHitBox = GameObject.Find("SecondDialogueEncounter");
