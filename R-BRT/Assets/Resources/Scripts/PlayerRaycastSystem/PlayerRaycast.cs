@@ -94,6 +94,33 @@ public class PlayerRaycast : MonoBehaviour
                         interactableText.text = "";
                     }
                 }
+
+                if(hitInfo.collider.tag == "LoreEntry2")
+                {
+                    interactableText.text = "Press (E) to pick up the Tablet";
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        interactableText.text = "";
+                    }
+                }
+
+                if(hitInfo.collider.tag == "LoreEntry3")
+                {
+                    interactableText.text = "Press (E) to pick up the Tablet";
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        interactableText.text = "";
+                    }
+                }
+
+                if(hitInfo.collider.tag == "LoreEntry4")
+                {
+                    interactableText.text = "Press (E) to pick up the Tablet";
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        interactableText.text = "";
+                    }
+                }
             }
 
             else
@@ -121,7 +148,7 @@ public class PlayerRaycast : MonoBehaviour
         interactableText = GameManager.instance.ReturnInteractableText();
         phoenixChipDecision = GameManager.instance.ReturnPhoenixChipDecision();
         battery = GameManager.instance.ReturnBatteryScript();
-        loreEntry = GameManager.instance.ReturnLoreEntry();
+        //loreEntry = GameManager.instance.ReturnLoreEntry();
     }
 
     public void SetInteractableText(string value)
