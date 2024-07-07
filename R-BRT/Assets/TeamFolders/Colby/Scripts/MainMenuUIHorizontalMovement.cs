@@ -45,9 +45,11 @@ public class MainMenuUIHorizontalMovement : MonoBehaviour
         float UIPosX = Mathf.Lerp((startingPosition + offsetAmount), (startingPosition - offsetAmount), adjustedMousePos);
         float UIRotY = Mathf.Lerp((startingRotation + rotationAmount), (startingRotation - rotationAmount), adjustedMousePos);
 
+        //float smoothUIRotY = Mathf.Lerp(transform.rotation.y, UIRotY, Time.deltaTime);
+        //Vector3 newRotation = new Vector3(transform.rotation.x, smoothUIRotY, transform.rotation.z);
+
         transform.localPosition = new Vector3(Mathf.Lerp(transform.localPosition.x, UIPosX, (uiMoveSpeed * Time.deltaTime)), 0, 0);
-        //transform.localEulerAngles = new Vector3(transform.rotation.x, Mathf.Repeat(Mathf.Lerp(transform.rotation.y, UIRotY, (uiRotationSpeed * Time.deltaTime)), 360f), transform.rotation.z);
+        //transform.localRotation = Quaternion.Euler(newRotation);
         transform.localEulerAngles = new Vector3(transform.rotation.x, UIRotY, transform.rotation.z);
-        
     }
 }
