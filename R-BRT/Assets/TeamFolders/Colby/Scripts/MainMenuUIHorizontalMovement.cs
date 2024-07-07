@@ -34,7 +34,7 @@ public class MainMenuUIHorizontalMovement : MonoBehaviour
     {
         float adjustedMousePos = mousePos / (((1920f / 2f) + mouseMaxWidth) - ((1920f / 2f) - mouseMaxWidth));
         
-        float UIPosX = Mathf.Lerp((startingPosition - offsetAmount), (startingPosition + offsetAmount), );
+        float UIPosX = Mathf.Lerp((startingPosition - offsetAmount), (startingPosition + offsetAmount), adjustedMousePos);
         //float UIRotY = Mathf.Lerp(maxCamPosZ, minCamPosZ, mousePosPercent);
     }
 }
