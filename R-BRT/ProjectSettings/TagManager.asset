@@ -55,6 +55,7 @@ TagManager:
   - JanitorCloset
   - Janitor
   - DialogueTriggerThree
+  - LoreEntry
   layers:
   - Default
   - TransparentFX
