@@ -34,10 +34,12 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         pauseMenu.SetActive(false);
         optionsPanel.SetActive(false);
+        entriesPanel.SetActive(false);
         panels.Add("PauseMenuPanel", pauseMenu);
         panels.Add("OptionsPanel", optionsPanel);
         panels.Add("EntriesPanel", entriesPanel);
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        playerController = GameManager.instance.ReturnPlayerController();
     }
 
     // Update is called once per frame
