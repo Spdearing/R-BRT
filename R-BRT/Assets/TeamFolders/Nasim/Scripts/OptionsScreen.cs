@@ -123,7 +123,7 @@ public class OptionsScreen : MonoBehaviour
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
     }
 
-    /*public void SetMasterVolume()
+    public void SetMasterVolume()
     {
         masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
 
@@ -148,7 +148,7 @@ public class OptionsScreen : MonoBehaviour
         theMixer.SetFloat("SFXVol" , sfxSlider.value);
 
         PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
-    }*/
+    }
 
 }
 
