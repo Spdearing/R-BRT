@@ -238,10 +238,10 @@ public class GameManager : MonoBehaviour
         return this.phoenixChipDecision;
     }
 
-    public LoreEntry ReturnLoreEntry()
+    /*public LoreEntry ReturnLoreEntry()
     {
         return this.gameObject;
-    }
+    }*/
 
     public DetectionMeter ReturnDetectionMeter()
     {
