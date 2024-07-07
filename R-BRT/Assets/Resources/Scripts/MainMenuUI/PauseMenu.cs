@@ -16,7 +16,6 @@ public class PauseMenu : MonoBehaviour
     [Header("Game Objects")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsPanel;
-    [SerializeField] private GameObject entriesPanel;
     [SerializeField] private GameObject fuelMeter;
     [SerializeField] private GameObject invisbilityMeter;
 
@@ -36,7 +35,6 @@ public class PauseMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         panels.Add("PauseMenuPanel", pauseMenu);
         panels.Add("OptionsPanel", optionsPanel);
-        panels.Add("EntriesPanel", entriesPanel);
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
@@ -106,11 +104,6 @@ public class PauseMenu : MonoBehaviour
     public void SwitchToOptionsPanel()
     {
         SwitchPanel("OptionsPanel");
-    }
-
-    public void SwitchToEntriesPanel()
-    {
-        SwitchPanel("EntriesPanel");
     }
 
     public void BackToMainMenu()
