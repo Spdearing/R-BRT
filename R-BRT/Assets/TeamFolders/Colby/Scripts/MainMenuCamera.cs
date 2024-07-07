@@ -8,10 +8,10 @@ public class MainMenuCamera : MonoBehaviour
     Vector3 mousePos;
     float currentMousePos;
     float maxMousePos = 1920.0f;
-    float minCamPosX = 73.0f;
+    float minCamPosX = 73.22f;
     float maxCamPosX = 73.5f;
     float minCamPosZ = 184.86f;
-    float maxCamPosZ = 185.55f;
+    float maxCamPosZ = 185.32f;
     float cameraSpeed = 3f;
 
     // Start is called before the first frame update
