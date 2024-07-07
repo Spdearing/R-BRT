@@ -23,6 +23,7 @@ public class PlayerRaycast : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PhoenixChipDecision phoenixChipDecision;
     [SerializeField] private Battery battery;
+    [SerializeField] private LoreEntry loreEntry;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableText;
@@ -83,7 +84,15 @@ public class PlayerRaycast : MonoBehaviour
                         interactableText.text = "";
                         battery.OpenAbilitiesSelection();
                     }
+                }
 
+                if(hitInfo.collider.tag == "LoreEntry")
+                {
+                    interactableText.text = "Press (E) to pick up the Tablet";
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        interactableText.text = "";
+                    }
                 }
             }
 
@@ -112,6 +121,7 @@ public class PlayerRaycast : MonoBehaviour
         interactableText = GameManager.instance.ReturnInteractableText();
         phoenixChipDecision = GameManager.instance.ReturnPhoenixChipDecision();
         battery = GameManager.instance.ReturnBatteryScript();
+        loreEntry = GameManager.instance.ReturnLoreEntry();
     }
 
     public void SetInteractableText(string value)
