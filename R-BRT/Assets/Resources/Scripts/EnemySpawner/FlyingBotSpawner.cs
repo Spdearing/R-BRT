@@ -7,13 +7,18 @@ public class FlyingBotSpawner : MonoBehaviour
 {
 
     [Header("Enemy")]
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefab;
+
+    [Header("Int")]
+    [SerializeField] private int enemiesSpawned;
 
     [Header("EnemyGroups")]
-    [SerializeField] GameObject[] group1;
+    [SerializeField] private GameObject[] group1;
+    //[SerializeField] private GameObject[] group2;
 
     [Header("EnemyGroupLocations")]
-    [SerializeField] Transform[] enemyGroupLocations;
+    [SerializeField] Transform[] enemyGroupLocations1;
+    //[SerializeField] Transform[] groupGroupLocations2;
 
     [Header("References")]
     [SerializeField] FlyingBotStateMachine flyingBotStateInstance;
@@ -23,6 +28,8 @@ public class FlyingBotSpawner : MonoBehaviour
     {
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/FlyingBotFinal");
         group1 = new GameObject[4];
+        //group2 = new GameObject[3];
+        enemiesSpawned = 0;
         SpawnGroup1();
     }
 
@@ -30,10 +37,10 @@ public class FlyingBotSpawner : MonoBehaviour
     {
         for (int i = 0; i < group1.Length; i++)
         {
-            if (i < enemyGroupLocations.Length)
+            if (i < enemyGroupLocations1.Length)
             {
 
-                GameObject enemy = Instantiate(enemyPrefab, enemyGroupLocations[i].position, enemyGroupLocations[i].rotation);
+                GameObject enemy = Instantiate(enemyPrefab, enemyGroupLocations1[i].position, enemyGroupLocations1[i].rotation);
                 group1[i] = enemy;
                
                 FlyingBotStateMachine stateMachine = enemy.GetComponent<FlyingBotStateMachine>();
@@ -43,7 +50,8 @@ public class FlyingBotSpawner : MonoBehaviour
                 if (stateMachine != null) flyingBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyFlyingBotFieldOfViewInstance = fieldOfView;
 
-                enemy.name = "FlyingBotGroup1";
+                enemy.name = "FlyingBotGroup1Lobby" + (enemiesSpawned + 1).ToString();
+                enemiesSpawned++;
             }
             else
             {
