@@ -205,10 +205,8 @@ public class GameManager : MonoBehaviour
         int index = 0;
         foreach (bool activeLore in loreEntries)
         {
-            if (activeLore)
-            {
-                loreButtons[index].interactable = true;
-            }
+            Debug.Log($"Lore Entry {index}: {activeLore}");
+            loreButtons[index].interactable = activeLore;
             index++;
         }
     }
