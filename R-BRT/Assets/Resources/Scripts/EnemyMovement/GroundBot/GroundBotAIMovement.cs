@@ -107,9 +107,13 @@ public class GroundBotAIMovement : MonoBehaviour
                 yield return MoveToPoint(roamingPointB.position);
                 yield return new WaitForSeconds(2.5f);
                 yield return RotateBotGlobal(180);
+                isRoaming = true;
             }
-            isRoaming = true;
-            
+            else
+            {
+                yield return null;
+            }
+             
         }
     }
 

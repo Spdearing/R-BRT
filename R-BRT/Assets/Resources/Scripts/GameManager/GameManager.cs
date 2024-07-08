@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem.Android;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,8 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject loreEntry2;
     [SerializeField] private GameObject loreEntry3;
     [SerializeField] private GameObject loreEntry4;
-
-
     [SerializeField] private GameObject loreEntryMenu;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
@@ -80,12 +79,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Capsule Collider")]
     [SerializeField] CapsuleCollider playerCollider;
+
+    [Header("Bools")]
+    [SerializeField] private bool[] loreEntries;
+
+    [Header("Buttons")]
+    [SerializeField] private Button[] loreButtons;
     
-
-
-
-
-
     private void Awake()
     {
         //GM not destroyed
@@ -141,6 +141,8 @@ public class GameManager : MonoBehaviour
 
     public void GrabAllTheTools()
     {
+        loreButtons = new Button[4];
+        loreEntries = new bool[4];
         player = GameObject.FindWithTag("Player");
         playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -389,5 +391,23 @@ public class GameManager : MonoBehaviour
     {
         return this.gameOverScreen;
     }
+
+    public void SetLoreEntryOne(bool value)
+    {
+        loreEntries[0] = value; 
+    }
+    public void SetLoreEntryTwo(bool value)
+    {
+        loreEntries[1] = value;
+    }
+    public void SetLoreEntryThree(bool value)
+    {
+        loreEntries[2] = value;
+    }
+    public void SetLoreEntryFour(bool value)
+    {
+        loreEntries[3] = value;
+    }
+
 
 }
