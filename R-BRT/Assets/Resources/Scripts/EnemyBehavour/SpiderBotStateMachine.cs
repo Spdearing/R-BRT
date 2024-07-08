@@ -98,7 +98,7 @@ public class SpiderBotStateMachine : MonoBehaviour
 
             case SpiderState.scanning:
 
-                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+                //playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
 
                 break;
 
