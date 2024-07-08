@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject phoenixChipMenu;
     [SerializeField] private GameObject loreEntry;
+    [SerializeField] private GameObject loreEntry2;
+    [SerializeField] private GameObject loreEntry3;
+    [SerializeField] private GameObject loreEntry4;
+
+
     [SerializeField] private GameObject loreEntryMenu;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
@@ -169,6 +174,9 @@ public class GameManager : MonoBehaviour
         battery = GameObject.FindWithTag("Battery");
         phoenixChipMenu = GameObject.FindWithTag("PhoenixChipMenu");
         loreEntry = GameObject.FindWithTag("LoreEntry");
+        loreEntry2 = GameObject.FindWithTag("LoreEntry2");
+        loreEntry3 = GameObject.FindWithTag("LoreEntry3");
+        loreEntry4 = GameObject.FindWithTag("LoreEntry4");
         fuelMeter = GameObject.FindWithTag("FuelMeter");
         activateInvisibility = GameObject.Find("ActivateInvisibility").GetComponent<AudioSource>();
         invisibilityDuration = GameObject.Find("InvisibilityDuration").GetComponent<AudioSource>();
@@ -238,10 +246,10 @@ public class GameManager : MonoBehaviour
         return this.phoenixChipDecision;
     }
 
-    /*public LoreEntry ReturnLoreEntry()
+    public GameObject ReturnLoreEntry()
     {
-        return this.gameObject;
-    }*/
+        return this.loreEntry;
+    }
 
     public DetectionMeter ReturnDetectionMeter()
     {
