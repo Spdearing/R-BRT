@@ -53,6 +53,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
             string fullText = fullTexts[j];
 
             skipText = false;
+
             for (int i = 0; i <= fullText.Length; i++)
             {
                 if (Input.GetKeyDown(KeyCode.Return))

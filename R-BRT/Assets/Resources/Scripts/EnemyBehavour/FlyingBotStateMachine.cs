@@ -21,6 +21,9 @@ public class FlyingBotStateMachine : MonoBehaviour
     [Header("Patrol Speed")]
     [SerializeField] private float patrolSpeed;
 
+    [Header("Bools")]
+    [SerializeField] private bool patrolling;
+
     [Header("Scripts")]
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
@@ -48,7 +51,7 @@ public class FlyingBotStateMachine : MonoBehaviour
     void Start()
     {
         Setup();
-        StartCoroutine(PatrolRoutine());
+        
     }
 
     void Update()
@@ -70,7 +73,9 @@ public class FlyingBotStateMachine : MonoBehaviour
 
     void Setup()
     {
+        
         patrolSpeed = 3.5f;
+        patrolling = true;
         player = GameManager.instance.ReturnPlayer();
         playerController = GameManager.instance.ReturnPlayerController();
         playerCamera = GameManager.instance.ReturnPlayerCamera();
@@ -111,14 +116,16 @@ public class FlyingBotStateMachine : MonoBehaviour
     {
         while (true)
         {
-            if (currentState == FlyingState.patrolling)
+            if (currentState == FlyingState.patrolling && patrolling == true)
             {
+                patrolling = false;
                 yield return MoveToPoint(flyingBotOnePatrolPointA.position);
                 yield return new WaitForSeconds(2.5f);
                 yield return RotateBotGlobal(180);
                 yield return MoveToPoint(flyingBotOnePatrolPointB.position);
                 yield return new WaitForSeconds(2.5f);
                 yield return RotateBotGlobal(180);
+                patrolling = true;
             }
             else
             {
@@ -162,10 +169,17 @@ public class FlyingBotStateMachine : MonoBehaviour
         switch (currentState)
         {
             case FlyingState.patrolling:
-                // Patrolling logic is handled by the coroutine
+
+                StartCoroutine(PatrolRoutine());
+
+
                 break;
+
             case FlyingState.scanning:
-                // Scanning behavior logic
+
+                Debug.Log(gameObject.name.ToString() + "Changing to scanning state");
+                StopAllCoroutines();
+
                 break;
             case FlyingState.playerCaught:
                 HandlePlayerCaught();
@@ -192,5 +206,13 @@ public class FlyingBotStateMachine : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void SetPatrollingStatus(bool value)
+    {
+        if (this.patrolling == false)
+        {
+            patrolling = value;
+        }
     }
 }

@@ -38,10 +38,10 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         ability = GameManager.instance.ReturnPlayerAbilities();
         enemyProximity = GameManager.instance.ReturnEnemyProximityCheck();
         playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
-        flyingBotSpawner = GameManager.instance.ReturnFlyingBotSpawner();
-        flyingBotStateMachine = flyingBotSpawner.ReturnFlyingBotStateInstance();
+        flyingBotSpawner = GameManager.instance.ReturnFlyingBotSpawner(); 
         playerIsBeingDetected = false;
         enemyGrandparentTransform = gameObject.transform.parent.parent;
+        flyingBotStateMachine = enemyGrandparentTransform.GetComponent<FlyingBotStateMachine>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,6 +50,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         {
             if (!ability.ReturnUsingInvisibility())
             {
+                Debug.Log("entering " + transform.parent.parent.gameObject.name);
                 sceneActivity.SetPlayerIsSpotted(true);
                 playerIsBeingDetected = true;
 
@@ -79,6 +80,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
     {
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
         {
+            Debug.Log("inside " + transform.parent.parent.gameObject.name);
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
             sceneActivity.SetPlayerIsSpotted(withinRange);
 
@@ -104,18 +106,13 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
     {
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange())
         {
+            Debug.Log("exiting " + transform.parent.parent.gameObject.name);
             sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
-
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
-
             playerDetectionState.SetDetectedByFlyingBot(false);
-            
- 
-            if (gameObject.transform.parent.tag == "FlyingBot")
-            {
-                flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.patrolling);
-            }
+            flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.patrolling);
+            flyingBotStateMachine.SetPatrollingStatus(true);
         }
     }
 

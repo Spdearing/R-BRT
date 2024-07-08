@@ -14,13 +14,11 @@ public class GroundBotSpawner : MonoBehaviour
     [SerializeField] GameObject[] group1;
     [SerializeField] GameObject[] group2;
     [SerializeField] GameObject[] group3;
-    [SerializeField] GameObject[] group4;
 
     [Header("EnemyGroupLocations")]
     [SerializeField] Transform[] enemyGroupLocations1;
     [SerializeField] Transform[] enemyGroupLocations2;
     [SerializeField] Transform[] enemyGroupLocations3;
-    [SerializeField] Transform[] enemyGroupLocations4;
 
     [Header("References")]
     [SerializeField] GroundBotStateMachine groundBotStateInstance;
@@ -33,7 +31,10 @@ public class GroundBotSpawner : MonoBehaviour
 
     [Header("Script")]
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private SceneActivity sceneActivity; 
+    [SerializeField] private SceneActivity sceneActivity;
+
+    [Header("Int")]
+    [SerializeField] private int enemiesSpawned;
 
     // Start is called before the first frame update
     void Start()
@@ -46,13 +47,13 @@ public class GroundBotSpawner : MonoBehaviour
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         group1 = new GameObject[1];
-        group2 = new GameObject[4];
-        group3 = new GameObject[6];
-        group4 = new GameObject[8];
+        group2 = new GameObject[6];
+        group3 = new GameObject[4];
+        
         SpawnGroup1();
         SpawnGroup2();
         SpawnGroup3();
-        SpawnGroup4();
+        
     }
 
     public void SpawnGroup1()
@@ -88,27 +89,16 @@ public class GroundBotSpawner : MonoBehaviour
         {
             if (i < enemyGroupLocations2.Length)
             {
-
                 GameObject enemy = Instantiate(enemyPrefab, enemyGroupLocations2[i].position, enemyGroupLocations2[i].rotation);
                 group2[i] = enemy;
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
-                enemy.AddComponent<NavMeshAgent>();
-                NavMeshAgent navMeshAgent = enemy.GetComponent<NavMeshAgent>();
-                navMeshAgent.baseOffset = .5f;
-                navMeshAgent.height = 1.0f;
-                enemy.AddComponent<GroundBotAIMovement>();
-                GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
-                
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
                 if (stateMachine != null) groundBotStateInstance = stateMachine;
                 if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
-                if (navMeshAgent != null) groundBotAI = navMeshAgent;
-                if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
 
-                groundBotAIMovement.SetGroundBotHeadMovement(headMovement);
                 enemy.name = "GroundBotGroup2";
                 enemy.tag = "GroundBot";
             }
@@ -125,33 +115,9 @@ public class GroundBotSpawner : MonoBehaviour
         {
             if (i < enemyGroupLocations3.Length)
             {
+
                 GameObject enemy = Instantiate(enemyPrefab, enemyGroupLocations3[i].position, enemyGroupLocations3[i].rotation);
                 group3[i] = enemy;
-                GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
-                GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
-                EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
-
-                if (headMovement != null) groundBotHeadMovementInstance = headMovement;
-                if (stateMachine != null) groundBotStateInstance = stateMachine;
-                if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
-
-                enemy.name = "GroundBotGroup3";
-                enemy.tag = "GroundBot";
-            }
-            else
-            {
-                Debug.LogWarning("Index out of bounds for enemyGroupLocations array.");
-            }
-        }
-    }
-    public void SpawnGroup4()
-    {
-        for (int i = 0; i < group4.Length; i++)
-        {
-            if (i < enemyGroupLocations4.Length)
-            {
-                GameObject enemy = Instantiate(enemyPrefab, enemyGroupLocations4[i].position, enemyGroupLocations4[i].rotation);
-                group4[i] = enemy;
                 GroundBotHeadMovement headMovement = enemy.GetComponent<GroundBotHeadMovement>();
                 GroundBotStateMachine stateMachine = enemy.GetComponent<GroundBotStateMachine>();
                 EnemyGroundBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyGroundBotFieldOfView>();
@@ -161,6 +127,8 @@ public class GroundBotSpawner : MonoBehaviour
                 navMeshAgent.height = 1.0f;
                 enemy.AddComponent<GroundBotAIMovement>();
                 GroundBotAIMovement groundBotAIMovement = enemy.GetComponent<GroundBotAIMovement>();
+                stateMachine.SetGroundBotAIMovement(groundBotAIMovement);
+                groundBotAIMovement.SetStateMachine(stateMachine);
 
 
                 if (headMovement != null) groundBotHeadMovementInstance = headMovement;
@@ -170,7 +138,8 @@ public class GroundBotSpawner : MonoBehaviour
                 if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
 
                 groundBotAIMovement.SetGroundBotHeadMovement(headMovement);
-                enemy.name = "GroundBotGroup4";
+                enemy.name = "GroundBotGroup3SecondFloor" + (enemiesSpawned + 1).ToString();
+                enemiesSpawned++;
                 enemy.tag = "GroundBot";
             }
             else
@@ -179,6 +148,7 @@ public class GroundBotSpawner : MonoBehaviour
             }
         }
     }
+
 
     public GameObject ReturnEnemyOne()
     {

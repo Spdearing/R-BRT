@@ -48,17 +48,20 @@ public class PlayerDetectionState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Setup();
+    }
+
+    void Setup()
+    {
         playerController = GameManager.instance.ReturnPlayerController();
         detection = GameManager.instance.ReturnDetectionMeter();
         detectedByGroundBot = false;
         detectedByFlyingBot = false;
         detectedBySpiderBot = false;
         crouchingDetectionIncrease = 1.0f;
-        detectionIncreaseRate = 7.5f;
+        detectionIncreaseRate = 25.0f;
         detectionDecreaseRate = 25.0f;
         currentState = DetectionState.exploring;
-
-
     }
 
     // Update is called once per frame
@@ -110,8 +113,9 @@ public class PlayerDetectionState : MonoBehaviour
 
             case DetectionState.meterRepleneshing:
                 // Decrease detection level over time
+                detectionIncreaseRate = 25.0f;
                 detection.DecreaseDetection(detectionDecreaseRate);
-                detectionIncreaseRate = 5.0f;
+                
 
                 // Transition to exploring state when detection is replenished
                 if (detection.ReturnStartingDetection() <= 0)
@@ -142,7 +146,6 @@ public class PlayerDetectionState : MonoBehaviour
             default:
                 // Handle any unexpected state transitions gracefully
                 currentState = DetectionState.exploring;
-                detectionIncreaseRate = 5.0f;
                 break;
         }
     }
