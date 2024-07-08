@@ -15,13 +15,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.94510126, y: 0.9702895, z: 1, w: 0}
+    m_Value: {x: 0.94510126, y: 0.9702895, z: 1, w: 0.054249614}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.03616637}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.10849912}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0.05
@@ -129,10 +129,10 @@ MonoBehaviour:
     m_Value: 0.72
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.09
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.957
   clamp:
     m_OverrideState: 0
     m_Value: 65472
@@ -237,10 +237,10 @@ MonoBehaviour:
   active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 7
   tint:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
 --- !u!114 &7548479395720447714
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -259,10 +259,10 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.13084112}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.34783933}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 0.90491945, y: 0.91805667, z: 1, w: 0.10849912}
 --- !u!114 &7644381388614837225
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -278,7 +278,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2
@@ -318,16 +318,16 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -0.2
   contrast:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 4
   colorFilter:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
   saturation:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 20
