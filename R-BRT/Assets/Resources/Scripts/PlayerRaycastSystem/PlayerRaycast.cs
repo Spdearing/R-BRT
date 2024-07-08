@@ -86,7 +86,7 @@ public class PlayerRaycast : MonoBehaviour
                 phoenixChipDecision.PlayerDecision();
             }
         }
-        else if (tag == "Battery")
+        if (tag == "Battery")
         {
             interactableText.text = "Press (E) to pick up the Battery";
             if (Input.GetKeyDown(KeyCode.E))
@@ -113,20 +113,28 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry2":
 
                         GameManager.instance.SetLoreEntryTwo(true);
+                        GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryTwoGameObject());
                         break;
 
                     case "LoreEntry3":
 
                         GameManager.instance.SetLoreEntryThree(true);
+                        GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryThreeGameObject());
                         break;
 
                     case "LoreEntry4":
 
                         GameManager.instance.SetLoreEntryFour(true);
+                        GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryFourGameObject());
                         break;
 
                 }
             }
+        }
+
+        else
+        {
+            interactableText.text = "";
         }
     }
 
