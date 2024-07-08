@@ -5,11 +5,9 @@ using TMPro;
 
 public class PlayerRaycast : MonoBehaviour
 {
-
     [Header("Game Objects")]
     [SerializeField] private GameObject lastHitObject;
     [SerializeField] private GameObject heldObject;
-
 
     [Header("Floats")]
     [SerializeField] private float interactDistance;
@@ -23,106 +21,32 @@ public class PlayerRaycast : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PhoenixChipDecision phoenixChipDecision;
     [SerializeField] private Battery battery;
-    [SerializeField] private LoreEntry loreEntry;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableText;
+
+    private string[] loreEntryTags = { "LoreEntry", "LoreEntry2", "LoreEntry3", "LoreEntry4" };
 
     void Start()
     {
         Setup();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Ray ray = new Ray(transform.position, transform.forward);
-
         RaycastHit hitInfo;
 
-
-        if (Physics.Raycast(ray, out hitInfo))
+        if (Physics.Raycast(ray, out hitInfo, raycastDistance))
         {
-            string objectHit = hitInfo.collider.gameObject.tag;
+            string objectHitTag = hitInfo.collider.gameObject.tag;
 
             Debug.DrawRay(transform.position, transform.forward * raycastDistance, Color.red);
 
             if (hitInfo.distance < interactDistance)
             {
-                if (hitInfo.collider.tag == "PickUpItem")
-                {
-                    interactableText.text = "Press (E) to pick up the rock";
-
-                    if (Input.GetKeyDown(KeyCode.E) && !holding)
-                    {
-                        interactableText.text = "";
-                        holding = true;
-                        hitInfo.collider.gameObject.GetComponent<PickUpObject>().PickUp();
-                        heldObject = hitInfo.collider.gameObject;
-                        pickUpTime = 0f;
-                    }
-                }
-
-                else if (hitInfo.collider.tag == "PhoenixChip")
-                {
-                    interactableText.text = "Press (E) to pick up the Phoenix Chip";
-
-                    if (Input.GetKeyDown(KeyCode.E))
-                    {
-                        interactableText.text = "";
-                        phoenixChipDecision.PlayerDecision();
-                    }
-
-                }
-
-                if (hitInfo.collider.tag == "Battery")
-                {
-                    interactableText.text = "Press (E) to pick up the Battery";
-
-                    if (Input.GetKeyDown(KeyCode.E))
-                    {
-                        interactableText.text = "";
-                        battery.OpenAbilitiesSelection();
-                    }
-                }
-
-                if(hitInfo.collider.tag == "LoreEntry")
-                {
-                    interactableText.text = "Press (E) to pick up the Tablet";
-                    if(Input.GetKeyDown(KeyCode.E))
-                    {
-                        interactableText.text = "";
-                    }
-                }
-
-                if(hitInfo.collider.tag == "LoreEntry2")
-                {
-                    interactableText.text = "Press (E) to pick up the Tablet";
-                    if(Input.GetKeyDown(KeyCode.E))
-                    {
-                        interactableText.text = "";
-                    }
-                }
-
-                if(hitInfo.collider.tag == "LoreEntry3")
-                {
-                    interactableText.text = "Press (E) to pick up the Tablet";
-                    if(Input.GetKeyDown(KeyCode.E))
-                    {
-                        interactableText.text = "";
-                    }
-                }
-
-                if(hitInfo.collider.tag == "LoreEntry4")
-                {
-                    interactableText.text = "Press (E) to pick up the Tablet";
-                    if(Input.GetKeyDown(KeyCode.E))
-                    {
-                        interactableText.text = "";
-                    }
-                }
+                HandleInteraction(objectHitTag, hitInfo);
             }
-
             else
             {
                 interactableText.text = " ";
@@ -139,6 +63,49 @@ public class PlayerRaycast : MonoBehaviour
         }
     }
 
+    void HandleInteraction(string tag, RaycastHit hitInfo)
+    {
+        if (tag == "PickUpItem")
+        {
+            interactableText.text = "Press (E) to pick up the rock";
+            if (Input.GetKeyDown(KeyCode.E) && !holding)
+            {
+                interactableText.text = "";
+                holding = true;
+                hitInfo.collider.gameObject.GetComponent<PickUpObject>().PickUp();
+                heldObject = hitInfo.collider.gameObject;
+                pickUpTime = 0f;
+            }
+        }
+        else if (tag == "PhoenixChip")
+        {
+            interactableText.text = "Press (E) to pick up the Phoenix Chip";
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                interactableText.text = "";
+                phoenixChipDecision.PlayerDecision();
+            }
+        }
+        else if (tag == "Battery")
+        {
+            interactableText.text = "Press (E) to pick up the Battery";
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                interactableText.text = "";
+                battery.OpenAbilitiesSelection();
+            }
+        }
+        else if (System.Array.Exists(loreEntryTags, element => element == tag))
+        {
+            interactableText.text = "Press (E) to pick up the Tablet";
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                interactableText.text = "";
+                
+            }
+        }
+    }
+
     void Setup()
     {
         interactDistance = 4;
@@ -148,14 +115,10 @@ public class PlayerRaycast : MonoBehaviour
         interactableText = GameManager.instance.ReturnInteractableText();
         phoenixChipDecision = GameManager.instance.ReturnPhoenixChipDecision();
         battery = GameManager.instance.ReturnBatteryScript();
-        //loreEntry = GameManager.instance.ReturnLoreEntry();
     }
 
     public void SetInteractableText(string value)
     {
         interactableText.text = value;
     }
-
-
-    
 }
