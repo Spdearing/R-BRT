@@ -56,6 +56,7 @@ public class PauseMenu : MonoBehaviour
                 else
                 {
                     PauseGame();
+                    
                 }
             }
         }

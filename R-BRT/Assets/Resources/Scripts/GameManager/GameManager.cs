@@ -142,7 +142,18 @@ public class GameManager : MonoBehaviour
     public void GrabAllTheTools()
     {
         loreButtons = new Button[4];
+        loreButtons[0] = GameObject.Find("LoreEntry1").GetComponent<Button>();
+        loreButtons[1] = GameObject.Find("LoreEntry2").GetComponent<Button>();
+        loreButtons[2] = GameObject.Find("LoreEntry3").GetComponent<Button>();
+        loreButtons[3] = GameObject.Find("LoreEntry4").GetComponent<Button>();
+
         loreEntries = new bool[4];
+        loreEntries[0] = false;
+        loreEntries[1] = false;
+        loreEntries[2] = false;
+        loreEntries[3] = false;
+
+
         player = GameObject.FindWithTag("Player");
         playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -186,6 +197,42 @@ public class GameManager : MonoBehaviour
         jumpingSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
         fuelMeterSlider = GameObject.Find("Fuel Meter").GetComponent<Slider>();
 
+    }
+
+
+    public void CheckLoreButtonStatus()
+    {
+        int index = 0;
+        foreach (bool activeLore in loreEntries)
+        {
+            if (activeLore)
+            {
+                loreButtons[index].interactable = true;
+            }
+            index++;
+        }
+    }
+
+    public void DestroyGameObject(GameObject value)
+    {
+        Destroy(value.gameObject);
+    }
+
+    public GameObject ReturnLoreEntryOneGameObject()
+    {
+        return this.loreEntry;
+    }
+    public GameObject ReturnLoreEntryTwoGameObject()
+    {
+        return this.loreEntry2;
+    }
+    public GameObject ReturnLoreEntryThreeGameObject()
+    {
+        return this.loreEntry3;
+    }
+    public GameObject ReturnLoreEntryFourGameObject()
+    {
+        return this.loreEntry4;
     }
 
     private IEnumerator TransitionBackToStart()

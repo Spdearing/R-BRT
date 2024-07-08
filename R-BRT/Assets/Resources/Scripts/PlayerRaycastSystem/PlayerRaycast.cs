@@ -101,7 +101,31 @@ public class PlayerRaycast : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 interactableText.text = "";
-                
+
+                switch (tag)
+                {
+                    case "LoreEntry":
+
+                        GameManager.instance.SetLoreEntryOne(true);
+                        GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryOneGameObject());
+                        break;
+
+                    case "LoreEntry2":
+
+                        GameManager.instance.SetLoreEntryTwo(true);
+                        break;
+
+                    case "LoreEntry3":
+
+                        GameManager.instance.SetLoreEntryThree(true);
+                        break;
+
+                    case "LoreEntry4":
+
+                        GameManager.instance.SetLoreEntryFour(true);
+                        break;
+
+                }
             }
         }
     }
