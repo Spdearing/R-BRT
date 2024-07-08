@@ -36,7 +36,7 @@ public class DetectionMeter : MonoBehaviour
     {
         detectionMeter = GameManager.instance.ReturnDetectionAmountImage();
         startingDetection = 0.0f;
-        detectionIncrement = .75f;
+        detectionIncrement = 1.5f;
         maxDetection = 100.0f;
         detectionMeter.fillAmount = startingDetection / maxDetection;
     }

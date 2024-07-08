@@ -63,9 +63,6 @@ public class PlayerController : MonoBehaviour
     [Header("Movement State")]
     [SerializeField] private MovementState currentState;
 
-    [Header("Trail Renderer")]
-    [SerializeField] private TrailRenderer tr;
-
     [Header("Animator")]
     [SerializeField] private Animator playerAnimator;
 

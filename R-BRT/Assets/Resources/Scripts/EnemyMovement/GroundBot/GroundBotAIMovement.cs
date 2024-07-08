@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,15 +9,11 @@ public class GroundBotAIMovement : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] GroundBotHeadMovement groundBotHeadMovement;
+    [SerializeField] GroundBotStateMachine groundBotStateMachine;
 
     [Header("Transforms")]
-    [SerializeField] private List<Transform> patrolPoints1 = new List<Transform>();
-    [SerializeField] private List<Transform> patrolPoints2 = new List<Transform>();
-
-    [Header("Int")]
-    [SerializeField] private int currentWaypointIndex;
-
-    [SerializeField] private bool isWaiting;
+    [SerializeField] private Transform roamingPointA;
+    [SerializeField] private Transform roamingPointB;
 
     [Header("Detection")]
     [SerializeField] private float detectionSpeed = 1.0f;
@@ -27,11 +21,12 @@ public class GroundBotAIMovement : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] private bool isRoaming;
+    [SerializeField] private bool isWaiting;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Setup();
+        StartCoroutine(Patrolling());
     }
 
     private void Update()
@@ -48,48 +43,39 @@ public class GroundBotAIMovement : MonoBehaviour
         }
     }
 
-    void Setup()
+    private void Setup()
     {
-        isRoaming = true;
-        InitializePatrolPoints();
         groundBotAI = GetComponent<NavMeshAgent>();
-        isWaiting = false;
-        currentWaypointIndex = 0;
-        StartCoroutine(Patrolling());
-    }
 
-    private void InitializePatrolPoints()
-    {
-        patrolPoints1.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint1").Select(g => g.transform));
-        patrolPoints1.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint2").Select(g => g.transform));
-        patrolPoints1.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint3").Select(g => g.transform));
-        patrolPoints1.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint4").Select(g => g.transform));
+        string groundBotName = gameObject.name;
 
-        patrolPoints2.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint5").Select(g => g.transform));
-        patrolPoints2.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint6").Select(g => g.transform));
-        patrolPoints2.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint7").Select(g => g.transform));
-        patrolPoints2.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint8").Select(g => g.transform));
-        patrolPoints2.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint9").Select(g => g.transform));
-        patrolPoints2.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint10").Select(g => g.transform));
-        patrolPoints2.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint11").Select(g => g.transform));
-        patrolPoints2.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint12").Select(g => g.transform));
-
-        ShufflePatrolPoints(patrolPoints1);
-        ShufflePatrolPoints(patrolPoints2);
-
-        Debug.Log($"PatrolPoints1 count: {patrolPoints1.Count}");
-        Debug.Log($"PatrolPoints2 count: {patrolPoints2.Count}");
-    }
-
-    private void ShufflePatrolPoints(List<Transform> patrolPoints)
-    {
-        for (int i = 0; i < patrolPoints.Count; i++)
+        switch (groundBotName)
         {
-            Transform temp = patrolPoints[i];
-            int randomIndex = Random.Range(i, patrolPoints.Count);
-            patrolPoints[i] = patrolPoints[randomIndex];
-            patrolPoints[randomIndex] = temp;
+            case "GroundBotGroup3SecondFloor1":
+                InitializePatrolPoints("RoamingPointA", "RoamingPointB");
+                break;
+            case "GroundBotGroup3SecondFloor2":
+                InitializePatrolPoints("RoamingPointC", "RoamingPointD");
+                break;
+            case "GroundBotGroup3SecondFloor3":
+                InitializePatrolPoints("RoamingPointE", "RoamingPointF");
+                break;
+            case "GroundBotGroup3SecondFloor4":
+                InitializePatrolPoints("RoamingPointG", "RoamingPointH");
+                break;
         }
+
+
+
+        isRoaming = true;
+        isWaiting = false;
+        //StartCoroutine(Patrolling());
+    }
+
+    private void InitializePatrolPoints(string pointAName, string pointBName)
+    {
+        roamingPointA = GameObject.Find(pointAName).transform;
+        roamingPointB = GameObject.Find(pointBName).transform;
     }
 
     private void StopBot()
@@ -108,44 +94,63 @@ public class GroundBotAIMovement : MonoBehaviour
         StartCoroutine(Patrolling());
     }
 
-    private IEnumerator Patrolling()
+    public IEnumerator Patrolling()
     {
-        if(isRoaming)
+        while (true)
         {
-            List<Transform> patrolPoints = gameObject.name == "GroundBotGroup2" ? patrolPoints1 : patrolPoints2;
-
-            if (patrolPoints != null && patrolPoints.Count > 0)
+            if(groundBotStateMachine.ReturnCurrentState() == GroundBotStateMachine.BehaviorState.patrolling && isRoaming)
             {
-                while (!isWaiting)
-                {
-                    groundBotAI.SetDestination(patrolPoints[currentWaypointIndex].position);
-
-                    // Wait until the bot reaches the waypoint
-                    while (!isWaiting && groundBotAI.remainingDistance > groundBotAI.stoppingDistance)
-                    {
-                        yield return null;
-                    }
-
-                    yield return new WaitForSeconds(5.0f); // Wait at the waypoint
-
-                    currentWaypointIndex = (currentWaypointIndex + 1) % patrolPoints.Count;
-                }
+                isRoaming = false;
+                yield return MoveToPoint(roamingPointA.position);
+                yield return new WaitForSeconds(2.5f);
+                yield return RotateBotGlobal(180);
+                yield return MoveToPoint(roamingPointB.position);
+                yield return new WaitForSeconds(2.5f);
+                yield return RotateBotGlobal(180);
             }
-            else
-            {
-                Debug.LogError("Patrol points not properly set or empty.");
-            }
+            isRoaming = true;
+            
         }
+    }
 
+    private IEnumerator MoveToPoint(Vector3 target)
+    {
+        groundBotAI.SetDestination(target);
+
+        while (groundBotAI.pathPending || groundBotAI.remainingDistance > groundBotAI.stoppingDistance)
+        {
+            yield return null;
+        }
+    }
+
+    private IEnumerator RotateBotGlobal(float angle)
+    {
+        Quaternion initialRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + angle, transform.eulerAngles.z);
+        float rotateTime = 0f;
+        float rotateDuration = 0.5f;
+
+        while (rotateTime < rotateDuration)
+        {
+            rotateTime += Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, rotateTime / rotateDuration);
+            yield return null;
+        }
+        transform.rotation = targetRotation;
     }
 
     public void SetGroundBotHeadMovement(GroundBotHeadMovement value)
     {
-        this.groundBotHeadMovement = value;
+        groundBotHeadMovement = value;
     }
 
     public void SetRoamingStatus(bool value)
     {
         isRoaming = value;
+    }
+
+    public void SetStateMachine(GroundBotStateMachine value)
+    {
+        this.groundBotStateMachine = value;
     }
 }

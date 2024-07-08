@@ -9,10 +9,8 @@ public class GroundBotStateMachine : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
-    [SerializeField] PlayerDetectionState playerDetectionState;
     [SerializeField] PlayerController playerController;
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
-    [SerializeField] GroundBotHeadMovement groundBotHeadMovement;
     [SerializeField] GroundBotAIMovement groundBotAIMovement;
 
 
@@ -40,13 +38,10 @@ public class GroundBotStateMachine : MonoBehaviour
 
     void Setup()
     {
-        groundBotAIMovement = GetComponent<GroundBotAIMovement>();
         playerCameraTransform = GameManager.instance.ReturnCameraTransform();
         gameOverScreen = GameManager.instance.ReturnGameOver();
         playerController = GameManager.instance.ReturnPlayerController();
         enemyGroundBotFieldOfView = GetComponentInChildren<EnemyGroundBotFieldOfView>();
-        groundBotHeadMovement = gameObject.GetComponent<GroundBotHeadMovement>();
-        playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
         currentState = BehaviorState.patrolling;
     }
 
@@ -85,20 +80,11 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviorState.patrolling:
 
-                if (gameObject.name == "GroundBotGroup2" || gameObject.name == "GroundBotGroup4")
-                {
-                    groundBotAIMovement.SetRoamingStatus(true);
-                }
+                //groundBotAIMovement.StartCoroutine(groundBotAIMovement.Patrolling());
+                
                 break;
 
             case BehaviorState.scanning:
-
-
-                if (gameObject.name == "GroundBotGroup2" || gameObject.name == "GroundBotGroup4")
-                {
-                    groundBotAIMovement.SetRoamingStatus(false);
-                }
-
 
                 break;
 
@@ -130,5 +116,15 @@ public class GroundBotStateMachine : MonoBehaviour
 
                 break;
         }
+    }
+
+    public BehaviorState ReturnCurrentState()
+    {
+        return this.currentState;
+    }
+
+    public void SetGroundBotAIMovement(GroundBotAIMovement value)
+    {
+        this.groundBotAIMovement = value;
     }
 }
