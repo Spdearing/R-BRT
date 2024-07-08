@@ -17,7 +17,7 @@ public class GroundBotAIMovement : MonoBehaviour
 
     [Header("Detection")]
     [SerializeField] private float detectionSpeed = 1.0f;
-    [SerializeField] private float crouchDetectionMultiplier = 0.5f; // Multiplier to reduce detection speed when crouching
+    [SerializeField] private float crouchDetectionMultiplier = 0.5f;
 
     [Header("Bools")]
     [SerializeField] private bool isRoaming;
@@ -91,7 +91,7 @@ public class GroundBotAIMovement : MonoBehaviour
 
         isWaiting = false;
         groundBotAI.isStopped = false;
-        StartCoroutine(Patrolling());
+        //StartCoroutine(Patrolling());
     }
 
     public IEnumerator Patrolling()

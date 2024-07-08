@@ -80,11 +80,13 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviorState.patrolling:
 
-                //groundBotAIMovement.StartCoroutine(groundBotAIMovement.Patrolling());
+                groundBotAIMovement.StartCoroutine(groundBotAIMovement.Patrolling());
                 
                 break;
 
             case BehaviorState.scanning:
+
+                groundBotAIMovement.StopAllCoroutines();
 
                 break;
 
