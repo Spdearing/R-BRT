@@ -130,13 +130,28 @@ public class GroundBotSpawner : MonoBehaviour
                 
 
 
-                if (headMovement != null) groundBotHeadMovementInstance = headMovement;
-                if (stateMachine != null) groundBotStateInstance = stateMachine;
-                if (fieldOfView != null) enemyGroundBotFieldViewInstance = fieldOfView;
-                if (navMeshAgent != null) groundBotAI = navMeshAgent;
-                if (groundBotAIMovement != null) groundBotAIMovementInstance = groundBotAIMovement;
+                if (headMovement != null)
+                {
+                    groundBotHeadMovementInstance = headMovement;
+                }
+                if (stateMachine != null)
+                {
+                    groundBotStateInstance = stateMachine;
+                }
+                if (fieldOfView != null)
+                {
+                    enemyGroundBotFieldViewInstance = fieldOfView;
+                }
+                if (navMeshAgent != null)
+                {
+                    groundBotAI = navMeshAgent;
+                }
+                if (groundBotAIMovement != null)
+                {
+                    groundBotAIMovementInstance = groundBotAIMovement;
+                }
 
-                stateMachine.SetGroundBotAIMovement(groundBotAIMovement);
+                stateMachine.SetGroundBotAIMovement(groundBotAIMovementInstance);
                 groundBotAIMovement.SetStateMachine(stateMachine);
                 groundBotAIMovement.SetGroundBotHeadMovement(headMovement);
                 enemy.name = "GroundBotGroup3SecondFloor" + (enemiesSpawned + 1).ToString();
