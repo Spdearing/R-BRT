@@ -36,11 +36,6 @@ public class GroundBotAIMovement : MonoBehaviour
             isRoaming = false;
             StopBot();
         }
-        else
-        {
-            isRoaming = true;
-            ResumePatrolling();
-        }
     }
 
     private void Setup()
@@ -98,14 +93,14 @@ public class GroundBotAIMovement : MonoBehaviour
     {
         while (true)
         {
-            if(groundBotStateMachine.ReturnCurrentState() == GroundBotStateMachine.BehaviorState.patrolling && isRoaming)
+            if(isRoaming)
             {
                 isRoaming = false;
                 yield return MoveToPoint(roamingPointA.position);
-                yield return new WaitForSeconds(2.5f);
+                yield return new WaitForSeconds(4.0f);
                 yield return RotateBotGlobal(180);
                 yield return MoveToPoint(roamingPointB.position);
-                yield return new WaitForSeconds(2.5f);
+                yield return new WaitForSeconds(4.0f);
                 yield return RotateBotGlobal(180);
                 isRoaming = true;
             }
@@ -156,5 +151,10 @@ public class GroundBotAIMovement : MonoBehaviour
     public void SetStateMachine(GroundBotStateMachine value)
     {
         this.groundBotStateMachine = value;
+    }
+
+    public bool ReturnIsRoaming()
+    {
+        return this.isRoaming;
     }
 }

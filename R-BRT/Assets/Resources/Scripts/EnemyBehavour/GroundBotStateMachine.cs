@@ -42,6 +42,7 @@ public class GroundBotStateMachine : MonoBehaviour
         gameOverScreen = GameManager.instance.ReturnGameOver();
         playerController = GameManager.instance.ReturnPlayerController();
         enemyGroundBotFieldOfView = GetComponentInChildren<EnemyGroundBotFieldOfView>();
+        groundBotAIMovement = gameObject.GetComponent<GroundBotAIMovement>();
         currentState = BehaviorState.patrolling;
     }
 
@@ -80,7 +81,11 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviorState.patrolling:
 
-                groundBotAIMovement.StartCoroutine(groundBotAIMovement.Patrolling());
+                if (groundBotAIMovement.ReturnIsRoaming() == true)
+                {
+                    groundBotAIMovement.StartCoroutine(groundBotAIMovement.Patrolling());
+                }
+                
                 
                 break;
 
