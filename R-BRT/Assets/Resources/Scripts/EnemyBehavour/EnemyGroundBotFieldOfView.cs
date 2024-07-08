@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static FlyingBotStateMachine;
-using UnityEngine.InputSystem.LowLevel;
 using Unity.VisualScripting;
 
 public class EnemyGroundBotFieldOfView : MonoBehaviour
@@ -16,14 +15,11 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
     [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private PlayerAbilities ability;
 
-
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
 
     [Header("Transform")]
     [SerializeField] private Transform enemyGrandparentTransform;
-
-
 
     private void Start()
     {
@@ -50,69 +46,43 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
+        if (IsPlayer(other) && IsDetectable())
         {
             sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
-
-            Transform grandparentTransform = gameObject.transform.parent.parent;
-
-            GroundBotStateMachine groundBotStateMachine = grandparentTransform.GetComponent<GroundBotStateMachine>();
-            
-            EnemyGroundBotFieldOfView enemyFieldOfView = gameObject.GetComponent<EnemyGroundBotFieldOfView>();
-
-            if (groundBotStateMachine != null && enemyFieldOfView != null)
-            {
-                playerDetectionState.SetGroundBotStateMachine(groundBotStateMachine);
-                playerDetectionState.SetGroundBotFieldOfView(enemyFieldOfView);
-                groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.scanning);
-            }
-
-            if (groundBotHeadMovement != null)
-            {
-                groundBotHeadMovement.SetPlayerSpotted(true); // Assuming this method exists
-                playerDetectionState.SetDetectedByGroundBot(true);
-            }
+            SetGroundBotStateToScanning();
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
+        if (IsPlayer(other))
         {
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
             sceneActivity.SetPlayerIsSpotted(withinRange);
 
             if (!withinRange)
             {
-                playerIsBeingDetected = false;
-                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing); 
+                ResetDetection();
             }
         }
         else
         {
-            groundBotHeadMovement.SetPlayerSpotted(false);
-            sceneActivity.SetPlayerIsSpotted(false);
-            playerIsBeingDetected = false;
-            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing); 
+            ResetDetection();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
+        if (IsPlayer(other))
         {
             sceneActivity.SetPlayerIsSpotted(false);
             playerIsBeingDetected = false;
 
             groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.patrolling);
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
-            
-            if (gameObject.transform.parent.parent.tag == "GroundBot")
-            {
-                groundBotHeadMovement.SetPlayerSpotted(false);
-                playerDetectionState.SetDetectedByGroundBot(false);
-            }
+            groundBotHeadMovement.SetPlayerSpotted(false);
+            playerDetectionState.SetDetectedByGroundBot(false);
         }
     }
 
@@ -127,9 +97,47 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
             }
         }
         else
-        
+        {
             playerIsBeingDetected = false;
-        
+        }
+    }
+
+    private bool IsPlayer(Collider other)
+    {
+        return other.CompareTag("Player") && !ability.ReturnUsingInvisibility();
+    }
+
+    private bool IsDetectable()
+    {
+        return enemyProximity.ReturnEnemyWithinRange();
+    }
+
+    private void SetGroundBotStateToScanning()
+    {
+        Transform grandparentTransform = gameObject.transform.parent.parent;
+        GroundBotStateMachine stateMachine = grandparentTransform.GetComponent<GroundBotStateMachine>();
+        EnemyGroundBotFieldOfView enemyFieldOfView = GetComponent<EnemyGroundBotFieldOfView>();
+
+        if (stateMachine != null && enemyFieldOfView != null)
+        {
+            playerDetectionState.SetGroundBotStateMachine(stateMachine);
+            playerDetectionState.SetGroundBotFieldOfView(enemyFieldOfView);
+            stateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.scanning);
+        }
+
+        if (groundBotHeadMovement != null)
+        {
+            groundBotHeadMovement.SetPlayerSpotted(true);
+            playerDetectionState.SetDetectedByGroundBot(true);
+        }
+    }
+
+    private void ResetDetection()
+    {
+        groundBotHeadMovement.SetPlayerSpotted(false);
+        sceneActivity.SetPlayerIsSpotted(false);
+        playerIsBeingDetected = false;
+        playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
     }
 
     public Transform ReturnThisEnemy()
@@ -137,3 +145,4 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
         return this.enemyGrandparentTransform;
     }
 }
+
