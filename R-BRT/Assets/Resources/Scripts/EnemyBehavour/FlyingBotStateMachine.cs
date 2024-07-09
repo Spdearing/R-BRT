@@ -170,6 +170,8 @@ public class FlyingBotStateMachine : MonoBehaviour
         {
             case FlyingState.patrolling:
 
+                if(gameObject.name == "FlyingBotGroup1Lobby1" || gameObject.name == "FlyingBotGroup1Lobby2" || gameObject.name == "FlyingBotGroup1Lobby3" || gameObject.name == "FlyingBotGroup1Lobby4")
+
                 StartCoroutine(PatrolRoutine());
 
 

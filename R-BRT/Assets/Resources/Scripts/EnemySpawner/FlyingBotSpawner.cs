@@ -14,11 +14,11 @@ public class FlyingBotSpawner : MonoBehaviour
 
     [Header("EnemyGroups")]
     [SerializeField] private GameObject[] group1;
-    //[SerializeField] private GameObject[] group2;
+    [SerializeField] private GameObject[] group2;
 
     [Header("EnemyGroupLocations")]
     [SerializeField] Transform[] enemyGroupLocations1;
-    //[SerializeField] Transform[] groupGroupLocations2;
+    [SerializeField] Transform[] enemyGroupLocations2;
 
     [Header("References")]
     [SerializeField] FlyingBotStateMachine flyingBotStateInstance;
@@ -28,9 +28,10 @@ public class FlyingBotSpawner : MonoBehaviour
     {
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/FlyingBotFinal");
         group1 = new GameObject[4];
-        //group2 = new GameObject[3];
+        group2 = new GameObject[4];
         enemiesSpawned = 0;
         SpawnGroup1();
+        SpawnGroup2();
     }
 
     void SpawnGroup1()
@@ -52,6 +53,33 @@ public class FlyingBotSpawner : MonoBehaviour
 
                 enemy.name = "FlyingBotGroup1Lobby" + (enemiesSpawned + 1).ToString();
                 enemiesSpawned++;
+            }
+            else
+            {
+                Debug.LogWarning("Index out of bounds for enemyGroupLocations array.");
+            }
+        }
+    }
+
+    void SpawnGroup2()
+    {
+        for (int i = 0; i < group2.Length; i++)
+        {
+            if (i < enemyGroupLocations2.Length)
+            {
+
+                GameObject enemy = Instantiate(enemyPrefab, enemyGroupLocations2[i].position, enemyGroupLocations2[i].rotation);
+                group2[i] = enemy;
+
+                FlyingBotStateMachine stateMachine = enemy.GetComponent<FlyingBotStateMachine>();
+                EnemyFlyingBotFieldOfView fieldOfView = enemy.GetComponentInChildren<EnemyFlyingBotFieldOfView>();
+
+
+                if (stateMachine != null) flyingBotStateInstance = stateMachine;
+                if (fieldOfView != null) enemyFlyingBotFieldOfViewInstance = fieldOfView;
+
+                enemy.name = "FlyingBotGroup2";
+                
             }
             else
             {
