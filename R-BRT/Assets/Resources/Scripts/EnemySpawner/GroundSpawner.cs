@@ -151,9 +151,9 @@ public class GroundBotSpawner : MonoBehaviour
                     groundBotAIMovementInstance = groundBotAIMovement;
                 }
 
-                stateMachine.SetGroundBotAIMovement(groundBotAIMovementInstance);
-                groundBotAIMovement.SetStateMachine(stateMachine);
-                groundBotAIMovement.SetGroundBotHeadMovement(headMovement);
+                groundBotStateInstance.SetGroundBotAIMovement(groundBotAIMovement);
+                groundBotAIMovementInstance.SetStateMachine(stateMachine);
+                groundBotAIMovementInstance.SetGroundBotHeadMovement(headMovement);
                 enemy.name = "GroundBotGroup3SecondFloor" + (enemiesSpawned + 1).ToString();
                 enemiesSpawned++;
                 enemy.tag = "GroundBot";

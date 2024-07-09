@@ -80,7 +80,11 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             case BehaviorState.patrolling:
 
-                //groundBotAIMovement.StartCoroutine(groundBotAIMovement.Patrolling());
+                if(gameObject.name == "GroundBotGroup3SecondFloor1" || gameObject.name == "GroundBotGroup3SecondFloor2" || gameObject.name == "GroundBotGroup3SecondFloor3" || gameObject.name == "GroundBotGroup3SecondFloor4")
+                {
+                    groundBotAIMovement.StartCoroutine(groundBotAIMovement.Patrolling());
+                }
+                
 
                 break;
 
