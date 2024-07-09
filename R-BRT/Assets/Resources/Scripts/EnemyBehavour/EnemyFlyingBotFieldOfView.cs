@@ -71,8 +71,8 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
                 playerDetectionState.SetDetectedByFlyingBot(true);
                 flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
             }
-            sceneActivity.SetPlayerIsSpotted(false);
-            playerIsBeingDetected = false;
+            //sceneActivity.SetPlayerIsSpotted(false);
+           //playerIsBeingDetected = false;
         }
     }
 
@@ -88,10 +88,6 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
             {
                 playerIsBeingDetected = false;
                 playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
-            }
-            else
-            {
-                playerIsBeingDetected = true;
             }
         }
         else
