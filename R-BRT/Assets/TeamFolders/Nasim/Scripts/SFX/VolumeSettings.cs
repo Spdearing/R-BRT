@@ -11,7 +11,11 @@ public class VolumeSettings : MonoBehaviour
 
 	private void Start()
 	{
-		if(PlayerPrefs.HasKey("masterVolume"))
+		masterSlider.value = masterSlider.maxValue;
+		musicSlider.value = musicSlider.maxValue;
+		sfxSlider.value = sfxSlider.maxValue;
+
+		if (PlayerPrefs.HasKey("masterVolume"))
 		{
 			LoadVolume();
 		}

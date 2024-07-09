@@ -67,15 +67,15 @@ public class OptionsScreen : MonoBehaviour
         theMixer.GetFloat("SFXVol", out vol);
         sfxSlider.value = vol;
 
-        masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
-        musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
-        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
+        
     }
 
     
     void Update()
     {
-        
+        masterLabel.text = Mathf.RoundToInt(masterSlider.value * 100).ToString();
+        musicLabel.text = Mathf.RoundToInt(musicSlider.value * 100).ToString();
+        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value * 100).ToString();
     }
 
     public void ResolutionLeft()
