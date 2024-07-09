@@ -28,8 +28,6 @@ public class SceneActivity : MonoBehaviour
     [SerializeField] private DetectionMeter detectionMeter;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private FirstDialogueFunctionality firstDialogueFunctionality;
-    [SerializeField] private SecondDialogueFunctionality secondDialogueFunctionality;
-    [SerializeField] private ThirdDialogueFunctionality thirdDialogueFunctionality;
 
     void Start()
     {
@@ -65,9 +63,12 @@ public class SceneActivity : MonoBehaviour
 
     private void InitializeGameScene()
     {
+        
         InitializeTextBoxes();
-        InitializePlayerAndDetectionMeter();
         InitalizeScripts();
+        InitializePlayerAndDetectionMeter();
+        
+        
         mainCamera = GameManager.instance.ReturnCameraTransform();
         friendLocation = GameManager.instance.ReturnFriendsLocation();
         playerIsSpotted = false;
@@ -84,16 +85,14 @@ public class SceneActivity : MonoBehaviour
 
     private void InitalizeScripts()
     {
-        firstDialogueFunctionality = dialogueTriggerOne.GetComponent<FirstDialogueFunctionality>();
-        secondDialogueFunctionality = dialogueTriggerOne.GetComponent<SecondDialogueFunctionality>();
-        thirdDialogueFunctionality = dialogueTriggerOne.GetComponent<ThirdDialogueFunctionality>(); 
+        firstDialogueFunctionality =  dialogueTriggerOne.GetComponentInChildren<FirstDialogueFunctionality>();
     }
 
     private void InitializeTextBoxes()
     {
-        dialogueTriggerOne = GameObject.Find("DialoguePanel");
-        dialogueTwoHitBox = GameObject.Find("SecondDialogueEncounter");
-        dialogueThreeHitBox = GameObject.Find("ThirdDialogueEncounter");
+        dialogueTriggerOne = GameManager.instance.ReturnDialogue();
+        dialogueTwoHitBox = GameManager.instance.ReturnDialogueTwoHitBox();
+        dialogueThreeHitBox = GameManager.instance.ReturnDialogueThreeHitBox();
 
         if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(true);
         if (dialogueTwoHitBox != null) dialogueTwoHitBox.SetActive(true);
@@ -162,15 +161,6 @@ public class SceneActivity : MonoBehaviour
         return this.firstDialogueFunctionality;
     }
 
-    public SecondDialogueFunctionality ReturnSecondDialogueFunctionality()
-    {
-        return this.secondDialogueFunctionality;
-    }
-
-    public ThirdDialogueFunctionality ReturnThirdDialogueFunctionality()
-    {
-        return this.thirdDialogueFunctionality;
-    }
 
     public void SetDialogueThreeHit(bool value)
     {

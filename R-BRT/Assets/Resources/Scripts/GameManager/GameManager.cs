@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
     [SerializeField] private GameObject dialogue;
+    [SerializeField] private GameObject dialogueTwoHitBox;
+    [SerializeField] private GameObject dialogueThreeHitBox;
 
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private InvisibilityCloak invisibilityCloak;
     [SerializeField] private DetectionMeter detection;
+    [SerializeField] private FirstDialogueFunctionality firstDialogueFunctionality;
 
 
     [Header("Animator")]
@@ -197,6 +200,10 @@ public class GameManager : MonoBehaviour
         walkingSound = GameObject.Find("WalkingSound").GetComponent<AudioSource>();
         jumpingSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
         fuelMeterSlider = GameObject.Find("Fuel Meter").GetComponent<Slider>();
+        dialogue = GameObject.Find("DialoguePanel");
+        firstDialogueFunctionality = dialogue.GetComponentInChildren<FirstDialogueFunctionality>();
+        dialogueTwoHitBox = GameObject.Find("SecondDialogueEncounter");
+        dialogueThreeHitBox = GameObject.Find("ThirdDialogueEncounter");
 
     }
 
@@ -215,6 +222,21 @@ public class GameManager : MonoBehaviour
     public void DestroyGameObject(GameObject value)
     {
         Destroy(value.gameObject);
+    }
+
+    public GameObject ReturnDialogue()
+    {
+        return this.dialogue;
+    }
+
+    public GameObject ReturnDialogueTwoHitBox()
+    {
+        return this.dialogueTwoHitBox;
+    }
+
+    public GameObject ReturnDialogueThreeHitBox()
+    {
+        return this.dialogueThreeHitBox;
     }
 
     public GameObject ReturnLoreEntryOneGameObject()
@@ -436,6 +458,10 @@ public class GameManager : MonoBehaviour
     public GameOverScreen ReturnGameOver()
     {
         return this.gameOverScreen;
+    }
+    public FirstDialogueFunctionality ReturnFirstDialogueFunctionality()
+    {
+        return this.firstDialogueFunctionality;
     }
 
     public void SetLoreEntryOne(bool value)
