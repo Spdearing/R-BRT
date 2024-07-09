@@ -29,8 +29,8 @@ public class Jetpack : MonoBehaviour
     [SerializeField] private PlayerController playerCharacterController;
 
 
-    [Header("Slider")]
-    [SerializeField] private Slider fuelMeter;
+    [Header("Images")]
+    [SerializeField] private Image fuelMeter;
 
     void Start()
     {
@@ -118,7 +118,7 @@ public class Jetpack : MonoBehaviour
             currentFillRatio = Mathf.Clamp01(currentFillRatio);
         }
 
-        fuelMeter.value = currentFillRatio;
+        fuelMeter.fillAmount = currentFillRatio;
 
     }
 

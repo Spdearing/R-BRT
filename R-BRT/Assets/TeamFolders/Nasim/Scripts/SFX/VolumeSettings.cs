@@ -11,9 +11,6 @@ public class VolumeSettings : MonoBehaviour
 
 	private void Start()
 	{
-		masterSlider.value = masterSlider.maxValue;
-		musicSlider.value = musicSlider.maxValue;
-		sfxSlider.value = sfxSlider.maxValue;
 
 		if (PlayerPrefs.HasKey("masterVolume"))
 		{
@@ -25,6 +22,10 @@ public class VolumeSettings : MonoBehaviour
 			SetMusicVolume();
 			SetSFXVolume();
 		}
+
+		masterSlider.value = masterSlider.maxValue;
+		musicSlider.value = musicSlider.maxValue;
+		sfxSlider.value = sfxSlider.maxValue;
 
 	}
 

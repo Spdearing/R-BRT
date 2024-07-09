@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image invisibilityVisualMeter;
     [SerializeField] private Image invisibilityVisualEmpty;
     [SerializeField] private Image invisibilityVisualAmount;
+    [SerializeField] private Image fuelMeterSlider;
 
     [Header("Floats")]
     [SerializeField] float startingDetection;
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource jumpingSound;
 
     [Header("Slider")]
-    [SerializeField] Slider fuelMeterSlider;
+    //changed fuelMeterSlider from a Slider to an Image
 
     [Header("Capsule Collider")]
     [SerializeField] CapsuleCollider playerCollider;
@@ -176,9 +177,9 @@ public class GameManager : MonoBehaviour
         skinMeshRenderer1 = GameObject.Find("LeftArm_RightArm5").GetComponent<SkinnedMeshRenderer>();
         skinMeshRenderer2 = GameObject.Find("LeftArm_RightArm5 (Copy)").GetComponent<SkinnedMeshRenderer>();
         detectionMeter = GameObject.Find("DetectionAmount").GetComponent<Image>();
-        invisibilityVisualAmount = GameObject.Find("InvisibleAmount").GetComponent<Image>();
-        invisibilityVisualEmpty = GameObject.Find("InvisibleEmpty").GetComponent<Image>();
-        invisibilityVisualMeter = GameObject.Find("InvisibleMeter").GetComponent<Image>();
+        invisibilityVisualAmount = GameObject.Find("StealthMeterFill").GetComponent<Image>();
+        invisibilityVisualEmpty = GameObject.Find("StealthMeterMask").GetComponent<Image>();
+        invisibilityVisualMeter = GameObject.Find("StealthImage").GetComponent<Image>();
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         gameOverScreen = GameObject.Find("Canvas").GetComponentInChildren<GameOverScreen>();
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
@@ -199,7 +200,7 @@ public class GameManager : MonoBehaviour
         invisibilityDuration = GameObject.Find("InvisibilityDuration").GetComponent<AudioSource>();
         walkingSound = GameObject.Find("WalkingSound").GetComponent<AudioSource>();
         jumpingSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
-        fuelMeterSlider = GameObject.Find("Fuel Meter").GetComponent<Slider>();
+        fuelMeterSlider = GameObject.Find("JetpackMeterFill").GetComponent<Image>();
         dialogue = GameObject.Find("DialoguePanel");
         firstDialogueFunctionality = dialogue.GetComponentInChildren<FirstDialogueFunctionality>();
         dialogueTwoHitBox = GameObject.Find("SecondDialogueEncounter");
@@ -269,7 +270,7 @@ public class GameManager : MonoBehaviour
         return this.playerCollider;
     }
 
-    public Slider ReturnFuelMeterSlider()
+    public Image ReturnFuelMeterSlider()
     {
         return this.fuelMeterSlider;
     }

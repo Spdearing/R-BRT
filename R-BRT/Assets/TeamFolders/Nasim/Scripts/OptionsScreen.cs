@@ -57,7 +57,7 @@ public class OptionsScreen : MonoBehaviour
             UpdateResolutionLabel();
         }
 
-        float vol = 0f;
+        float vol = 1f;
         theMixer.GetFloat("MasterVol", out vol);
         masterSlider.value = vol;
 
