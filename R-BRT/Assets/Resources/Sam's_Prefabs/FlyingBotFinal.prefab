@@ -882,7 +882,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 156
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 5
@@ -1162,6 +1162,10 @@ MonoBehaviour:
   flyingBotHeadColor: {fileID: 7893746361603777904}
   fieldOfViewRenderer: {fileID: 5645821382852503768}
   playerCameraTransform: {fileID: 0}
+  flyingBotOnePatrolPointA: {fileID: 0}
+  flyingBotOnePatrolPointB: {fileID: 0}
+  patrolSpeed: 0
+  patrolling: 0
   gameOverScreen: {fileID: 0}
   enemyFlyingBotFieldOfView: {fileID: 0}
   playerController: {fileID: 0}
