@@ -231,7 +231,14 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
-            flashLight.enabled = true;
+            if(flashLight.enabled == false)
+            {
+                flashLight.enabled = true;
+            }
+            else 
+
+                flashLight.enabled = false;
+            
         }
         
     }
