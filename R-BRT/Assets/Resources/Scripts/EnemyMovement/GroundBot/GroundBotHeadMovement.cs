@@ -94,11 +94,14 @@ public class GroundBotHeadMovement : MonoBehaviour
 
     IEnumerator PauseAndSwitchDirection()
     {
-        isPaused = true;
-        yield return new WaitForSeconds(2.0f);
-        rotatingLeft = !rotatingLeft;
-        SetTargetYRotation();
-        isPaused = false;
+        if(!isPaused)
+        {
+            isPaused = true;
+            yield return new WaitForSeconds(2.0f);
+            rotatingLeft = !rotatingLeft;
+            SetTargetYRotation();
+            isPaused = false;
+        }
     }
 
     private void SetTargetYRotation()
