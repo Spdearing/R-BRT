@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     [Header("Audio Source")]
 
     [SerializeField] private AudioSource walkingSound;
+    [SerializeField] private AudioSource sprintingSound;
     [SerializeField] private AudioSource jumpingSound;
 
     public enum MovementState
@@ -124,6 +125,7 @@ public class PlayerController : MonoBehaviour
         cameraTransform = GameManager.instance.ReturnCameraTransform();
         playerAnimator = GameManager.instance.ReturnAnimator();
         walkingSound = GameManager.instance.ReturnWalkingSound();
+        //sprintingSound = GameManager.instance.ReturnSprintingSound();
         jumpingSound = GameManager.instance.ReturnJumpingSound();
         readyToJump = true;
         gravity = -1.0f;
@@ -308,7 +310,7 @@ public class PlayerController : MonoBehaviour
             // Start sprinting
             if (!isSprinting)
             {
-                walkingSound.pitch = 2.5f;
+                //sprintingSound.Play();
                 isSprinting = true;
                 Sprint();
                 HandleSprintAnimation();
