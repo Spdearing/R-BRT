@@ -11,6 +11,10 @@ public class Battery : MonoBehaviour
     [SerializeField] private GameObject abilitySelectionPanel;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
+    [SerializeField] private GameObject invisibilityMeter;
+
+    [Header("Image")]
+    [SerializeField] private Image invisibilityMeterImage;
 
     [Header("Buttons")]
     [SerializeField] private Button jetpackButton;
@@ -32,9 +36,11 @@ public class Battery : MonoBehaviour
         playerRayCast = GameManager.instance.ReturnPlayerRaycast();
         battery = GameManager.instance.ReturnBatteryObject();
         fuelMeter = GameManager.instance.ReturnFuelMeter();
+        invisibilityMeter = GameManager.instance.ReturnInvisibilityMeterGameObject();
         abilities = GameManager.instance.ReturnPlayerAbilities();
         gameObject.tag = "Battery";
         fuelMeter.SetActive(false);
+        invisibilityMeter.SetActive(false);
         abilitySelectionPanel.SetActive(false);
     }
 
@@ -70,6 +76,7 @@ public class Battery : MonoBehaviour
         abilities.SetInvisibilityUnlock(true);
         abilities.DisplayInvisibilityMeter();
         abilitySelectionPanel.SetActive(false);
+        invisibilityMeter.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Destroy(battery);

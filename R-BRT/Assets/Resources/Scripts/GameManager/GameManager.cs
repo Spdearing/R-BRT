@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogue;
     [SerializeField] private GameObject dialogueTwoHitBox;
     [SerializeField] private GameObject dialogueThreeHitBox;
+    [SerializeField] private GameObject invisibilityMeter;
 
     [Header("Dialogue String")]
     [SerializeField] private string dialogueCheckPoint;
@@ -187,6 +188,7 @@ public class GameManager : MonoBehaviour
         skinMeshRenderer1 = GameObject.Find("LeftArm_RightArm5").GetComponent<SkinnedMeshRenderer>();
         skinMeshRenderer2 = GameObject.Find("LeftArm_RightArm5 (Copy)").GetComponent<SkinnedMeshRenderer>();
         detectionMeter = GameObject.Find("DetectionAmount").GetComponent<Image>();
+        invisibilityMeter = GameObject.Find("StealthImage");
         invisibilityVisualAmount = GameObject.Find("StealthMeterFill").GetComponent<Image>();
         invisibilityVisualEmpty = GameObject.Find("StealthMeterMask").GetComponent<Image>();
         invisibilityVisualMeter = GameObject.Find("StealthImage").GetComponent<Image>();
@@ -256,6 +258,11 @@ public class GameManager : MonoBehaviour
     public void SetDialogueCheckPoint(string checkPointName)
     {
         dialogueCheckPoint = checkPointName;
+    }
+
+    public GameObject ReturnInvisibilityMeterGameObject()
+    {
+        return this.invisibilityMeter;
     }
 
     public GameObject ReturnDialogue()
@@ -455,7 +462,7 @@ public class GameManager : MonoBehaviour
         return this.invisibilityVisualAmount;
     }
 
-    public Image ReturnInvisibilityMeter()
+    public Image ReturnInvisibilityMeterImage()
     {
         return this.invisibilityVisualMeter;
     }

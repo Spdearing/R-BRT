@@ -59,7 +59,7 @@ public class PlayerAbilities : MonoBehaviour
         invisibilityCloak = GameManager.instance.ReturnInvisibilityCloak();
         jetPack = gameObject.GetComponent<Jetpack>();
         playerAnimator = GameManager.instance.ReturnAnimator();
-        invisibilityVisualMeter = GameManager.instance.ReturnInvisibilityMeter();
+        invisibilityVisualMeter = GameManager.instance.ReturnInvisibilityMeterImage();
         invisibilityVisualEmpty = GameManager.instance.ReturnInvisibilityMeterEmpty();
         invisibilityVisualAmount = GameManager.instance.ReturnInvisibilityMeterAmount();
         invisibleMeter = GameManager.instance.ReturnInvisibilityMeterAmount();
@@ -73,7 +73,7 @@ public class PlayerAbilities : MonoBehaviour
         invisibleIncrement = .25f;
         startingInvisible = 7.5f;
         invisibilityMeterFillingBackUp = false;
-        HideInvisibilityMeter();
+        //HideInvisibilityMeter();
         Debug.Log("invis bar should be gone");
     }
 
