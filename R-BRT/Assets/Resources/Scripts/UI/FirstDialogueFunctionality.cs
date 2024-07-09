@@ -26,45 +26,44 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] private bool skipText;
-    [SerializeField] private bool firstDialogue;
-    [SerializeField] private bool secondDialogue;
-    [SerializeField] private bool thirdDialogue;
-    [SerializeField] private bool fourthDialogue;
+
+    [Header("Dialogue CheckPoint Name")]
+    [SerializeField] private string dialogueName;
+
+    [Header("Index for Dialogue")]
+    [SerializeField] private int dialogueIndex = 0;
 
     private string[][] dialogues;
 
 
-    public void Awake()
-    {
-        firstDialogue = true;
-        secondDialogue = false;
-        thirdDialogue = false;
-        fourthDialogue = false;
-    }
 
     void Start()
     {
+        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex);
+        Debug.Log(dialogueIndex);
         playerController = GameManager.instance.ReturnPlayerController();
         sceneActivity = GameManager.instance.ReturnSceneActivity();
 
         dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4 };
 
-        if (firstDialogue)
+        if (dialogueName == "First Dialogue")
         {
             StartCoroutine(ShowDialogue(dialogues[0]));
         }
-        else if (secondDialogue)
+        else if (dialogueName == "Second Dialogue")
         {
             StartCoroutine(ShowDialogue(dialogues[1]));
         }
-        else if (thirdDialogue)
+        if (dialogueName == "Third Dialogue")
         {
             StartCoroutine(ShowDialogue(dialogues[2]));
         }
-        else if (fourthDialogue)
+        else if (dialogueName == "Fourth Dialogue")
         {
             StartCoroutine(ShowDialogue(dialogues[3]));
         }
+
+
     }
 
     private IEnumerator ShowDialogue(string[] texts)
@@ -99,30 +98,41 @@ public class FirstDialogueFunctionality : MonoBehaviour
             continueText.SetActive(true);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
-        firstDialogue = false;
+        skipText = false;
+        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex++);
         playerController.SetPlayerActivity(true);
         playerController.isCameraLocked = false;
         sceneActivity.SetDialogueTriggerOne(false);
-        //sceneActivity.SetFirstDialogueHit(true);
     }
 
-    public void SetFirstDialogue(bool value)
+    private void OnEnable()
     {
-        firstDialogue = value;
+        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex);
+
+        dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4 };
+
+        if (dialogueName == "First Dialogue")
+        {
+            StartCoroutine(ShowDialogue(dialogues[0]));
+        }
+        else if (dialogueName == "Second Dialogue")
+        {
+            StartCoroutine(ShowDialogue(dialogues[1]));
+        }
+        if (dialogueName == "Third Dialogue")
+        {
+            StartCoroutine(ShowDialogue(dialogues[2]));
+        }
+        else if (dialogueName == "Fourth Dialogue")
+        {
+            StartCoroutine(ShowDialogue(dialogues[3]));
+        }
     }
 
-    public void SetSecondDialogue(bool value)
+    public void UpdateDialogue()
     {
-        secondDialogue = value;
-    }
+        dialogueName = GameManager.instance.ReturnDialogueCheckPoint();
 
-    public void SetThirdDialogue(bool value)
-    {
-        thirdDialogue = value;
-    }
 
-    public void SetFourthDialogue(bool value)
-    {
-        fourthDialogue = value;
     }
 }

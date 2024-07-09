@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueTwoHitBox;
     [SerializeField] private GameObject dialogueThreeHitBox;
 
+    [Header("Dialogue String")]
+    [SerializeField] private string dialogueCheckPoint;
+
+    [Header("Strings Array For Dialogues")]
+    [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue" };
+
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer2;
@@ -88,6 +94,8 @@ public class GameManager : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool[] loreEntries;
 
+
+
     [Header("Buttons")]
     [SerializeField] private Button[] loreButtons;
     
@@ -122,7 +130,8 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "GameScene":
-                
+
+                dialogueCheckPoint = "First Dialogue";
                 GrabAllTheTools();
                 break;
 
@@ -220,9 +229,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public string ReturnPlayerDialogueCheckPoints(int index)
+    {
+        return this.playerDialogueCheckPoints[index];
+    }
+
+
     public void DestroyGameObject(GameObject value)
     {
         Destroy(value.gameObject);
+    }
+
+    public string ReturnDialogueCheckPoint()
+    {
+        return this.dialogueCheckPoint;
+    }
+
+    public void SetDialogueCheckPoint(string checkPointName)
+    {
+        dialogueCheckPoint = checkPointName;
     }
 
     public GameObject ReturnDialogue()

@@ -26,14 +26,12 @@ public class PlayerCollisions : MonoBehaviour
 
         else if (other.gameObject.tag == "SecondDialogueEncounter")
         {
-            firstDialogueFunctionality.SetSecondDialogue(true);
+            
             sceneActivity.StartSecondDialogue();
         }
 
         if (other.gameObject.tag == "ThirdDialogueEncounter")
         {
-            firstDialogueFunctionality.SetSecondDialogue(false);
-            firstDialogueFunctionality.SetThirdDialogue(true);
             sceneActivity.StartThirdDialogue();
         }
     }
