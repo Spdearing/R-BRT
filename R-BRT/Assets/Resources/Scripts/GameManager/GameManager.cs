@@ -94,10 +94,11 @@ public class GameManager : MonoBehaviour
     [Header("Bools")]
     [SerializeField] private bool[] loreEntries;
 
-
-
     [Header("Buttons")]
     [SerializeField] private Button[] loreButtons;
+
+    [Header("Flash Light")]
+    [SerializeField] private Light flashLight;
     
     private void Awake()
     {
@@ -214,8 +215,10 @@ public class GameManager : MonoBehaviour
         firstDialogueFunctionality = dialogue.GetComponentInChildren<FirstDialogueFunctionality>();
         dialogueTwoHitBox = GameObject.Find("SecondDialogueEncounter");
         dialogueThreeHitBox = GameObject.Find("ThirdDialogueEncounter");
+        flashLight = GameObject.Find("FlashLight").GetComponent<Light>();
 
     }
+
 
 
     public void CheckLoreButtonStatus()
@@ -238,6 +241,11 @@ public class GameManager : MonoBehaviour
     public void DestroyGameObject(GameObject value)
     {
         Destroy(value.gameObject);
+    }
+
+    public Light ReturnFlashLight()
+    {
+        return this.flashLight;
     }
 
     public string ReturnDialogueCheckPoint()

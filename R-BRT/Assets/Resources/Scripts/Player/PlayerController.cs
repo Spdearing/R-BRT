@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float horizontalInput;
     [SerializeField] private float verticalInput;
 
+    [Header("Flash Light")]
+    [SerializeField] private Light flashLight;
+
     [Header("Bools")]
     [SerializeField] private bool playerIsActive;
     [SerializeField] private bool onSlope;
@@ -98,6 +101,8 @@ public class PlayerController : MonoBehaviour
 
             rb.drag = isGrounded ? groundDrag : (OnSlope() && !exitingSlope ? groundDrag : 0);
         }
+
+        TurnFlashLightOn();
         
     }
 
@@ -133,6 +138,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("CapsuleCollider not assigned!");
         }
+
+        
+        flashLight = GameManager.instance.ReturnFlashLight();
+        flashLight.enabled = false;
+
     }
 
     private void HandleInput()
@@ -215,6 +225,15 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.useGravity = !OnSlope();
+    }
+
+    void TurnFlashLightOn()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            flashLight.enabled = true;
+        }
+        
     }
 
     private void ControlSpeed()
