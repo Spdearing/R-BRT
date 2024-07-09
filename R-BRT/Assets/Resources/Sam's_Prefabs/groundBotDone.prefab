@@ -875,7 +875,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 4c5d6a008e6faa841a611df52049e8e6, type: 2}
-  m_audioClip: {fileID: 8300000, guid: d54cacd4277944d4c934453be2909c5f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 43e414e0aa9b7614fa25ac0545431518, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1178,10 +1178,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCameraTransform: {fileID: 0}
   gameOverScreen: {fileID: 0}
-  playerDetectionState: {fileID: 0}
   playerController: {fileID: 0}
   enemyGroundBotFieldOfView: {fileID: 0}
-  groundBotHeadMovement: {fileID: 0}
   groundBotAIMovement: {fileID: 0}
   currentState: 0
 --- !u!114 &697343153668334853
