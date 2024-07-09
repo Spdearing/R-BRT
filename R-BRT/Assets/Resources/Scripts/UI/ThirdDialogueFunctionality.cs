@@ -72,7 +72,6 @@ public class ThirdDialogueFunctionality : MonoBehaviour
 
     private void EndDialogue()
     {
-        sceneActivity.SetDialogueTriggerThree(false);
         sceneActivity.SetDialogueThreeHit(true);
         sceneActivity.TurnOffThirdDialogueHitBox();
     }

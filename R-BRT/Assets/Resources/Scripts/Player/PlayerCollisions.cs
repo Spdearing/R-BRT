@@ -22,14 +22,14 @@ public class PlayerCollisions : MonoBehaviour
             transform.position = destinationA.transform.position;
         }
 
-        //else if(other.gameObject.tag == "SecondDialogueEncounter")
-        //{
-        //    sceneActivity.StartSecondDialogue();
-        //}
+        else if (other.gameObject.tag == "SecondDialogueEncounter")
+        {
+            sceneActivity.StartSecondDialogue();
+        }
 
-        //if(other.gameObject.tag == "ThirdDialogueEncounter")
-        //{
-        //    sceneActivity.StartThirdDialogue();
-        //}
+        if (other.gameObject.tag == "ThirdDialogueEncounter")
+        {
+            sceneActivity.StartThirdDialogue();
+        }
     }
 }

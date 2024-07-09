@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject loreEntryMenu;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
+    [SerializeField] private GameObject dialogue;
 
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;

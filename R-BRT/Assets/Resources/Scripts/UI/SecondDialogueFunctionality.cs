@@ -82,7 +82,6 @@ public class SecondDialogueFunctionality : MonoBehaviour
 
     private void EndDialogue()
     {
-        sceneActivity.SetDialogueTriggerTwo(false);
         sceneActivity.SetDialogueTwoHit(true);
         sceneActivity.TurnOffSecondDialogueHitBox();
         playerController.SetCameraLock(false);
