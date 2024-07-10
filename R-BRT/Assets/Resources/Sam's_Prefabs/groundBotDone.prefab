@@ -980,6 +980,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1941914680256774057}
   - component: {fileID: 1976299694608472566}
+  - component: {fileID: 2192018995500210394}
   m_Layer: 0
   m_Name: DeathCollider
   m_TagString: TouchingEnemy
@@ -1015,14 +1016,27 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.7760835, z: 0.26555103}
-  m_Center: {x: 1.01768094e-10, y: -0.111959256, z: -0.0011820196}
+  m_Size: {x: 1, y: 0.3503399, z: 0.24641512}
+  m_Center: {x: -1.2446633e-10, y: -0.32483333, z: 0.008045098}
+--- !u!114 &2192018995500210394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5692079504982445716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21442e5ca5daf14a82a37c2a47481b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundBotStateMachine: {fileID: 0}
 --- !u!1 &8725752190841570743
 GameObject:
   m_ObjectHideFlags: 0
