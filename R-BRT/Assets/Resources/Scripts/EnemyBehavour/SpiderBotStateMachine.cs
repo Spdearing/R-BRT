@@ -14,16 +14,6 @@ public class SpiderBotStateMachine : MonoBehaviour
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private EnemySpiderBotFieldOfView enemySpiderBotFieldOfView;
 
-
-
-    [Header("Renderer")]
-    [SerializeField] private Renderer spiderBotEyeColor;
-    [SerializeField] private Renderer fieldOfViewRenderer;
-
-    [Header("Materials")]
-    [SerializeField] private Material red;
-    [SerializeField] private Material fieldOfViewRed;
-
     [Header("Quaternions")]
     [SerializeField] private Quaternion startRotation;
     [SerializeField] private Quaternion endRotation;
@@ -54,8 +44,6 @@ public class SpiderBotStateMachine : MonoBehaviour
         enemySpiderBotFieldOfView = GetComponentInChildren<EnemySpiderBotFieldOfView>();
         playerCamera = GameManager.instance.ReturnPlayerCamera();
         playerCameraTransform = GameManager.instance.ReturnCameraTransform();
-        spiderBotEyeColor.material = red;
-        fieldOfViewRenderer.material = fieldOfViewRed;
         currentState = SpiderState.patrolling;
     }
 

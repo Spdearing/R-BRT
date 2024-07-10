@@ -9,9 +9,6 @@ public class FlyingBotStateMachine : MonoBehaviour
     [SerializeField] private GameObject flyingBotHead;
     [SerializeField] private GameObject fieldOfView;
 
-    [Header("Renderer")]
-    [SerializeField] private Renderer flyingBotHeadColor;
-    [SerializeField] private Renderer fieldOfViewRenderer;
 
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
@@ -29,9 +26,6 @@ public class FlyingBotStateMachine : MonoBehaviour
     [SerializeField] private EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
     [SerializeField] private PlayerController playerController;
 
-    [Header("Materials")]
-    [SerializeField] private Material red;
-    [SerializeField] private Material fieldOfViewRed;
 
     private Quaternion startRotation;
     private Quaternion endRotation;
@@ -101,8 +95,6 @@ public class FlyingBotStateMachine : MonoBehaviour
                 break;
         }
 
-        flyingBotHeadColor.material = red;
-        fieldOfViewRenderer.material = fieldOfViewRed;
         currentState = FlyingState.patrolling;
     }
 
