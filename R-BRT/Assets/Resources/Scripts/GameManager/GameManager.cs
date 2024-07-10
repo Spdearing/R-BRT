@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject loreEntry2;
     [SerializeField] private GameObject loreEntry3;
     [SerializeField] private GameObject loreEntry4;
-    [SerializeField] private GameObject loreEntryMenu;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
     [SerializeField] private GameObject dialogue;
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string dialogueCheckPoint;
 
     [Header("Strings Array For Dialogues")]
-    [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue" };
+    [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue", "Eighth Dialogue" };
     
     [SerializeField] private string[] abilityChosen = new string[] { "Jetpack", "Stealth" };
 
@@ -455,11 +454,6 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnPhoenixChipMenu()
     {
         return this.phoenixChipMenu;
-    }
-
-    public GameObject ReturnLoreEntryMenu()
-    {
-        return this.loreEntryMenu;
     }
 
     public GameObject ReturnBatteryObject()

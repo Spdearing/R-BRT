@@ -17,8 +17,6 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private string[] fullTexts7;
     [SerializeField] private string[] fullTexts8;
     [SerializeField] private string[] fullTexts9;
-    [SerializeField] private string[] fullStealthAbilityText;
-    [SerializeField] private string[] fullJetPackAbilityText;
 
     [Header("Floats")]
     [SerializeField] private float delay;
@@ -49,7 +47,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     private void Initialize()
     {
-        dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4, fullTexts5, fullTexts6, fullTexts7, fullTexts8, fullTexts9, fullStealthAbilityText, fullJetPackAbilityText };
+        dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4, fullTexts5, fullTexts6, fullTexts7, fullTexts8, fullTexts9};
         playerController = GameManager.instance.ReturnPlayerController();
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         delay = 0.035f;
@@ -82,6 +80,14 @@ public class FirstDialogueFunctionality : MonoBehaviour
             case "Third Dialogue":
                 return dialogues[2];
             case "Fourth Dialogue":
+                return dialogues[3];
+            case "Fifth Dialogue":
+                return dialogues[0];
+            case "Sixth Dialogue":
+                return dialogues[1];
+            case "Seventh Dialogue":
+                return dialogues[2];
+            case "Eighth Dialogue":
                 return dialogues[3];
             default:
                 return null;
