@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
     [SerializeField] private GameObject dialogue;
+    [SerializeField] private GameObject abilityDialogue;
     [SerializeField] private GameObject dialogueTwoHitBox;
     [SerializeField] private GameObject dialogueThreeHitBox;
     [SerializeField] private GameObject dialogueFourHitBox;
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Strings Array For Dialogues")]
     [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue" };
+    
+    [SerializeField] private string[] abilityChosen = new string[] { "Jetpack", "Stealth" };
 
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
@@ -78,16 +81,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image fuelMeterSlider;
 
     [Header("Floats")]
-    [SerializeField] float startingDetection;
-    [SerializeField] float detectionIncrement;
-    [SerializeField] float maxDetection;
+    [SerializeField] private float startingDetection;
+    [SerializeField] private float detectionIncrement;
+    [SerializeField] private float maxDetection;
 
     [Header("Audio Source")]
-    [SerializeField] AudioSource activateInvisibility;
-    [SerializeField] AudioSource invisibilityDuration;
-    [SerializeField] AudioSource walkingSound;
-    [SerializeField] AudioSource sprintingSound;
-    [SerializeField] AudioSource jumpingSound;
+    [SerializeField] private AudioSource activateInvisibility;
+    [SerializeField] private AudioSource invisibilityDuration;
+    [SerializeField] private AudioSource walkingSound;
+    [SerializeField] private AudioSource sprintingSound;
+    [SerializeField] private AudioSource jumpingSound;
 
     [Header("Slider")]
     //changed fuelMeterSlider from a Slider to an Image
@@ -97,6 +100,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] private bool[] loreEntries;
+    
 
     [Header("Buttons")]
     [SerializeField] private Button[] loreButtons;
@@ -172,7 +176,6 @@ public class GameManager : MonoBehaviour
         loreEntries[2] = false;
         loreEntries[3] = false;
 
-
         player = GameObject.FindWithTag("Player");
         playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -217,6 +220,7 @@ public class GameManager : MonoBehaviour
         sprintingSound = GameObject.Find("SprintingSound").GetComponent<AudioSource>();
         jumpingSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
         fuelMeterSlider = GameObject.Find("JetpackMeterFill").GetComponent<Image>();
+        abilityDialogue = GameObject.Find("AbilityDialogue");
         dialogue = GameObject.Find("DialoguePanel");
         firstDialogueFunctionality = dialogue.GetComponentInChildren<FirstDialogueFunctionality>();
         dialogueTwoHitBox = GameObject.Find("SecondDialogueEncounter");
@@ -243,6 +247,11 @@ public class GameManager : MonoBehaviour
     public string ReturnPlayerDialogueCheckPoints(int index)
     {
         return this.playerDialogueCheckPoints[index];
+    }
+
+    public string ReturnPlayerDialogueAbilityChoice(int index)
+    {
+        return this.abilityChosen[index];
     }
 
 
@@ -274,6 +283,11 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnDialogue()
     {
         return this.dialogue;
+    }
+
+    public GameObject ReturnAbilityDialogue()
+    {
+        return this.abilityDialogue;
     }
 
     public GameObject ReturnDialogueTwoHitBox()

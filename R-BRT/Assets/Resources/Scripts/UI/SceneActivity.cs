@@ -16,6 +16,7 @@ public class SceneActivity : MonoBehaviour
     [Header("Game Objects")]
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject dialogueTriggerOne;
+    [SerializeField] private GameObject abilityDialogueTrigger;
     [SerializeField] private GameObject enemyNumberOne;
     [SerializeField] private GameObject dialogueTwoHitBox;
     [SerializeField] private GameObject dialogueThreeHitBox;
@@ -93,12 +94,14 @@ public class SceneActivity : MonoBehaviour
     private void InitializeTextBoxes()
     {
         dialogueTriggerOne = GameManager.instance.ReturnDialogue();
+        abilityDialogueTrigger = GameManager.instance.ReturnAbilityDialogue();
         dialogueTwoHitBox = GameManager.instance.ReturnDialogueTwoHitBox();
         dialogueThreeHitBox = GameManager.instance.ReturnDialogueThreeHitBox();
         dialogueFourHitBox = GameManager.instance.ReturnDialogueFourHitBox();
         dialogueFiveHitBox = GameManager.instance.ReturnDialogueFiveHitBox();
 
         if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(true);
+        if (abilityDialogueTrigger != null) abilityDialogueTrigger.SetActive(false);
         if (dialogueTwoHitBox != null) dialogueTwoHitBox.SetActive(true);
         if (dialogueThreeHitBox != null) dialogueThreeHitBox.SetActive(true);
         if (dialogueFourHitBox != null) dialogueFourHitBox.SetActive(true);
@@ -186,6 +189,22 @@ public class SceneActivity : MonoBehaviour
         }
     }
 
+    public void StartStealthDialogue()
+    {
+        if (abilityDialogueTrigger != null)
+        {
+            abilityDialogueTrigger.SetActive(true);
+        }
+    }
+
+    public void StartJetPackDialogue()
+    {
+        if (abilityDialogueTrigger != null)
+        {
+            abilityDialogueTrigger.SetActive(true);
+        }
+    }
+
     public FirstDialogueFunctionality ReturnFirstDialogueFunctionality()
     {
         return this.firstDialogueFunctionality;
@@ -225,6 +244,11 @@ public class SceneActivity : MonoBehaviour
     public void SetDialogueTriggerOne(bool value)
     {
         if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(value);
+    }
+
+    public void SetDialogueAbilityTrigger(bool value)
+    {
+        if (abilityDialogueTrigger != null) abilityDialogueTrigger.SetActive(value);
     }
 
     public void SetJetPackStatus(bool value)
