@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCollisions : MonoBehaviour
 {
     [SerializeField] GameObject destinationA;
-    [SerializeField] GameObject destinationB;
+   
 
 
     [SerializeField] private SceneActivity sceneActivity;
