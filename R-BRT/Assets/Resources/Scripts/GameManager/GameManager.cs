@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
         activateInvisibility = GameObject.Find("ActivateInvisibility").GetComponent<AudioSource>();
         invisibilityDuration = GameObject.Find("InvisibilityDuration").GetComponent<AudioSource>();
         walkingSound = GameObject.Find("WalkingSound").GetComponent<AudioSource>();
-        //sprintingSound = GameObject.Find("SprintingSound").GetComponent<AudioSource>();
+        sprintingSound = GameObject.Find("SprintingSound").GetComponent<AudioSource>();
         jumpingSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
         fuelMeterSlider = GameObject.Find("JetpackMeterFill").GetComponent<Image>();
         dialogue = GameObject.Find("DialoguePanel");
@@ -331,10 +331,10 @@ public class GameManager : MonoBehaviour
         return this.fuelMeterSlider;
     }
 
-    //public AudioSource ReturnSprintingSound()
-    //{
-    //    return this.sprintingSound;
-    //}
+    public AudioSource ReturnSprintingSound()
+    {
+        return this.sprintingSound;
+    }
 
     public AudioSource ReturnWalkingSound()
     {

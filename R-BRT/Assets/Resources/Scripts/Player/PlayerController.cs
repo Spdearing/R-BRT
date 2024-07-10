@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
         cameraTransform = GameManager.instance.ReturnCameraTransform();
         playerAnimator = GameManager.instance.ReturnAnimator();
         walkingSound = GameManager.instance.ReturnWalkingSound();
-        //sprintingSound = GameManager.instance.ReturnSprintingSound();
+        sprintingSound = GameManager.instance.ReturnSprintingSound();
         jumpingSound = GameManager.instance.ReturnJumpingSound();
         readyToJump = true;
         gravity = -1.0f;
@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour
             // Start sprinting
             if (!isSprinting)
             {
-                //sprintingSound.Play();
+                sprintingSound.Play();
                 isSprinting = true;
                 Sprint();
                 HandleSprintAnimation();
