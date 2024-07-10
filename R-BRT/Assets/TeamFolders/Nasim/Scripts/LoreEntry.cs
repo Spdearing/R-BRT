@@ -12,7 +12,6 @@ public class LoreEntry : MonoBehaviour
 	private void Start()
 	{
 
-		loreEntryMenu = GameManager.instance.ReturnLoreEntryMenu(); 
         Time.timeScale = 1.0f;
         loreEntryMenu.SetActive(false);
 	}
