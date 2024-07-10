@@ -34,11 +34,6 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
     private string[][] dialogues;
 
-    void Start()
-    {
-        Initialize();
-        StartDialogue();
-    }
 
     private void Initialize()
     {
@@ -121,12 +116,12 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
     private void OnEnable()
     {
+        Initialize();
         StartDialogue();
 
-        if(dialogueIndex > 0) 
-        {
-            StartCoroutine(CountDownTillClose());
-        }
+
+        StartCoroutine(CountDownTillClose());
+        
     }
 
     IEnumerator CountDownTillClose()

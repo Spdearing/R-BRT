@@ -24,6 +24,7 @@ public class Battery : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerRaycast playerRayCast;
     [SerializeField] private PlayerAbilities abilities;
+    [SerializeField] private SceneActivity sceneActivity; 
 
 
 
@@ -38,6 +39,7 @@ public class Battery : MonoBehaviour
         fuelMeter = GameManager.instance.ReturnFuelMeter();
         invisibilityMeter = GameManager.instance.ReturnInvisibilityMeterGameObject();
         abilities = GameManager.instance.ReturnPlayerAbilities();
+        sceneActivity = GameManager.instance.ReturnSceneActivity();
         gameObject.tag = "Battery";
         fuelMeter.SetActive(false);
         invisibilityMeter.SetActive(false);
@@ -56,6 +58,7 @@ public class Battery : MonoBehaviour
 
     public void OnClickJetpackButton()
     {
+        GameManager.instance.SetPlayerAbilityChoice(0);
         playerController.ReturnPlayerActivity();
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
@@ -70,6 +73,7 @@ public class Battery : MonoBehaviour
 
     public void OnClickInvisibleButton()
     {
+        GameManager.instance.SetPlayerAbilityChoice(1);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");

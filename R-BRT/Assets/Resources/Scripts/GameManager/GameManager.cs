@@ -253,6 +253,11 @@ public class GameManager : MonoBehaviour
         return this.abilityChosen[index];
     }
 
+    public void SetPlayerAbilityChoice(int index)
+    {
+        abilityChosen[index] = abilityChosen[index];
+    }
+
 
     public void DestroyGameObject(GameObject value)
     {
