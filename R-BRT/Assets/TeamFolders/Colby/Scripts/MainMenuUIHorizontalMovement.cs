@@ -13,7 +13,6 @@ public class MainMenuUIHorizontalMovement : MonoBehaviour
     public float offsetAmount;
     public float mouseMaxWidth;
     float uiMoveSpeed = 2;
-    float uiRotationSpeed = 2;
     public float extraMouseRoom = 400;
 
     // Start is called before the first frame update

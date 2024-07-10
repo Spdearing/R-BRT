@@ -34,5 +34,15 @@ public class PlayerCollisions : MonoBehaviour
         {
             sceneActivity.StartThirdDialogue();
         }
+
+        if (other.gameObject.tag == "FourthDialogueEncounter")
+        {
+            sceneActivity.StartFourthDialogue();
+        }
+
+        if (other.gameObject.tag == "FifthDialogueEncounter")
+        {
+            sceneActivity.StartFifthDialogue();
+        }
     }
 }

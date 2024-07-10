@@ -19,6 +19,8 @@ public class SceneActivity : MonoBehaviour
     [SerializeField] private GameObject enemyNumberOne;
     [SerializeField] private GameObject dialogueTwoHitBox;
     [SerializeField] private GameObject dialogueThreeHitBox;
+    [SerializeField] private GameObject dialogueFourHitBox;
+    [SerializeField] private GameObject dialogueFiveHitBox;
 
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
@@ -93,10 +95,14 @@ public class SceneActivity : MonoBehaviour
         dialogueTriggerOne = GameManager.instance.ReturnDialogue();
         dialogueTwoHitBox = GameManager.instance.ReturnDialogueTwoHitBox();
         dialogueThreeHitBox = GameManager.instance.ReturnDialogueThreeHitBox();
+        dialogueFourHitBox = GameManager.instance.ReturnDialogueFourHitBox();
+        dialogueFiveHitBox = GameManager.instance.ReturnDialogueFiveHitBox();
 
         if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(true);
         if (dialogueTwoHitBox != null) dialogueTwoHitBox.SetActive(true);
         if (dialogueThreeHitBox != null) dialogueThreeHitBox.SetActive(true);
+        if (dialogueFourHitBox != null) dialogueFourHitBox.SetActive(true);
+        if (dialogueFiveHitBox != null) dialogueFiveHitBox.SetActive(true);
     }
 
     private void InitializePlayerAndDetectionMeter()
@@ -153,6 +159,30 @@ public class SceneActivity : MonoBehaviour
         if (dialogueThreeHitBox != null)
         {
             dialogueThreeHitBox.SetActive(false);
+        }
+    }
+
+    public void StartFourthDialogue()
+    {
+        if (dialogueTriggerOne != null)
+        {
+            dialogueTriggerOne.SetActive(true);
+        }
+        if (dialogueFourHitBox != null)
+        {
+            dialogueTwoHitBox.SetActive(false);
+        }
+    }
+
+    public void StartFifthDialogue()
+    {
+        if (dialogueTriggerOne != null)
+        {
+            dialogueTriggerOne.SetActive(true);
+        }
+        if (dialogueFiveHitBox != null)
+        {
+            dialogueTwoHitBox.SetActive(false);
         }
     }
 

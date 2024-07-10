@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class FirstDialogueFunctionality : MonoBehaviour
@@ -13,9 +12,16 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private string[] fullTexts2;
     [SerializeField] private string[] fullTexts3;
     [SerializeField] private string[] fullTexts4;
+    [SerializeField] private string[] fullTexts5;
+    [SerializeField] private string[] fullTexts6;
+    [SerializeField] private string[] fullTexts7;
+    [SerializeField] private string[] fullTexts8;
+    [SerializeField] private string[] fullTexts9;
+    [SerializeField] private string[] fullStealthAbilityText;
+    [SerializeField] private string[] fullJetPackAbilityText;
 
     [Header("Floats")]
-    [SerializeField] private float delay = 0.035f;
+    [SerializeField] private float delay;
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
@@ -35,35 +41,51 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     private string[][] dialogues;
 
-
-
     void Start()
     {
-        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex);
-        Debug.Log(dialogueIndex);
+        Initialize();
+        StartDialogue();
+    }
+
+    private void Initialize()
+    {
+        dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4, fullTexts5, fullTexts6, fullTexts7, fullTexts8, fullTexts9, fullStealthAbilityText, fullJetPackAbilityText };
         playerController = GameManager.instance.ReturnPlayerController();
         sceneActivity = GameManager.instance.ReturnSceneActivity();
+        delay = 0.035f;
+    }
 
-        dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4 };
+    private void StartDialogue()
+    {
+        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex);
+        string[] currentDialogue = GetCurrentDialogue(dialogueName, GetDialogues());
 
-        if (dialogueName == "First Dialogue")
+        if (currentDialogue != null)
         {
-            StartCoroutine(ShowDialogue(dialogues[0]));
+            StartCoroutine(ShowDialogue(currentDialogue));
         }
-        else if (dialogueName == "Second Dialogue")
-        {
-            StartCoroutine(ShowDialogue(dialogues[1]));
-        }
-        if (dialogueName == "Third Dialogue")
-        {
-            StartCoroutine(ShowDialogue(dialogues[2]));
-        }
-        else if (dialogueName == "Fourth Dialogue")
-        {
-            StartCoroutine(ShowDialogue(dialogues[3]));
-        }
+    }
 
+    private string[][] GetDialogues()
+    {
+        return dialogues;
+    }
 
+    private string[] GetCurrentDialogue(string dialogueName, string[][] dialogues)
+    {
+        switch (dialogueName)
+        {
+            case "First Dialogue":
+                return dialogues[0];
+            case "Second Dialogue":
+                return dialogues[1];
+            case "Third Dialogue":
+                return dialogues[2];
+            case "Fourth Dialogue":
+                return dialogues[3];
+            default:
+                return null;
+        }
     }
 
     private IEnumerator ShowDialogue(string[] texts)
@@ -73,12 +95,11 @@ public class FirstDialogueFunctionality : MonoBehaviour
             continueText.SetActive(false);
             uiText.text = "";
             string fullText = texts[j];
-
             skipText = false;
 
             for (int i = 0; i <= fullText.Length; i++)
             {
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetMouseButtonDown(0))
                 {
                     skipText = true;
                 }
@@ -94,10 +115,15 @@ public class FirstDialogueFunctionality : MonoBehaviour
                     yield return new WaitForSeconds(delay);
                 }
             }
-
             continueText.SetActive(true);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         }
+
+        EndDialogue();
+    }
+
+    private void EndDialogue()
+    {
         skipText = false;
         dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex++);
         playerController.SetPlayerActivity(true);
@@ -107,32 +133,26 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     private void OnEnable()
     {
-        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex);
+        StartDialogue();
 
-        dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4 };
+        if(dialogueIndex > 0) 
+        {
+            StartCoroutine(CountDownTillClose());
+        }
+    }
 
-        if (dialogueName == "First Dialogue")
-        {
-            StartCoroutine(ShowDialogue(dialogues[0]));
-        }
-        else if (dialogueName == "Second Dialogue")
-        {
-            StartCoroutine(ShowDialogue(dialogues[1]));
-        }
-        if (dialogueName == "Third Dialogue")
-        {
-            StartCoroutine(ShowDialogue(dialogues[2]));
-        }
-        else if (dialogueName == "Fourth Dialogue")
-        {
-            StartCoroutine(ShowDialogue(dialogues[3]));
-        }
+    IEnumerator CountDownTillClose()
+    {
+        yield return new WaitForSeconds(10.0f);
+        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex++);
+        playerController.SetPlayerActivity(true);
+        playerController.isCameraLocked = false;
+        sceneActivity.SetDialogueTriggerOne(false);
     }
 
     public void UpdateDialogue()
     {
         dialogueName = GameManager.instance.ReturnDialogueCheckPoint();
-
-
+        StartDialogue();
     }
 }

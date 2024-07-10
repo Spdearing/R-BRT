@@ -15,9 +15,7 @@ public class GroundBotAIMovement : MonoBehaviour
     [SerializeField] private Transform roamingPointA;
     [SerializeField] private Transform roamingPointB;
 
-    [Header("Detection")]
-    [SerializeField] private float detectionSpeed = 1.0f;
-    [SerializeField] private float crouchDetectionMultiplier = 0.5f;
+
 
     [Header("Bools")]
     [SerializeField] private bool isRoaming;

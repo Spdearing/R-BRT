@@ -60,6 +60,12 @@ TagManager:
   - LoreEntry3
   - LoreEntry4
   - Audio
+  - FourthDialogueEncounter
+  - FifthDialogueEncounter
+  - SixthDialogueEcounter
+  - SeventhDialogueEncounter
+  - EighthDialogueEncounter
+  - NinthDialogueEncounter
   layers:
   - Default
   - TransparentFX

@@ -24,13 +24,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogue;
     [SerializeField] private GameObject dialogueTwoHitBox;
     [SerializeField] private GameObject dialogueThreeHitBox;
+    [SerializeField] private GameObject dialogueFourHitBox;
+    [SerializeField] private GameObject dialogueFiveHitBox;
     [SerializeField] private GameObject invisibilityMeter;
 
     [Header("Dialogue String")]
     [SerializeField] private string dialogueCheckPoint;
 
     [Header("Strings Array For Dialogues")]
-    [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue" };
+    [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue" };
 
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
@@ -219,6 +221,8 @@ public class GameManager : MonoBehaviour
         firstDialogueFunctionality = dialogue.GetComponentInChildren<FirstDialogueFunctionality>();
         dialogueTwoHitBox = GameObject.Find("SecondDialogueEncounter");
         dialogueThreeHitBox = GameObject.Find("ThirdDialogueEncounter");
+        dialogueFourHitBox = GameObject.Find("FourthDialogueEncounter");
+        dialogueFiveHitBox = GameObject.Find("FifthDialogueEncounter");
         flashLight = GameObject.Find("FlashLight").GetComponent<Light>();
 
     }
@@ -280,6 +284,16 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnDialogueThreeHitBox()
     {
         return this.dialogueThreeHitBox;
+    }
+
+    public GameObject ReturnDialogueFourHitBox()
+    {
+        return this.dialogueFourHitBox;
+    }
+
+    public GameObject ReturnDialogueFiveHitBox()
+    {
+        return this.dialogueFiveHitBox;
     }
 
     public GameObject ReturnLoreEntryOneGameObject()
