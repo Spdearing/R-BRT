@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 234746205659554604}
   - component: {fileID: 3917409111072183497}
   - component: {fileID: 5005789476351870081}
-  - component: {fileID: 1954977105857529504}
   m_Layer: 6
   m_Name: ElevatorBlockade (1)
   m_TagString: Untagged
@@ -140,28 +139,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1736275460377397950, guid: 82c71a3ec043ae04fa81e64d8ca07676, type: 3}
---- !u!64 &1954977105857529504
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7453753922526118138}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1736275460377397950, guid: 82c71a3ec043ae04fa81e64d8ca07676, type: 3}
 --- !u!1 &8938522977667100817
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +151,6 @@ GameObject:
   - component: {fileID: 284857839700818789}
   - component: {fileID: 1174423085802942253}
   - component: {fileID: 6791205735780133907}
-  - component: {fileID: 6261863624869196348}
   m_Layer: 6
   m_Name: ElevatorBlockade
   m_TagString: Untagged
@@ -248,28 +224,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &6791205735780133907
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8938522977667100817}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1736275460377397950, guid: 82c71a3ec043ae04fa81e64d8ca07676, type: 3}
---- !u!64 &6261863624869196348
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
