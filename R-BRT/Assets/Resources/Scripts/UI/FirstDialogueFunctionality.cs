@@ -82,13 +82,13 @@ public class FirstDialogueFunctionality : MonoBehaviour
             case "Fourth Dialogue":
                 return dialogues[3];
             case "Fifth Dialogue":
-                return dialogues[0];
+                return dialogues[4];
             case "Sixth Dialogue":
-                return dialogues[1];
+                return dialogues[5];
             case "Seventh Dialogue":
-                return dialogues[2];
+                return dialogues[6];
             case "Eighth Dialogue":
-                return dialogues[3];
+                return dialogues[7];
             default:
                 return null;
         }

@@ -6,11 +6,13 @@ public class EnemyDeathCollider : MonoBehaviour
 {
 
     [SerializeField] GroundBotStateMachine groundBotStateMachine;
+    [SerializeField] PlayerController playerController;
 
 
     private void Start()
     {
         groundBotStateMachine = transform.parent.parent.GetComponent<GroundBotStateMachine>();
+        playerController = GameManager.instance.ReturnPlayerController();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -18,7 +20,7 @@ public class EnemyDeathCollider : MonoBehaviour
         if (other.gameObject.tag == "DeathBox")
         {
             groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.playerCaught);
-            Debug.Log("hitting player");
+            playerController.SetPlayerActivity(false);
         }
     }
 

@@ -22,6 +22,9 @@ public class SceneActivity : MonoBehaviour
     [SerializeField] private GameObject dialogueThreeHitBox;
     [SerializeField] private GameObject dialogueFourHitBox;
     [SerializeField] private GameObject dialogueFiveHitBox;
+    [SerializeField] private GameObject dialogueSixHitBox;
+    [SerializeField] private GameObject dialogueSevenHitBox;
+    [SerializeField] private GameObject dialogueEightHitBox;
 
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
@@ -99,6 +102,9 @@ public class SceneActivity : MonoBehaviour
         dialogueThreeHitBox = GameManager.instance.ReturnDialogueThreeHitBox();
         dialogueFourHitBox = GameManager.instance.ReturnDialogueFourHitBox();
         dialogueFiveHitBox = GameManager.instance.ReturnDialogueFiveHitBox();
+        dialogueSixHitBox = GameManager.instance.ReturnDialogueSixHitBox();
+        dialogueSevenHitBox = GameManager.instance.ReturnDialogueSevenHitBox();
+        dialogueEightHitBox = GameManager.instance.ReturnDialogueEightHitBox();
 
         if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(true);
         if (abilityDialogueTrigger != null) abilityDialogueTrigger.SetActive(false);
@@ -106,6 +112,9 @@ public class SceneActivity : MonoBehaviour
         if (dialogueThreeHitBox != null) dialogueThreeHitBox.SetActive(true);
         if (dialogueFourHitBox != null) dialogueFourHitBox.SetActive(true);
         if (dialogueFiveHitBox != null) dialogueFiveHitBox.SetActive(true);
+        if (dialogueSixHitBox != null) dialogueSixHitBox.SetActive(true);
+        if (dialogueSevenHitBox != null) dialogueSevenHitBox.SetActive(true);
+        if (dialogueEightHitBox != null) dialogueEightHitBox.SetActive(true);
     }
 
     private void InitializePlayerAndDetectionMeter()
@@ -173,7 +182,7 @@ public class SceneActivity : MonoBehaviour
         }
         if (dialogueFourHitBox != null)
         {
-            dialogueTwoHitBox.SetActive(false);
+            dialogueFourHitBox.SetActive(false);
         }
     }
 
@@ -185,7 +194,44 @@ public class SceneActivity : MonoBehaviour
         }
         if (dialogueFiveHitBox != null)
         {
-            dialogueTwoHitBox.SetActive(false);
+            dialogueFiveHitBox.SetActive(false);
+        }
+    }
+
+    public void StartSixthDialogue()
+    {
+        if (dialogueTriggerOne != null)
+        {
+            dialogueTriggerOne.SetActive(true);
+        }
+        if (dialogueSixHitBox != null)
+        {
+            dialogueSixHitBox.SetActive(false);
+        }
+    }
+
+    public void StartSeventhDialogue()
+    {
+        if (dialogueTriggerOne != null)
+        {
+            dialogueTriggerOne.SetActive(true);
+        }
+        if (dialogueSevenHitBox != null)
+        {
+            dialogueSevenHitBox.SetActive(false);
+        }
+    }
+
+
+    public void StartEighthDialogue()
+    {
+        if (dialogueTriggerOne != null)
+        {
+            dialogueTriggerOne.SetActive(true);
+        }
+        if (dialogueEightHitBox != null)
+        {
+            dialogueEightHitBox.SetActive(false);
         }
     }
 

@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueThreeHitBox;
     [SerializeField] private GameObject dialogueFourHitBox;
     [SerializeField] private GameObject dialogueFiveHitBox;
+    [SerializeField] private GameObject dialogueSixHitBox;
+    [SerializeField] private GameObject dialogueSevenHitBox;
+    [SerializeField] private GameObject dialogueEightHitBox;
     [SerializeField] private GameObject invisibilityMeter;
 
     [Header("Dialogue String")]
@@ -34,7 +37,7 @@ public class GameManager : MonoBehaviour
     [Header("Strings Array For Dialogues")]
     [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue", "Eighth Dialogue" };
     
-    [SerializeField] private string[] abilityChosen = new string[] { "Jetpack", "Stealth" };
+    [SerializeField] private string[] abilityChosen = new string[] { "Stealth", "Jetpack" };
 
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
@@ -106,6 +109,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Flash Light")]
     [SerializeField] private Light flashLight;
+
+    [Header("Index For Ability Dialogue")]
+    [SerializeField] private int index;
     
     private void Awake()
     {
@@ -226,11 +232,13 @@ public class GameManager : MonoBehaviour
         dialogueThreeHitBox = GameObject.Find("ThirdDialogueEncounter");
         dialogueFourHitBox = GameObject.Find("FourthDialogueEncounter");
         dialogueFiveHitBox = GameObject.Find("FifthDialogueEncounter");
+        dialogueSixHitBox = GameObject.Find("SixthDialogueEncounter");
+        dialogueSevenHitBox = GameObject.Find("SeventhDialogueEncounter");
+        dialogueEightHitBox = GameObject.Find("EighthDialogueEncounter");
+        //dialogueNineHitBox = GameObject.Find("NinthDialogueEncounter");
         flashLight = GameObject.Find("FlashLight").GetComponent<Light>();
 
     }
-
-
 
     public void CheckLoreButtonStatus()
     {
@@ -243,12 +251,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetIndexForAbilityChoice(int value)
+    {
+        index = value;
+    }
+
     public string ReturnPlayerDialogueCheckPoints(int index)
     {
         return this.playerDialogueCheckPoints[index];
     }
 
-    public string ReturnPlayerDialogueAbilityChoice(int index)
+    public string ReturnPlayerDialogueAbilityChoice()
     {
         return this.abilityChosen[index];
     }
@@ -313,6 +326,22 @@ public class GameManager : MonoBehaviour
     {
         return this.dialogueFiveHitBox;
     }
+    public GameObject ReturnDialogueSixHitBox()
+    {
+        return this.dialogueSixHitBox;
+    }
+    public GameObject ReturnDialogueSevenHitBox()
+    {
+        return this.dialogueSevenHitBox;
+    }
+    public GameObject ReturnDialogueEightHitBox()
+    {
+        return this.dialogueEightHitBox;
+    }
+    //public GameObject ReturnDialogueNineHitBox()
+    //{
+    //    return this.dialogueNineHitBox;
+    //}
 
     public GameObject ReturnLoreEntryOneGameObject()
     {

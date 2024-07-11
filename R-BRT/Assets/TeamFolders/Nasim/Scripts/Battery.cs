@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class Battery : MonoBehaviour
 {
 
@@ -58,8 +59,8 @@ public class Battery : MonoBehaviour
 
     public void OnClickJetpackButton()
     {
-        GameManager.instance.SetPlayerAbilityChoice(0);
-        playerController.ReturnPlayerActivity();
+        GameManager.instance.SetIndexForAbilityChoice(1);
+        
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");
@@ -68,12 +69,13 @@ public class Battery : MonoBehaviour
         abilitySelectionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        sceneActivity.StartJetPackDialogue();
         Destroy(battery);
     }
 
     public void OnClickInvisibleButton()
     {
-        GameManager.instance.SetPlayerAbilityChoice(1);
+        GameManager.instance.SetIndexForAbilityChoice(0);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");
@@ -83,6 +85,7 @@ public class Battery : MonoBehaviour
         invisibilityMeter.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        sceneActivity.StartStealthDialogue();
         Destroy(battery);
     }
 }

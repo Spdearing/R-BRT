@@ -130,16 +130,19 @@ public class PlayerDetectionState : MonoBehaviour
                 if (detectedByGroundBot)
                 {
                     groundBotStateMachine.ChangeBehavior(BehaviorState.playerCaught);
+                    playerController.SetPlayerActivity(false);
                 }
 
                 if (detectedByFlyingBot)
                 {
                     flyingBotStateMachine.ChangeBehavior(FlyingState.playerCaught);
+                    playerController.SetPlayerActivity(false);
                 }
 
                 if (detectedBySpiderBot)
                 {
                     spiderBotStateMachine.ChangeBehavior(SpiderState.playerCaught);
+                    playerController.SetPlayerActivity(false);
                 }
                 break;
 

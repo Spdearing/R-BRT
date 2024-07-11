@@ -12,6 +12,10 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
     [SerializeField] private string[] fullStealthAbilityText;
     [SerializeField] private string[] fullJetPackAbilityText;
+    [SerializeField] private string[] fullStealthAbilityText2;
+    [SerializeField] private string[] fullJetPackAbilityText2; 
+    [SerializeField] private string[] fullStealthAbilityText3;
+    [SerializeField] private string[] fullJetPackAbilityText3;
 
     [Header("Floats")]
     [SerializeField] private float delay;
@@ -29,15 +33,13 @@ public class AbilityDialogueFunctionality : MonoBehaviour
     [Header("Dialogue CheckPoint Name")]
     [SerializeField] private string dialogueName;
 
-    [Header("Index for Dialogue")]
-    [SerializeField] private int dialogueIndex = 0;
 
     private string[][] dialogues;
 
 
     private void Initialize()
     {
-        dialogues = new string[][] { fullStealthAbilityText , fullJetPackAbilityText };
+        dialogues = new string[][] { fullStealthAbilityText , fullJetPackAbilityText, fullStealthAbilityText2, fullJetPackAbilityText2, fullStealthAbilityText3, fullJetPackAbilityText3 };
         playerController = GameManager.instance.ReturnPlayerController();
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         delay = 0.035f;
@@ -45,7 +47,7 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
     private void StartDialogue()
     {
-        dialogueName = GameManager.instance.ReturnPlayerDialogueAbilityChoice(dialogueIndex);
+        dialogueName = GameManager.instance.ReturnPlayerDialogueAbilityChoice();
         string[] currentDialogue = GetCurrentDialogue(dialogueName, GetDialogues());
 
         if (currentDialogue != null)
@@ -111,7 +113,7 @@ public class AbilityDialogueFunctionality : MonoBehaviour
         skipText = false;
         playerController.SetPlayerActivity(true);
         playerController.isCameraLocked = false;
-        sceneActivity.SetDialogueTriggerOne(false);
+        sceneActivity.SetDialogueAbilityTrigger(false);
     }
 
     private void OnEnable()

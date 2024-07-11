@@ -35,7 +35,7 @@ public class PlayerCollisions : MonoBehaviour
             sceneActivity.StartThirdDialogue();
         }
 
-        if (other.gameObject.tag == "FourthDialogueEncounter")
+        else if (other.gameObject.tag == "FourthDialogueEncounter")
         {
             sceneActivity.StartFourthDialogue();
         }
@@ -44,5 +44,16 @@ public class PlayerCollisions : MonoBehaviour
         {
             sceneActivity.StartFifthDialogue();
         }
+        
+        else if (other.gameObject.tag == "SixthDialogueEncounter")
+        {
+            Debug.Log("Hitting the sixth encounter");
+            sceneActivity.StartSixthDialogue();
+        }
+        if (other.gameObject.tag == "SevenDialogueEncounter")
+        {
+            sceneActivity.StartSeventhDialogue();
+        }
+
     }
 }
