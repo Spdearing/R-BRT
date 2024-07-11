@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     [Header("Strings Array For Dialogues")]
     [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue", "Eighth Dialogue" };
     
-    [SerializeField] private string[] abilityChosen = new string[] { "Stealth", "Jetpack" };
+    [SerializeField] private string[] abilityChosen = new string[] { "Stealth", "Jetpack", "Stealth2", "Jetpack2", "Stealth3", "Jetpack3" };
 
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;

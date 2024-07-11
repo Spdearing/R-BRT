@@ -68,6 +68,8 @@ TagManager:
   - NinthDialogueEncounter
   - TouchingEnemy
   - DeathBox
+  - SixthDialogueEncounter
+  - TenDialogueEncounter
   layers:
   - Default
   - TransparentFX

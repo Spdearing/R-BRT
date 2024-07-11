@@ -69,6 +69,14 @@ public class AbilityDialogueFunctionality : MonoBehaviour
                 return dialogues[0];
             case "Stealth":
                 return dialogues[1];
+            case "Stealth2":
+                return dialogues[2];
+            case "JetPack2":
+                return dialogues[3];
+            case "Stealth3":
+                return dialogues[4];
+            case "JetPack3":
+                return dialogues[5];
             default:
                 return null;
         }

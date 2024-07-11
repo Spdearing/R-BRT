@@ -47,12 +47,28 @@ public class PlayerCollisions : MonoBehaviour
         
         else if (other.gameObject.tag == "SixthDialogueEncounter")
         {
-            Debug.Log("Hitting the sixth encounter");
+            
             sceneActivity.StartSixthDialogue();
         }
-        if (other.gameObject.tag == "SevenDialogueEncounter")
+        if (other.gameObject.tag == "SeventhDialogueEncounter")
         {
-            sceneActivity.StartSeventhDialogue();
+            GameManager.instance.SetIndexForAbilityChoice(2);
+            sceneActivity.StartStealthDialogue();
+        }
+        if (other.gameObject.tag == "EighthDialogueEncounter")
+        {
+            GameManager.instance.SetIndexForAbilityChoice(3);
+            sceneActivity.StartJetPackDialogue();
+        }
+        else if (other.gameObject.tag == "NinthDialogueEncounter")
+        {
+            GameManager.instance.SetIndexForAbilityChoice(5);
+            sceneActivity.StartJetPackDialogue();
+        }
+        if (other.gameObject.tag == "TenthDialogueEncounter")
+        {
+            GameManager.instance.SetIndexForAbilityChoice(4);
+            sceneActivity.StartStealthDialogue();
         }
 
     }

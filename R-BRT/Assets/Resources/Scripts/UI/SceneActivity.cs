@@ -241,7 +241,12 @@ public class SceneActivity : MonoBehaviour
         {
             abilityDialogueTrigger.SetActive(true);
         }
+        if (dialogueEightHitBox != null)
+        {
+            dialogueEightHitBox.SetActive(false);
+        }
     }
+
 
     public void StartJetPackDialogue()
     {
@@ -250,6 +255,7 @@ public class SceneActivity : MonoBehaviour
             abilityDialogueTrigger.SetActive(true);
         }
     }
+
 
     public FirstDialogueFunctionality ReturnFirstDialogueFunctionality()
     {
