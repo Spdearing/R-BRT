@@ -344,10 +344,6 @@ MonoBehaviour:
   playerDetectionState: {fileID: 0}
   gameOverScreen: {fileID: 0}
   enemySpiderBotFieldOfView: {fileID: 0}
-  spiderBotEyeColor: {fileID: 8146041121221052507}
-  fieldOfViewRenderer: {fileID: 2533211617910399917}
-  red: {fileID: 2100000, guid: 272ebf71be99ccf45b187a4b1b2af6e9, type: 2}
-  fieldOfViewRed: {fileID: 2100000, guid: 5284c31dd4c4b3947a5cf660ede19eea, type: 2}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   endRotation: {x: 0, y: 0, z: 0, w: 0}
   lerpTime: 0
@@ -1896,7 +1892,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bf174fb1913b053458a82bedf2b2d071, type: 2}
+  - {fileID: 2100000, guid: 8016cceac7ce771439c3e559d893bf84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
