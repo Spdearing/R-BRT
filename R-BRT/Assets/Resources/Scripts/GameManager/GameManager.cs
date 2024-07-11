@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource walkingSound;
     [SerializeField] private AudioSource sprintingSound;
     [SerializeField] private AudioSource jumpingSound;
+   
 
     [Header("Slider")]
     //changed fuelMeterSlider from a Slider to an Image
