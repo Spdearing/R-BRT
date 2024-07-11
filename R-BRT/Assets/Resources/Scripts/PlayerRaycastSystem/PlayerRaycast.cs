@@ -47,10 +47,7 @@ public class PlayerRaycast : MonoBehaviour
             {
                 HandleInteraction(objectHitTag, hitInfo);
             }
-            else
-            {
-                interactableText.text = " ";
-            }
+            
 
             pickUpTime += Time.deltaTime;
 
@@ -61,6 +58,10 @@ public class PlayerRaycast : MonoBehaviour
                 heldObject = null;
             }
         }
+        else
+        {
+            interactableText.text = string.Empty;
+        }
     }
 
     void HandleInteraction(string tag, RaycastHit hitInfo)
@@ -68,6 +69,7 @@ public class PlayerRaycast : MonoBehaviour
         if (tag == "PickUpItem")
         {
             Debug.Log(tag);
+
             interactableText.text = "Press (E) to pick up the rock";
 
             if (Input.GetKeyDown(KeyCode.E) && !holding)
@@ -79,7 +81,9 @@ public class PlayerRaycast : MonoBehaviour
                 pickUpTime = 0f;
             }
         }
-        else if (tag == "PhoenixChip")
+
+        
+        if (tag == "PhoenixChip")
         {
             interactableText.text = "Press (E) to pick up the Phoenix Chip";
 
@@ -89,6 +93,9 @@ public class PlayerRaycast : MonoBehaviour
                 phoenixChipDecision.PlayerDecision();
             }
         }
+
+        
+
         if (tag == "Battery")
         {
             interactableText.text = "Press (E) to pick up the Battery";
@@ -99,7 +106,8 @@ public class PlayerRaycast : MonoBehaviour
                 battery.OpenAbilitiesSelection();
             }
         }
-        else if (System.Array.Exists(loreEntryTags, element => element == tag))
+        
+        if (System.Array.Exists(loreEntryTags, element => element == tag))
         {
             interactableText.text = "Press (E) to pick up the Tablet";
             if (Input.GetKeyDown(KeyCode.E))
@@ -136,15 +144,11 @@ public class PlayerRaycast : MonoBehaviour
             }
         }
 
-        else
-        {
-            interactableText.text = "";
-        }
     }
 
     void Setup()
     {
-        interactDistance = 5;
+        interactDistance = 1.5f;
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;
         holding = false;
