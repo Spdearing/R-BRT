@@ -545,7 +545,6 @@ MonoBehaviour:
     m_Bits: 4
   enemyTags: []
   throwObject: {fileID: 5611155476215349757}
-  pickUpObject: {fileID: 0}
   groundBotHeadMovement: {fileID: 0}
   rockHit: {fileID: 6354754283837966905}
 --- !u!135 &533737053719841852
@@ -577,7 +576,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8444829814019913431}
   serializedVersion: 4
-  m_Mass: 2
+  m_Mass: 1.4
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

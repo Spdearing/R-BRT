@@ -54,21 +54,25 @@ public class PlayerCollisions : MonoBehaviour
         {
             GameManager.instance.SetIndexForAbilityChoice(3);
             sceneActivity.StartStealthDialogue();
+            sceneActivity.TurnOffSeventhDialogueBox();
         }
         if (other.gameObject.tag == "EighthDialogueEncounter")
         {
             GameManager.instance.SetIndexForAbilityChoice(2);
             sceneActivity.StartJetPackDialogue();
+            sceneActivity.TurnOffEighthDialogueBox();
         }
         else if (other.gameObject.tag == "NinthDialogueEncounter")
         {
             GameManager.instance.SetIndexForAbilityChoice(4);
             sceneActivity.StartJetPackDialogue();
+            sceneActivity.TurnOffNinthDialogueBox();
         }
         if (other.gameObject.tag == "TenDialogueEncounter")
         {
             GameManager.instance.SetIndexForAbilityChoice(5);
             sceneActivity.StartStealthDialogue();
+            sceneActivity.TurnOffTenthDialogueBox();
         }
         else if(other.gameObject.tag == "EleventhDialogueEncounter")
         {

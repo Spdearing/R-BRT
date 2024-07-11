@@ -67,6 +67,7 @@ public class PlayerRaycast : MonoBehaviour
     {
         if (tag == "PickUpItem")
         {
+            Debug.Log(tag);
             interactableText.text = "Press (E) to pick up the rock";
 
             if (Input.GetKeyDown(KeyCode.E) && !holding)
@@ -81,6 +82,7 @@ public class PlayerRaycast : MonoBehaviour
         else if (tag == "PhoenixChip")
         {
             interactableText.text = "Press (E) to pick up the Phoenix Chip";
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                 interactableText.text = "";
@@ -142,7 +144,7 @@ public class PlayerRaycast : MonoBehaviour
 
     void Setup()
     {
-        interactDistance = 2;
+        interactDistance = 5;
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;
         holding = false;
