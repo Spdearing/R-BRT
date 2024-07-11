@@ -13,6 +13,8 @@ public class Battery : MonoBehaviour
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
     [SerializeField] private GameObject invisibilityMeter;
+    [SerializeField] private GameObject stealthBaracade;
+    [SerializeField] private GameObject elevatorBaracade;
 
     [Header("Image")]
     [SerializeField] private Image invisibilityMeterImage;
@@ -45,6 +47,8 @@ public class Battery : MonoBehaviour
         fuelMeter.SetActive(false);
         invisibilityMeter.SetActive(false);
         abilitySelectionPanel.SetActive(false);
+        elevatorBaracade = GameManager.instance.ReturnElevatorBlockade();
+        stealthBaracade = GameManager.instance.ReturnStealthBlockade();
     }
 
     public void OpenAbilitiesSelection()
@@ -60,7 +64,7 @@ public class Battery : MonoBehaviour
     public void OnClickJetpackButton()
     {
         GameManager.instance.SetIndexForAbilityChoice(1);
-        
+        stealthBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");
@@ -76,6 +80,7 @@ public class Battery : MonoBehaviour
     public void OnClickInvisibleButton()
     {
         GameManager.instance.SetIndexForAbilityChoice(0);
+        elevatorBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         playerRayCast.SetInteractableText("");

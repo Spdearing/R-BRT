@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueNineHitBox;
     [SerializeField] private GameObject invisibilityMeter;
     [SerializeField] private GameObject stealthBlockade;
-    [SerializeField] private GameObject JetPackBlockade;
+    [SerializeField] private GameObject jetPackBlockade;
 
     [Header("Dialogue String")]
     [SerializeField] private string dialogueCheckPoint;
@@ -244,6 +244,10 @@ public class GameManager : MonoBehaviour
         dialogueNineHitBox = GameObject.Find("NinthDialogueEncounter");
         flashLight = GameObject.Find("FlashLight").GetComponent<Light>();
         stealthBlockade = GameObject.Find("StealthBlockade");
+        jetPackBlockade = GameObject.Find("ElevatorBlockade");
+        stealthBlockade.SetActive(false);
+        jetPackBlockade.SetActive(false);
+
 
     }
 
@@ -302,6 +306,11 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnStealthBlockade()
     {
         return this.stealthBlockade;
+    }
+
+    public GameObject ReturnElevatorBlockade()
+    {
+        return this.jetPackBlockade;
     }
 
     public GameObject ReturnInvisibilityMeterGameObject()
