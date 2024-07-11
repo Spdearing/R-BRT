@@ -874,9 +874,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8236002778888563297, guid: 4c5d6a008e6faa841a611df52049e8e6, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a6cb1319efd322243b7d3b009eac8f63, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f11a6934b55437d43adbd7e9ce3f3ce0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -884,8 +884,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 175
   DopplerLevel: 1
-  MinDistance: 4
-  MaxDistance: 17
+  MinDistance: 2
+  MaxDistance: 14
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -1159,8 +1159,6 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   flyingBotHead: {fileID: 6315697062558066951}
   fieldOfView: {fileID: 4879019478756126523}
-  flyingBotHeadColor: {fileID: 7893746361603777904}
-  fieldOfViewRenderer: {fileID: 5645821382852503768}
   playerCameraTransform: {fileID: 0}
   flyingBotOnePatrolPointA: {fileID: 0}
   flyingBotOnePatrolPointB: {fileID: 0}
@@ -1169,8 +1167,6 @@ MonoBehaviour:
   gameOverScreen: {fileID: 0}
   enemyFlyingBotFieldOfView: {fileID: 0}
   playerController: {fileID: 0}
-  red: {fileID: 2100000, guid: edabf50f645810d42a63fc757724fc7b, type: 2}
-  fieldOfViewRed: {fileID: 2100000, guid: 5284c31dd4c4b3947a5cf660ede19eea, type: 2}
   currentState: 0
 --- !u!4 &3191645636289297088 stripped
 Transform:
@@ -1185,10 +1181,5 @@ Transform:
 --- !u!1 &6315697062558066951 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -259972160606440404, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
-  m_PrefabInstance: {fileID: 3153005408446029099}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &7893746361603777904 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -4157524182732408741, guid: 19dcdeea18fddac41b44b649c730576a, type: 3}
   m_PrefabInstance: {fileID: 3153005408446029099}
   m_PrefabAsset: {fileID: 0}
