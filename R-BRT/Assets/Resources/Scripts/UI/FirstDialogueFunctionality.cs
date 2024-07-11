@@ -16,7 +16,6 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private string[] fullTexts6;
     [SerializeField] private string[] fullTexts7;
     [SerializeField] private string[] fullTexts8;
-    [SerializeField] private string[] fullTexts9;
 
     [Header("Floats")]
     [SerializeField] private float delay;
@@ -47,7 +46,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     private void Initialize()
     {
-        dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4, fullTexts5, fullTexts6, fullTexts7, fullTexts8, fullTexts9};
+        dialogues = new string[][] { fullTexts1, fullTexts2, fullTexts3, fullTexts4, fullTexts5, fullTexts6, fullTexts7, fullTexts8};
         playerController = GameManager.instance.ReturnPlayerController();
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         delay = 0.035f;

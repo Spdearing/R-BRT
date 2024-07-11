@@ -65,10 +65,18 @@ public class PlayerCollisions : MonoBehaviour
             GameManager.instance.SetIndexForAbilityChoice(4);
             sceneActivity.StartJetPackDialogue();
         }
-        if (other.gameObject.tag == "TenthDialogueEncounter")
+        if (other.gameObject.tag == "TenDialogueEncounter")
         {
             GameManager.instance.SetIndexForAbilityChoice(5);
             sceneActivity.StartStealthDialogue();
+        }
+        else if(other.gameObject.tag == "EleventhDialogueEncounter")
+        {
+            sceneActivity.StartEleventhDialogue();
+        }
+        if (other.gameObject.tag == "TwelthDialogueEncounter")
+        {
+            sceneActivity.StartTwelthDialogue();
         }
 
     }

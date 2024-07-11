@@ -64,6 +64,7 @@ public class Battery : MonoBehaviour
     public void OnClickJetpackButton()
     {
         GameManager.instance.SetIndexForAbilityChoice(1);
+        sceneActivity.TurnOffNotJetPackPathDialogue();
         stealthBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
@@ -80,6 +81,7 @@ public class Battery : MonoBehaviour
     public void OnClickInvisibleButton()
     {
         GameManager.instance.SetIndexForAbilityChoice(0);
+        sceneActivity.TurnOffNotStealthPathDialogue();
         elevatorBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);

@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueSevenHitBox;
     [SerializeField] private GameObject dialogueEightHitBox;
     [SerializeField] private GameObject dialogueNineHitBox;
+    [SerializeField] private GameObject dialogueTenHitBox;
+    [SerializeField] private GameObject dialogueElevenHitBox;
+    [SerializeField] private GameObject dialogueTwelveHitBox;
     [SerializeField] private GameObject invisibilityMeter;
     [SerializeField] private GameObject stealthBlockade;
     [SerializeField] private GameObject jetPackBlockade;
@@ -242,6 +245,9 @@ public class GameManager : MonoBehaviour
         dialogueSevenHitBox = GameObject.Find("SeventhDialogueEncounter");
         dialogueEightHitBox = GameObject.Find("EighthDialogueEncounter");
         dialogueNineHitBox = GameObject.Find("NinthDialogueEncounter");
+        dialogueTenHitBox = GameObject.Find("TenthDialogueEncounter");
+        dialogueElevenHitBox = GameObject.Find("EleventhDialogueEncounter");
+        dialogueTwelveHitBox = GameObject.Find("TwelthDialogueEncounter");
         flashLight = GameObject.Find("FlashLight").GetComponent<Light>();
         stealthBlockade = GameObject.Find("StealthBlockade");
         jetPackBlockade = GameObject.Find("ElevatorBlockade");
@@ -359,10 +365,24 @@ public class GameManager : MonoBehaviour
     {
         return this.dialogueEightHitBox;
     }
-    //public GameObject ReturnDialogueNineHitBox()
-    //{
-    //    return this.dialogueNineHitBox;
-    //}
+    public GameObject ReturnDialogueNineHitBox()
+    {
+        return this.dialogueNineHitBox;
+    }
+
+    public GameObject ReturnDialogueTenHitBox()
+    {
+        return this.dialogueTenHitBox;
+    }
+
+    public GameObject ReturnDialogueElevenHitBox()
+    {
+        return this.dialogueElevenHitBox;
+    }
+    public GameObject ReturnDialogueTwelthHitBox()
+    {
+        return this.dialogueTwelveHitBox;
+    }
 
     public GameObject ReturnLoreEntryOneGameObject()
     {

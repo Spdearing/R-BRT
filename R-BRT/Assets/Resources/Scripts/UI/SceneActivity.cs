@@ -25,6 +25,10 @@ public class SceneActivity : MonoBehaviour
     [SerializeField] private GameObject dialogueSixHitBox;
     [SerializeField] private GameObject dialogueSevenHitBox;
     [SerializeField] private GameObject dialogueEightHitBox;
+    [SerializeField] private GameObject dialogueNineHitBox;
+    [SerializeField] private GameObject dialogueTenHitBox;
+    [SerializeField] private GameObject dialogueElevenHitBox;
+    [SerializeField] private GameObject dialogueTwelveHitBox;
 
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
@@ -105,6 +109,10 @@ public class SceneActivity : MonoBehaviour
         dialogueSixHitBox = GameManager.instance.ReturnDialogueSixHitBox();
         dialogueSevenHitBox = GameManager.instance.ReturnDialogueSevenHitBox();
         dialogueEightHitBox = GameManager.instance.ReturnDialogueEightHitBox();
+        dialogueNineHitBox = GameManager.instance.ReturnDialogueNineHitBox();
+        dialogueTenHitBox = GameManager.instance.ReturnDialogueTenHitBox();
+        dialogueElevenHitBox = GameManager.instance.ReturnDialogueElevenHitBox();
+        dialogueTwelveHitBox = GameManager.instance.ReturnDialogueTwelthHitBox();
 
         if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(true);
         if (abilityDialogueTrigger != null) abilityDialogueTrigger.SetActive(false);
@@ -115,6 +123,10 @@ public class SceneActivity : MonoBehaviour
         if (dialogueSixHitBox != null) dialogueSixHitBox.SetActive(true);
         if (dialogueSevenHitBox != null) dialogueSevenHitBox.SetActive(true);
         if (dialogueEightHitBox != null) dialogueEightHitBox.SetActive(true);
+        if (dialogueNineHitBox != null) dialogueNineHitBox.SetActive(true);
+        if (dialogueTenHitBox != null) dialogueTenHitBox.SetActive(true);
+        if (dialogueElevenHitBox != null) dialogueElevenHitBox.SetActive(true);
+        if (dialogueTwelveHitBox != null) dialogueTwelveHitBox.SetActive(true);
     }
 
     private void InitializePlayerAndDetectionMeter()
@@ -210,28 +222,28 @@ public class SceneActivity : MonoBehaviour
         }
     }
 
-    public void StartSeventhDialogue()
+    public void StartTwelthDialogue()
     {
         if (dialogueTriggerOne != null)
         {
             dialogueTriggerOne.SetActive(true);
         }
-        if (dialogueSevenHitBox != null)
+        if (dialogueTwelveHitBox != null)
         {
-            dialogueSevenHitBox.SetActive(false);
+            dialogueTwelveHitBox.SetActive(false);
         }
     }
 
 
-    public void StartEighthDialogue()
+    public void StartEleventhDialogue()
     {
         if (dialogueTriggerOne != null)
         {
             dialogueTriggerOne.SetActive(true);
         }
-        if (dialogueEightHitBox != null)
+        if (dialogueElevenHitBox != null)
         {
-            dialogueEightHitBox.SetActive(false);
+            dialogueElevenHitBox.SetActive(false);
         }
     }
 
@@ -254,6 +266,18 @@ public class SceneActivity : MonoBehaviour
         {
             abilityDialogueTrigger.SetActive(true);
         }
+    }
+
+    public void TurnOffNotJetPackPathDialogue()
+    {
+        TurnOffSeventhDialogueBox();
+        TurnOffTenthDialogueBox();
+    }
+
+    public void TurnOffNotStealthPathDialogue()
+    {
+        TurnOffEighthDialogueBox();
+        TurnOffNinthDialogueBox();
     }
 
 
@@ -281,6 +305,26 @@ public class SceneActivity : MonoBehaviour
     public void TurnOffThirdDialogueHitBox()
     {
         if (dialogueThreeHitBox != null) dialogueThreeHitBox.SetActive(false);
+    }
+
+    public void TurnOffSeventhDialogueBox()
+    {
+        if (dialogueSevenHitBox != null) dialogueSevenHitBox.SetActive(false);
+    }
+
+    public void TurnOffEighthDialogueBox()
+    {
+        if (dialogueEightHitBox != null) dialogueEightHitBox.SetActive(false);
+    }
+
+    public void TurnOffNinthDialogueBox()
+    {
+        if (dialogueNineHitBox != null) dialogueNineHitBox.SetActive(false);
+    }
+
+    public void TurnOffTenthDialogueBox()
+    {
+        if (dialogueTenHitBox != null) dialogueTenHitBox.SetActive(false);
     }
 
     public void SetEnemyOne(GameObject gameObject)
