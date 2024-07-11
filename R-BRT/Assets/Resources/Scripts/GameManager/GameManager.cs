@@ -29,15 +29,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueSixHitBox;
     [SerializeField] private GameObject dialogueSevenHitBox;
     [SerializeField] private GameObject dialogueEightHitBox;
+    [SerializeField] private GameObject dialogueNineHitBox;
     [SerializeField] private GameObject invisibilityMeter;
+    [SerializeField] private GameObject stealthBlockade;
+    [SerializeField] private GameObject JetPackBlockade;
 
     [Header("Dialogue String")]
     [SerializeField] private string dialogueCheckPoint;
 
     [Header("Strings Array For Dialogues")]
-    [SerializeField] private string[] playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue", "Eighth Dialogue" };
+    [SerializeField] private string[] playerDialogueCheckPoints;
     
-    [SerializeField] private string[] abilityChosen = new string[] { "Stealth", "Jetpack", "Stealth2", "Jetpack2", "Stealth3", "Jetpack3" };
+    [SerializeField] private string[] abilityChosen;
 
     [Header("SkinnedMeshRenderer")]
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
@@ -169,6 +172,9 @@ public class GameManager : MonoBehaviour
 
     public void GrabAllTheTools()
     {
+        playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue", "Eighth Dialogue" };
+        abilityChosen = new string[] { "Stealth", "Jetpack", "Stealth2", "Jetpack2", "Stealth3", "Jetpack3" };
+
         loreButtons = new Button[4];
         loreButtons[0] = GameObject.Find("LoreEntry1").GetComponent<Button>();
         loreButtons[1] = GameObject.Find("LoreEntry2").GetComponent<Button>();
@@ -235,8 +241,9 @@ public class GameManager : MonoBehaviour
         dialogueSixHitBox = GameObject.Find("SixthDialogueEncounter");
         dialogueSevenHitBox = GameObject.Find("SeventhDialogueEncounter");
         dialogueEightHitBox = GameObject.Find("EighthDialogueEncounter");
-        //dialogueNineHitBox = GameObject.Find("NinthDialogueEncounter");
+        dialogueNineHitBox = GameObject.Find("NinthDialogueEncounter");
         flashLight = GameObject.Find("FlashLight").GetComponent<Light>();
+        stealthBlockade = GameObject.Find("StealthBlockade");
 
     }
 
@@ -290,6 +297,11 @@ public class GameManager : MonoBehaviour
     public void SetDialogueCheckPoint(string checkPointName)
     {
         dialogueCheckPoint = checkPointName;
+    }
+
+    public GameObject ReturnStealthBlockade()
+    {
+        return this.stealthBlockade;
     }
 
     public GameObject ReturnInvisibilityMeterGameObject()

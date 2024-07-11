@@ -48,6 +48,7 @@ public class AbilityDialogueFunctionality : MonoBehaviour
     private void StartDialogue()
     {
         dialogueName = GameManager.instance.ReturnPlayerDialogueAbilityChoice();
+        Debug.Log(GameManager.instance.ReturnPlayerDialogueAbilityChoice());
         string[] currentDialogue = GetCurrentDialogue(dialogueName, GetDialogues());
 
         if (currentDialogue != null)
@@ -65,17 +66,17 @@ public class AbilityDialogueFunctionality : MonoBehaviour
     {
         switch (dialogueName)
         {
-            case "Jetpack":
-                return dialogues[0];
             case "Stealth":
+                return dialogues[0];
+            case "Jetpack":
                 return dialogues[1];
-            case "Stealth2":
+            case "Jetpack2":
                 return dialogues[2];
-            case "JetPack2":
+            case "Stealth2":
                 return dialogues[3];
-            case "Stealth3":
+            case "Jetpack3":
                 return dialogues[4];
-            case "JetPack3":
+            case "Stealth3":
                 return dialogues[5];
             default:
                 return null;
