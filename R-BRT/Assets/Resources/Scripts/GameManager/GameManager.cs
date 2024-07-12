@@ -82,6 +82,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Animator")]
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private Animator interactBoxAnimator;
+    [SerializeField] private Animator interactEAnimator;
 
     #region//Images
     [Header("Image")]
@@ -226,7 +228,7 @@ public class GameManager : MonoBehaviour
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         invisibilityCloak = GameObject.Find("LeftArm_RightArm5").GetComponent<InvisibilityCloak>();
         detection = GameObject.FindWithTag("DetectionMeter").GetComponent<DetectionMeter>();
-        interactableUIText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
+        //interactableUIText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
         //interactableBatteryText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
         phoenixChipDecision = GameObject.Find("Canvas").GetComponent<PhoenixChipDecision>();
         batteryScript = GameObject.FindWithTag("Battery").GetComponent<Battery>();
@@ -260,6 +262,8 @@ public class GameManager : MonoBehaviour
         flashLight = GameObject.Find("FlashLight").GetComponent<Light>();
         stealthBlockade = GameObject.Find("StealthBlockade");
         jetPackBlockade = GameObject.Find("ElevatorBlockade");
+        interactBoxAnimator = GameObject.Find("Crosshair").GetComponent<Animator>();
+        interactEAnimator = GameObject.Find("InteractE").GetComponent<Animator>();
         stealthBlockade.SetActive(false);
         jetPackBlockade.SetActive(false);
 
@@ -523,10 +527,10 @@ public class GameManager : MonoBehaviour
     {
         return this.fuelMeterSlider;
     }
-    public TMP_Text ReturnInteractableText()
-    {
-        return this.interactableUIText;
-    }
+    //public TMP_Text ReturnInteractableText()
+    //{
+    //    return this.interactableUIText;
+    //}
 
     //public TMP_Text ReturnInteractableBatteryText()
     //{
@@ -581,6 +585,14 @@ public class GameManager : MonoBehaviour
     public FirstDialogueFunctionality ReturnFirstDialogueFunctionality()
     {
         return this.firstDialogueFunctionality;
+    }
+    public Animator ReturnInteractBoxAnim()
+    {
+        return this.interactBoxAnimator;
+    }
+    public Animator ReturnInteractEAnim()
+    {
+        return this.interactEAnimator;
     }
 
     #endregion

@@ -25,6 +25,10 @@ public class PlayerRaycast : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableText;
 
+    [Header("Animators")]
+    [SerializeField] private Animator interactBoxAnim;
+    [SerializeField] private Animator interactEAnim;
+
     private string[] loreEntryTags = { "LoreEntry", "LoreEntry2", "LoreEntry3", "LoreEntry4" };
 
     void Start()
@@ -60,7 +64,8 @@ public class PlayerRaycast : MonoBehaviour
         }
         else
         {
-            interactableText.text = string.Empty;
+            interactBoxAnim.SetBool("Interact", false);
+            interactEAnim.SetBool("Interact", false);
         }
     }
 
@@ -69,12 +74,13 @@ public class PlayerRaycast : MonoBehaviour
         if (tag == "PickUpItem")
         {
             Debug.Log(tag);
+            interactBoxAnim.SetBool("Interact", true);
+            interactEAnim.SetBool("Interact", true);
 
-            interactableText.text = "Press (E) to pick up the rock";
 
             if (Input.GetKeyDown(KeyCode.E) && !holding)
             {
-                interactableText.text = "";
+                
                 holding = true;
                 hitInfo.collider.gameObject.GetComponent<PickUpObject>().PickUp();
                 heldObject = hitInfo.collider.gameObject;
@@ -85,7 +91,8 @@ public class PlayerRaycast : MonoBehaviour
         
         if (tag == "PhoenixChip")
         {
-            interactableText.text = "Press (E) to pick up the Phoenix Chip";
+            interactBoxAnim.SetBool("Interact", true);
+            interactEAnim.SetBool("Interact", true);
 
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -98,7 +105,8 @@ public class PlayerRaycast : MonoBehaviour
 
         if (tag == "Battery")
         {
-            interactableText.text = "Press (E) to pick up the Battery";
+            interactBoxAnim.SetBool("Interact", true);
+            interactEAnim.SetBool("Interact", true);
 
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -109,11 +117,12 @@ public class PlayerRaycast : MonoBehaviour
         
         if (System.Array.Exists(loreEntryTags, element => element == tag))
         {
-            interactableText.text = "Press (E) to pick up the Tablet";
+            interactBoxAnim.SetBool("Interact", true);
+            interactEAnim.SetBool("Interact", true);
+
             if (Input.GetKeyDown(KeyCode.E))
             {
-                interactableText.text = "";
-
+                
                 switch (tag)
                 {
                     case "LoreEntry":
@@ -152,13 +161,14 @@ public class PlayerRaycast : MonoBehaviour
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;
         holding = false;
-        interactableText = GameManager.instance.ReturnInteractableText();
+        interactBoxAnim = GameManager.instance.ReturnInteractBoxAnim();
+        interactEAnim = GameManager.instance.ReturnInteractEAnim();
         phoenixChipDecision = GameManager.instance.ReturnPhoenixChipDecision();
         battery = GameManager.instance.ReturnBatteryScript();
     }
 
     public void SetInteractableText(string value)
     {
-        interactableText.text = value;
+        //interactableText.text = value;
     }
 }
