@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-
+    #region//Game Objects
     [Header("GameObjects")]
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerCamera;
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject invisibilityMeter;
     [SerializeField] private GameObject stealthBlockade;
     [SerializeField] private GameObject jetPackBlockade;
+    #endregion
 
     [Header("Dialogue String")]
     [SerializeField] private string dialogueCheckPoint;
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] private Transform friendLocation;
 
-
+    #region//Scripts
     [Header("Scripts")]
     [SerializeField] private PhoenixChipDecision phoenixChipDecision;
     [SerializeField] private Battery batteryScript;
@@ -76,30 +77,37 @@ public class GameManager : MonoBehaviour
     [SerializeField] private InvisibilityCloak invisibilityCloak;
     [SerializeField] private DetectionMeter detection;
     [SerializeField] private FirstDialogueFunctionality firstDialogueFunctionality;
+    #endregion
 
 
     [Header("Animator")]
     [SerializeField] private Animator playerAnimator;
 
+    #region//Images
     [Header("Image")]
     [SerializeField] private Image detectionMeter;
     [SerializeField] private Image invisibilityVisualMeter;
     [SerializeField] private Image invisibilityVisualEmpty;
     [SerializeField] private Image invisibilityVisualAmount;
     [SerializeField] private Image fuelMeterSlider;
+    #endregion
 
+    #region//Floats
     [Header("Floats")]
     [SerializeField] private float startingDetection;
     [SerializeField] private float detectionIncrement;
     [SerializeField] private float maxDetection;
+    #endregion
 
+
+    #region//Audio Sources
     [Header("Audio Source")]
     [SerializeField] private AudioSource activateInvisibility;
     [SerializeField] private AudioSource invisibilityDuration;
     [SerializeField] private AudioSource walkingSound;
     [SerializeField] private AudioSource sprintingSound;
     [SerializeField] private AudioSource jumpingSound;
-
+    #endregion
 
     [Header("Slider")]
     //changed fuelMeterSlider from a Slider to an Image
@@ -443,39 +451,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public void DestroyGameObject(GameObject value)
-    {
-        Destroy(value.gameObject);
-    }
-
-    public Light ReturnFlashLight()
-    {
-        return this.flashLight;
-    }
-
-
-
-
-    
-
-
-    private IEnumerator TransitionBackToStart()
-    {
-        yield return new WaitForSeconds(7.5f);
-
-        SceneManager.LoadScene("MainMenuScene");
-
-    }
-
-    public CapsuleCollider ReturnPlayerCollider()
-    {
-        return this.playerCollider;
-    }
-
-    public Image ReturnFuelMeterSlider()
-    {
-        return this.fuelMeterSlider;
-    }
     #region//ReturningAudio Sources
     public AudioSource ReturnSprintingSound()
     {
@@ -498,7 +473,56 @@ public class GameManager : MonoBehaviour
     {
         return this.invisibilityDuration;
     }
+    #endregion
 
+    #region//Returning Transforms
+    public Transform ReturnFriendsLocation()
+    {
+        return this.friendLocation;
+    }
+
+    public Transform ReturnPlayerTransform()
+    {
+        return this.playerTransform;
+    }
+
+    public Transform ReturnHoldPosition()
+    {
+        return this.holdPosition;
+    }
+
+    public Transform ReturnCameraTransform()
+    {
+        return this.playerCameraTransform;
+    }
+    #endregion
+
+    #region//Returning UI Elements
+
+    public Image ReturnDetectionAmountImage()
+    {
+        return this.detectionMeter;
+    }
+
+    public Image ReturnInvisibilityMeterAmount()
+    {
+        return this.invisibilityVisualAmount;
+    }
+
+    public Image ReturnInvisibilityMeterImage()
+    {
+        return this.invisibilityVisualMeter;
+    }
+
+    public Image ReturnInvisibilityMeterEmpty()
+    {
+        return this.invisibilityVisualEmpty;
+    }
+
+    public Image ReturnFuelMeterSlider()
+    {
+        return this.fuelMeterSlider;
+    }
     public TMP_Text ReturnInteractableText()
     {
         return this.interactableUIText;
@@ -550,6 +574,18 @@ public class GameManager : MonoBehaviour
         return this.enemyProximity;
     }
 
+    public GameOverScreen ReturnGameOver()
+    {
+        return this.gameOverScreen;
+    }
+    public FirstDialogueFunctionality ReturnFirstDialogueFunctionality()
+    {
+        return this.firstDialogueFunctionality;
+    }
+
+    #endregion
+
+    #region//Returning Spawners
     public SpiderBotSpawner ReturnSpiderBotSpawner()
     {
         return this.spiderBotSpawner;
@@ -564,6 +600,13 @@ public class GameManager : MonoBehaviour
     {
         return this.flyingBotSpawner;
     }
+    #endregion
+
+    #region//Returning Player Components
+    public CapsuleCollider ReturnPlayerCollider()
+    {
+        return this.playerCollider;
+    }
 
     public PlayerController ReturnPlayerController()
     {
@@ -573,47 +616,6 @@ public class GameManager : MonoBehaviour
     public PlayerDetectionState ReturnPlayerDetectionState()
     {
         return this.playerDetectionState;
-    }
-
-
-    public Transform ReturnFriendsLocation()
-    {
-        return this.friendLocation;
-    }
-
-    public Transform ReturnPlayerTransform()
-    {
-        return this.playerTransform;
-    }
-
-    public Image ReturnDetectionAmountImage()
-    {
-        return this.detectionMeter;
-    }
-
-    public Image ReturnInvisibilityMeterAmount()
-    {
-        return this.invisibilityVisualAmount;
-    }
-
-    public Image ReturnInvisibilityMeterImage()
-    {
-        return this.invisibilityVisualMeter;
-    }
-
-    public Image ReturnInvisibilityMeterEmpty()
-    {
-        return this.invisibilityVisualEmpty;
-    }
-
-    public Transform ReturnHoldPosition()
-    {
-        return this.holdPosition;
-    }
-
-    public Transform ReturnCameraTransform()
-    {
-        return this.playerCameraTransform;
     }
 
     public Animator ReturnAnimator()
@@ -629,16 +631,24 @@ public class GameManager : MonoBehaviour
     {
         return this.skinMeshRenderer2;
     }
-
-    public GameOverScreen ReturnGameOver()
-    {
-        return this.gameOverScreen;
-    }
-    public FirstDialogueFunctionality ReturnFirstDialogueFunctionality()
-    {
-        return this.firstDialogueFunctionality;
-    }
-
-
     #endregion
+
+    public void DestroyGameObject(GameObject value)
+    {
+        Destroy(value.gameObject);
+    }
+
+    public Light ReturnFlashLight()
+    {
+        return this.flashLight;
+    }
+
+    private IEnumerator TransitionBackToStart()
+    {
+        yield return new WaitForSeconds(7.5f);
+
+        SceneManager.LoadScene("MainMenuScene");
+
+    }
+    
 }
