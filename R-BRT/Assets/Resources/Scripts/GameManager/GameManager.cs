@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Strings Array For Dialogues")]
     [SerializeField] private string[] playerDialogueCheckPoints;
-    
+
     [SerializeField] private string[] abilityChosen;
 
     [Header("SkinnedMeshRenderer")]
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource walkingSound;
     [SerializeField] private AudioSource sprintingSound;
     [SerializeField] private AudioSource jumpingSound;
-   
+
 
     [Header("Slider")]
     //changed fuelMeterSlider from a Slider to an Image
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] private bool[] loreEntries;
-    
+
 
     [Header("Buttons")]
     [SerializeField] private Button[] loreButtons;
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Index For Ability Dialogue")]
     [SerializeField] private int index;
-    
+
     private void Awake()
     {
         //GM not destroyed
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "MainMenuScene":
-                
+
                 break;
 
             case "SamDies":
@@ -258,6 +258,8 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    #region//Setting Variables
     public void CheckLoreButtonStatus()
     {
         int index = 0;
@@ -273,6 +275,33 @@ public class GameManager : MonoBehaviour
     {
         index = value;
     }
+    public void SetPlayerAbilityChoice(int index)
+    {
+        abilityChosen[index] = abilityChosen[index];
+    }
+    public void SetDialogueCheckPoint(string checkPointName)
+    {
+        dialogueCheckPoint = checkPointName;
+    }
+    public void SetLoreEntryOne(bool value)
+    {
+        loreEntries[0] = value;
+    }
+    public void SetLoreEntryTwo(bool value)
+    {
+        loreEntries[1] = value;
+    }
+    public void SetLoreEntryThree(bool value)
+    {
+        loreEntries[2] = value;
+    }
+    public void SetLoreEntryFour(bool value)
+    {
+        loreEntries[3] = value;
+    }
+    #endregion
+    
+    #region//Returning Strings
 
     public string ReturnPlayerDialogueCheckPoints(int index)
     {
@@ -284,32 +313,13 @@ public class GameManager : MonoBehaviour
         return this.abilityChosen[index];
     }
 
-    public void SetPlayerAbilityChoice(int index)
-    {
-        abilityChosen[index] = abilityChosen[index];
-    }
-
-
-    public void DestroyGameObject(GameObject value)
-    {
-        Destroy(value.gameObject);
-    }
-
-    public Light ReturnFlashLight()
-    {
-        return this.flashLight;
-    }
-
     public string ReturnDialogueCheckPoint()
     {
         return this.dialogueCheckPoint;
     }
+    #endregion
 
-    public void SetDialogueCheckPoint(string checkPointName)
-    {
-        dialogueCheckPoint = checkPointName;
-    }
-
+    #region //Return GameObjects
     public GameObject ReturnStealthBlockade()
     {
         return this.stealthBlockade;
@@ -402,12 +412,59 @@ public class GameManager : MonoBehaviour
         return this.loreEntry4;
     }
 
+    public GameObject ReturnFuelMeter()
+    {
+        return this.fuelMeter;
+    }
+
+    public GameObject ReturnPhoenixChipMenu()
+    {
+        return this.phoenixChipMenu;
+    }
+
+    public GameObject ReturnBatteryObject()
+    {
+        return this.battery;
+    }
+
+    public GameObject ReturnPlayer()
+    {
+        return this.player;
+    }
+
+    public GameObject ReturnPlayerCamera()
+    {
+        return this.playerCamera;
+    }
+
+    public GameObject ReturnLoreEntry()
+    {
+        return this.loreEntry;
+    }
+    #endregion
+
+    public void DestroyGameObject(GameObject value)
+    {
+        Destroy(value.gameObject);
+    }
+
+    public Light ReturnFlashLight()
+    {
+        return this.flashLight;
+    }
+
+
+
+
+    
+
+
     private IEnumerator TransitionBackToStart()
     {
         yield return new WaitForSeconds(7.5f);
-  
+
         SceneManager.LoadScene("MainMenuScene");
-       
+
     }
 
     public CapsuleCollider ReturnPlayerCollider()
@@ -419,7 +476,7 @@ public class GameManager : MonoBehaviour
     {
         return this.fuelMeterSlider;
     }
-
+    #region//ReturningAudio Sources
     public AudioSource ReturnSprintingSound()
     {
         return this.sprintingSound;
@@ -452,12 +509,12 @@ public class GameManager : MonoBehaviour
         return this.interactableBatteryText;
     }
 
-    public PlayerRaycast ReturnPlayerRaycast() 
+    public PlayerRaycast ReturnPlayerRaycast()
     {
         return this.playerRaycast;
     }
 
-    public Battery ReturnBatteryScript() 
+    public Battery ReturnBatteryScript()
     {
         return this.batteryScript;
     }
@@ -467,10 +524,6 @@ public class GameManager : MonoBehaviour
         return this.phoenixChipDecision;
     }
 
-    public GameObject ReturnLoreEntry()
-    {
-        return this.loreEntry;
-    }
 
     public DetectionMeter ReturnDetectionMeter()
     {
@@ -522,30 +575,6 @@ public class GameManager : MonoBehaviour
         return this.playerDetectionState;
     }
 
-    public GameObject ReturnFuelMeter()
-    {
-        return this.fuelMeter;
-    }
-
-    public GameObject ReturnPhoenixChipMenu()
-    {
-        return this.phoenixChipMenu;
-    }
-
-    public GameObject ReturnBatteryObject()
-    {
-        return this.battery;
-    }
-
-    public GameObject ReturnPlayer()
-    {
-        return this.player;
-    }
-
-    public GameObject ReturnPlayerCamera() 
-    {
-        return this.playerCamera;
-    }
 
     public Transform ReturnFriendsLocation()
     {
@@ -590,8 +619,8 @@ public class GameManager : MonoBehaviour
     public Animator ReturnAnimator()
     {
         return this.playerAnimator;
-    }   
-    
+    }
+
     public SkinnedMeshRenderer ReturnRendererOne()
     {
         return this.skinMeshRenderer1;
@@ -610,22 +639,6 @@ public class GameManager : MonoBehaviour
         return this.firstDialogueFunctionality;
     }
 
-    public void SetLoreEntryOne(bool value)
-    {
-        loreEntries[0] = value; 
-    }
-    public void SetLoreEntryTwo(bool value)
-    {
-        loreEntries[1] = value;
-    }
-    public void SetLoreEntryThree(bool value)
-    {
-        loreEntries[2] = value;
-    }
-    public void SetLoreEntryFour(bool value)
-    {
-        loreEntries[3] = value;
-    }
 
-
+    #endregion
 }
