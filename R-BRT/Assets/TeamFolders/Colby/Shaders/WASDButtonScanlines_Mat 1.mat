@@ -54,6 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _ScanlineBrightness: 5
     - _Scanline_Amount: 50
     m_Colors: []
   m_BuildTextureStacks: []

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DialogueScanlines
+  m_Name: LoreEntriesScanlines
   m_Shader: {fileID: -6465566751694194690, guid: 03dfafbb0d1902a46b7182cba40b2c43, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ScanlineBrightness: 5
-    - _Scanline_Amount: 500
+    - _ScanlineBrightness: 0.5
+    - _Scanline_Amount: 100
     m_Colors: []
   m_BuildTextureStacks: []
