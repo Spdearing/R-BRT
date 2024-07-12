@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableUIText;
-    [SerializeField] private TMP_Text interactableBatteryText;
+    //[SerializeField] private TMP_Text interactableBatteryText;
 
     [Header("Transform")]
     [SerializeField] private Transform playerTransform;
@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
         invisibilityCloak = GameObject.Find("LeftArm_RightArm5").GetComponent<InvisibilityCloak>();
         detection = GameObject.FindWithTag("DetectionMeter").GetComponent<DetectionMeter>();
         interactableUIText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
-        interactableBatteryText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
+        //interactableBatteryText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
         phoenixChipDecision = GameObject.Find("Canvas").GetComponent<PhoenixChipDecision>();
         batteryScript = GameObject.FindWithTag("Battery").GetComponent<Battery>();
         battery = GameObject.FindWithTag("Battery");
@@ -528,10 +528,10 @@ public class GameManager : MonoBehaviour
         return this.interactableUIText;
     }
 
-    public TMP_Text ReturnInteractableBatteryText()
-    {
-        return this.interactableBatteryText;
-    }
+    //public TMP_Text ReturnInteractableBatteryText()
+    //{
+    //    return this.interactableBatteryText;
+    //}
 
     public PlayerRaycast ReturnPlayerRaycast()
     {
