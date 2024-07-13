@@ -18,8 +18,8 @@ public class MainMenuCamera : MonoBehaviour
     [SerializeField] private GameObject RBRTinfrontCamera;
     [SerializeField] private GameObject S4MoutlineCamera;
     [SerializeField] private GameObject S4MinfrontCamera;
-    [SerializeField] private Animator offsetRBRT;
-    [SerializeField] private Animator offsetS4M;
+    [SerializeField] private Animator offsetRBRTAnim;
+    [SerializeField] private Animator offsetS4MAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +28,8 @@ public class MainMenuCamera : MonoBehaviour
         RBRTinfrontCamera = GameObject.Find("RBRTInfrontCamera");
         S4MoutlineCamera = GameObject.Find("S4MOutlineCamera");
         S4MinfrontCamera = GameObject.Find("S4MInfrontCamera");
-        offsetRBRT = GameObject.Find("RBRTOutlineHolder").GetComponent<Animator>();
-        offsetS4M = GameObject.Find("S4MOutlineHolder").GetComponent<Animator>();
+        offsetRBRTAnim = GameObject.Find("RBRTOutlineHolder").GetComponent<Animator>();
+        offsetS4MAnim = GameObject.Find("S4MOutlineHolder").GetComponent<Animator>();
 
         RBRToutlineCamera.SetActive(false);
         RBRTinfrontCamera.SetActive(false);
@@ -68,14 +68,14 @@ public class MainMenuCamera : MonoBehaviour
             {
                 RBRToutlineCamera.SetActive(true);
                 RBRTinfrontCamera.SetActive(true);
-                Debug.Log("RBRT Hovered");
+                offsetRBRTAnim.SetBool("RBRTHovered", true);
             }
 
             if (hit.collider.tag == "MainMenuS4M")
             {
                 S4MoutlineCamera.SetActive(true);
                 S4MinfrontCamera.SetActive(true);
-                Debug.Log("S4M Hovered");
+                offsetS4MAnim.SetBool("S4MHovered", true);
             }
             
             if (hit.collider.tag != "MainMenuRBRT" && hit.collider.tag != "MainMenuS4M")
@@ -84,6 +84,8 @@ public class MainMenuCamera : MonoBehaviour
                 RBRTinfrontCamera.SetActive(false);
                 S4MoutlineCamera.SetActive(false);
                 S4MinfrontCamera.SetActive(false);
+                offsetRBRTAnim.SetBool("RBRTHovered", false);
+                offsetS4MAnim.SetBool("S4MHovered", false);
             }
         }
     }
