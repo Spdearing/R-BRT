@@ -19,38 +19,33 @@ public class PlayerCollisions : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Death")
-        {
-            transform.position = destinationA.transform.position;
-        }
-
-        else if (other.gameObject.tag == "SecondDialogueEncounter")
+       if (other.gameObject.tag == "SecondDialogueEncounter")
         {
             
             sceneActivity.StartSecondDialogue();
         }
 
-        if (other.gameObject.tag == "ThirdDialogueEncounter")
+        else if (other.gameObject.tag == "ThirdDialogueEncounter")
         {
             sceneActivity.StartThirdDialogue();
         }
 
-        else if (other.gameObject.tag == "FourthDialogueEncounter")
+        if (other.gameObject.tag == "FourthDialogueEncounter")
         {
             sceneActivity.StartFourthDialogue();
         }
 
-        if (other.gameObject.tag == "FifthDialogueEncounter")
+        else if (other.gameObject.tag == "FifthDialogueEncounter")
         {
             sceneActivity.StartFifthDialogue();
         }
         
-        else if (other.gameObject.tag == "SixthDialogueEncounter")
+        if (other.gameObject.tag == "SixthDialogueEncounter")
         {
             
             sceneActivity.StartSixthDialogue();
         }
-        if (other.gameObject.tag == "SeventhDialogueEncounter")
+        else if (other.gameObject.tag == "SeventhDialogueEncounter")
         {
             GameManager.instance.SetIndexForAbilityChoice(3);
             sceneActivity.StartStealthDialogue();
@@ -82,6 +77,9 @@ public class PlayerCollisions : MonoBehaviour
         {
             sceneActivity.StartTwelthDialogue();
         }
-
+        else if(other.gameObject.tag == "After Lobby")
+        {
+            
+        }
     }
 }

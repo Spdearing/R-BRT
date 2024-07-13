@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject invisibilityMeter;
     [SerializeField] private GameObject stealthBlockade;
     [SerializeField] private GameObject jetPackBlockade;
+    [SerializeField] private GameObject[] checkPoints;
     #endregion
 
     [Header("Dialogue String")]
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform holdPosition;
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] private Transform friendLocation;
+    [SerializeField] private Transform[] checkPointLocations;
 
     #region//Scripts
     [Header("Scripts")]
@@ -119,6 +121,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] private bool[] loreEntries;
+    [SerializeField] private bool[] checkPointsHit;
+    [SerializeField] private bool newGame;
+    [SerializeField] private bool playerCaught;
+    [SerializeField] private bool invisibilityPicked;
+    [SerializeField] private bool jetPackPicked;
 
 
     [Header("Buttons")]
@@ -130,11 +137,14 @@ public class GameManager : MonoBehaviour
     [Header("Index For Ability Dialogue")]
     [SerializeField] private int index;
 
+     
+
     private void Awake()
     {
         //GM not destroyed
         if (instance == null)
         {
+            newGame = true;
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -161,9 +171,18 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "GameScene":
-
-                dialogueCheckPoint = "First Dialogue";
-                GrabAllTheTools();
+                //if(newGame)
+                //{
+                    playerCaught = false;
+                    dialogueCheckPoint = "First Dialogue";
+                    GrabAllTheTools();
+                //}
+                //else if(!newGame)
+                //{
+                //    GrabAllTheTools();
+                //    playerTransform.position = new Vector3(-2.56f, 7.45f, 8.95f);
+                //}
+                
                 break;
 
             case "MainMenuScene":
@@ -184,9 +203,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(playerCaught)
+        {
+            RespawnPlayer();
+        }
+        
+    }
+
+    private void RespawnPlayer()
+    {
+        playerCaught = false;
+        StartCoroutine(RespawningPlayer(0.5f));
+    }
+
+    private IEnumerator RespawningPlayer(float delay)
+    {
+        
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene("GameScene");
+
+    }
+
+
     public void GrabAllTheTools()
     {
         playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue", "Eighth Dialogue" };
+
         abilityChosen = new string[] { "Stealth", "Jetpack", "Stealth2", "Jetpack2", "Stealth3", "Jetpack3" };
 
         loreButtons = new Button[4];
@@ -195,11 +240,36 @@ public class GameManager : MonoBehaviour
         loreButtons[2] = GameObject.Find("LoreEntry3").GetComponent<Button>();
         loreButtons[3] = GameObject.Find("LoreEntry4").GetComponent<Button>();
 
+        checkPoints = new GameObject[6];
+        checkPoints[0] = GameObject.Find("After Lobby");
+        checkPoints[1] = GameObject.Find("In Front Of Janitors Closet");
+        checkPoints[2] = GameObject.Find("Top Of Elevator Spawn");
+        checkPoints[3] = GameObject.Find("Top Of Spawn Spawn");
+        checkPoints[4] = GameObject.Find("Second Broken Room");
+        checkPoints[5] = GameObject.Find("Before Jetpack Puzzle");
+
+        checkPointLocations = new Transform[6];
+        checkPointLocations[0] = checkPoints[0].transform;
+        checkPointLocations[1] = checkPoints[1].transform;
+        checkPointLocations[2] = checkPoints[2].transform;
+        checkPointLocations[3] = checkPoints[3].transform;
+        checkPointLocations[4] = checkPoints[4].transform;
+        checkPointLocations[5] = checkPoints[5].transform;
+
         loreEntries = new bool[4];
         loreEntries[0] = false;
         loreEntries[1] = false;
         loreEntries[2] = false;
         loreEntries[3] = false;
+
+        checkPointsHit = new bool[6];
+        checkPointsHit[0] = false;
+        checkPointsHit[1] = false;
+        checkPointsHit[2] = false;
+        checkPointsHit[3] = false;
+        checkPointsHit[4] = false;
+        checkPointsHit[5] = false;
+
 
         player = GameObject.FindWithTag("Player");
         playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
@@ -228,8 +298,6 @@ public class GameManager : MonoBehaviour
         sceneActivity = GameObject.FindWithTag("Canvas").GetComponent<SceneActivity>();
         invisibilityCloak = GameObject.Find("LeftArm_RightArm5").GetComponent<InvisibilityCloak>();
         detection = GameObject.FindWithTag("DetectionMeter").GetComponent<DetectionMeter>();
-        //interactableUIText = GameObject.FindWithTag("InteractableUIText").GetComponent<TMP_Text>();
-        //interactableBatteryText = GameObject.FindWithTag("InteractableText").GetComponent<TMP_Text>();
         phoenixChipDecision = GameObject.Find("Canvas").GetComponent<PhoenixChipDecision>();
         batteryScript = GameObject.FindWithTag("Battery").GetComponent<Battery>();
         battery = GameObject.FindWithTag("Battery");
@@ -266,10 +334,18 @@ public class GameManager : MonoBehaviour
         interactEAnimator = GameObject.Find("InteractE").GetComponent<Animator>();
         stealthBlockade.SetActive(false);
         jetPackBlockade.SetActive(false);
-
-
     }
 
+    public void CheckSpawnLocation(int index)
+    {
+        foreach (bool checkPoint in checkPointsHit)
+        {
+            if (checkPoints[index] == true)
+            {
+                playerTransform = checkPointLocations[index];
+            }
+        }
+    }
 
     #region//Setting Variables
     public void CheckLoreButtonStatus()
@@ -283,6 +359,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetPlayerSpawnLocation(int index)
+    {
+        playerTransform = checkPointLocations[index];
+    }
+
+    public void SetCheckPointHit(int index)
+    {
+        checkPointsHit[index] = true;
+    }
     public void SetIndexForAbilityChoice(int value)
     {
         index = value;
@@ -311,8 +396,18 @@ public class GameManager : MonoBehaviour
     {
         loreEntries[3] = value;
     }
+
+    public void SetNewGameStatus(bool value)
+    {
+        newGame = value;
+    }
+
+    public void SetPlayerCaughtStatus(bool value)
+    {
+        playerCaught = value;
+    }
     #endregion
-    
+
     #region//Returning Strings
 
     public string ReturnPlayerDialogueCheckPoints(int index)
@@ -645,6 +740,19 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+
+    #region//Returning Bools
+    public bool ReturnNewGameStatus()
+    {
+        return this.newGame;
+    }
+
+    public bool ReturnPlayerCaughtStatus()
+    {
+        return this.playerCaught;
+    }
+    #endregion
+
     public void DestroyGameObject(GameObject value)
     {
         Destroy(value.gameObject);
@@ -655,12 +763,6 @@ public class GameManager : MonoBehaviour
         return this.flashLight;
     }
 
-    private IEnumerator TransitionBackToStart()
-    {
-        yield return new WaitForSeconds(7.5f);
 
-        SceneManager.LoadScene("MainMenuScene");
-
-    }
     
 }

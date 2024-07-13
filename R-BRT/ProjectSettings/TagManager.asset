@@ -72,6 +72,7 @@ TagManager:
   - TenDialogueEncounter
   - EleventhDialogueEncounter
   - TwelthDialogueEncounter
+  - After Lobby
   layers:
   - Default
   - TransparentFX
