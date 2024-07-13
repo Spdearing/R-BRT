@@ -62,7 +62,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform[] checkPointLocations;
     [SerializeField] private Transform originalSpawnPoint;
-    //[SerializeField] private Transform newSpawnLocation;
 
     [Header("Vector3")]
     [SerializeField] private Vector3 newSpawnPoint;
@@ -135,8 +134,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool[] checkPointsHit;
     [SerializeField] private bool newGame;
     [SerializeField] private bool playerCaught;
-    [SerializeField] private bool invisibilityPicked;
-    [SerializeField] private bool jetPackPicked;
+    [SerializeField] private bool invisibilityUnlocked;
+    [SerializeField] private bool jetpackUnlocked;
 
 
     [Header("Buttons")]
@@ -175,6 +174,11 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void Update()
+    {
+        DEVCHEATS();
+    }
+
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -185,6 +189,8 @@ public class GameManager : MonoBehaviour
             case "GameScene":
                 if (newGame)
                 {
+                    jetpackUnlocked = false;
+                    invisibilityUnlocked = false;
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
@@ -202,8 +208,7 @@ public class GameManager : MonoBehaviour
                     {
                         Debug.Log("Player did not have a new spawn Location");
                         player.transform.position = originalSpawnPoint.position;
-                    }
-                    
+                    } 
                 }
 
                 break;
@@ -334,6 +339,32 @@ public class GameManager : MonoBehaviour
         interactEAnimator = GameObject.Find("InteractE").GetComponent<Animator>();
         stealthBlockade.SetActive(false);
         jetPackBlockade.SetActive(false);
+        fuelMeter.SetActive(false);
+        invisibilityMeter.SetActive(false);
+    }
+
+    public void PlayerHasJetpack()
+    {
+        playerController.SetPlayerActivity(true);
+        playerController.SetCameraLock(false);
+        ability.SetJetPackUnlock(true);
+        fuelMeter.SetActive(true);
+        stealthBlockade.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void PlayerHasInvisibility()
+    {
+        
+        playerController.SetPlayerActivity(true);
+        playerController.SetCameraLock(false);
+        ability.SetInvisibilityUnlock(true);
+        invisibilityMeter.SetActive(true);
+        Debug.Log("Stealth Image set to active");
+        jetPackBlockade.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void CheckSpawnLocation(int index)
@@ -349,6 +380,15 @@ public class GameManager : MonoBehaviour
 
     #region//Setting Variables
 
+    public void SetInvisibilityStatus(bool value)
+    {
+        invisibilityUnlocked = value;
+    }
+
+    public void SetJetpackStatus(bool value)
+    {
+        jetpackUnlocked = value;
+    }
 
     public void SetPlayerSpawnLocation(int index)
     {
@@ -737,6 +777,15 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region//Returning Bools
+
+    public bool ReturnInvisibilityStatus()
+    {
+        return this.invisibilityUnlocked;
+    }
+    public bool ReturnJetpackStatus()
+    {
+        return this.jetpackUnlocked;
+    }
     public bool ReturnNewGameStatus()
     {
         return this.newGame;
@@ -781,6 +830,18 @@ public class GameManager : MonoBehaviour
     public Light ReturnFlashLight()
     {
         return this.flashLight;
+    }
+
+    void DEVCHEATS()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            invisibilityUnlocked = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            jetpackUnlocked = true;
+        }
     }
 
 

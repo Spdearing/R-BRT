@@ -166,9 +166,4 @@ public class PlayerRaycast : MonoBehaviour
         phoenixChipDecision = GameManager.instance.ReturnPhoenixChipDecision();
         battery = GameManager.instance.ReturnBatteryScript();
     }
-
-    public void SetInteractableText(string value)
-    {
-        //interactableText.text = value;
-    }
 }

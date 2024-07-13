@@ -33,6 +33,9 @@ public class SceneActivity : MonoBehaviour
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform mainCamera;
+    [SerializeField] private Transform mainCameraRotation;
+
+    
 
     [Header("Scripts")]
     [SerializeField] private DetectionMeter detectionMeter;
@@ -41,7 +44,14 @@ public class SceneActivity : MonoBehaviour
 
     void Start()
     {
-        InitializeGameData();
+        if (GameManager.instance.ReturnNewGameStatus() == true)
+        {
+            InitializeGameData();
+        }
+        else
+
+            LoadGame();
+       
     }
 
     private void InitializeGameData()
@@ -57,6 +67,23 @@ public class SceneActivity : MonoBehaviour
 
         InitializePlayerAndDetectionMeter();
         HandleGameSceneLoad();
+    }
+
+    public void LoadGame()
+    {
+        InitializePlayerAndDetectionMeter();
+        InitializeLoadedTextBoxes();
+        playerController.SetPlayerActivity(true);
+        if(GameManager.instance.ReturnInvisibilityStatus() == true)
+        {
+            GameManager.instance.PlayerHasInvisibility();
+            Debug.Log("player has Invisibility");
+        }
+        else if (GameManager.instance.ReturnJetpackStatus() == true)
+        {
+            GameManager.instance.PlayerHasJetpack();
+            Debug.Log("player has Jetpack");
+        }
     }
 
     public void HandleGameSceneLoad()
@@ -81,6 +108,7 @@ public class SceneActivity : MonoBehaviour
         
         mainCamera = GameManager.instance.ReturnCameraTransform();
         friendLocation = GameManager.instance.ReturnFriendsLocation();
+        mainCameraRotation = mainCamera;
         playerIsSpotted = false;
 
         if (firstPlaythrough)
@@ -89,6 +117,7 @@ public class SceneActivity : MonoBehaviour
             {
                 StartCoroutine(SmoothCameraRotation(mainCamera, friendLocation.position, 2));
                 if (playerController != null) playerController.SetCameraLock(true);
+                mainCamera.rotation = ;
             }
         }
     }
@@ -115,6 +144,37 @@ public class SceneActivity : MonoBehaviour
         dialogueTwelveHitBox = GameManager.instance.ReturnDialogueTwelthHitBox();
 
         if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(true);
+        if (abilityDialogueTrigger != null) abilityDialogueTrigger.SetActive(false);
+        if (dialogueTwoHitBox != null) dialogueTwoHitBox.SetActive(true);
+        if (dialogueThreeHitBox != null) dialogueThreeHitBox.SetActive(true);
+        if (dialogueFourHitBox != null) dialogueFourHitBox.SetActive(true);
+        if (dialogueFiveHitBox != null) dialogueFiveHitBox.SetActive(true);
+        if (dialogueSixHitBox != null) dialogueSixHitBox.SetActive(true);
+        if (dialogueSevenHitBox != null) dialogueSevenHitBox.SetActive(true);
+        if (dialogueEightHitBox != null) dialogueEightHitBox.SetActive(true);
+        if (dialogueNineHitBox != null) dialogueNineHitBox.SetActive(true);
+        if (dialogueTenHitBox != null) dialogueTenHitBox.SetActive(true);
+        if (dialogueElevenHitBox != null) dialogueElevenHitBox.SetActive(true);
+        if (dialogueTwelveHitBox != null) dialogueTwelveHitBox.SetActive(true);
+    }
+
+    private void InitializeLoadedTextBoxes()
+    {
+        dialogueTriggerOne = GameManager.instance.ReturnDialogue();
+        abilityDialogueTrigger = GameManager.instance.ReturnAbilityDialogue();
+        dialogueTwoHitBox = GameManager.instance.ReturnDialogueTwoHitBox();
+        dialogueThreeHitBox = GameManager.instance.ReturnDialogueThreeHitBox();
+        dialogueFourHitBox = GameManager.instance.ReturnDialogueFourHitBox();
+        dialogueFiveHitBox = GameManager.instance.ReturnDialogueFiveHitBox();
+        dialogueSixHitBox = GameManager.instance.ReturnDialogueSixHitBox();
+        dialogueSevenHitBox = GameManager.instance.ReturnDialogueSevenHitBox();
+        dialogueEightHitBox = GameManager.instance.ReturnDialogueEightHitBox();
+        dialogueNineHitBox = GameManager.instance.ReturnDialogueNineHitBox();
+        dialogueTenHitBox = GameManager.instance.ReturnDialogueTenHitBox();
+        dialogueElevenHitBox = GameManager.instance.ReturnDialogueElevenHitBox();
+        dialogueTwelveHitBox = GameManager.instance.ReturnDialogueTwelthHitBox();
+
+        if (dialogueTriggerOne != null) dialogueTriggerOne.SetActive(false);
         if (abilityDialogueTrigger != null) abilityDialogueTrigger.SetActive(false);
         if (dialogueTwoHitBox != null) dialogueTwoHitBox.SetActive(true);
         if (dialogueThreeHitBox != null) dialogueThreeHitBox.SetActive(true);
@@ -160,8 +220,10 @@ public class SceneActivity : MonoBehaviour
             yield return null;
         }
         cameraTransform.rotation = endRotation;
+         
     }
 
+    #region//Starting Dialogue
     public void StartSecondDialogue()
     {
         if (dialogueTriggerOne != null)
@@ -279,6 +341,7 @@ public class SceneActivity : MonoBehaviour
         TurnOffEighthDialogueBox();
         TurnOffNinthDialogueBox();
     }
+    #endregion
 
 
     public FirstDialogueFunctionality ReturnFirstDialogueFunctionality()

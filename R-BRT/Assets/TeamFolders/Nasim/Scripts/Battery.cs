@@ -44,8 +44,6 @@ public class Battery : MonoBehaviour
         abilities = GameManager.instance.ReturnPlayerAbilities();
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         gameObject.tag = "Battery";
-        fuelMeter.SetActive(false);
-        invisibilityMeter.SetActive(false);
         abilitySelectionPanel.SetActive(false);
         elevatorBaracade = GameManager.instance.ReturnElevatorBlockade();
         stealthBaracade = GameManager.instance.ReturnStealthBlockade();
@@ -55,7 +53,6 @@ public class Battery : MonoBehaviour
     {
         playerController.SetPlayerActivity(false);
         abilitySelectionPanel.SetActive(true);
-        playerRayCast.SetInteractableText("");
         playerController.isCameraLocked = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -68,7 +65,6 @@ public class Battery : MonoBehaviour
         stealthBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
-        playerRayCast.SetInteractableText("");
         abilities.SetJetPackUnlock(true);
         fuelMeter.SetActive(true);
         abilitySelectionPanel.SetActive(false);
@@ -85,7 +81,6 @@ public class Battery : MonoBehaviour
         elevatorBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
-        playerRayCast.SetInteractableText("");
         abilities.SetInvisibilityUnlock(true);
         abilities.DisplayInvisibilityMeter();
         abilitySelectionPanel.SetActive(false);

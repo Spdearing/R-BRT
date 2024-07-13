@@ -90,6 +90,7 @@ public class PlayerCollisions : MonoBehaviour
         else if (other.gameObject.tag == "Top Elevator")
         {
             GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+            GameManager.instance.SetJetpackStatus(true);
             GameManager.instance.ReturnPlayerCheckPoint(3).SetActive(false);
             GameManager.instance.ReturnPlayerCheckPoint(4).SetActive(false);
 
@@ -97,6 +98,7 @@ public class PlayerCollisions : MonoBehaviour
         if (other.gameObject.tag == "Top Stairs")
         {
             GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+            GameManager.instance.SetInvisibilityStatus(true);
             GameManager.instance.ReturnPlayerCheckPoint(2).SetActive(false);
             GameManager.instance.ReturnPlayerCheckPoint(5).SetActive(false);
 
