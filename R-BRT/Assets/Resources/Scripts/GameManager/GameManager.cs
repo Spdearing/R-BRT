@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -61,6 +62,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform[] checkPointLocations;
+    [SerializeField] private Transform originalSpawnPoint;
+
+
+    //list of spawn points that are added when a checkpoint is hit
+    [SerializeField] private List<Transform> playerSpawnLocations = new List<Transform> { };
 
     #region//Scripts
     [Header("Scripts")]
@@ -171,18 +177,28 @@ public class GameManager : MonoBehaviour
         switch (scene.name)
         {
             case "GameScene":
-                //if(newGame)
-                //{
+                if (newGame)
+                {
+                    originalSpawnPoint = playerTransform;
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                //}
-                //else if(!newGame)
-                //{
-                //    GrabAllTheTools();
-                //    playerTransform.position = new Vector3(-2.56f, 7.45f, 8.95f);
-                //}
-                
+                }
+                else if (!newGame)
+                {
+                    playerCaught = false;
+                    GrabAllTheTools();
+                    if (playerSpawnLocations[0] != null)
+                    {
+                        playerTransform = playerSpawnLocations[0];
+                    }
+                    else
+                    {
+                        playerTransform = originalSpawnPoint;
+                    }
+                    
+                }
+
                 break;
 
             case "MainMenuScene":
@@ -244,7 +260,7 @@ public class GameManager : MonoBehaviour
         checkPoints[0] = GameObject.Find("After Lobby");
         checkPoints[1] = GameObject.Find("In Front Of Janitors Closet");
         checkPoints[2] = GameObject.Find("Top Of Elevator Spawn");
-        checkPoints[3] = GameObject.Find("Top Of Spawn Spawn");
+        checkPoints[3] = GameObject.Find("Top Of Stairs Spawn");
         checkPoints[4] = GameObject.Find("Second Broken Room");
         checkPoints[5] = GameObject.Find("Before Jetpack Puzzle");
 
@@ -348,16 +364,7 @@ public class GameManager : MonoBehaviour
     }
 
     #region//Setting Variables
-    public void CheckLoreButtonStatus()
-    {
-        int index = 0;
-        foreach (bool activeLore in loreEntries)
-        {
-            Debug.Log($"Lore Entry {index}: {activeLore}");
-            loreButtons[index].interactable = activeLore;
-            index++;
-        }
-    }
+
 
     public void SetPlayerSpawnLocation(int index)
     {
@@ -752,6 +759,23 @@ public class GameManager : MonoBehaviour
         return this.playerCaught;
     }
     #endregion
+
+
+    public void CheckLoreButtonStatus()
+    {
+        int index = 0;
+        foreach (bool activeLore in loreEntries)
+        {
+            Debug.Log($"Lore Entry {index}: {activeLore}");
+            loreButtons[index].interactable = activeLore;
+            index++;
+        }
+    }
+
+    public void AddSpawnPoint(Transform transform)
+    {
+        playerSpawnLocations.Insert(0, transform);
+    }
 
     public void DestroyGameObject(GameObject value)
     {

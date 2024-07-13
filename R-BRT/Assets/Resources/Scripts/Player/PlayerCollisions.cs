@@ -79,7 +79,7 @@ public class PlayerCollisions : MonoBehaviour
         }
         else if(other.gameObject.tag == "After Lobby")
         {
-            
+            GameManager.instance.AddSpawnPoint(other.transform);
         }
     }
 }
