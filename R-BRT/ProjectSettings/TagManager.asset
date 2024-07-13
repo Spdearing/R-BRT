@@ -74,6 +74,8 @@ TagManager:
   - TwelthDialogueEncounter
   - After Lobby
   - Janitors Closet
+  - MainMenuRBRT
+  - MainMenuS4M
   layers:
   - Default
   - TransparentFX
@@ -84,11 +86,11 @@ TagManager:
   - whatIsGround
   - Ground
   - ParticlesRain
-  - Outline
-  - Infront
+  - RBRTOutline
+  - RBRTInfront
   - Lightblocker
-  - 
-  - 
+  - S4MOutline
+  - S4MInfront
   - 
   - 
   - 
