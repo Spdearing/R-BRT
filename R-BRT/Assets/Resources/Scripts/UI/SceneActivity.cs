@@ -117,7 +117,7 @@ public class SceneActivity : MonoBehaviour
             {
                 StartCoroutine(SmoothCameraRotation(mainCamera, friendLocation.position, 2));
                 if (playerController != null) playerController.SetCameraLock(true);
-                mainCamera.rotation = ;
+                
             }
         }
     }
