@@ -223,6 +223,7 @@ public class GameManager : MonoBehaviour
     {
         if(playerCaught)
         {
+            playerCaught = false;
             RespawnPlayer();
         }
         
@@ -230,7 +231,7 @@ public class GameManager : MonoBehaviour
 
     private void RespawnPlayer()
     {
-        playerCaught = false;
+        
         StartCoroutine(RespawningPlayer(0.5f));
     }
 

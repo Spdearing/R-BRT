@@ -38,6 +38,7 @@ public class FlyingBotStateMachine : MonoBehaviour
     public enum FlyingState
     {
         patrolling,
+        moving,
         scanning,
         playerCaught,
     }
@@ -110,6 +111,7 @@ public class FlyingBotStateMachine : MonoBehaviour
         {
             if (currentState == FlyingState.patrolling && patrolling == true)
             {
+                ChangeBehavior(FlyingState.moving);
                 patrolling = false;
                 yield return MoveToPoint(flyingBotOnePatrolPointA.position);
                 yield return new WaitForSeconds(2.5f);
@@ -118,6 +120,7 @@ public class FlyingBotStateMachine : MonoBehaviour
                 yield return new WaitForSeconds(2.5f);
                 yield return RotateBotGlobal(180);
                 patrolling = true;
+                ChangeBehavior(FlyingState.patrolling);
             }
             else
             {
@@ -166,13 +169,17 @@ public class FlyingBotStateMachine : MonoBehaviour
 
                 StartCoroutine(PatrolRoutine());
 
+                break;
+
+            case FlyingState.moving:
+
 
                 break;
 
             case FlyingState.scanning:
 
-                Debug.Log(gameObject.name.ToString() + "Changing to scanning state");
-                StopAllCoroutines();
+                //Debug.Log(gameObject.name.ToString() + "Changing to scanning state");
+                //StopAllCoroutines();
 
                 break;
             case FlyingState.playerCaught:
@@ -187,8 +194,23 @@ public class FlyingBotStateMachine : MonoBehaviour
     private void HandlePlayerCaught()
     {
         gameOverScreen.ReturnGameOverPanel().SetActive(true);
+        
+        if (GameManager.instance.ReturnNewGameStatus() == true)
+        {
+            GameManager.instance.SetNewGameStatus(false);
+        }
+
+        if (GameManager.instance.ReturnPlayerCaughtStatus() == false)
+        {
+
+            GameManager.instance.SetPlayerCaughtStatus(true);
+            Debug.Log(GameManager.instance.ReturnPlayerCaughtStatus());
+        }
+
         playerController.SetCameraLock(true);
         startRotation = playerCameraTransform.rotation;
+
+
 
         if (enemyFlyingBotFieldOfView != null)
         {
