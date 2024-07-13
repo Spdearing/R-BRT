@@ -14,18 +14,27 @@ public class MainMenuCamera : MonoBehaviour
     float maxCamPosZ = 185.32f;
     float cameraSpeed = 3f;
 
-    [SerializeField] private GameObject outlineCamera;
-    [SerializeField] private GameObject infrontCamera;
+    [SerializeField] private GameObject RBRToutlineCamera;
+    [SerializeField] private GameObject RBRTinfrontCamera;
+    [SerializeField] private GameObject S4MoutlineCamera;
+    [SerializeField] private GameObject S4MinfrontCamera;
     [SerializeField] private Animator offsetRBRT;
     [SerializeField] private Animator offsetS4M;
 
     // Start is called before the first frame update
     void Start()
     {
-        outlineCamera = GameObject.Find("OutlineCamera");
-        infrontCamera = GameObject.Find("InfrontCamera");
+        RBRToutlineCamera = GameObject.Find("RBRTOutlineCamera");
+        RBRTinfrontCamera = GameObject.Find("RBRTInfrontCamera");
+        S4MoutlineCamera = GameObject.Find("S4MOutlineCamera");
+        S4MinfrontCamera = GameObject.Find("S4MInfrontCamera");
         offsetRBRT = GameObject.Find("RBRTOutlineHolder").GetComponent<Animator>();
         offsetS4M = GameObject.Find("S4MOutlineHolder").GetComponent<Animator>();
+
+        RBRToutlineCamera.SetActive(false);
+        RBRTinfrontCamera.SetActive(false);
+        S4MoutlineCamera.SetActive(false);
+        S4MinfrontCamera.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,6 +42,7 @@ public class MainMenuCamera : MonoBehaviour
     {
         mousePos = Input.mousePosition;
         MoveCameraWithMouse();
+        OnMouseHover();
     }
 
     private void MoveCameraWithMouse()
@@ -51,7 +61,30 @@ public class MainMenuCamera : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.tag == "") ;
+            //Debug.DrawRay(transform.position, transform.forward, Color.red);
+            Debug.Log(hit.collider.gameObject.name);
+
+            if (hit.collider.tag == "MainMenuRBRT")
+            {
+                RBRToutlineCamera.SetActive(true);
+                RBRTinfrontCamera.SetActive(true);
+                Debug.Log("RBRT Hovered");
+            }
+
+            if (hit.collider.tag == "MainMenuS4M")
+            {
+                S4MoutlineCamera.SetActive(true);
+                S4MinfrontCamera.SetActive(true);
+                Debug.Log("S4M Hovered");
+            }
+            
+            if (hit.collider.tag != "MainMenuRBRT" && hit.collider.tag != "MainMenuS4M")
+            {
+                RBRToutlineCamera.SetActive(false);
+                RBRTinfrontCamera.SetActive(false);
+                S4MoutlineCamera.SetActive(false);
+                S4MinfrontCamera.SetActive(false);
+            }
         }
     }
 }
