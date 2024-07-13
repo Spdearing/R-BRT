@@ -191,10 +191,10 @@ public class GameManager : MonoBehaviour
 
             case "SamDies":
             case "VictorySamLives":
-                Time.timeScale = 1;
-                {
-                    StartCoroutine(TransitionBackToStart());
-                }
+                //Time.timeScale = 1;
+                //{
+                //    StartCoroutine(TransitionBackToStart());
+                //}
                 break;
 
             default:
@@ -340,7 +340,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (bool checkPoint in checkPointsHit)
         {
-            if (checkPoints[index] == true)
+            if (checkPointsHit[index] == true)
             {
                 playerTransform = checkPointLocations[index];
             }
