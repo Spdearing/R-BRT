@@ -194,6 +194,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("Player did not have a new spawn Location");
                         playerTransform = originalSpawnPoint;
                     }
                     
@@ -219,30 +220,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(playerCaught)
-        {
-            playerCaught = false;
-            RespawnPlayer();
-        }
-        
-    }
 
-    private void RespawnPlayer()
+    public void RespawnPlayer()
     {
-        
-        StartCoroutine(RespawningPlayer(0.5f));
-    }
-
-    private IEnumerator RespawningPlayer(float delay)
-    {
-        
-        yield return new WaitForSeconds(delay);
-
         SceneManager.LoadScene("GameScene");
-
     }
+
+    //private IEnumerator RespawningPlayer(float delay)
+    //{
+        
+    //    yield return new WaitForSeconds(delay);
+
+    //    SceneManager.LoadScene("GameScene");
+
+    //}
 
 
     public void GrabAllTheTools()

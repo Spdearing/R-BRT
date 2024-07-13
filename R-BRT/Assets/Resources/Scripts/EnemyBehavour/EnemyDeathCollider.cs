@@ -12,15 +12,16 @@ public class EnemyDeathCollider : MonoBehaviour
 
     private void Start()
     {
-        groundBotStateMachine = transform.parent.parent.GetComponent<GroundBotStateMachine>();
+        
         playerController = GameManager.instance.ReturnPlayerController();
         playerAbilities = GameManager.instance.ReturnPlayerAbilities();
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "DeathBox" && playerAbilities.ReturnUsingInvisibility() == false)
+        if (other.gameObject.tag == "GroundBot" && playerAbilities.ReturnUsingInvisibility() == false)
         {
+            groundBotStateMachine = other.gameObject.GetComponent<GroundBotStateMachine>();
             groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.playerCaught);
             playerController.SetPlayerActivity(false);
         }
