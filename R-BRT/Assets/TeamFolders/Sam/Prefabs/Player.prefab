@@ -267,8 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57102d76ffa4c984a8246b443e206be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 200
-  sensY: 200
+  sensX: 100
+  sensY: 100
   xRotation: 0
   yRotation: 0
   orientation: {fileID: 159131420631619943}
@@ -339,6 +339,8 @@ MonoBehaviour:
   phoenixChipDecision: {fileID: 0}
   battery: {fileID: 0}
   interactableText: {fileID: 0}
+  interactBoxAnim: {fileID: 0}
+  interactEAnim: {fileID: 0}
 --- !u!114 &7736776365293704415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -881,7 +883,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5744364298332939551}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c37958d7ca44e5f4aa303fe09e37da38, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -893,10 +895,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.17462835
-  m_Height: 0.9472184
+  m_Radius: 0.3591638
+  m_Height: 0.8773918
   m_Direction: 1
-  m_Center: {x: -0.18193457, y: 0.026390791, z: -0.11128845}
+  m_Center: {x: -0.18193504, y: -0.0085225105, z: 0.07324699}
 --- !u!1 &8385717578478089440
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,8 +943,8 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7176471}
-  m_Intensity: 5.31
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6156863}
+  m_Intensity: 2
   m_Range: 25
   m_SpotAngle: 59.52171
   m_InnerSpotAngle: 50
@@ -973,7 +975,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: a9ca84b9a11a354448bf9a9103de7d3c, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -1214,10 +1216,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.27184397
   m_Height: 0.96
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.00000012394048, y: 0, z: 0.2303232}
 --- !u!1001 &7930035405969680485
 PrefabInstance:
   m_ObjectHideFlags: 0
