@@ -96,7 +96,7 @@ public class PlayerRaycast : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                interactableText.text = "";
+               
                 phoenixChipDecision.PlayerDecision();
             }
         }
@@ -110,7 +110,7 @@ public class PlayerRaycast : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                interactableText.text = "";
+                
                 battery.OpenAbilitiesSelection();
             }
         }

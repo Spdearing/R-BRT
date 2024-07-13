@@ -73,6 +73,7 @@ TagManager:
   - EleventhDialogueEncounter
   - TwelthDialogueEncounter
   - After Lobby
+  - Janitors Closet
   layers:
   - Default
   - TransparentFX

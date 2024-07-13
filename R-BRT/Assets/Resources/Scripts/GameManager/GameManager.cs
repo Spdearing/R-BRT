@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableUIText;
-    //[SerializeField] private TMP_Text interactableBatteryText;
 
     [Header("Transform")]
     [SerializeField] private Transform playerTransform;
@@ -63,6 +62,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform[] checkPointLocations;
     [SerializeField] private Transform originalSpawnPoint;
+    //[SerializeField] private Transform newSpawnLocation;
+
+    [Header("Vector3")]
+    [SerializeField] private Vector3 newSpawnPoint;
+
+    
 
 
     //list of spawn points that are added when a checkpoint is hit
@@ -142,6 +147,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Index For Ability Dialogue")]
     [SerializeField] private int index;
+    [SerializeField] private int currentCheckPointIndex = 0;
 
      
 
@@ -188,14 +194,14 @@ public class GameManager : MonoBehaviour
                 {
                     playerCaught = false;
                     GrabAllTheTools();
-                    if (playerSpawnLocations[0] != null)
+                    if(newSpawnPoint != null)
                     {
-                        playerTransform = playerSpawnLocations[0];
+                        player.transform.position = newSpawnPoint;
                     }
                     else
                     {
                         Debug.Log("Player did not have a new spawn Location");
-                        playerTransform = originalSpawnPoint;
+                        player.transform.position = originalSpawnPoint.position;
                     }
                     
                 }
@@ -208,10 +214,6 @@ public class GameManager : MonoBehaviour
 
             case "SamDies":
             case "VictorySamLives":
-                //Time.timeScale = 1;
-                //{
-                //    StartCoroutine(TransitionBackToStart());
-                //}
                 break;
 
             default:
@@ -225,16 +227,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
-
-    //private IEnumerator RespawningPlayer(float delay)
-    //{
-        
-    //    yield return new WaitForSeconds(delay);
-
-    //    SceneManager.LoadScene("GameScene");
-
-    //}
-
 
     public void GrabAllTheTools()
     {
@@ -429,6 +421,11 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnStealthBlockade()
     {
         return this.stealthBlockade;
+    }
+
+    public GameObject ReturnPlayerCheckPoint(int index)
+    {
+        return this.checkPoints[index];
     }
 
     public GameObject ReturnElevatorBlockade()
@@ -739,7 +736,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-
     #region//Returning Bools
     public bool ReturnNewGameStatus()
     {
@@ -766,7 +762,15 @@ public class GameManager : MonoBehaviour
 
     public void AddSpawnPoint(Transform transform)
     {
-        playerSpawnLocations.Insert(0, transform);
+        if(currentCheckPointIndex < checkPoints.Length)
+        {
+            playerSpawnLocations.Insert(0, transform);
+            newSpawnPoint = playerSpawnLocations[0].position;
+            checkPoints[currentCheckPointIndex].SetActive(false);
+            currentCheckPointIndex++;
+            
+        }
+       
     }
 
     public void DestroyGameObject(GameObject value)

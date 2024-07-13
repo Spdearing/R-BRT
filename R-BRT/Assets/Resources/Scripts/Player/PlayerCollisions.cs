@@ -80,6 +80,36 @@ public class PlayerCollisions : MonoBehaviour
         else if(other.gameObject.tag == "After Lobby")
         {
             GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+            
+        }
+        if (other.gameObject.tag == "Janitors Closet")
+        {
+            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+            
+        }
+        else if (other.gameObject.tag == "Top Elevator")
+        {
+            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+            GameManager.instance.ReturnPlayerCheckPoint(3).SetActive(false);
+            GameManager.instance.ReturnPlayerCheckPoint(4).SetActive(false);
+
+        }
+        if (other.gameObject.tag == "Top Stairs")
+        {
+            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+            GameManager.instance.ReturnPlayerCheckPoint(2).SetActive(false);
+            GameManager.instance.ReturnPlayerCheckPoint(5).SetActive(false);
+
+        }
+        else if (other.gameObject.tag == "Second Broken Room")
+        {
+            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+           
+        }
+        if (other.gameObject.tag == "Before Jetpack Puzzle")
+        {
+            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+            
         }
     }
 }

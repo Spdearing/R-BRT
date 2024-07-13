@@ -194,18 +194,19 @@ public class FlyingBotStateMachine : MonoBehaviour
     private void HandlePlayerCaught()
     {
         gameOverScreen.ReturnGameOverPanel().SetActive(true);
-        
+
+
         if (GameManager.instance.ReturnNewGameStatus() == true)
         {
             GameManager.instance.SetNewGameStatus(false);
         }
 
-        if (GameManager.instance.ReturnPlayerCaughtStatus() == false)
-        {
+        //if (GameManager.instance.ReturnPlayerCaughtStatus() == false)
+        //{
 
-            GameManager.instance.SetPlayerCaughtStatus(true);
-            Debug.Log(GameManager.instance.ReturnPlayerCaughtStatus());
-        }
+        //    GameManager.instance.SetPlayerCaughtStatus(true);
+        //    Debug.Log(GameManager.instance.ReturnPlayerCaughtStatus());
+        //}
 
         playerController.SetCameraLock(true);
         startRotation = playerCameraTransform.rotation;
