@@ -179,10 +179,10 @@ public class GameManager : MonoBehaviour
             case "GameScene":
                 if (newGame)
                 {
-                    originalSpawnPoint = playerTransform;
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
+                    originalSpawnPoint = playerTransform;
                 }
                 else if (!newGame)
                 {
