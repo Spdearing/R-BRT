@@ -76,6 +76,11 @@ TagManager:
   - Janitors Closet
   - MainMenuRBRT
   - MainMenuS4M
+  - Undefined
+  - Top Elevator
+  - Top Stairs
+  - Second Broken Room
+  - Before Jetpack Puzzle
   layers:
   - Default
   - TransparentFX

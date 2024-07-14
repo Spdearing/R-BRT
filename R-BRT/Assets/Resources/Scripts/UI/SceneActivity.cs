@@ -33,9 +33,10 @@ public class SceneActivity : MonoBehaviour
     [Header("Transforms")]
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform mainCamera;
-    [SerializeField] private Transform mainCameraRotation;
-
+    [SerializeField] private Transform playerEndRotation;
     
+
+
 
     [Header("Scripts")]
     [SerializeField] private DetectionMeter detectionMeter;
@@ -67,6 +68,8 @@ public class SceneActivity : MonoBehaviour
 
         InitializePlayerAndDetectionMeter();
         HandleGameSceneLoad();
+        player.transform.rotation = Quaternion.Euler(player.transform.rotation.eulerAngles.x, -309.85f, player.transform.rotation.eulerAngles.z);
+
     }
 
     public void LoadGame()
@@ -74,6 +77,7 @@ public class SceneActivity : MonoBehaviour
         InitializePlayerAndDetectionMeter();
         InitializeLoadedTextBoxes();
         playerController.SetPlayerActivity(true);
+        playerIsSpotted = false;
         if(GameManager.instance.ReturnInvisibilityStatus() == true)
         {
             GameManager.instance.PlayerHasInvisibility();
@@ -100,24 +104,20 @@ public class SceneActivity : MonoBehaviour
 
     private void InitializeGameScene()
     {
-        
         InitializeTextBoxes();
         InitalizeScripts();
         InitializePlayerAndDetectionMeter();
-        
-        
+
         mainCamera = GameManager.instance.ReturnCameraTransform();
         friendLocation = GameManager.instance.ReturnFriendsLocation();
-        mainCameraRotation = mainCamera;
         playerIsSpotted = false;
 
         if (firstPlaythrough)
         {
             if (mainCamera != null && friendLocation != null)
             {
-                StartCoroutine(SmoothCameraRotation(mainCamera, friendLocation.position, 2));
+                StartCoroutine(SmoothCameraRotation(mainCamera, player.transform, friendLocation.position, 2));
                 if (playerController != null) playerController.SetCameraLock(true);
-                
             }
         }
     }
@@ -200,27 +200,35 @@ public class SceneActivity : MonoBehaviour
         detectionMeter = GameObject.Find("EnemyDetectionManager")?.GetComponent<DetectionMeter>();
     }
 
-    private IEnumerator SmoothCameraRotation(Transform cameraTransform, Vector3 targetPosition, float duration, bool inverse = false)
+    private IEnumerator SmoothCameraRotation(Transform cameraTransform, Transform playerTransform, Vector3 targetPosition, float duration, bool inverse = false)
     {
-        if (cameraTransform == null) yield break;
+        if (cameraTransform == null || playerTransform == null) yield break;
 
-        Quaternion startRotation = cameraTransform.rotation;
+        Quaternion startCameraRotation = cameraTransform.rotation;
+        Quaternion startPlayerRotation = playerTransform.rotation;
+
         Vector3 direction = targetPosition - cameraTransform.position;
         if (inverse)
         {
             direction = -direction;
         }
+
         Quaternion endRotation = Quaternion.LookRotation(direction);
+        Quaternion endCameraRotation = Quaternion.Euler(cameraTransform.eulerAngles.x, endRotation.eulerAngles.y, cameraTransform.eulerAngles.z);
+        Quaternion endPlayerRotation = Quaternion.Euler(playerTransform.eulerAngles.x, endRotation.eulerAngles.y, playerTransform.eulerAngles.z);
+
         float elapsedTime = 0;
 
         while (elapsedTime < duration)
         {
-            cameraTransform.rotation = Quaternion.Lerp(startRotation, endRotation, elapsedTime / duration);
+            cameraTransform.rotation = Quaternion.Lerp(startCameraRotation, endCameraRotation, elapsedTime / duration);
+            playerTransform.rotation = Quaternion.Lerp(startPlayerRotation, endPlayerRotation, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        cameraTransform.rotation = endRotation;
-         
+
+        cameraTransform.rotation = endCameraRotation;
+        playerTransform.rotation = endPlayerRotation;
     }
 
     #region//Starting Dialogue
