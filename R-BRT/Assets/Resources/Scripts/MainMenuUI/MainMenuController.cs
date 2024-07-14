@@ -17,6 +17,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] bool introPanelOpen;
 
 
+
+
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
 
     // Start is called before the first frame update
@@ -96,5 +98,7 @@ public class MainMenuController : MonoBehaviour
     {
         return this.mainMenuOpen;
     }
+
+
 
 }

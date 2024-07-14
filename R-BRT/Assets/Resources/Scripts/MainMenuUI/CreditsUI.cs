@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class CreditsUI : MonoBehaviour
 {
@@ -14,6 +14,9 @@ public class CreditsUI : MonoBehaviour
     [SerializeField] GameObject colbyPanel;
     [SerializeField] GameObject tylerPanel;
     [SerializeField] GameObject rayPanel;
+
+    [SerializeField] Button previousPanelButton;
+    [SerializeField] Button nextPanelButton;
 
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
@@ -43,6 +46,17 @@ public class CreditsUI : MonoBehaviour
         SwitchPanel("AnnaPanel");
     }
 
+    private void Update()
+    {
+        DisableButtons();
+    }
+
+    private void OnEnable()
+    {
+        previousPanelButton = GameObject.Find("PreviousPanel").GetComponent<Button>();
+        nextPanelButton = GameObject.Find("NextPanel").GetComponent<Button>();
+    }
+
 
     public void SwitchPanel(string panelName)
     {
@@ -62,5 +76,23 @@ public class CreditsUI : MonoBehaviour
     {
         currentPanelIndex = (currentPanelIndex - 1) % panelKeys.Count;
         SwitchPanel(panelKeys[currentPanelIndex]);
+    }
+
+    void DisableButtons()
+    {
+        if (currentPanelIndex == 0)
+        {
+            previousPanelButton.interactable = false;
+        }
+        else if (currentPanelIndex == 5)
+        {
+            nextPanelButton.interactable = false;
+        }
+        else
+        {
+            previousPanelButton.interactable = true;
+            nextPanelButton.interactable = true;
+        }
+
     }
 }
