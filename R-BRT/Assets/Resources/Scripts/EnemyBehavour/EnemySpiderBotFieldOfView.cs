@@ -94,7 +94,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     private void SetSpiderBotStateToScanning()
     {
-        SpiderBotStateMachine stateMachine = gameObject.GetComponentInChildren<SpiderBotStateMachine>();
+        SpiderBotStateMachine stateMachine = gameObject.transform.parent.GetComponent<SpiderBotStateMachine>();
         EnemySpiderBotFieldOfView enemyFieldOfView = GetComponent<EnemySpiderBotFieldOfView>();
 
         if (stateMachine != null && enemyFieldOfView != null)

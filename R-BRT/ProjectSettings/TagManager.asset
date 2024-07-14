@@ -81,6 +81,7 @@ TagManager:
   - Top Stairs
   - Second Broken Room
   - Before Jetpack Puzzle
+  - Close Janitors Closet
   layers:
   - Default
   - TransparentFX

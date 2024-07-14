@@ -118,5 +118,12 @@ public class PlayerCollisions : MonoBehaviour
             GameManager.instance.AddSpawnPoint(other.gameObject.transform);
             
         }
+        else if(other.gameObject.tag == "Close Janitors Closet")
+        {
+            if(GameManager.instance.CheckIfPickedUpAbility() == true)
+            {
+                GameManager.instance.ShutJanitorsCloset();
+            }
+        }
     }
 }

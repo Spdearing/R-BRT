@@ -39,6 +39,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject jetPackBlockade;
     [SerializeField] private GameObject[] checkPoints;
     [SerializeField] private GameObject startingSpawnPoint;
+    [SerializeField] private GameObject doorOpenOne;
+    [SerializeField] private GameObject doorOpenTwo;
+    [SerializeField] private GameObject doorOpenThree;//janitor closet
+    [SerializeField] private GameObject doorClosedOne;
+    [SerializeField] private GameObject doorClosedTwo;
+    [SerializeField] private GameObject doorClosedThree;//Janitors closet
     #endregion
 
     [Header("Dialogue String")]
@@ -140,6 +146,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool playerCaught;
     [SerializeField] private bool invisibilityUnlocked;
     [SerializeField] private bool jetpackUnlocked;
+    [SerializeField] private bool hasPickedAbility;
 
     [Header("Buttons")]
     [SerializeField] private Button[] loreButtons;
@@ -195,8 +202,8 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    startingSpawnLocation = startingSpawnPoint.transform.position;
-                    player.transform.position = startingSpawnLocation;
+                    //startingSpawnLocation = startingSpawnPoint.transform.position;
+                    //player.transform.position = startingSpawnLocation;
                 }
                 else if (!newGame)
                 {
@@ -350,6 +357,19 @@ public class GameManager : MonoBehaviour
         jetPackBlockade.SetActive(false);
         fuelMeter.SetActive(false);
         invisibilityMeter.SetActive(false);
+        doorClosedOne = GameObject.Find("DoorClosedOne");
+        doorClosedOne.SetActive(false);
+        doorClosedTwo = GameObject.Find("DoorClosedTwo");
+        doorClosedTwo.SetActive(false);
+        doorClosedThree = GameObject.Find("DoorClosedJanitorsCloset");
+        doorClosedThree.SetActive(false);
+        doorOpenOne = GameObject.Find("DoorOpenOne");
+        doorOpenOne.SetActive(true);
+        doorOpenTwo = GameObject.Find("DoorOpenTwo");
+        doorOpenTwo.SetActive(true);
+        doorOpenThree = GameObject.Find("DoorOpenJanitorsCloset");
+        doorOpenThree.SetActive(true);
+
     }
 
     public void PlayerHasJetpack()
@@ -388,6 +408,11 @@ public class GameManager : MonoBehaviour
 
     #region//Setting Variables
 
+
+    public void SetHasPickedAbility(bool value)
+    {
+        hasPickedAbility = value;
+    }
     public void SetInvisibilityStatus(bool value)
     {
         invisibilityUnlocked = value;
@@ -786,6 +811,11 @@ public class GameManager : MonoBehaviour
 
     #region//Returning Bools
 
+
+    public bool CheckIfPickedUpAbility()
+    {
+        return this.hasPickedAbility;
+    }
     public bool ReturnInvisibilityStatus()
     {
         return this.invisibilityUnlocked;
@@ -854,5 +884,19 @@ public class GameManager : MonoBehaviour
     public MainMenuController ReturnMainMenuController()
     {
         return this.mainMenuController;
+    }
+
+    public void CloseOffTheStairs()
+    {
+        doorClosedOne.SetActive(true);
+        doorClosedTwo.SetActive(true);
+        doorOpenOne.SetActive(false);
+        doorOpenTwo.SetActive(false);
+    }
+
+    public void ShutJanitorsCloset()
+    {
+        doorOpenThree.SetActive(false);
+        doorClosedThree.SetActive(true);
     }
 }

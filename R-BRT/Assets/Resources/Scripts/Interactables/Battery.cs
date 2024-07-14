@@ -62,6 +62,8 @@ public class Battery : MonoBehaviour
     {
         GameManager.instance.SetIndexForAbilityChoice(1);
         sceneActivity.TurnOffNotJetPackPathDialogue();
+        GameManager.instance.CloseOffTheStairs();
+        GameManager.instance.SetHasPickedAbility(true);
         stealthBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
@@ -78,6 +80,7 @@ public class Battery : MonoBehaviour
     {
         GameManager.instance.SetIndexForAbilityChoice(0);
         sceneActivity.TurnOffNotStealthPathDialogue();
+        GameManager.instance.SetHasPickedAbility(true);
         elevatorBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
