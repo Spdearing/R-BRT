@@ -51,9 +51,9 @@ public class Battery : MonoBehaviour
 
     public void OpenAbilitiesSelection()
     {
-        playerController.SetPlayerActivity(false);
         abilitySelectionPanel.SetActive(true);
-        playerController.isCameraLocked = true;
+        playerController.SetPlayerActivity(false);
+        playerController.SetCameraLock(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

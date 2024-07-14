@@ -19,9 +19,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject entriesPanel;
     [SerializeField] private GameObject fuelMeter;
     [SerializeField] private GameObject invisbilityMeter;
+    [SerializeField] private GameObject controlsPanel;
 
     [Header("Bools")]
     [SerializeField] private bool isPaused;
+    [SerializeField] private bool pausePanelOpen;
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
@@ -31,13 +33,16 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pausePanelOpen = false;
         isPaused = false;
         pauseMenu.SetActive(false);
         optionsPanel.SetActive(false);
         entriesPanel.SetActive(false);
+        controlsPanel.SetActive(false);
         panels.Add("PauseMenuPanel", pauseMenu);
         panels.Add("OptionsPanel", optionsPanel);
         panels.Add("EntriesPanel", entriesPanel);
+        panels.Add("ControlsPanel", controlsPanel);
 
         playerController = GameManager.instance.ReturnPlayerController();
     }
@@ -49,11 +54,11 @@ public class PauseMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (isPaused)
+                if (isPaused && pausePanelOpen)
                 {
                     ResumeGame();
                 }
-                else
+                else if (!isPaused)
                 {
                     PauseGame();
                     
@@ -67,6 +72,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        pausePanelOpen = true;
         EnableCursor();
     }
 
@@ -108,22 +114,32 @@ public class PauseMenu : MonoBehaviour
     }
     public void SwitchToOptionsPanel()
     {
+        pausePanelOpen = false;
         SwitchPanel("OptionsPanel");
     }
 
     public void SwitchToEntriesPanel()
     {
+        pausePanelOpen = false;
         SwitchPanel("EntriesPanel");
+    }
+
+    public void SwitchToControlsPanel()
+    {
+        pausePanelOpen = false;
+        SwitchPanel("ControlsPanel");
     }
 
     public void BackToMainMenu()
     {
+        pausePanelOpen = false;
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenuScene");
     }
 
     public void BackToMainPanel()
     {
+        pausePanelOpen = true;
         SwitchPanel("PauseMenuPanel");
     }
 

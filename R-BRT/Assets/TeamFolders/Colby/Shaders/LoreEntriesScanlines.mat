@@ -55,6 +55,6 @@ Material:
     m_Ints: []
     m_Floats:
     - _ScanlineBrightness: 0.5
-    - _Scanline_Amount: 100
+    - _Scanline_Amount: 120
     m_Colors: []
   m_BuildTextureStacks: []
