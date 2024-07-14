@@ -27,6 +27,8 @@ public class GroundBotHeadMovement : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
+    [SerializeField] private EnemyProximityCheck enemyProximityCheck;
+    [SerializeField] private PlayerController playerController;
 
 
 
@@ -45,6 +47,10 @@ public class GroundBotHeadMovement : MonoBehaviour
         {
             Patrol();
         }
+        if(enemyProximityCheck.ReturnEnemyWithinRange() && playerController.PlayerIsRunning() == true)
+        {
+            RotateTowardsPlayer();
+        }
 
     }
 
@@ -57,8 +63,10 @@ public class GroundBotHeadMovement : MonoBehaviour
         robotIsActive = true;
         isDistracted = false;
         rotationAngle = 45f;
-        rotationSpeed = 25f;
+        rotationSpeed = 50f;
         enemyGroundBotFieldOfView = groundBotHead.GetComponentInChildren<EnemyGroundBotFieldOfView>();
+        playerController = GameManager.instance.ReturnPlayerController();
+        enemyProximityCheck = GameManager.instance.ReturnEnemyProximityCheck();
         startYRotation = transform.eulerAngles.y;
         playerTransform = GameManager.instance.ReturnPlayerTransform();
         SetTargetYRotation();

@@ -451,4 +451,9 @@ public class PlayerController : MonoBehaviour
     {
        playerIsActive = value;
     }
+
+    public bool PlayerIsRunning()
+    {
+        return this.isSprinting;
+    }
 }
