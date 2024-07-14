@@ -117,10 +117,11 @@ public class PlayerController : MonoBehaviour
 
     void Setup()
     {
+        
+        groundDrag = 5.0f;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.freezeRotation = true;
-        groundDrag = 5.0f;
         playerCollider = GameManager.instance.ReturnPlayerCollider();
         cameraTransform = GameManager.instance.ReturnCameraTransform();
         playerAnimator = GameManager.instance.ReturnAnimator();
@@ -134,7 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             originalHeight = playerCollider.height;
             originalCameraPosition = cameraTransform.localPosition;
-            Debug.Log("CapsuleCollider successfully assigned.");
+            
         }
         else
         {

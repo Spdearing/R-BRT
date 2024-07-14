@@ -199,10 +199,13 @@ public class GameManager : MonoBehaviour
                 }
                 else if (!newGame)
                 {
+                    Debug.Log("Respawning");
                     playerCaught = false;
+                    Debug.Log("About to get all the stuff again");
                     GrabAllTheTools();
                     if(newSpawnPoint != null)
                     {
+                        Debug.Log("About to set new spawn location");
                         player.transform.position = newSpawnPoint;
                     }
                     else
@@ -278,7 +281,7 @@ public class GameManager : MonoBehaviour
         checkPointsHit[5] = false;
 
 
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.Find("Player");
         playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;

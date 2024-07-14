@@ -74,7 +74,7 @@ public class PlayerAbilities : MonoBehaviour
         startingInvisible = 7.5f;
         invisibilityMeterFillingBackUp = false;
         //HideInvisibilityMeter();
-        Debug.Log("invis bar should be gone");
+        
     }
 
     public void HandleInvisibility()
