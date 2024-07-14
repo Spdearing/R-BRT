@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject doorClosedOne;
     [SerializeField] private GameObject doorClosedTwo;
     [SerializeField] private GameObject doorClosedThree;//Janitors closet
+    [SerializeField] private GameObject crouchVolume;
+    [SerializeField] private GameObject invisVolume;
     #endregion
 
     [Header("Dialogue String")]
@@ -202,8 +204,8 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    startingSpawnLocation = startingSpawnPoint.transform.position;
-                    player.transform.position = startingSpawnLocation;
+                    //startingSpawnLocation = startingSpawnPoint.transform.position;
+                    //player.transform.position = startingSpawnLocation;
                 }
                 else if (!newGame)
                 {
@@ -369,7 +371,10 @@ public class GameManager : MonoBehaviour
         doorOpenTwo.SetActive(true);
         doorOpenThree = GameObject.Find("DoorOpenJanitorsCloset");
         doorOpenThree.SetActive(true);
-
+        crouchVolume = GameObject.Find("CrouchVolume");
+        invisVolume = GameObject.Find("InvisVolume");
+        crouchVolume.SetActive(false);
+        invisVolume.SetActive(false);
     }
 
     public void PlayerHasJetpack()
@@ -491,6 +496,16 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region //Return GameObjects
+
+    public GameObject ReturnInvisibilityVolume()
+    {
+        return this.invisVolume;
+    }
+
+    public GameObject ReturnCrouchVolume()
+    {
+        return this.crouchVolume;
+    }
     public GameObject ReturnStealthBlockade()
     {
         return this.stealthBlockade;

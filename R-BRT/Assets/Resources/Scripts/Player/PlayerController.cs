@@ -170,6 +170,7 @@ public class PlayerController : MonoBehaviour
             Crouch();
             playerAnimator.SetBool("isCrouching", true);
             playerAnimator.SetBool("isCrouched", true);
+            GameManager.instance.ReturnCrouchVolume().SetActive(true);
         }
 
         if (Input.GetKeyUp(crouchKey))
@@ -178,6 +179,7 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("isCrouching", false);
             playerAnimator.SetBool("isCrouched", false);
             playerAnimator.SetBool("standingUp", true);
+            GameManager.instance.ReturnCrouchVolume().SetActive(false);
         }
     }
 

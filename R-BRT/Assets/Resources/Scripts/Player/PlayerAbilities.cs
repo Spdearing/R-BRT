@@ -73,7 +73,6 @@ public class PlayerAbilities : MonoBehaviour
         invisibleIncrement = .25f;
         startingInvisible = 7.5f;
         invisibilityMeterFillingBackUp = false;
-        //HideInvisibilityMeter();
         
     }
 
@@ -83,6 +82,7 @@ public class PlayerAbilities : MonoBehaviour
         {
             gameObject.tag = "Invisible";
             playerAnimator.SetTrigger("usingInvisibility 0");
+            GameManager.instance.ReturnInvisibilityVolume().SetActive(true);
             StartCoroutine(InvisibilityTimer());
         }
     }
@@ -106,6 +106,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         if (!invisibilityAvailable)
         {
+
             startingInvisible -= 5.0f * Time.deltaTime * invisibleIncrement;
             startingInvisible = Mathf.Clamp(startingInvisible, 0, maxInvisible);
             invisibleMeter.fillAmount = startingInvisible / maxInvisible;
@@ -114,6 +115,7 @@ public class PlayerAbilities : MonoBehaviour
             {
                 startingInvisible = 0;
                 invisibilityAvailable = true;
+                GameManager.instance.ReturnInvisibilityVolume().SetActive(false);
                 usingInvisibility = false;
                 invisibilityMeterFillingBackUp = true;
                 gameObject.tag = "Player";
