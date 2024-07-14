@@ -141,7 +141,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool invisibilityUnlocked;
     [SerializeField] private bool jetpackUnlocked;
 
-
     [Header("Buttons")]
     [SerializeField] private Button[] loreButtons;
 
@@ -151,8 +150,6 @@ public class GameManager : MonoBehaviour
     [Header("Index For Ability Dialogue")]
     [SerializeField] private int index;
     [SerializeField] private int currentCheckPointIndex = 0;
-
-     
 
     private void Awake()
     {
@@ -198,8 +195,8 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    startingSpawnLocation = startingSpawnPoint.transform.position;
-                    player.transform.position = startingSpawnLocation;
+                    //startingSpawnLocation = startingSpawnPoint.transform.position;
+                    //player.transform.position = startingSpawnLocation;
                 }
                 else if (!newGame)
                 {
@@ -373,7 +370,6 @@ public class GameManager : MonoBehaviour
         playerController.SetCameraLock(false);
         ability.SetInvisibilityUnlock(true);
         invisibilityMeter.SetActive(true);
-        Debug.Log("Stealth Image set to active");
         jetPackBlockade.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -829,7 +825,6 @@ public class GameManager : MonoBehaviour
             newSpawnPoint = playerSpawnLocations[0].position;
             checkPoints[currentCheckPointIndex].SetActive(false);
             currentCheckPointIndex++;
-            
         }
        
     }
@@ -860,5 +855,4 @@ public class GameManager : MonoBehaviour
     {
         return this.mainMenuController;
     }
-    
 }

@@ -91,8 +91,13 @@ public class SpiderBotStateMachine : MonoBehaviour
 
             case SpiderState.playerCaught:
 
-                Debug.Log("inside player Caught");
+                
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
+
+                if (GameManager.instance.ReturnNewGameStatus() == true)
+                {
+                    GameManager.instance.SetNewGameStatus(false);
+                }
 
                 playerController.SetCameraLock(true);
 

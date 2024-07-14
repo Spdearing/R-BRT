@@ -19,9 +19,15 @@ public class EnemyProximityCheck : MonoBehaviour
     [Header("Array Of Tags To Compare")]
     [SerializeField] private string[] enemyTags = new string[] { "GroundBot", "SpiderBot", "FlyingBot" };
 
+
+    [Header("Scripts")]
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private GroundBotStateMachine groundBotStateMachine;
+
     private void Start()
     {
         raycastDistance = 10.0f;
+        playerController = GameManager.instance.ReturnPlayerController();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,11 +59,6 @@ public class EnemyProximityCheck : MonoBehaviour
         }
     }
 
-    public bool ReturnPlayerProximity()
-    {
-        return enemyWithinRange;
-    }
-
     private void DetectEnemy(GameObject enemyDetected)
     {
         if (enemyDetected == null)
@@ -69,12 +70,23 @@ public class EnemyProximityCheck : MonoBehaviour
         RaycastHit hitInfo;
 
         Debug.DrawRay(rayOrigin, rayDirection * raycastDistance, Color.blue);
+        
 
         if (Physics.Raycast(rayOrigin, rayDirection, out hitInfo, raycastDistance, ~ignoreLayerMask))
         {
+            Debug.Log(hitInfo.collider.tag);
+            Debug.Log(raycastDistance);
+
             if (IsTagInList(hitInfo.collider.tag))
             {
                 enemyWithinRange = true;
+
+                if(hitInfo.collider.tag == "GroundBot" && Vector3.Distance(transform.position, hitInfo.collider.transform.position) < 1.0f)
+                {
+                    groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
+                    groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.playerCaught);
+                    playerController.SetPlayerActivity(false);
+                }
             }
             else
             {

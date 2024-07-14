@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static FlyingBotStateMachine;
-using UnityEngine.InputSystem.LowLevel;
-using Unity.VisualScripting;
+
 
 public class EnemySpiderBotFieldOfView : MonoBehaviour
 {
@@ -18,12 +16,6 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] private bool playerIsBeingDetected;
-
-    [Header("Transform")]
-    [SerializeField] private Transform enemyGrandparentTransform;
-
-
-
 
     private void Start()
     {
@@ -44,56 +36,40 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
         spiderBotSpawner = GameManager.instance.ReturnSpiderBotSpawner();
         spiderBotStateMachine = spiderBotSpawner.ReturnSpiderBotStateInstance();
         playerIsBeingDetected = false;
-        enemyGrandparentTransform = gameObject.transform.parent;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
+        Debug.Log(other.gameObject.tag);
+        if (IsPlayer(other) && IsDetectable())
         {
             sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
-
-            
-            Transform grandparentTransform = gameObject.transform.parent;
-
-            SpiderBotStateMachine spiderBotStateMachine = grandparentTransform.GetComponent<SpiderBotStateMachine>();
-            
-            EnemySpiderBotFieldOfView enemyFieldOfView = gameObject.GetComponent<EnemySpiderBotFieldOfView>();
-
-            
-
-            if (spiderBotStateMachine != null && enemyFieldOfView != null)
-            {
-                playerDetectionState.SetSpiderBotStateMachine(spiderBotStateMachine);
-                playerDetectionState.SetSpiderBotFieldOfView(enemyFieldOfView);
-            }
-
-            playerDetectionState.SetDetectedBySpiderBot(true);
+            SetSpiderBotStateToScanning();
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
+        if (IsPlayer(other))
         {
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
             sceneActivity.SetPlayerIsSpotted(withinRange);
 
             if (!withinRange)
             {
-                playerIsBeingDetected = false;
-                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+                ResetDetection();
             }
-            else
-            {
-                playerIsBeingDetected = true;
-            }
+        }
+        else
+        {
+            ResetDetection();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        
         if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange())
         {
             sceneActivity.SetPlayerIsSpotted(false);
@@ -116,8 +92,39 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
         }
     }
 
+    private void SetSpiderBotStateToScanning()
+    {
+        Transform grandparentTransform = gameObject.transform.parent.parent;
+        SpiderBotStateMachine stateMachine = gameObject.GetComponentInChildren<SpiderBotStateMachine>();
+        EnemySpiderBotFieldOfView enemyFieldOfView = GetComponent<EnemySpiderBotFieldOfView>();
+
+        if (stateMachine != null && enemyFieldOfView != null)
+        {
+            playerDetectionState.SetSpiderBotStateMachine(stateMachine);
+            playerDetectionState.SetSpiderBotFieldOfView(enemyFieldOfView);
+            stateMachine.ChangeBehavior(SpiderBotStateMachine.SpiderState.scanning);
+        }
+    }
+
+    private void ResetDetection()
+    {
+        sceneActivity.SetPlayerIsSpotted(false);
+        playerIsBeingDetected = false;
+        playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+    }
+
+    private bool IsPlayer(Collider other)
+    {
+        return other.CompareTag("Player");
+    }
+
+    private bool IsDetectable()
+    {
+        return enemyProximity.ReturnEnemyWithinRange();
+    }
+
     public Transform ReturnThisEnemy()
     {
-        return this.enemyGrandparentTransform;
+        return this.gameObject.transform.parent;
     }
 }

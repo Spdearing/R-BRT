@@ -25,7 +25,5 @@ public class EnemyDeathCollider : MonoBehaviour
             groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.playerCaught);
             playerController.SetPlayerActivity(false);
         }
-    }
-
-    
+    } 
 }
