@@ -20,6 +20,10 @@ public class MainMenuCamera : MonoBehaviour
     [SerializeField] private GameObject S4MinfrontCamera;
     [SerializeField] private Animator offsetRBRTAnim;
     [SerializeField] private Animator offsetS4MAnim;
+    //[SerializeField] private Animator RBRTPanelAnim;
+    //[SerializeField] private Animator S4MPanelAnim;
+    [SerializeField] private GameObject RBRTPanel;
+    [SerializeField] private GameObject S4MPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -30,11 +34,17 @@ public class MainMenuCamera : MonoBehaviour
         S4MinfrontCamera = GameObject.Find("S4MInfrontCamera");
         offsetRBRTAnim = GameObject.Find("RBRTOutlineHolder").GetComponent<Animator>();
         offsetS4MAnim = GameObject.Find("S4MOutlineHolder").GetComponent<Animator>();
+        RBRTPanel = GameObject.Find("RBRTPanel");
+        S4MPanel = GameObject.Find("S4MPanel");
+        //RBRTPanelAnim = RBRTPanel.GetComponent<Animator>();
+        //S4MPanelAnim = S4MPanel.GetComponent<Animator>();
 
         RBRToutlineCamera.SetActive(false);
         RBRTinfrontCamera.SetActive(false);
         S4MoutlineCamera.SetActive(false);
         S4MinfrontCamera.SetActive(false);
+        RBRTPanel.SetActive(false);
+        S4MPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -69,6 +79,7 @@ public class MainMenuCamera : MonoBehaviour
                 RBRToutlineCamera.SetActive(true);
                 RBRTinfrontCamera.SetActive(true);
                 offsetRBRTAnim.SetBool("RBRTHovered", true);
+                RBRTPanel.SetActive(true);
             }
 
             if (hit.collider.tag == "MainMenuS4M")
@@ -76,6 +87,7 @@ public class MainMenuCamera : MonoBehaviour
                 S4MoutlineCamera.SetActive(true);
                 S4MinfrontCamera.SetActive(true);
                 offsetS4MAnim.SetBool("S4MHovered", true);
+                S4MPanel.SetActive(true);
             }
             
             if (hit.collider.tag != "MainMenuRBRT" && hit.collider.tag != "MainMenuS4M")
@@ -86,6 +98,8 @@ public class MainMenuCamera : MonoBehaviour
                 S4MinfrontCamera.SetActive(false);
                 offsetRBRTAnim.SetBool("RBRTHovered", false);
                 offsetS4MAnim.SetBool("S4MHovered", false);
+                RBRTPanel.SetActive(false);
+                S4MPanel.SetActive(false);
             }
         }
     }
