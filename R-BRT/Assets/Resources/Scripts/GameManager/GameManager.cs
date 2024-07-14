@@ -195,8 +195,8 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    //startingSpawnLocation = startingSpawnPoint.transform.position;
-                    //player.transform.position = startingSpawnLocation;
+                    startingSpawnLocation = startingSpawnPoint.transform.position;
+                    player.transform.position = startingSpawnLocation;
                 }
                 else if (!newGame)
                 {

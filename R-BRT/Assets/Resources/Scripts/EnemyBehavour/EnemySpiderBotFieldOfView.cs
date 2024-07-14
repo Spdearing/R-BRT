@@ -94,7 +94,6 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
 
     private void SetSpiderBotStateToScanning()
     {
-        Transform grandparentTransform = gameObject.transform.parent.parent;
         SpiderBotStateMachine stateMachine = gameObject.GetComponentInChildren<SpiderBotStateMachine>();
         EnemySpiderBotFieldOfView enemyFieldOfView = GetComponent<EnemySpiderBotFieldOfView>();
 
@@ -102,6 +101,7 @@ public class EnemySpiderBotFieldOfView : MonoBehaviour
         {
             playerDetectionState.SetSpiderBotStateMachine(stateMachine);
             playerDetectionState.SetSpiderBotFieldOfView(enemyFieldOfView);
+            playerDetectionState.SetDetectedBySpiderBot(true);
             stateMachine.ChangeBehavior(SpiderBotStateMachine.SpiderState.scanning);
         }
     }
