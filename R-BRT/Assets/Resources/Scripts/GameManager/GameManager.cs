@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject stealthBlockade;
     [SerializeField] private GameObject jetPackBlockade;
     [SerializeField] private GameObject[] checkPoints;
+    [SerializeField] private GameObject startingSpawnPoint;
     #endregion
 
     [Header("Dialogue String")]
@@ -61,10 +62,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform[] checkPointLocations;
-    [SerializeField] private Transform originalSpawnPoint;
+    
 
     [Header("Vector3")]
     [SerializeField] private Vector3 newSpawnPoint;
+    [SerializeField] private Vector3 startingSpawnLocation;
+    
 
     
 
@@ -195,7 +198,8 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    originalSpawnPoint = playerTransform;
+                    startingSpawnLocation = startingSpawnPoint.transform.position;
+                    player.transform.position = startingSpawnLocation;
                 }
                 else if (!newGame)
                 {
@@ -203,7 +207,7 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     Debug.Log("About to get all the stuff again");
                     GrabAllTheTools();
-                    if(newSpawnPoint != null)
+                    if(newSpawnPoint != new Vector3(0,0,0))
                     {
                         Debug.Log("About to set new spawn location");
                         player.transform.position = newSpawnPoint;
@@ -211,7 +215,8 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         Debug.Log("Player did not have a new spawn Location");
-                        player.transform.position = originalSpawnPoint.position;
+                        startingSpawnLocation = startingSpawnPoint.transform.position;
+                        player.transform.position = startingSpawnLocation;
                     } 
                 }
 
@@ -240,6 +245,8 @@ public class GameManager : MonoBehaviour
 
     public void GrabAllTheTools()
     {
+        startingSpawnPoint = GameObject.Find("StartingSpawnPoint");
+
         playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue", "Eighth Dialogue" };
 
         abilityChosen = new string[] { "Stealth", "Jetpack", "Stealth2", "Jetpack2", "Stealth3", "Jetpack3" };

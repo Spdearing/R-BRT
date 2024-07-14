@@ -117,12 +117,11 @@ public class PlayerController : MonoBehaviour
 
     void Setup()
     {
-        
+        playerCollider = GameManager.instance.ReturnPlayerCollider();
         groundDrag = 5.0f;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rb.freezeRotation = true;
-        playerCollider = GameManager.instance.ReturnPlayerCollider();
         cameraTransform = GameManager.instance.ReturnCameraTransform();
         playerAnimator = GameManager.instance.ReturnAnimator();
         walkingSound = GameManager.instance.ReturnWalkingSound();

@@ -74,12 +74,12 @@ public class PlayerCollisions : MonoBehaviour
         }
         else if(other.gameObject.tag == "EleventhDialogueEncounter")
         {
-            firstDialogueFunctionality.SetDialogue("Seventh Dialogue");
+            firstDialogueFunctionality.SetDialogue("Eighth Dialogue");
             sceneActivity.StartEleventhDialogue();
         }
         if (other.gameObject.tag == "TwelthDialogueEncounter")
         {
-            firstDialogueFunctionality.SetDialogue("Eighth Dialogue");
+            firstDialogueFunctionality.SetDialogue("Seventh Dialogue");
             sceneActivity.StartTwelthDialogue();
         }
         else if(other.gameObject.tag == "After Lobby")
