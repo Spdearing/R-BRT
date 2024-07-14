@@ -22,7 +22,7 @@ public class MainMenuCamera : MonoBehaviour
     [SerializeField] private Animator offsetS4MAnim;
     [SerializeField] private GameObject RBRTPanel;
     [SerializeField] private GameObject S4MPanel;
-    [SerializeField] private MainMenuController mainMenuController;
+    [SerializeField] private GameObject mainMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +35,7 @@ public class MainMenuCamera : MonoBehaviour
         offsetS4MAnim = GameObject.Find("S4MOutlineHolder").GetComponent<Animator>();
         RBRTPanel = GameObject.Find("RBRTPanel");
         S4MPanel = GameObject.Find("S4MPanel");
-        mainMenuController = GameManager.instance.ReturnMainMenuController();
-        //RBRTPanelAnim = RBRTPanel.GetComponent<Animator>();
-        //S4MPanelAnim = S4MPanel.GetComponent<Animator>();
+        mainMenu = GameObject.Find("MainMenuPanel");
 
         RBRToutlineCamera.SetActive(false);
         RBRTinfrontCamera.SetActive(false);
@@ -74,7 +72,7 @@ public class MainMenuCamera : MonoBehaviour
             //Debug.DrawRay(transform.position, transform.forward, Color.red);
             Debug.Log(hit.collider.gameObject.name);
 
-            if (hit.collider.tag == "MainMenuRBRT" && mainMenuController.ReturnMainMenuOpen() == true)
+            if (hit.collider.tag == "MainMenuRBRT" && mainMenu.activeInHierarchy == true)
             {
                 RBRToutlineCamera.SetActive(true);
                 RBRTinfrontCamera.SetActive(true);
@@ -82,7 +80,7 @@ public class MainMenuCamera : MonoBehaviour
                 RBRTPanel.SetActive(true);
             }
 
-            if (hit.collider.tag == "MainMenuS4M" && mainMenuController.ReturnMainMenuOpen() == true)
+            if (hit.collider.tag == "MainMenuS4M" && mainMenu.activeInHierarchy == true)
             {
                 S4MoutlineCamera.SetActive(true);
                 S4MinfrontCamera.SetActive(true);
