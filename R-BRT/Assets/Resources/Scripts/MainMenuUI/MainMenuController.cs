@@ -12,6 +12,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] GameObject instructionsPanel;
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject creditsPanel;
+    [SerializeField] bool mainMenuOpen;
 
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
@@ -19,6 +20,7 @@ public class MainMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainMenuOpen = true;
         panels.Add("MainMenuPanel", mainMenuPanel);
         panels.Add("InstructionsPanel", instructionsPanel);
         panels.Add("OptionsPanel", optionsPanel);
@@ -71,6 +73,11 @@ public class MainMenuController : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public bool ReturnMainMenuOpen()
+    {
+        return this.mainMenuOpen;
     }
 
 }

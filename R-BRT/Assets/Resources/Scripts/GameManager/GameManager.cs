@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private InvisibilityCloak invisibilityCloak;
     [SerializeField] private DetectionMeter detection;
     [SerializeField] private FirstDialogueFunctionality firstDialogueFunctionality;
+    [SerializeField] private MainMenuController mainMenuController;
     #endregion
 
 
@@ -214,6 +215,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "MainMenuScene":
+                mainMenuController = GameObject.Find("Canvas").GetComponent<MainMenuController>();
 
                 break;
 
@@ -844,6 +846,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    public MainMenuController ReturnMainMenuController()
+    {
+        return this.mainMenuController;
+    }
     
 }
