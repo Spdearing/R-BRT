@@ -12,7 +12,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] GameObject instructionsPanel;
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject creditsPanel;
+    [SerializeField] GameObject introPanel;
     [SerializeField] bool mainMenuOpen;
+    [SerializeField] bool introPanelOpen;
 
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
@@ -25,8 +27,14 @@ public class MainMenuController : MonoBehaviour
         panels.Add("InstructionsPanel", instructionsPanel);
         panels.Add("OptionsPanel", optionsPanel);
         panels.Add("CreditsPanel", creditsPanel);
+        panels.Add("IntroPanel", introPanel);
 
         SwitchPanel("MainMenuPanel");
+    }
+
+    private void Update()
+    {
+        PlayGame();
     }
 
 
@@ -66,9 +74,18 @@ public class MainMenuController : MonoBehaviour
     {
         SwitchPanel("InstructionsPanel");
     }
+
+    public void StartIntro()
+    {
+        SwitchPanel("IntroPanel");
+        introPanelOpen = true;
+    }
     public void PlayGame()
     {
-        SceneManager.LoadScene("GameScene");
+        if(introPanelOpen == true && Input.GetMouseButton(0))
+        {
+            SceneManager.LoadScene("GameScene");
+        } 
     }
     public void QuitGame()
     {
