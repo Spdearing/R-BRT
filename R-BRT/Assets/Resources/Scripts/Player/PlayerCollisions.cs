@@ -21,28 +21,31 @@ public class PlayerCollisions : MonoBehaviour
     {
        if (other.gameObject.tag == "SecondDialogueEncounter")
         {
-            
+            firstDialogueFunctionality.SetDialogue("Second Dialogue");
             sceneActivity.StartSecondDialogue();
         }
 
         else if (other.gameObject.tag == "ThirdDialogueEncounter")
         {
+            firstDialogueFunctionality.SetDialogue("Third Dialogue");
             sceneActivity.StartThirdDialogue();
         }
 
         if (other.gameObject.tag == "FourthDialogueEncounter")
         {
+            firstDialogueFunctionality.SetDialogue("Fourth Dialogue");
             sceneActivity.StartFourthDialogue();
         }
 
         else if (other.gameObject.tag == "FifthDialogueEncounter")
         {
+            firstDialogueFunctionality.SetDialogue("Fifth Dialogue");
             sceneActivity.StartFifthDialogue();
         }
         
         if (other.gameObject.tag == "SixthDialogueEncounter")
         {
-            
+            firstDialogueFunctionality.SetDialogue("Sixth Dialogue");
             sceneActivity.StartSixthDialogue();
         }
         else if (other.gameObject.tag == "SeventhDialogueEncounter")
@@ -71,10 +74,12 @@ public class PlayerCollisions : MonoBehaviour
         }
         else if(other.gameObject.tag == "EleventhDialogueEncounter")
         {
+            firstDialogueFunctionality.SetDialogue("Seventh Dialogue");
             sceneActivity.StartEleventhDialogue();
         }
         if (other.gameObject.tag == "TwelthDialogueEncounter")
         {
+            firstDialogueFunctionality.SetDialogue("Eighth Dialogue");
             sceneActivity.StartTwelthDialogue();
         }
         else if(other.gameObject.tag == "After Lobby")

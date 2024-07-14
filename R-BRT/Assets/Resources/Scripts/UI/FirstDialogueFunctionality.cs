@@ -16,6 +16,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private string[] fullTexts6;
     [SerializeField] private string[] fullTexts7;
     [SerializeField] private string[] fullTexts8;
+    [SerializeField] private string checkPointDialogue;
 
     [Header("Floats")]
     [SerializeField] private float delay;
@@ -40,8 +41,10 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     void Start()
     {
+        checkPointDialogue = "First Dialogue";
         Initialize();
         StartDialogue();
+        
     }
 
     private void Initialize()
@@ -54,7 +57,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     private void StartDialogue()
     {
-        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex);
+        dialogueName = checkPointDialogue;
         string[] currentDialogue = GetCurrentDialogue(dialogueName, GetDialogues());
 
         if (currentDialogue != null)
@@ -130,7 +133,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
     private void EndDialogue()
     {
         skipText = false;
-        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex++);
+        //dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex++);
         playerController.SetPlayerActivity(true);
         playerController.isCameraLocked = false;
         sceneActivity.SetDialogueTriggerOne(false);
@@ -140,10 +143,15 @@ public class FirstDialogueFunctionality : MonoBehaviour
     {
         StartDialogue();
 
-        if(dialogueIndex > 0) 
-        {
-            StartCoroutine(CountDownTillClose());
-        }
+        //if(dialogueIndex > 0) 
+        //{
+        //    StartCoroutine(CountDownTillClose());
+        //}
+    }
+
+    public void SetDialogue(string desiredDialogue)
+    {
+        checkPointDialogue = desiredDialogue;
     }
 
     IEnumerator CountDownTillClose()
@@ -155,9 +163,9 @@ public class FirstDialogueFunctionality : MonoBehaviour
         sceneActivity.SetDialogueTriggerOne(false);
     }
 
-    public void UpdateDialogue()
-    {
-        dialogueName = GameManager.instance.ReturnDialogueCheckPoint();
-        StartDialogue();
-    }
+    //public void UpdateDialogue()
+    //{
+    //    dialogueName = GameManager.instance.ReturnDialogueCheckPoint();
+    //    StartDialogue();
+    //}
 }
