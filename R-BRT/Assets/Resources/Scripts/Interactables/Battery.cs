@@ -85,7 +85,7 @@ public class Battery : MonoBehaviour
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         abilities.SetInvisibilityUnlock(true);
-        abilities.DisplayInvisibilityMeter();
+        //abilities.DisplayInvisibilityMeter();
         abilitySelectionPanel.SetActive(false);
         invisibilityMeter.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
