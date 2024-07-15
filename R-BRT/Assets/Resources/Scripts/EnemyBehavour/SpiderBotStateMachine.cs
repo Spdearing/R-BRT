@@ -4,6 +4,7 @@ public class SpiderBotStateMachine : MonoBehaviour
 {
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
+    [SerializeField] private Transform playerOtherTransform;
 
     [Header("GameObjects")]
     [SerializeField] private GameObject playerCamera;
@@ -44,6 +45,7 @@ public class SpiderBotStateMachine : MonoBehaviour
         enemySpiderBotFieldOfView = GetComponentInChildren<EnemySpiderBotFieldOfView>();
         playerCamera = GameManager.instance.ReturnPlayerCamera();
         playerCameraTransform = GameManager.instance.ReturnCameraTransform();
+        playerOtherTransform = GameManager.instance.ReturnPlayerOtherCamera();
         currentState = SpiderState.patrolling;
     }
 

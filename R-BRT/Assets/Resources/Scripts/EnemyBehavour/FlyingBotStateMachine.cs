@@ -11,6 +11,7 @@ public class FlyingBotStateMachine : MonoBehaviour
 
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
+    [SerializeField] private Transform playerOtherTransform;
     [SerializeField] private Transform flyingBotOnePatrolPointA;
     [SerializeField] private Transform flyingBotOnePatrolPointB;
 
@@ -71,6 +72,7 @@ public class FlyingBotStateMachine : MonoBehaviour
         player = GameManager.instance.ReturnPlayer();
         playerController = GameManager.instance.ReturnPlayerController();
         playerCamera = GameManager.instance.ReturnPlayerCamera();
+        playerOtherTransform = GameManager.instance.ReturnPlayerOtherCamera();
         playerCameraTransform = playerCamera.transform;
         gameOverScreen = GameManager.instance.ReturnGameOver();
         enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();

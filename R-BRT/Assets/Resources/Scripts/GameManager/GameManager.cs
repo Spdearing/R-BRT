@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Transform")]
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform playerOtherTransform;
     [SerializeField] private Transform holdPosition;
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] private Transform friendLocation;
@@ -149,6 +150,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool invisibilityUnlocked;
     [SerializeField] private bool jetpackUnlocked;
     [SerializeField] private bool hasPickedAbility;
+    [SerializeField] private bool playerHasClearedFirstFloor;
 
     [Header("Buttons")]
     [SerializeField] private Button[] loreButtons;
@@ -204,14 +206,20 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    //startingSpawnLocation = startingSpawnPoint.transform.position;
-                    //player.transform.position = startingSpawnLocation;
+                    startingSpawnLocation = startingSpawnPoint.transform.position;
+                    player.transform.position = startingSpawnLocation;
                 }
                 else if (!newGame)
                 {
-                    Debug.Log("Respawning");
+                    if(playerHasClearedFirstFloor)
+                    {
+                        hasPickedAbility = true;
+                    }
+                    else
+                    {
+                        hasPickedAbility= false;
+                    }
                     playerCaught = false;
-                    Debug.Log("About to get all the stuff again");
                     GrabAllTheTools();
                     if(newSpawnPoint != new Vector3(0,0,0))
                     {
@@ -298,6 +306,7 @@ public class GameManager : MonoBehaviour
         playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
+        playerOtherTransform = GameObject.Find("RenderInFrontCam").GetComponent<Transform>();
         playerRaycast = GameObject.FindWithTag("MainCamera").GetComponent<PlayerRaycast>();
         flyingBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<FlyingBotSpawner>();
         groundBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<GroundBotSpawner>();
@@ -413,6 +422,10 @@ public class GameManager : MonoBehaviour
 
     #region//Setting Variables
 
+    public void SetPlayerHasClearedHallway(bool value)
+    {
+        playerHasClearedFirstFloor = value;
+    }
 
     public void SetHasPickedAbility(bool value)
     {
@@ -662,6 +675,11 @@ public class GameManager : MonoBehaviour
     public Transform ReturnFriendsLocation()
     {
         return this.friendLocation;
+    }
+
+    public Transform ReturnPlayerOtherCamera()
+    {
+        return this.playerOtherTransform;
     }
 
     public Transform ReturnPlayerTransform()

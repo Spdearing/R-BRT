@@ -98,6 +98,7 @@ public class PlayerCollisions : MonoBehaviour
             GameManager.instance.SetJetpackStatus(true);
             GameManager.instance.ReturnPlayerCheckPoint(3).SetActive(false);
             GameManager.instance.ReturnPlayerCheckPoint(4).SetActive(false);
+            GameManager.instance.SetPlayerHasClearedHallway(true);
 
         }
         if (other.gameObject.tag == "Top Stairs")
@@ -106,6 +107,7 @@ public class PlayerCollisions : MonoBehaviour
             GameManager.instance.SetInvisibilityStatus(true);
             GameManager.instance.ReturnPlayerCheckPoint(2).SetActive(false);
             GameManager.instance.ReturnPlayerCheckPoint(5).SetActive(false);
+            GameManager.instance.SetPlayerHasClearedHallway(true);
 
         }
         else if (other.gameObject.tag == "Second Broken Room")

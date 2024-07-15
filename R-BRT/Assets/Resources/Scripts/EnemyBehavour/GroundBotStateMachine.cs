@@ -6,6 +6,7 @@ public class GroundBotStateMachine : MonoBehaviour
 {
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
+    [SerializeField] private Transform playerOtherTransform;
 
     [Header("Scripts")]
     [SerializeField] GameOverScreen gameOverScreen;
@@ -43,6 +44,7 @@ public class GroundBotStateMachine : MonoBehaviour
     {
         player = GameManager.instance.ReturnPlayer();
         playerCameraTransform = GameManager.instance.ReturnCameraTransform();
+        playerOtherTransform = GameManager.instance.ReturnPlayerOtherCamera();
         gameOverScreen = GameManager.instance.ReturnGameOver();
         playerController = GameManager.instance.ReturnPlayerController();
         enemyGroundBotFieldOfView = GetComponentInChildren<EnemyGroundBotFieldOfView>();
@@ -117,7 +119,7 @@ public class GroundBotStateMachine : MonoBehaviour
 
                 if (enemyGroundBotFieldOfView != null)
                 {
-                    Vector3 directionToEnemy = enemyGroundBotFieldOfView.ReturnThisEnemy().position - player.transform.position;
+                    Vector3 directionToEnemy = enemyGroundBotFieldOfView.ReturnThisEnemy().position - playerCameraTransform.position;
                     endRotation = Quaternion.LookRotation(directionToEnemy);
                 }
                 lerpTime = 0f;

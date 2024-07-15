@@ -23,11 +23,13 @@ public class EnemyProximityCheck : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GroundBotStateMachine groundBotStateMachine;
+    [SerializeField] private PlayerAbilities playerAbilities;
 
     private void Start()
     {
         raycastDistance = 7.5f;
         playerController = GameManager.instance.ReturnPlayerController();
+        playerAbilities = GameManager.instance.ReturnPlayerAbilities();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,7 +83,7 @@ public class EnemyProximityCheck : MonoBehaviour
             {
                 enemyWithinRange = true;
 
-                if(hitInfo.collider.tag == "GroundBot" && Vector3.Distance(transform.position, hitInfo.collider.transform.position) < 1.5f)
+                if(hitInfo.collider.tag == "GroundBot" && Vector3.Distance(transform.position, hitInfo.collider.transform.position) < 1.5f && !playerAbilities.ReturnUsingInvisibility())
                 {
                     Debug.Log("Touched the bot");
                     groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
