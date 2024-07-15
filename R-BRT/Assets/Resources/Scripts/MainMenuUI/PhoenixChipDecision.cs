@@ -41,6 +41,7 @@ public class PhoenixChipDecision : MonoBehaviour
     public void ChooseYourFriend()
     {
         SceneManager.LoadScene("VictorySamLives");
+        
     }
 
     public void SaveTheWorld()

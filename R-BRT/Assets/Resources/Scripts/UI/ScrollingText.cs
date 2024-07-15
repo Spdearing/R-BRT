@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro; // Use this if you are using TextMeshPro
+using UnityEngine.SceneManagement;
 
 public class ScrollingText : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ScrollingText : MonoBehaviour
 
     private void OnEnable()
     {
+        Time.timeScale = 1.0f;
         if (textRectTransform == null)
         {
             textRectTransform = GetComponent<RectTransform>();
@@ -21,18 +23,12 @@ public class ScrollingText : MonoBehaviour
 
         StartCoroutine(StartScrolling());
         HideSkipText();
-        Invoke("ShowSkipText", 10);
+        Invoke("ShowSkipText", 1);
     }
 
     private void Update()
     {
-        if (isScrolling)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                SkipScrolling();
-            }
-        }
+        GoBackToMainMenu();
     }
 
     IEnumerator StartScrolling()
@@ -51,7 +47,7 @@ public class ScrollingText : MonoBehaviour
                 currentScrollSpeed *= speedUpMultiplier;
             }
 
-            textRectTransform.anchoredPosition += new Vector2(0, currentScrollSpeed * Time.deltaTime);
+            textRectTransform.anchoredPosition += new Vector2(-currentScrollSpeed * Time.deltaTime, 0 );
             yield return null;
         }
 
@@ -82,5 +78,13 @@ public class ScrollingText : MonoBehaviour
         //StopAllCoroutines();
         //textRectTransform.anchoredPosition = new Vector2(textRectTransform.anchoredPosition.x, Screen.height);
         HideSkipText();
+    }
+
+    public void GoBackToMainMenu()
+    {
+        if(skipText.text == "[Press Left - Click To Skip]" && Input.GetMouseButton(0))
+        {
+            SceneManager.LoadScene("MainMenuScene");
+        }
     }
 }
