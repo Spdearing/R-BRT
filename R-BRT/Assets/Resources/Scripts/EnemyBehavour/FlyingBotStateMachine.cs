@@ -9,7 +9,6 @@ public class FlyingBotStateMachine : MonoBehaviour
     [SerializeField] private GameObject flyingBotHead;
     [SerializeField] private GameObject fieldOfView;
 
-
     [Header("Transform")]
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] private Transform flyingBotOnePatrolPointA;
@@ -26,12 +25,12 @@ public class FlyingBotStateMachine : MonoBehaviour
     [SerializeField] private EnemyFlyingBotFieldOfView enemyFlyingBotFieldOfView;
     [SerializeField] private PlayerController playerController;
 
-
     private Quaternion startRotation;
     private Quaternion endRotation;
     private float lerpTime = 0f;
-    private float lerpDuration = .25f;
+    private float lerpDuration = 0.25f;
     private bool isLerping = false;
+    private Coroutine patrolRoutine;
 
     public FlyingState currentState;
 
@@ -41,12 +40,13 @@ public class FlyingBotStateMachine : MonoBehaviour
         moving,
         scanning,
         playerCaught,
+        lookingAtPlayer,
     }
 
     void Start()
     {
         Setup();
-        
+        StartPatrolRoutine();
     }
 
     void Update()
@@ -68,16 +68,25 @@ public class FlyingBotStateMachine : MonoBehaviour
 
     void Setup()
     {
-        
-        patrolSpeed = 3.5f;
-        patrolling = true;
         player = GameManager.instance.ReturnPlayer();
         playerController = GameManager.instance.ReturnPlayerController();
         playerCamera = GameManager.instance.ReturnPlayerCamera();
         playerCameraTransform = playerCamera.transform;
         gameOverScreen = GameManager.instance.ReturnGameOver();
         enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
+        patrolSpeed = 3.5f;
+        patrolling = true;
+        
+        if (gameObject.name == "FlyingBotGroup1Lobby1" || gameObject.name == "FlyingBotGroup1Lobby2" || gameObject.name == "FlyingBotGroup1Lobby3" || gameObject.name == "FlyingBotGroup1Lobby4")
+        {
+            AssignPatrolPointsBasedOnName();
+        }
+            
+        currentState = FlyingState.patrolling;
+    }
 
+    private void AssignPatrolPointsBasedOnName()
+    {
         string botName = gameObject.name;
 
         switch (botName)
@@ -95,8 +104,6 @@ public class FlyingBotStateMachine : MonoBehaviour
                 AssignPatrolPoints("FlyingBotOnePatrolPointH", "FlyingBotOnePatrolPointG");
                 break;
         }
-
-        currentState = FlyingState.patrolling;
     }
 
     private void AssignPatrolPoints(string pointAName, string pointBName)
@@ -105,11 +112,20 @@ public class FlyingBotStateMachine : MonoBehaviour
         flyingBotOnePatrolPointB = GameObject.Find(pointBName).transform;
     }
 
+    private void StartPatrolRoutine()
+    {
+        if (patrolRoutine != null)
+        {
+            StopCoroutine(patrolRoutine);
+        }
+        patrolRoutine = StartCoroutine(PatrolRoutine());
+    }
+
     private IEnumerator PatrolRoutine()
     {
         while (true)
         {
-            if (currentState == FlyingState.patrolling && patrolling == true)
+            if (currentState == FlyingState.patrolling && patrolling)
             {
                 ChangeBehavior(FlyingState.moving);
                 patrolling = false;
@@ -165,24 +181,25 @@ public class FlyingBotStateMachine : MonoBehaviour
         {
             case FlyingState.patrolling:
 
-                if(gameObject.name == "FlyingBotGroup1Lobby1" || gameObject.name == "FlyingBotGroup1Lobby2" || gameObject.name == "FlyingBotGroup1Lobby3" || gameObject.name == "FlyingBotGroup1Lobby4")
-
-                StartCoroutine(PatrolRoutine());
+                if (gameObject.name == "FlyingBotGroup1Lobby1" || gameObject.name == "FlyingBotGroup1Lobby2" || gameObject.name == "FlyingBotGroup1Lobby3" || gameObject.name == "FlyingBotGroup1Lobby4")
+                {
+                    if (patrolRoutine == null)
+                    {
+                        StartPatrolRoutine();
+                    }
+                }
 
                 break;
-
             case FlyingState.moving:
-
-
                 break;
-
             case FlyingState.scanning:
-
-                StopCoroutine(PatrolRoutine());
-
+                StopPatrolRoutine();
                 break;
             case FlyingState.playerCaught:
                 HandlePlayerCaught();
+                break;
+            case FlyingState.lookingAtPlayer:
+                LookAtPlayer();
                 break;
             default:
                 currentState = FlyingState.patrolling;
@@ -190,21 +207,34 @@ public class FlyingBotStateMachine : MonoBehaviour
         }
     }
 
+    private void StopPatrolRoutine()
+    {
+        if (patrolRoutine != null)
+        {
+            StopCoroutine(patrolRoutine);
+            patrolRoutine = null;
+        }
+    }
+
+    private void LookAtPlayer()
+    {
+        // Make the bot look at the player
+        Vector3 directionToPlayer = player.transform.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * patrolSpeed);
+    }
+
     private void HandlePlayerCaught()
     {
         gameOverScreen.ReturnGameOverPanel().SetActive(true);
-
 
         if (GameManager.instance.ReturnNewGameStatus() == true)
         {
             GameManager.instance.SetNewGameStatus(false);
         }
 
-
         playerController.SetCameraLock(true);
         startRotation = playerCameraTransform.rotation;
-
-
 
         if (enemyFlyingBotFieldOfView != null)
         {
@@ -220,9 +250,6 @@ public class FlyingBotStateMachine : MonoBehaviour
 
     public void SetPatrollingStatus(bool value)
     {
-        if (this.patrolling == false)
-        {
-            patrolling = value;
-        }
+        patrolling = value;
     }
 }

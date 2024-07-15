@@ -26,7 +26,7 @@ public class EnemyProximityCheck : MonoBehaviour
 
     private void Start()
     {
-        raycastDistance = 10.0f;
+        raycastDistance = 7.5f;
         playerController = GameManager.instance.ReturnPlayerController();
     }
 
@@ -81,8 +81,9 @@ public class EnemyProximityCheck : MonoBehaviour
             {
                 enemyWithinRange = true;
 
-                if(hitInfo.collider.tag == "GroundBot" && Vector3.Distance(transform.position, hitInfo.collider.transform.position) < 1.0f)
+                if(hitInfo.collider.tag == "GroundBot" && Vector3.Distance(transform.position, hitInfo.collider.transform.position) < 1.5f)
                 {
+                    Debug.Log("Touched the bot");
                     groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
                     groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.playerCaught);
                     playerController.SetPlayerActivity(false);

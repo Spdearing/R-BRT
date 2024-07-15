@@ -13,6 +13,9 @@ public class GroundBotStateMachine : MonoBehaviour
     [SerializeField] EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
     [SerializeField] GroundBotAIMovement groundBotAIMovement;
 
+    [Header("GameObject")]
+    [SerializeField] private GameObject player;
+
 
     private Quaternion startRotation;
     private Quaternion endRotation;
@@ -38,6 +41,7 @@ public class GroundBotStateMachine : MonoBehaviour
 
     void Setup()
     {
+        player = GameManager.instance.ReturnPlayer();
         playerCameraTransform = GameManager.instance.ReturnCameraTransform();
         gameOverScreen = GameManager.instance.ReturnGameOver();
         playerController = GameManager.instance.ReturnPlayerController();
@@ -107,20 +111,13 @@ public class GroundBotStateMachine : MonoBehaviour
                     GameManager.instance.SetNewGameStatus(false);
                 }
 
-                //if (GameManager.instance.ReturnPlayerCaughtStatus() == false)
-                //{
-                    
-                //    GameManager.instance.SetPlayerCaughtStatus(true);
-                //    Debug.Log(GameManager.instance.ReturnPlayerCaughtStatus());
-                //}
-                
                 playerController.SetCameraLock(true);
 
                 startRotation = playerCameraTransform.rotation;
 
                 if (enemyGroundBotFieldOfView != null)
                 {
-                    Vector3 directionToEnemy = enemyGroundBotFieldOfView.ReturnThisEnemy().position - playerCameraTransform.position;
+                    Vector3 directionToEnemy = enemyGroundBotFieldOfView.ReturnThisEnemy().position - player.transform.position;
                     endRotation = Quaternion.LookRotation(directionToEnemy);
                 }
                 lerpTime = 0f;

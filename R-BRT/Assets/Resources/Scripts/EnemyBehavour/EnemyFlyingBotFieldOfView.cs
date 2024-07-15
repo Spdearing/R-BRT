@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro; // Use this if you are using TextMeshPro
 
@@ -79,13 +78,10 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     private void DetectingPlayer()
     {
-        if (enemyProximity.ReturnEnemyWithinRange() && sceneActivity.ReturnPlayerSpotted())
+        if (enemyProximity.ReturnEnemyWithinRange() && sceneActivity.ReturnPlayerSpotted() && playerIsBeingDetected)
         {
-            if (playerIsBeingDetected)
-            {
-                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
-                playerIsBeingDetected = false;
-            }
+            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
+            playerIsBeingDetected = false;
         }
     }
 
@@ -104,7 +100,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         playerDetectionState.SetFlyingBotFieldOfView(this);
 
         playerDetectionState.SetDetectedByFlyingBot(true);
-        flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
+        flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.lookingAtPlayer);
     }
 
     void ResetPlayerDetection()
@@ -114,6 +110,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         playerIsBeingDetected = false;
         playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
         playerDetectionState.SetDetectedByFlyingBot(false);
+        flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.patrolling);
     }
 
     public Transform ReturnThisEnemy()
@@ -121,3 +118,5 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         return enemyGrandparentTransform;
     }
 }
+
+

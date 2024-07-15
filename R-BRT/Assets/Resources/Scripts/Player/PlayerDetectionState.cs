@@ -58,9 +58,9 @@ public class PlayerDetectionState : MonoBehaviour
         detectedByGroundBot = false;
         detectedByFlyingBot = false;
         detectedBySpiderBot = false;
-        crouchingDetectionIncrease = 1.0f;
-        detectionIncreaseRate = 25.0f;
-        detectionDecreaseRate = 25.0f;
+        crouchingDetectionIncrease = 5.0f;
+        detectionIncreaseRate = 30.0f;
+        detectionDecreaseRate = 15.0f;
         currentState = DetectionState.exploring;
     }
 
@@ -87,16 +87,19 @@ public class PlayerDetectionState : MonoBehaviour
 
                 if (playerController.ReturnCrouchingStatus(true))
                 {
+                    Debug.Log("is crouching and being detected");
                     detection.IncreaseDetection(crouchingDetectionIncrease);
                     detectionIncreaseRate += 0.5f;
                 }
                 else if (jetpack.IsUsingJetpack(true))
                 {
+                    Debug.Log("is jetpacking and being detected");
                     detection.IncreaseDetection(detectionIncreaseRate * 2);
                     detectionIncreaseRate += 0.5f;
                 }
                 else
                 {
+                    Debug.Log("is regululary being detected");
                     detection.IncreaseDetection(detectionIncreaseRate);
                     detectionIncreaseRate += 0.5f;
                 }
@@ -113,7 +116,7 @@ public class PlayerDetectionState : MonoBehaviour
 
             case DetectionState.meterRepleneshing:
                 // Decrease detection level over time
-                detectionIncreaseRate = 25.0f;
+                detectionIncreaseRate = 30f;
                 detection.DecreaseDetection(detectionDecreaseRate);
                 
 
