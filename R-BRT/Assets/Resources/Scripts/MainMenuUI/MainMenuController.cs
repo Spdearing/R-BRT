@@ -86,6 +86,7 @@ public class MainMenuController : MonoBehaviour
     {
         if(introPanelOpen == true && Input.GetMouseButton(0))
         {
+            GameManager.instance.SetNewGameStatus(true);
             SceneManager.LoadScene("GameScene");
         } 
     }

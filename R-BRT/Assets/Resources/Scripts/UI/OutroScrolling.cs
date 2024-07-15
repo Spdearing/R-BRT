@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro; // Use this if you are using TextMeshPro
 using UnityEngine.SceneManagement;
 
-public class ScrollingText : MonoBehaviour
+public class OutroScrolling : MonoBehaviour
 {
     public float scrollSpeed = 60.0f;
     public float startDelay = 1.0f;
@@ -47,7 +47,7 @@ public class ScrollingText : MonoBehaviour
                 currentScrollSpeed *= speedUpMultiplier;
             }
 
-            textRectTransform.anchoredPosition += new Vector2(-currentScrollSpeed * Time.deltaTime, 0 );
+            textRectTransform.anchoredPosition += new Vector2(currentScrollSpeed * Time.deltaTime,0 );
             yield return null;
         }
 
@@ -82,9 +82,9 @@ public class ScrollingText : MonoBehaviour
 
     public void GoBackToMainMenu()
     {
-        if(skipText.text == "[Press Left - Click To Skip]" && Input.GetMouseButton(0))
+        if (skipText.text == "[Press Left - Click To Skip]" && Input.GetMouseButton(0))
         {
-            SceneManager.LoadScene("MainMenuScene");
+            SceneManager.LoadScene("GameScene");
         }
     }
 }
