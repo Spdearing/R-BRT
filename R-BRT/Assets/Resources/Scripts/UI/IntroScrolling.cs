@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // Use this if you are using TextMeshPro
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class IntroScrolling : MonoBehaviour
@@ -23,31 +22,39 @@ public class IntroScrolling : MonoBehaviour
 
         StartCoroutine(StartScrolling());
         HideSkipText();
-        Invoke("ShowSkipText", 1);
     }
 
     private void Update()
     {
-     
+        if (isScrolling)
+        {
+            if (textRectTransform.offsetMax.y >= 40)
+            {
+                Debug.Log("Showing Text");
+                ShowSkipText();
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                SkipScrolling();
+            }
+        }
     }
 
     IEnumerator StartScrolling()
     {
-     
         yield return new WaitForSeconds(startDelay);
 
-     
         while (textRectTransform.anchoredPosition.y < Screen.height)
         {
             float currentScrollSpeed = scrollSpeed;
 
- 
             if (Input.GetKey(KeyCode.Space))
             {
                 currentScrollSpeed *= speedUpMultiplier;
             }
 
-            textRectTransform.anchoredPosition += new Vector2(0,currentScrollSpeed * Time.deltaTime );
+            textRectTransform.anchoredPosition += new Vector2(0, currentScrollSpeed * Time.deltaTime);
             yield return null;
         }
 
@@ -75,8 +82,8 @@ public class IntroScrolling : MonoBehaviour
     void SkipScrolling()
     {
         isScrolling = false;
-        //StopAllCoroutines();
-        //textRectTransform.anchoredPosition = new Vector2(textRectTransform.anchoredPosition.x, Screen.height);
+        textRectTransform.anchoredPosition = new Vector2(textRectTransform.anchoredPosition.x, Screen.height);
         HideSkipText();
+        SceneManager.LoadScene("GameScene");
     }
 }
