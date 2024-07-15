@@ -178,8 +178,7 @@ public class FlyingBotStateMachine : MonoBehaviour
 
             case FlyingState.scanning:
 
-                //Debug.Log(gameObject.name.ToString() + "Changing to scanning state");
-                //StopAllCoroutines();
+                StopCoroutine(PatrolRoutine());
 
                 break;
             case FlyingState.playerCaught:

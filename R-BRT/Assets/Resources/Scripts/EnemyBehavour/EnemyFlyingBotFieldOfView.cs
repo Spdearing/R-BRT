@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static FlyingBotStateMachine;
-using UnityEngine.InputSystem.LowLevel;
-using Unity.VisualScripting;
+using TMPro; // Use this if you are using TextMeshPro
 
 public class EnemyFlyingBotFieldOfView : MonoBehaviour
 {
@@ -21,7 +19,6 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
     [Header("Transform")]
     [SerializeField] private Transform enemyGrandparentTransform;
 
-
     private void Start()
     {
         Setup();
@@ -38,75 +35,43 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         ability = GameManager.instance.ReturnPlayerAbilities();
         enemyProximity = GameManager.instance.ReturnEnemyProximityCheck();
         playerDetectionState = GameManager.instance.ReturnPlayerDetectionState();
-        flyingBotSpawner = GameManager.instance.ReturnFlyingBotSpawner(); 
+        flyingBotSpawner = GameManager.instance.ReturnFlyingBotSpawner();
         playerIsBeingDetected = false;
-        enemyGrandparentTransform = gameObject.transform.parent.parent;
+        enemyGrandparentTransform = transform.parent.parent;
         flyingBotStateMachine = enemyGrandparentTransform.GetComponent<FlyingBotStateMachine>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange())
+        if (IsPlayer(other))
         {
-            if (!ability.ReturnUsingInvisibility())
-            {
-                Debug.Log("entering " + transform.parent.parent.gameObject.name);
-                sceneActivity.SetPlayerIsSpotted(true);
-                playerIsBeingDetected = true;
-
-
-                Transform grandparentTransform = gameObject.transform.parent.parent;
-
-                FlyingBotStateMachine flyingBotStateMachine = grandparentTransform.GetComponent<FlyingBotStateMachine>();
-
-                EnemyFlyingBotFieldOfView enemyFieldOfView = gameObject.GetComponent<EnemyFlyingBotFieldOfView>();
-
-
-                if (flyingBotStateMachine != null && enemyFieldOfView != null)
-                {
-                    playerDetectionState.SetFlyingBotStateMachine(flyingBotStateMachine);
-                    playerDetectionState.SetFlyingBotFieldOfView(enemyFieldOfView);
-                }
-
-                playerDetectionState.SetDetectedByFlyingBot(true);
-                flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
-            }
-            //sceneActivity.SetPlayerIsSpotted(false);
-           //playerIsBeingDetected = false;
+            HandlePlayerDetection();
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility())
+        if (IsPlayer(other))
         {
-            Debug.Log("inside " + transform.parent.parent.gameObject.name);
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();
             sceneActivity.SetPlayerIsSpotted(withinRange);
 
             if (!withinRange)
             {
-                playerIsBeingDetected = false;
-                playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+                ResetPlayerDetection();
             }
         }
         else
         {
-            sceneActivity.SetPlayerIsSpotted(false);
-            playerIsBeingDetected = false;
-            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+            ResetPlayerDetection();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange())
+        if (IsPlayer(other))
         {
-            Debug.Log("exiting " + transform.parent.parent.gameObject.name);
-            sceneActivity.SetPlayerIsSpotted(false);
-            playerIsBeingDetected = false;
-            playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
-            playerDetectionState.SetDetectedByFlyingBot(false);
+            ResetPlayerDetection();
             flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.patrolling);
             flyingBotStateMachine.SetPatrollingStatus(true);
         }
@@ -124,8 +89,35 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         }
     }
 
+    bool IsPlayer(Collider other)
+    {
+        return other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility();
+    }
+
+    void HandlePlayerDetection()
+    {
+        Debug.Log("Entering " + transform.parent.parent.gameObject.name);
+        sceneActivity.SetPlayerIsSpotted(true);
+        playerIsBeingDetected = true;
+
+        playerDetectionState.SetFlyingBotStateMachine(flyingBotStateMachine);
+        playerDetectionState.SetFlyingBotFieldOfView(this);
+
+        playerDetectionState.SetDetectedByFlyingBot(true);
+        flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.scanning);
+    }
+
+    void ResetPlayerDetection()
+    {
+        Debug.Log("Exiting " + transform.parent.parent.gameObject.name);
+        sceneActivity.SetPlayerIsSpotted(false);
+        playerIsBeingDetected = false;
+        playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
+        playerDetectionState.SetDetectedByFlyingBot(false);
+    }
+
     public Transform ReturnThisEnemy()
     {
-        return this.enemyGrandparentTransform;
+        return enemyGrandparentTransform;
     }
 }
