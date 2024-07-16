@@ -25,19 +25,11 @@ public class Battery : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private PlayerRaycast playerRayCast;
     [SerializeField] private PlayerAbilities abilities;
     [SerializeField] private SceneActivity sceneActivity; 
 
-
-
-
-
-    // Start is called before the first frame update
     void Start()
     { 
-        
-        playerRayCast = GameManager.instance.ReturnPlayerRaycast();
         battery = GameManager.instance.ReturnBatteryObject();
         fuelMeter = GameManager.instance.ReturnFuelMeter();
         invisibilityMeter = GameManager.instance.ReturnInvisibilityMeterGameObject();
@@ -47,6 +39,7 @@ public class Battery : MonoBehaviour
         abilitySelectionPanel.SetActive(false);
         elevatorBaracade = GameManager.instance.ReturnElevatorBlockade();
         stealthBaracade = GameManager.instance.ReturnStealthBlockade();
+        
     }
 
     public void OpenAbilitiesSelection()
@@ -56,6 +49,7 @@ public class Battery : MonoBehaviour
         playerController.SetCameraLock(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Time.timeScale = 0.0f;
     }
 
     public void OnClickJetpackButton()
@@ -64,6 +58,8 @@ public class Battery : MonoBehaviour
         sceneActivity.TurnOffNotJetPackPathDialogue();
         GameManager.instance.CloseOffTheStairs();
         GameManager.instance.SetHasPickedAbility(true);
+        GameManager.instance.SetJetpackStatus(true);
+        GameManager.instance.SetPlayerHasClearedHallway(true);
         stealthBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
@@ -73,6 +69,7 @@ public class Battery : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         sceneActivity.StartJetPackDialogue();
+        Time.timeScale = 1.0f;
         Destroy(battery);
     }
 
@@ -81,16 +78,18 @@ public class Battery : MonoBehaviour
         GameManager.instance.SetIndexForAbilityChoice(0);
         sceneActivity.TurnOffNotStealthPathDialogue();
         GameManager.instance.SetHasPickedAbility(true);
+        GameManager.instance.SetInvisibilityStatus(true);
+        GameManager.instance.SetPlayerHasClearedHallway(true);
         elevatorBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         abilities.SetInvisibilityUnlock(true);
-        //abilities.DisplayInvisibilityMeter();
         abilitySelectionPanel.SetActive(false);
         invisibilityMeter.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         sceneActivity.StartStealthDialogue();
+        Time.timeScale = 1.0f;
         Destroy(battery);
     }
 }

@@ -332,10 +332,20 @@ public class SceneActivity : MonoBehaviour
 
     public void StartJetPackDialogue()
     {
-        if (abilityDialogueTrigger != null)
+        if(dialogueTriggerOne.activeSelf)
         {
-            abilityDialogueTrigger.SetActive(true);
+            dialogueTriggerOne.SetActive(false);
+            
+            if (abilityDialogueTrigger != null)
+            {
+                abilityDialogueTrigger.SetActive(true);
+            }
         }
+        else
+        
+            abilityDialogueTrigger.SetActive(true);
+        
+
     }
 
     public void TurnOffNotJetPackPathDialogue()

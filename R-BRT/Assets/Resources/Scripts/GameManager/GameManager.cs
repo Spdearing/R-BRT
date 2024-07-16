@@ -214,6 +214,20 @@ public class GameManager : MonoBehaviour
                     if(playerHasClearedFirstFloor)
                     {
                         hasPickedAbility = true;
+
+                        if(invisibilityUnlocked)
+                        {
+                            jetPackBlockade.SetActive(true);
+                            checkPoints[2].SetActive(false);
+                            checkPoints[5].SetActive(false);
+                        }
+                        else if(jetpackUnlocked)
+                        {
+                            stealthBlockade.SetActive(true);
+                            CloseOffTheStairs();
+                            checkPoints[3].SetActive(false);
+                            checkPoints[4].SetActive(false);
+                        }
                     }
                     else
                     {
