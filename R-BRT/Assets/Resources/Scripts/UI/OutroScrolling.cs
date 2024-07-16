@@ -29,6 +29,7 @@ public class OutroScrolling : MonoBehaviour
     private void Update()
     {
         GoBackToMainMenu();
+        ShowSkipText();
     }
 
     IEnumerator StartScrolling()
@@ -47,18 +48,18 @@ public class OutroScrolling : MonoBehaviour
                 currentScrollSpeed *= speedUpMultiplier;
             }
 
-            textRectTransform.anchoredPosition += new Vector2(currentScrollSpeed * Time.deltaTime,0 );
+            textRectTransform.anchoredPosition += new Vector2(0, currentScrollSpeed * Time.deltaTime);
             yield return null;
         }
 
         // End of scrolling
         isScrolling = false;
-        HideSkipText();
+        //HideSkipText();
     }
 
     void ShowSkipText()
     {
-        if (skipText != null)
+        if(textRectTransform.offsetMax.y >= 80)
         {
             skipText.text = "[Press Left - Click To Skip]";
         }
