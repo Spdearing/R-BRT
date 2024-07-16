@@ -28,7 +28,7 @@ public class FlyingBotSpawner : MonoBehaviour
     {
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/FlyingBotFinal");
         group1 = new GameObject[4];
-        group2 = new GameObject[4];
+        group2 = new GameObject[1];
         enemiesSpawned = 0;
         SpawnGroup1();
         SpawnGroup2();

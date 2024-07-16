@@ -47,7 +47,7 @@ public class GroundBotSpawner : MonoBehaviour
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         group1 = new GameObject[1];
-        group2 = new GameObject[6];
+        group2 = new GameObject[8];
         group3 = new GameObject[4];
         
         SpawnGroup1();
