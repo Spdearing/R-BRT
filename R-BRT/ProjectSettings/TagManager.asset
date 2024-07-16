@@ -82,6 +82,7 @@ TagManager:
   - Second Broken Room
   - Before Jetpack Puzzle
   - Close Janitors Closet
+  - Top Of Elevator
   layers:
   - Default
   - TransparentFX

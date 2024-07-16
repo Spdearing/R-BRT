@@ -36,8 +36,6 @@ public class SceneActivity : MonoBehaviour
     [SerializeField] private Transform playerEndRotation;
     
 
-
-
     [Header("Scripts")]
     [SerializeField] private DetectionMeter detectionMeter;
     [SerializeField] private PlayerController playerController;

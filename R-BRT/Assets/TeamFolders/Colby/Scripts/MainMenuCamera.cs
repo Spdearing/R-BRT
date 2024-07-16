@@ -69,9 +69,6 @@ public class MainMenuCamera : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            //Debug.DrawRay(transform.position, transform.forward, Color.red);
-            Debug.Log(hit.collider.gameObject.name);
-
             if (hit.collider.tag == "MainMenuRBRT" && mainMenu.activeInHierarchy == true)
             {
                 RBRToutlineCamera.SetActive(true);

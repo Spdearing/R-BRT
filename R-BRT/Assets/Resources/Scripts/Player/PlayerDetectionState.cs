@@ -87,19 +87,19 @@ public class PlayerDetectionState : MonoBehaviour
 
                 if (playerController.ReturnCrouchingStatus(true))
                 {
-                    Debug.Log("is crouching and being detected");
+                    
                     detection.IncreaseDetection(crouchingDetectionIncrease);
                     detectionIncreaseRate += 0.5f;
                 }
                 else if (jetpack.IsUsingJetpack(true))
                 {
-                    Debug.Log("is jetpacking and being detected");
+                    
                     detection.IncreaseDetection(detectionIncreaseRate * 2);
                     detectionIncreaseRate += 0.5f;
                 }
                 else
                 {
-                    Debug.Log("is regululary being detected");
+                  
                     detection.IncreaseDetection(detectionIncreaseRate);
                     detectionIncreaseRate += 0.5f;
                 }
