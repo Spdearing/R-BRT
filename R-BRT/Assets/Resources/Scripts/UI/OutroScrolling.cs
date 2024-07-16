@@ -85,7 +85,7 @@ public class OutroScrolling : MonoBehaviour
     {
         if (skipText.text == "[Press Left - Click To Skip]" && Input.GetMouseButton(0))
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("MainMenuScene");
         }
     }
 }
