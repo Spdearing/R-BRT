@@ -23,9 +23,11 @@ public class AbilityDialogueFunctionality : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private SceneActivity sceneActivity;
+    
 
     [Header("GameObject")]
     [SerializeField] private GameObject continueText;
+    [SerializeField] private GameObject firstDialogue;
 
     [Header("Bools")]
     [SerializeField] private bool skipText;
@@ -127,6 +129,12 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
     private void OnEnable()
     {
+        firstDialogue = GameManager.instance.ReturnDialogue();
+        if (firstDialogue.activeSelf == true)
+        {
+            firstDialogue.SetActive(false);
+        }
+        else return;
         Initialize();
         StartDialogue();
 
