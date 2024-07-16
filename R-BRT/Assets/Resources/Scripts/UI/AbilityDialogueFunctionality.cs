@@ -39,6 +39,7 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
     private void Initialize()
     {
+        dialogueName = string.Empty;
         dialogues = new string[][] { fullStealthAbilityText , fullJetPackAbilityText, fullStealthAbilityText2, fullJetPackAbilityText2, fullStealthAbilityText3, fullJetPackAbilityText3 };
         playerController = GameManager.instance.ReturnPlayerController();
         sceneActivity = GameManager.instance.ReturnSceneActivity();
@@ -48,7 +49,6 @@ public class AbilityDialogueFunctionality : MonoBehaviour
     private void StartDialogue()
     {
         dialogueName = GameManager.instance.ReturnPlayerDialogueAbilityChoice();
-        Debug.Log(GameManager.instance.ReturnPlayerDialogueAbilityChoice());
         string[] currentDialogue = GetCurrentDialogue(dialogueName, GetDialogues());
 
         if (currentDialogue != null)

@@ -5,128 +5,167 @@ using UnityEngine;
 public class PlayerCollisions : MonoBehaviour
 {
     [SerializeField] GameObject destinationA;
-   
-
 
     [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private FirstDialogueFunctionality firstDialogueFunctionality;
+
+    private Dictionary<string, System.Action<Collider>> collisionActions;
 
     private void Start()
     {
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         firstDialogueFunctionality = GameManager.instance.ReturnFirstDialogueFunctionality();
+
+        InitializeCollisionActions();
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void InitializeCollisionActions()
     {
-       if (other.gameObject.tag == "SecondDialogueEncounter")
+        collisionActions = new Dictionary<string, System.Action<Collider>>()
         {
-            firstDialogueFunctionality.SetDialogue("Second Dialogue");
-            sceneActivity.StartSecondDialogue();
-        }
+            { "SecondDialogueEncounter", SecondDialogueEncounter },
+            { "ThirdDialogueEncounter", ThirdDialogueEncounter },
+            { "FourthDialogueEncounter", FourthDialogueEncounter },
+            { "FifthDialogueEncounter", FifthDialogueEncounter },
+            { "SixthDialogueEncounter", SixthDialogueEncounter },
+            { "SeventhDialogueEncounter", SeventhDialogueEncounter },
+            { "EighthDialogueEncounter", EighthDialogueEncounter },
+            { "NinthDialogueEncounter", NinthDialogueEncounter },
+            { "TenDialogueEncounter", TenDialogueEncounter },
+            { "EleventhDialogueEncounter", EleventhDialogueEncounter },
+            { "TwelthDialogueEncounter", TwelthDialogueEncounter },
+            { "After Lobby", AfterLobby },
+            { "Janitors Closet", JanitorsCloset },
+            { "Top Of Elevator", TopElevator },
+            { "Top Stairs", TopStairs },
+            { "Second Broken Room", SecondBrokenRoom },
+            { "Before Jetpack Puzzle", BeforeJetpackPuzzle },
+            { "Close Janitors Closet", CloseJanitorsCloset }
+        };
+    }
 
-        else if (other.gameObject.tag == "ThirdDialogueEncounter")
+    private void OnTriggerEnter(Collider other)
+    {
+        if (collisionActions.TryGetValue(other.gameObject.tag, out System.Action<Collider> action))
         {
-            firstDialogueFunctionality.SetDialogue("Third Dialogue");
-            sceneActivity.StartThirdDialogue();
+            action.Invoke(other);
         }
+    }
 
-        if (other.gameObject.tag == "FourthDialogueEncounter")
-        {
-            firstDialogueFunctionality.SetDialogue("Fourth Dialogue");
-            sceneActivity.StartFourthDialogue();
-        }
+    private void SecondDialogueEncounter(Collider other)
+    {
+        firstDialogueFunctionality.SetDialogue("Second Dialogue");
+        sceneActivity.StartSecondDialogue();
+    }
 
-        else if (other.gameObject.tag == "FifthDialogueEncounter")
-        {
-            firstDialogueFunctionality.SetDialogue("Fifth Dialogue");
-            sceneActivity.StartFifthDialogue();
-        }
-        
-        if (other.gameObject.tag == "SixthDialogueEncounter")
-        {
-            firstDialogueFunctionality.SetDialogue("Sixth Dialogue");
-            sceneActivity.StartSixthDialogue();
-        }
-        else if (other.gameObject.tag == "SeventhDialogueEncounter")
-        {
-            GameManager.instance.SetIndexForAbilityChoice(3);
-            sceneActivity.StartStealthDialogue();
-            sceneActivity.TurnOffSeventhDialogueBox();
-        }
-        if (other.gameObject.tag == "EighthDialogueEncounter")
-        {
-            GameManager.instance.SetIndexForAbilityChoice(2);
-            sceneActivity.StartJetPackDialogue();
-            sceneActivity.TurnOffEighthDialogueBox();
-        }
-        else if (other.gameObject.tag == "NinthDialogueEncounter")
-        {
-            GameManager.instance.SetIndexForAbilityChoice(4);
-            sceneActivity.StartJetPackDialogue();
-            sceneActivity.TurnOffNinthDialogueBox();
-        }
-        if (other.gameObject.tag == "TenDialogueEncounter")
-        {
-            GameManager.instance.SetIndexForAbilityChoice(5);
-            sceneActivity.StartStealthDialogue();
-            sceneActivity.TurnOffTenthDialogueBox();
-        }
-        else if(other.gameObject.tag == "EleventhDialogueEncounter")
-        {
-            firstDialogueFunctionality.SetDialogue("Eighth Dialogue");
-            sceneActivity.StartEleventhDialogue();
-        }
-        if (other.gameObject.tag == "TwelthDialogueEncounter")
-        {
-            firstDialogueFunctionality.SetDialogue("Seventh Dialogue");
-            sceneActivity.StartTwelthDialogue();
-        }
-        else if(other.gameObject.tag == "After Lobby")
-        {
-            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
-            
-        }
-        if (other.gameObject.tag == "Janitors Closet")
-        {
-            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
-            
-        }
-        else if (other.gameObject.tag == "Top Elevator")
-        {
-            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
-            GameManager.instance.SetJetpackStatus(true);
-            GameManager.instance.ReturnPlayerCheckPoint(3).SetActive(false);
-            GameManager.instance.ReturnPlayerCheckPoint(4).SetActive(false);
-            GameManager.instance.SetPlayerHasClearedHallway(true);
-            GameManager.instance.CloseOffTheStairs();
+    private void ThirdDialogueEncounter(Collider other)
+    {
+        firstDialogueFunctionality.SetDialogue("Third Dialogue");
+        sceneActivity.StartThirdDialogue();
+    }
 
-        }
-        if (other.gameObject.tag == "Top Stairs")
-        {
-            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
-            GameManager.instance.SetInvisibilityStatus(true);
-            GameManager.instance.ReturnPlayerCheckPoint(2).SetActive(false);
-            GameManager.instance.ReturnPlayerCheckPoint(5).SetActive(false);
-            GameManager.instance.SetPlayerHasClearedHallway(true);
+    private void FourthDialogueEncounter(Collider other)
+    {
+        firstDialogueFunctionality.SetDialogue("Fourth Dialogue");
+        sceneActivity.StartFourthDialogue();
+    }
 
-        }
-        else if (other.gameObject.tag == "Second Broken Room")
+    private void FifthDialogueEncounter(Collider other)
+    {
+        firstDialogueFunctionality.SetDialogue("Fifth Dialogue");
+        sceneActivity.StartFifthDialogue();
+    }
+
+    private void SixthDialogueEncounter(Collider other)
+    {
+        firstDialogueFunctionality.SetDialogue("Sixth Dialogue");
+        sceneActivity.StartSixthDialogue();
+    }
+
+    private void SeventhDialogueEncounter(Collider other)
+    {
+        GameManager.instance.SetIndexForAbilityChoice(3);
+        sceneActivity.StartStealthDialogue();
+        sceneActivity.TurnOffSeventhDialogueBox();
+    }
+
+    private void EighthDialogueEncounter(Collider other)
+    {
+        GameManager.instance.SetIndexForAbilityChoice(2);
+        sceneActivity.StartJetPackDialogue();
+        sceneActivity.TurnOffEighthDialogueBox();
+    }
+
+    private void NinthDialogueEncounter(Collider other)
+    {
+        GameManager.instance.SetIndexForAbilityChoice(4);
+        sceneActivity.StartJetPackDialogue();
+        sceneActivity.TurnOffNinthDialogueBox();
+    }
+
+    private void TenDialogueEncounter(Collider other)
+    {
+        GameManager.instance.SetIndexForAbilityChoice(5);
+        sceneActivity.StartStealthDialogue();
+        sceneActivity.TurnOffTenthDialogueBox();
+    }
+
+    private void EleventhDialogueEncounter(Collider other)
+    {
+        firstDialogueFunctionality.SetDialogue("Eighth Dialogue");
+        sceneActivity.StartEleventhDialogue();
+    }
+
+    private void TwelthDialogueEncounter(Collider other)
+    {
+        firstDialogueFunctionality.SetDialogue("Seventh Dialogue");
+        sceneActivity.StartTwelthDialogue();
+    }
+
+    private void AfterLobby(Collider other)
+    {
+        GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+    }
+
+    private void JanitorsCloset(Collider other)
+    {
+        GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+    }
+
+    private void TopElevator(Collider other)
+    {
+        GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+        GameManager.instance.SetJetpackStatus(true);
+        GameManager.instance.ReturnPlayerCheckPoint(3).SetActive(false);
+        GameManager.instance.ReturnPlayerCheckPoint(4).SetActive(false);
+        GameManager.instance.SetPlayerHasClearedHallway(true);
+        GameManager.instance.CloseOffTheStairs();
+    }
+
+    private void TopStairs(Collider other)
+    {
+        GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+        GameManager.instance.SetInvisibilityStatus(true);
+        GameManager.instance.ReturnPlayerCheckPoint(2).SetActive(false);
+        GameManager.instance.ReturnPlayerCheckPoint(5).SetActive(false);
+        GameManager.instance.SetPlayerHasClearedHallway(true);
+    }
+
+    private void SecondBrokenRoom(Collider other)
+    {
+        GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+    }
+
+    private void BeforeJetpackPuzzle(Collider other)
+    {
+        GameManager.instance.AddSpawnPoint(other.gameObject.transform);
+    }
+
+    private void CloseJanitorsCloset(Collider other)
+    {
+        if (GameManager.instance.CheckIfPickedUpAbility())
         {
-            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
-           
-        }
-        if (other.gameObject.tag == "Before Jetpack Puzzle")
-        {
-            GameManager.instance.AddSpawnPoint(other.gameObject.transform);
-            
-        }
-        else if(other.gameObject.tag == "Close Janitors Closet")
-        {
-            if(GameManager.instance.CheckIfPickedUpAbility() == true)
-            {
-                GameManager.instance.ShutJanitorsCloset();
-            }
+            GameManager.instance.ShutJanitorsCloset();
         }
     }
 }

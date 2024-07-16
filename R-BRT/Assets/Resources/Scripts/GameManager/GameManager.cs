@@ -194,13 +194,12 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($"Scene loaded: {scene.name}");
-
         switch (scene.name)
         {
             case "GameScene":
                 if (newGame)
                 {
+                    index = 0;
                     hasPickedAbility = false;
                     playerHasClearedFirstFloor = false;
                     jetpackUnlocked = false;
@@ -217,6 +216,8 @@ public class GameManager : MonoBehaviour
                 {
                     playerCaught = false;
                     GrabAllTheTools();
+                    CheckPlayerAbility();
+                    
 
                     if (newSpawnPoint != new Vector3(0, 0, 0))
                     {
@@ -382,6 +383,25 @@ public class GameManager : MonoBehaviour
         invisVolume = GameObject.Find("InvisVolume");
         crouchVolume.SetActive(false);
         invisVolume.SetActive(false);
+    }
+
+    void CheckPlayerAbility()
+    {
+        if (invisibilityUnlocked)
+        {
+            PlayerHasInvisibility();
+            sceneActivity.TurnOffNotStealthPathDialogue();
+            sceneActivity.TurnOffSecondDialogueHitBox();
+            sceneActivity.TurnOffThirdDialogueHitBox();
+            
+        }
+        else if (jetpackUnlocked)
+        {
+            PlayerHasJetpack();
+            sceneActivity.TurnOffNotJetPackPathDialogue();
+        }
+        else
+            return;
     }
 
     public void PlayerHasJetpack()
@@ -878,16 +898,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddSpawnPoint(Transform transform)
+    public void AddSpawnPoint(Transform newTransform)
     {
-        if(currentCheckPointIndex < checkPoints.Length)
+        playerSpawnLocations.Clear();
+        playerSpawnLocations.Add(newTransform);
+        newSpawnPoint = playerSpawnLocations[0].position;
+        if (currentCheckPointIndex < checkPoints.Length)
         {
-            playerSpawnLocations.Insert(0, transform);
-            newSpawnPoint = playerSpawnLocations[0].position;
             checkPoints[currentCheckPointIndex].SetActive(false);
-            currentCheckPointIndex++;
         }
-       
+        currentCheckPointIndex++;
     }
 
     public void DestroyGameObject(GameObject value)

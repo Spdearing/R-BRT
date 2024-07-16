@@ -39,20 +39,13 @@ public class PlayerAbilities : MonoBehaviour
     void Start()
     {
         Setup();
+        CheckAbilities();
     }
 
     private void Update()
     {
-        if (GameManager.instance.ReturnInvisibilityStatus() == true)
-        {
-            invisibilityUnlocked = true;
-        }
-
-        if(GameManager.instance.ReturnJetpackStatus() == true)
-        {
-            jetPackUnlocked = true;
-        }
-
+        
+        
         if (jetPackUnlocked)
         {
             jetPack.enabled = true;
@@ -61,6 +54,19 @@ public class PlayerAbilities : MonoBehaviour
         HandleInvisibility();
         InvisibilityMeter();
         InvisibilityMeterFillingBackUp();
+    }
+
+    void CheckAbilities()
+    {
+        if (GameManager.instance.ReturnInvisibilityStatus() == true)
+        {
+            invisibilityUnlocked = true;
+        }
+
+        else if (GameManager.instance.ReturnJetpackStatus() == true)
+        {
+            jetPackUnlocked = true;
+        }
     }
 
 

@@ -50,6 +50,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log(this.gameObject.name + other.name);
         if (IsPlayer(other))
         {
             bool withinRange = enemyProximity.ReturnEnemyWithinRange();

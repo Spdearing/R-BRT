@@ -112,6 +112,11 @@ public class GroundBotStateMachine : MonoBehaviour
                 {
                     GameManager.instance.SetNewGameStatus(false);
                 }
+                else
+                {
+                    GameManager.instance.SetNewGameStatus(false);
+                }
+                    
 
                 playerController.SetCameraLock(true);
 
