@@ -47,7 +47,12 @@ public class FlyingBotStateMachine : MonoBehaviour
     void Start()
     {
         Setup();
-        StartPatrolRoutine();
+        if (gameObject.name == "FlyingBotGroup1Lobby1" || gameObject.name == "FlyingBotGroup1Lobby2" || gameObject.name == "FlyingBotGroup1Lobby3" || gameObject.name == "FlyingBotGroup1Lobby4")
+        {
+            AssignPatrolPointsBasedOnName();
+            StartPatrolRoutine();
+        }
+        
     }
 
     void Update()
@@ -79,10 +84,7 @@ public class FlyingBotStateMachine : MonoBehaviour
         patrolSpeed = 3.5f;
         patrolling = true;
         
-        if (gameObject.name == "FlyingBotGroup1Lobby1" || gameObject.name == "FlyingBotGroup1Lobby2" || gameObject.name == "FlyingBotGroup1Lobby3" || gameObject.name == "FlyingBotGroup1Lobby4")
-        {
-            AssignPatrolPointsBasedOnName();
-        }
+        
             
         currentState = FlyingState.patrolling;
     }
