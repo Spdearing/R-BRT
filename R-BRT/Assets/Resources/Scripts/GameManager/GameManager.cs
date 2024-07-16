@@ -210,6 +210,8 @@ public class GameManager : MonoBehaviour
                     GrabAllTheTools();
                     startingSpawnLocation = startingSpawnPoint.transform.position;
                     player.transform.position = startingSpawnLocation;
+                    newSpawnPoint = Vector3.zero;
+                    
                 }
                 else if (!newGame)
                 {
