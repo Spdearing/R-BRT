@@ -129,7 +129,7 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
     private void OnEnable()
     {
-        firstDialogue = GameManager.instance.ReturnAbilityDialogue();
+        firstDialogue = GameManager.instance.ReturnDialogue();
         if (firstDialogue.activeSelf == true)
         {
             firstDialogue.SetActive(false);
