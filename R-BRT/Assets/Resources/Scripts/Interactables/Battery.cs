@@ -92,4 +92,29 @@ public class Battery : MonoBehaviour
         Time.timeScale = 1.0f;
         Destroy(battery);
     }
+
+    public void KeepingInvisibility()
+    {
+        GameManager.instance.SetIndexForAbilityChoice(0);
+        GameManager.instance.SetHasPickedAbility(true);
+        GameManager.instance.SetInvisibilityStatus(true);
+        GameManager.instance.SetPlayerHasClearedHallway(true);
+        playerController.SetPlayerActivity(true);
+        playerController.SetCameraLock(false);
+        abilities.SetInvisibilityUnlock(true);
+        abilitySelectionPanel.SetActive(false);
+        invisibilityMeter.SetActive(true);
+    }
+
+    public void KeepingJetpack()
+    {
+        GameManager.instance.SetIndexForAbilityChoice(1);
+        GameManager.instance.SetHasPickedAbility(true);
+        GameManager.instance.SetJetpackStatus(true);
+        GameManager.instance.SetPlayerHasClearedHallway(true);
+        playerController.SetPlayerActivity(true);
+        playerController.SetCameraLock(false);
+        abilities.SetJetPackUnlock(true);
+        fuelMeter.SetActive(true);
+    }
 }
