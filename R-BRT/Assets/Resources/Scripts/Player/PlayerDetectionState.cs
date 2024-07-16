@@ -58,7 +58,7 @@ public class PlayerDetectionState : MonoBehaviour
         detectedByGroundBot = false;
         detectedByFlyingBot = false;
         detectedBySpiderBot = false;
-        crouchingDetectionIncrease = 5.0f;
+        crouchingDetectionIncrease = 20.0f;
         detectionIncreaseRate = 30.0f;
         detectionDecreaseRate = 15.0f;
         currentState = DetectionState.exploring;

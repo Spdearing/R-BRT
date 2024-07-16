@@ -21,6 +21,7 @@ public class PlayerRaycast : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PhoenixChipDecision phoenixChipDecision;
     [SerializeField] private Battery battery;
+    [SerializeField] private PauseMenu pauseMenuScript;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableText;
@@ -129,24 +130,32 @@ public class PlayerRaycast : MonoBehaviour
 
                         GameManager.instance.SetLoreEntryOne(true);
                         GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryOneGameObject());
+                        pauseMenuScript.PauseGame();
+                        pauseMenuScript.SwitchToEntriesPanel();
                         break;
 
                     case "LoreEntry2":
 
                         GameManager.instance.SetLoreEntryTwo(true);
                         GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryTwoGameObject());
+                        pauseMenuScript.PauseGame();
+                        pauseMenuScript.SwitchToEntriesPanel();
                         break;
 
                     case "LoreEntry3":
 
                         GameManager.instance.SetLoreEntryThree(true);
                         GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryThreeGameObject());
+                        pauseMenuScript.PauseGame();
+                        pauseMenuScript.SwitchToEntriesPanel();
                         break;
 
                     case "LoreEntry4":
 
                         GameManager.instance.SetLoreEntryFour(true);
                         GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryFourGameObject());
+                        pauseMenuScript.PauseGame();
+                        pauseMenuScript.SwitchToEntriesPanel();
                         break;
 
                 }
@@ -165,5 +174,6 @@ public class PlayerRaycast : MonoBehaviour
         interactEAnim = GameManager.instance.ReturnInteractEAnim();
         phoenixChipDecision = GameManager.instance.ReturnPhoenixChipDecision();
         battery = GameManager.instance.ReturnBatteryScript();
+        pauseMenuScript = GameManager.instance.ReturnPauseMenu();
     }
 }

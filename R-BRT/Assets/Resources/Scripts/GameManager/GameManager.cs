@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DetectionMeter detection;
     [SerializeField] private FirstDialogueFunctionality firstDialogueFunctionality;
     [SerializeField] private MainMenuController mainMenuController;
+    [SerializeField] private PauseMenu pauseMenuScript;
     #endregion
 
 
@@ -312,6 +313,7 @@ public class GameManager : MonoBehaviour
         spiderBotSpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<SpiderBotSpawner>();
         friendLocation = GameObject.Find("S-4MTiredShowcase")?.transform;
         ability = GameObject.Find("Player").GetComponent<PlayerAbilities>();
+        pauseMenuScript = GameObject.Find("Canvas").GetComponent<PauseMenu>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerDetectionState = GameObject.Find("Player").GetComponent<PlayerDetectionState>();
         enemyProximity = GameObject.Find("Player").GetComponent<EnemyProximityCheck>();
@@ -527,6 +529,11 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region //Return GameObjects
+
+    public PauseMenu ReturnPauseMenu()
+    {
+        return this.pauseMenuScript;
+    }
 
     public GameObject ReturnInvisibilityVolume()
     {
