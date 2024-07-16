@@ -43,6 +43,16 @@ public class PlayerAbilities : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.ReturnInvisibilityStatus() == true)
+        {
+            invisibilityUnlocked = true;
+        }
+
+        if(GameManager.instance.ReturnJetpackStatus() == true)
+        {
+            jetPackUnlocked = true;
+        }
+
         if (jetPackUnlocked)
         {
             jetPack.enabled = true;

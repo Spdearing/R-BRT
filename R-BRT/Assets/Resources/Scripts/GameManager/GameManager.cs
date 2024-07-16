@@ -216,14 +216,6 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     GrabAllTheTools();
 
-                    if(jetpackUnlocked)
-                    {
-                        ability.SetJetPackUnlock(true);
-                    }
-                    if(invisibilityUnlocked)
-                    {
-                        ability.SetInvisibilityUnlock(true);
-                    }
                     if (newSpawnPoint != new Vector3(0, 0, 0))
                     {
                         Debug.Log("About to set new spawn location");
