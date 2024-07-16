@@ -211,31 +211,9 @@ public class GameManager : MonoBehaviour
                 }
                 else if (!newGame)
                 {
-                    if(playerHasClearedFirstFloor)
-                    {
-                        hasPickedAbility = true;
-
-                        if(invisibilityUnlocked)
-                        {
-                            jetPackBlockade.SetActive(true);
-                            checkPoints[2].SetActive(false);
-                            checkPoints[5].SetActive(false);
-                        }
-                        else if(jetpackUnlocked)
-                        {
-                            stealthBlockade.SetActive(true);
-                            CloseOffTheStairs();
-                            checkPoints[3].SetActive(false);
-                            checkPoints[4].SetActive(false);
-                        }
-                    }
-                    else
-                    {
-                        hasPickedAbility= false;
-                    }
                     playerCaught = false;
                     GrabAllTheTools();
-                    if(newSpawnPoint != new Vector3(0,0,0))
+                    if (newSpawnPoint != new Vector3(0, 0, 0))
                     {
                         Debug.Log("About to set new spawn location");
                         player.transform.position = newSpawnPoint;
@@ -245,8 +223,9 @@ public class GameManager : MonoBehaviour
                         Debug.Log("Player did not have a new spawn Location");
                         startingSpawnLocation = startingSpawnPoint.transform.position;
                         player.transform.position = startingSpawnLocation;
-                    } 
+                    }
                 }
+        
 
                 break;
 

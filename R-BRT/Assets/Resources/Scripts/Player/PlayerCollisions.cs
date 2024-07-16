@@ -99,6 +99,7 @@ public class PlayerCollisions : MonoBehaviour
             GameManager.instance.ReturnPlayerCheckPoint(3).SetActive(false);
             GameManager.instance.ReturnPlayerCheckPoint(4).SetActive(false);
             GameManager.instance.SetPlayerHasClearedHallway(true);
+            GameManager.instance.CloseOffTheStairs();
 
         }
         if (other.gameObject.tag == "Top Stairs")
