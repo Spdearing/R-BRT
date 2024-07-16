@@ -317,14 +317,20 @@ public class SceneActivity : MonoBehaviour
 
     public void StartStealthDialogue()
     {
-        if (abilityDialogueTrigger != null)
+        if (dialogueTriggerOne.activeSelf)
         {
+            dialogueTriggerOne.SetActive(false);
+
+            if (abilityDialogueTrigger != null)
+            {
+                abilityDialogueTrigger.SetActive(true);
+            }
+        }
+        else
+
             abilityDialogueTrigger.SetActive(true);
-        }
-        if (dialogueEightHitBox != null)
-        {
-            dialogueEightHitBox.SetActive(false);
-        }
+
+
     }
 
 
