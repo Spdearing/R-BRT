@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject stealthBlockade;
     [SerializeField] private GameObject jetPackBlockade;
     [SerializeField] private GameObject[] checkPoints;
+    
     [SerializeField] private GameObject startingSpawnPoint;
     [SerializeField] private GameObject doorOpenOne;
     [SerializeField] private GameObject doorOpenTwo;
@@ -118,6 +119,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image invisibilityVisualEmpty;
     [SerializeField] private Image invisibilityVisualAmount;
     [SerializeField] private Image fuelMeterSlider;
+    [SerializeField] private Image[] lorePanels;
     #endregion
 
     #region//Floats
@@ -270,6 +272,13 @@ public class GameManager : MonoBehaviour
         loreButtons[1] = GameObject.Find("LoreEntry2").GetComponent<Button>();
         loreButtons[2] = GameObject.Find("LoreEntry3").GetComponent<Button>();
         loreButtons[3] = GameObject.Find("LoreEntry4").GetComponent<Button>();
+
+        lorePanels = new Image[4];
+        lorePanels[0] = GameObject.Find("LoreEntryOne").GetComponent<Image>();
+        lorePanels[1] = GameObject.Find("LoreEntryTwo").GetComponent<Image>();
+        lorePanels[2] = GameObject.Find("LoreEntryThree").GetComponent<Image>();
+        lorePanels[3] = GameObject.Find("LoreEntryFour").GetComponent<Image>();
+
 
         checkPoints = new GameObject[6];
         checkPoints[0] = GameObject.Find("After Lobby");
@@ -957,4 +966,5 @@ public class GameManager : MonoBehaviour
         doorOpenThree.SetActive(false);
         doorClosedThree.SetActive(true);
     }
+
 }

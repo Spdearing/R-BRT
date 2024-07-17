@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // Jump
-        if (Input.GetKey(jumpKey) && readyToJump && isGrounded)
+        if (Input.GetKey(jumpKey) && readyToJump && isGrounded && !isCrouching)
         {
             jumpingSound.Play();
             readyToJump = false;
@@ -307,7 +307,7 @@ public class PlayerController : MonoBehaviour
     private void HandleSprint()
     {
        
-        if (Input.GetKey(sprintKey) && (horizontalInput != 0f || verticalInput != 0))
+        if (Input.GetKey(sprintKey) && (horizontalInput != 0f || verticalInput != 0) && !isCrouching)
         {
             // Start sprinting
             if (!isSprinting)

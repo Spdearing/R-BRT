@@ -8,6 +8,7 @@ public class LoreEntryButtonEnabler : MonoBehaviour
     void OnEnable()
     {
         GameManager.instance.CheckLoreButtonStatus();
+       
     }
 
 }
