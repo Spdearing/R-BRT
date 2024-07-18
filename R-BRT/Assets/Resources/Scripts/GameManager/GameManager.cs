@@ -280,21 +280,23 @@ public class GameManager : MonoBehaviour
         lorePanels[3] = GameObject.Find("LoreEntryFour").GetComponent<Image>();
 
 
-        checkPoints = new GameObject[6];
-        checkPoints[0] = GameObject.Find("After Lobby");
-        checkPoints[1] = GameObject.Find("In Front Of Janitors Closet");
-        checkPoints[2] = GameObject.Find("Top Of Elevator Spawn");
-        checkPoints[3] = GameObject.Find("Top Of Stairs Spawn");
-        checkPoints[4] = GameObject.Find("Second Broken Room");
-        checkPoints[5] = GameObject.Find("Before Jetpack Puzzle");
+        checkPoints = new GameObject[7];
+        checkPoints[0] = GameObject.Find("BeginningOfLobby");
+        checkPoints[1] = GameObject.Find("After Lobby");
+        checkPoints[2] = GameObject.Find("In Front Of Janitors Closet");
+        checkPoints[3] = GameObject.Find("Top Of Elevator Spawn");
+        checkPoints[4] = GameObject.Find("Top Of Stairs Spawn");
+        checkPoints[5] = GameObject.Find("Second Broken Room");
+        checkPoints[6] = GameObject.Find("Before Jetpack Puzzle");
 
-        checkPointLocations = new Transform[6];
+        checkPointLocations = new Transform[7];
         checkPointLocations[0] = checkPoints[0].transform;
         checkPointLocations[1] = checkPoints[1].transform;
         checkPointLocations[2] = checkPoints[2].transform;
         checkPointLocations[3] = checkPoints[3].transform;
         checkPointLocations[4] = checkPoints[4].transform;
         checkPointLocations[5] = checkPoints[5].transform;
+        checkPointLocations[6] = checkPoints[6].transform;
 
         loreEntries = new bool[4];
         loreEntries[0] = false;

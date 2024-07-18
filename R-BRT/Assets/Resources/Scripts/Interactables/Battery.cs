@@ -60,7 +60,6 @@ public class Battery : MonoBehaviour
         GameManager.instance.SetHasPickedAbility(true);
         GameManager.instance.SetJetpackStatus(true);
         GameManager.instance.SetPlayerHasClearedHallway(true);
-        stealthBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         abilities.SetJetPackUnlock(true);
@@ -80,7 +79,6 @@ public class Battery : MonoBehaviour
         GameManager.instance.SetHasPickedAbility(true);
         GameManager.instance.SetInvisibilityStatus(true);
         GameManager.instance.SetPlayerHasClearedHallway(true);
-        elevatorBaracade.SetActive(true);
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         abilities.SetInvisibilityUnlock(true);

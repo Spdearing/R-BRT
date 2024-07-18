@@ -134,10 +134,10 @@ public class FlyingBotStateMachine : MonoBehaviour
                 ChangeBehavior(FlyingState.moving);
                 patrolling = false;
                 yield return MoveToPoint(flyingBotOnePatrolPointA.position);
-                yield return new WaitForSeconds(2.5f);
+                yield return new WaitForSeconds(.1f);
                 yield return RotateBotGlobal(180);
                 yield return MoveToPoint(flyingBotOnePatrolPointB.position);
-                yield return new WaitForSeconds(2.5f);
+                yield return new WaitForSeconds(.1f);
                 yield return RotateBotGlobal(180);
                 patrolling = true;
                 ChangeBehavior(FlyingState.patrolling);

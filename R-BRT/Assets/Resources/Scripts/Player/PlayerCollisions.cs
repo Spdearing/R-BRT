@@ -34,13 +34,14 @@ public class PlayerCollisions : MonoBehaviour
             { "TenDialogueEncounter", TenDialogueEncounter },
             { "EleventhDialogueEncounter", EleventhDialogueEncounter },
             { "TwelthDialogueEncounter", TwelthDialogueEncounter },
+            { "BeginingOfLobby", BeginningOfLobby },
             { "After Lobby", AfterLobby },
             { "Janitors Closet", JanitorsCloset },
             { "Top Of Elevator", TopElevator },
             { "Top Stairs", TopStairs },
             { "Second Broken Room", SecondBrokenRoom },
             { "Before Jetpack Puzzle", BeforeJetpackPuzzle },
-            { "Close Janitors Closet", CloseJanitorsCloset }
+            { "Close Janitors Closet", CloseJanitorsCloset }  
         };
     }
 
@@ -124,6 +125,11 @@ public class PlayerCollisions : MonoBehaviour
     {
         firstDialogueFunctionality.SetDialogue("Seventh Dialogue");
         sceneActivity.StartTwelthDialogue();
+    }
+
+    private void BeginningOfLobby(Collider other)
+    {
+        GameManager.instance.AddSpawnPoint(other.gameObject.transform);
     }
 
     private void AfterLobby(Collider other)

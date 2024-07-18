@@ -83,6 +83,8 @@ TagManager:
   - Before Jetpack Puzzle
   - Close Janitors Closet
   - Top Of Elevator
+  - BegginingOfHallway
+  - BeginingOfLobby
   layers:
   - Default
   - TransparentFX
