@@ -222,10 +222,10 @@ public class GameManager : MonoBehaviour
                         Debug.Log("About to set new spawn location");
                         player.transform.position = newSpawnPoint;
 
-                        if (newSpawnPoint.x == 1.317158f && newSpawnPoint.y == 13.69235f && newSpawnPoint.z == -55.02805f)
+                        if (newSpawnPoint == new Vector3(1.317158f, 13.69235f, -55.02805f))
                         {
                             Debug.Log("Changing The Rotation Of the Player");
-                            Quaternion newRotation =  Quaternion.Euler(0, 90, 0);
+                            Quaternion newRotation =  Quaternion.Euler(0, 270, 0);
                             player.transform.rotation = newRotation;
                         }
 

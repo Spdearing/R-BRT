@@ -3,8 +3,8 @@ using UnityEngine;
 public class PlayerCam : MonoBehaviour
 {
     [Header("Floats")]
-    [SerializeField] private float sensX = 100f;
-    [SerializeField] private float sensY = 100f;
+    [SerializeField] private float sensX;
+    [SerializeField] private float sensY;
     private float xRotation = 0f;
     private float yRotation = 0f;
 
@@ -27,6 +27,9 @@ public class PlayerCam : MonoBehaviour
     {
         if (!playerController.isCameraLocked)
         {
+            sensX = 50.0f;
+            sensY = 50.0f;
+
             float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
             float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 

@@ -141,7 +141,7 @@ public class AbilityDialogueFunctionality : MonoBehaviour
         StartDialogue();
 
 
-        StartCoroutine(CountDownTillClose());
+        
         
     }
 
