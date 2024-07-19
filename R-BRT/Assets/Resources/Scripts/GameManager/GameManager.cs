@@ -205,8 +205,8 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    startingSpawnLocation = startingSpawnPoint.transform.position;
-                    player.transform.position = startingSpawnLocation;
+                    //startingSpawnLocation = startingSpawnPoint.transform.position;
+                    //player.transform.position = startingSpawnLocation;
                     newSpawnPoint = Vector3.zero;
                     
                 }
@@ -221,6 +221,14 @@ public class GameManager : MonoBehaviour
                     {
                         Debug.Log("About to set new spawn location");
                         player.transform.position = newSpawnPoint;
+
+                        if (newSpawnPoint.x == 1.317158f && newSpawnPoint.y == 13.69235f && newSpawnPoint.z == -55.02805f)
+                        {
+                            Debug.Log("Changing The Rotation Of the Player");
+                            Quaternion newRotation =  Quaternion.Euler(0, 90, 0);
+                            player.transform.rotation = newRotation;
+                        }
+
                     }
                     else
                     {
