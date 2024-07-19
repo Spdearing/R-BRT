@@ -37,8 +37,6 @@ public class Battery : MonoBehaviour
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         gameObject.tag = "Battery";
         abilitySelectionPanel.SetActive(false);
-        elevatorBaracade = GameManager.instance.ReturnElevatorBlockade();
-        stealthBaracade = GameManager.instance.ReturnStealthBlockade();
         
     }
 

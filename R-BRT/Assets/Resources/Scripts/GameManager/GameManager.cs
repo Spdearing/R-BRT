@@ -35,8 +35,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueElevenHitBox;
     [SerializeField] private GameObject dialogueTwelveHitBox;
     [SerializeField] private GameObject invisibilityMeter;
-    [SerializeField] private GameObject stealthBlockade;
-    [SerializeField] private GameObject jetPackBlockade;
     [SerializeField] private GameObject[] checkPoints;
     
     [SerializeField] private GameObject startingSpawnPoint;
@@ -72,18 +70,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] private Transform friendLocation;
     [SerializeField] private Transform[] checkPointLocations;
-    
+    //list of spawn points that are added when a checkpoint is hit
+    [SerializeField] private List<Transform> playerSpawnLocations = new List<Transform> { };
+
 
     [Header("Vector3")]
     [SerializeField] private Vector3 newSpawnPoint;
     [SerializeField] private Vector3 startingSpawnLocation;
     
-
     
-
-
-    //list of spawn points that are added when a checkpoint is hit
-    [SerializeField] private List<Transform> playerSpawnLocations = new List<Transform> { };
 
     #region//Scripts
     [Header("Scripts")]
@@ -372,12 +367,8 @@ public class GameManager : MonoBehaviour
         dialogueElevenHitBox = GameObject.Find("EleventhDialogueEncounter");
         dialogueTwelveHitBox = GameObject.Find("TwelthDialogueEncounter");
         flashLight = GameObject.Find("FlashLight").GetComponent<Light>();
-        stealthBlockade = GameObject.Find("StealthBlockade");
-        jetPackBlockade = GameObject.Find("ElevatorBlockade");
         interactBoxAnimator = GameObject.Find("Crosshair").GetComponent<Animator>();
         interactEAnimator = GameObject.Find("InteractE").GetComponent<Animator>();
-        stealthBlockade.SetActive(false);
-        jetPackBlockade.SetActive(false);
         fuelMeter.SetActive(false);
         invisibilityMeter.SetActive(false);
         doorClosedOne = GameObject.Find("DoorClosedOne");
@@ -423,7 +414,6 @@ public class GameManager : MonoBehaviour
         playerController.SetCameraLock(false);
         ability.SetJetPackUnlock(true);
         fuelMeter.SetActive(true);
-        stealthBlockade.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -435,7 +425,6 @@ public class GameManager : MonoBehaviour
         playerController.SetCameraLock(false);
         ability.SetInvisibilityUnlock(true);
         invisibilityMeter.SetActive(true);
-        jetPackBlockade.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -555,19 +544,10 @@ public class GameManager : MonoBehaviour
     {
         return this.crouchVolume;
     }
-    public GameObject ReturnStealthBlockade()
-    {
-        return this.stealthBlockade;
-    }
 
     public GameObject ReturnPlayerCheckPoint(int index)
     {
         return this.checkPoints[index];
-    }
-
-    public GameObject ReturnElevatorBlockade()
-    {
-        return this.jetPackBlockade;
     }
 
     public GameObject ReturnInvisibilityMeterGameObject()
