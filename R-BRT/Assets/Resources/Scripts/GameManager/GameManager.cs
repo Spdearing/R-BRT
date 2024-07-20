@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject crouchVolume;
     [SerializeField] private GameObject invisVolume;
     [SerializeField] private GameObject elevator;
+    [SerializeField] private GameObject elevatorFallen;
     #endregion
 
     [Header("Dialogue String")]
@@ -413,7 +414,7 @@ public class GameManager : MonoBehaviour
         walkingSound = GameObject.Find("WalkingSound").GetComponent<AudioSource>();
         sprintingSound = GameObject.Find("SprintingSound").GetComponent<AudioSource>();
         jumpingSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
-        elevatorBreaking = GameObject.Find("ElevatorRoomBox").GetComponent<AudioSource>();
+        elevatorBreaking = GameObject.Find("ElevatorRoomFallen").GetComponent<AudioSource>();
         janitorDoorCloses = GameObject.Find("DoorClosedJanitorsCloset").GetComponent<AudioSource>();
         stairDoorClosing = GameObject.Find("DoorClosedTwo").GetComponent<AudioSource>();
         fuelMeterSlider = GameObject.Find("JetpackMeterFill").GetComponent<Image>();
@@ -453,6 +454,8 @@ public class GameManager : MonoBehaviour
         crouchVolume.SetActive(false);
         invisVolume.SetActive(false);
         elevator = GameObject.Find("ElevatorRoomBox");
+        elevatorFallen = GameObject.Find("ElevatorRoomFallen");
+        elevatorFallen.SetActive(false);
     }
 
     void CheckPlayerAbility()
@@ -1003,7 +1006,8 @@ public class GameManager : MonoBehaviour
 
     public void ElevatorCrashes()
     {
-        elevator.transform.position = new Vector3(-23.9105f,2.535f,-21.53148f);
+        elevator.SetActive(false);
+        elevatorFallen.SetActive(true);
         elevatorBreaking.Play();
     }
 
