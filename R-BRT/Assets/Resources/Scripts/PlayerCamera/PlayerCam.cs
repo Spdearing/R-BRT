@@ -14,12 +14,24 @@ public class PlayerCam : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
 
+    // Crouching sensitivity modifier
+    [SerializeField] private float crouchSensitivityModifier = 0.5f;
+    private float currentSensX;
+    private float currentSensY;
+
+    // Transition speed for sensitivity change
+    [SerializeField] private float sensitivityTransitionSpeed = 5.0f;
+
     // Start is called before the first frame update
     private void Start()
     {
         playerController = GameManager.instance.ReturnPlayerController();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Initialize current sensitivity
+        currentSensX = sensX;
+        currentSensY = sensY;
     }
 
     // Update is called once per frame
@@ -27,11 +39,21 @@ public class PlayerCam : MonoBehaviour
     {
         if (!playerController.isCameraLocked)
         {
-            sensX = 50.0f;
-            sensY = 50.0f;
+            float targetSensX = sensX;
+            float targetSensY = sensY;
 
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+            if (playerController.ReturnCrouchingStatus(true))
+            {
+                targetSensX *= crouchSensitivityModifier;
+                targetSensY *= crouchSensitivityModifier;
+            }
+
+            // Smoothly interpolate the sensitivity values
+            currentSensX = Mathf.Lerp(currentSensX, targetSensX, Time.deltaTime * sensitivityTransitionSpeed);
+            currentSensY = Mathf.Lerp(currentSensY, targetSensY, Time.deltaTime * sensitivityTransitionSpeed);
+
+            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * currentSensX;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * currentSensY;
 
             yRotation += mouseX;
             xRotation -= mouseY;

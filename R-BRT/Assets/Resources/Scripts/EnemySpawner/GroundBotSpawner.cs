@@ -48,7 +48,7 @@ public class GroundBotSpawner : MonoBehaviour
 
     void Setup()
     {
-        Debug.Log("Setting Up GroundSpawner");
+        
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         group1 = new GameObject[1];
         SpawnGroup1();
@@ -102,7 +102,7 @@ public class GroundBotSpawner : MonoBehaviour
 
                 enemy.name = "GroundBotGroup1";
                 enemy.tag = "GroundBot";
-                Debug.Log("Assigning group1bot");
+             
             }
             else
             {

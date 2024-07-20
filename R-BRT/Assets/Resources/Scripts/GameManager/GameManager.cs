@@ -62,9 +62,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer1;
     [SerializeField] private SkinnedMeshRenderer skinMeshRenderer2;
 
-    [Header("UI Elements")]
-    [SerializeField] private TMP_Text interactableUIText;
-
     [Header("Transform")]
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform playerOtherTransform;
@@ -429,7 +426,7 @@ public class GameManager : MonoBehaviour
         dialogueSevenHitBox = GameObject.Find("SeventhDialogueEncounter");
         dialogueEightHitBox = GameObject.Find("EighthDialogueEncounter");
         dialogueNineHitBox = GameObject.Find("NinthDialogueEncounter");
-        dialogueTenHitBox = GameObject.Find("TenthDialogueEncounter");
+        dialogueTenHitBox = GameObject.Find("TenDialogueEncounter");
         dialogueElevenHitBox = GameObject.Find("EleventhDialogueEncounter");
         dialogueTwelveHitBox = GameObject.Find("TwelthDialogueEncounter");
         flashLight = GameObject.Find("FlashLight").GetComponent<Light>();

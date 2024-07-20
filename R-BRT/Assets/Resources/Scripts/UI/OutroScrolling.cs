@@ -11,7 +11,6 @@ public class OutroScrolling : MonoBehaviour
     public float speedUpMultiplier = 4.0f; // Factor by which to increase the speed when holding space
     public RectTransform textRectTransform;
     public TMP_Text skipText;
-    private bool isScrolling = true;
 
     private void OnEnable()
     {
@@ -53,8 +52,6 @@ public class OutroScrolling : MonoBehaviour
         }
 
         // End of scrolling
-        isScrolling = false;
-        //HideSkipText();
     }
 
     void ShowSkipText()
@@ -75,7 +72,6 @@ public class OutroScrolling : MonoBehaviour
 
     void SkipScrolling()
     {
-        isScrolling = false;
         //StopAllCoroutines();
         //textRectTransform.anchoredPosition = new Vector2(textRectTransform.anchoredPosition.x, Screen.height);
         HideSkipText();
