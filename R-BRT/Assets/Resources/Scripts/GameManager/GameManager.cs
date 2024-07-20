@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,7 +37,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject dialogueTwelveHitBox;
     [SerializeField] private GameObject invisibilityMeter;
     [SerializeField] private GameObject[] checkPoints;
-    
     [SerializeField] private GameObject startingSpawnPoint;
     [SerializeField] private GameObject doorOpenOne;
     [SerializeField] private GameObject doorOpenTwo;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject doorClosedThree;//Janitors closet
     [SerializeField] private GameObject crouchVolume;
     [SerializeField] private GameObject invisVolume;
+    [SerializeField] private GameObject elevator;
     #endregion
 
     [Header("Dialogue String")]
@@ -132,10 +133,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource walkingSound;
     [SerializeField] private AudioSource sprintingSound;
     [SerializeField] private AudioSource jumpingSound;
+    [SerializeField] private AudioSource elevatorBreaking;
+    [SerializeField] private AudioSource janitorDoorCloses;
+    [SerializeField] private AudioSource stairDoorClosing;
     #endregion
-
-    [Header("Slider")]
-    //changed fuelMeterSlider from a Slider to an Image
 
     [Header("Capsule Collider")]
     [SerializeField] CapsuleCollider playerCollider;
@@ -412,6 +413,9 @@ public class GameManager : MonoBehaviour
         walkingSound = GameObject.Find("WalkingSound").GetComponent<AudioSource>();
         sprintingSound = GameObject.Find("SprintingSound").GetComponent<AudioSource>();
         jumpingSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
+        elevatorBreaking = GameObject.Find("ElevatorRoomBox").GetComponent<AudioSource>();
+        janitorDoorCloses = GameObject.Find("DoorClosedJanitorsCloset").GetComponent<AudioSource>();
+        stairDoorClosing = GameObject.Find("DoorClosedTwo").GetComponent<AudioSource>();
         fuelMeterSlider = GameObject.Find("JetpackMeterFill").GetComponent<Image>();
         abilityDialogue = GameObject.Find("AbilityDialogue");
         dialogue = GameObject.Find("DialoguePanel");
@@ -448,6 +452,7 @@ public class GameManager : MonoBehaviour
         invisVolume = GameObject.Find("InvisVolume");
         crouchVolume.SetActive(false);
         invisVolume.SetActive(false);
+        elevator = GameObject.Find("ElevatorRoomBox");
     }
 
     void CheckPlayerAbility()
@@ -996,18 +1001,26 @@ public class GameManager : MonoBehaviour
         return this.mainMenuController;
     }
 
+    public void ElevatorCrashes()
+    {
+        elevator.transform.position = new Vector3(-23.9105f,2.535f,-21.53148f);
+        elevatorBreaking.Play();
+    }
+
     public void CloseOffTheStairs()
     {
         doorClosedOne.SetActive(true);
         doorClosedTwo.SetActive(true);
         doorOpenOne.SetActive(false);
         doorOpenTwo.SetActive(false);
+        stairDoorClosing.Play();
     }
 
     public void ShutJanitorsCloset()
     {
         doorOpenThree.SetActive(false);
         doorClosedThree.SetActive(true);
+        janitorDoorCloses.Play();
     }
 
 }

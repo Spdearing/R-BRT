@@ -82,6 +82,7 @@ public class Battery : MonoBehaviour
         abilities.SetInvisibilityUnlock(true);
         abilitySelectionPanel.SetActive(false);
         invisibilityMeter.SetActive(true);
+        GameManager.instance.ElevatorCrashes();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         sceneActivity.StartStealthDialogue();
