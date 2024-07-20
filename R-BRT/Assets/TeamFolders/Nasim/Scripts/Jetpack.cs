@@ -25,53 +25,45 @@ public class Jetpack : MonoBehaviour
     [Header("Audio Source")]
     [SerializeField] private AudioSource jetpackSound;
 
-    [Range(0f, 1f)]
-
-
     [Header("Scripts")]
     [SerializeField] private PlayerController playerCharacterController;
-
 
     [Header("Images")]
     [SerializeField] private Image fuelMeter;
 
     void Start()
     {
-
         pressedFirstTime = false;
         playerCharacterController = GameManager.instance.ReturnPlayerController();
         fuelMeter = GameManager.instance.ReturnFuelMeterSlider();
-
-
         currentFillRatio = 1f;
         jetpackSound = GameManager.instance.ReturnJetpackSound();
     }
 
     void Update()
     {
-        if (playerCharacterController.ReturnIsGrounded())
-        {
-            canUseJetpack = false;
-        }
+        HandleGroundCheck();
+        HandleInput();
+        HandleJetpackUsage();
+        UpdateFuelMeter();
+    }
 
+    private void HandleGroundCheck()
+    {
+        canUseJetpack = !playerCharacterController.ReturnIsGrounded();
+    }
+
+    private void HandleInput()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            canUseJetpack = true;
-            pressedFirstTime = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (pressedFirstTime)
+            if (pressedFirstTime && Time.time - lastPressedTime <= delayBetweenPress)
             {
-                bool isDoubledPress = Time.time - lastPressedTime <= delayBetweenPress;
-                
-
-                if (isDoubledPress)
-                {
-                    
-                    pressedFirstTime = false;
-                }
+                pressedFirstTime = false;
+            }
+            else
+            {
+                pressedFirstTime = true;
             }
 
             lastPressedTime = Time.time;
@@ -79,55 +71,71 @@ public class Jetpack : MonoBehaviour
 
         if (pressedFirstTime && Time.time - lastPressedTime > delayBetweenPress)
         {
-            
             pressedFirstTime = false;
         }
+    }
 
-
+    private void HandleJetpackUsage()
+    {
         bool jetpackIsInUse = canUseJetpack && currentFillRatio > 0f && Input.GetKey(KeyCode.Space);
 
         if (jetpackIsInUse)
         {
-            isUsingJetpack = true;
-            
-
-            lastTimeOfUse = Time.time;
-
-            float totalAcceleration = jetpackAcceleration;
-
-            totalAcceleration += playerCharacterController.ReturnGravity();
-
-            if (playerCharacterController.rb.velocity.y < 0f)
-            {
-
-                totalAcceleration += ((-playerCharacterController.rb.velocity.y / Time.deltaTime) * jetpackDownwardVelocity);
-            }
-
-            playerCharacterController.rb.velocity += Vector3.up * totalAcceleration * Time.deltaTime;
-
-            currentFillRatio = currentFillRatio - (Time.deltaTime / consumeFuelDuration);
-
+            StartJetpack();
         }
         else
         {
-            isUsingJetpack = false;
-            jetpackSound.Stop();
-
-
-            if (Time.time - lastTimeOfUse >= refuelDelay)
-            {
-                float refillRate = 1 / (playerCharacterController.ReturnIsGrounded() ? refuelDurationGrounded : refuelDurationAirborne);
-                currentFillRatio = currentFillRatio + Time.deltaTime * refillRate;
-
-            }
-            currentFillRatio = Mathf.Clamp01(currentFillRatio);
+            StopJetpack();
+            RefuelJetpack();
         }
-
-        fuelMeter.fillAmount = currentFillRatio;
-
     }
 
-    public bool IsUsingJetpack(bool value)
+    private void StartJetpack()
+    {
+        isUsingJetpack = true;
+        lastTimeOfUse = Time.time;
+        float totalAcceleration = jetpackAcceleration + playerCharacterController.ReturnGravity();
+
+        if (playerCharacterController.rb.velocity.y < 0f)
+        {
+            totalAcceleration += ((-playerCharacterController.rb.velocity.y / Time.deltaTime) * jetpackDownwardVelocity);
+        }
+
+        playerCharacterController.rb.velocity += Vector3.up * totalAcceleration * Time.deltaTime;
+        currentFillRatio -= Time.deltaTime / consumeFuelDuration;
+        currentFillRatio = Mathf.Clamp01(currentFillRatio);
+
+        if (!jetpackSound.isPlaying)
+        {
+            jetpackSound.Play();
+        }
+    }
+
+    private void StopJetpack()
+    {
+        isUsingJetpack = false;
+        if (jetpackSound.isPlaying)
+        {
+            jetpackSound.Stop();
+        }
+    }
+
+    private void RefuelJetpack()
+    {
+        if (Time.time - lastTimeOfUse >= refuelDelay)
+        {
+            float refillRate = 1 / (playerCharacterController.ReturnIsGrounded() ? refuelDurationGrounded : refuelDurationAirborne);
+            currentFillRatio += Time.deltaTime * refillRate;
+            currentFillRatio = Mathf.Clamp01(currentFillRatio);
+        }
+    }
+
+    private void UpdateFuelMeter()
+    {
+        fuelMeter.fillAmount = currentFillRatio;
+    }
+
+    public bool IsUsingJetpack()
     {
         return this.isUsingJetpack;
     }

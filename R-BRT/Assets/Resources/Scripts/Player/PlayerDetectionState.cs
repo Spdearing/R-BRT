@@ -91,7 +91,7 @@ public class PlayerDetectionState : MonoBehaviour
                     detection.IncreaseDetection(crouchingDetectionIncrease);
                     detectionIncreaseRate += 0.5f;
                 }
-                else if (jetpack.IsUsingJetpack(true))
+                else if (jetpack.IsUsingJetpack() == true)
                 {
                     
                     detection.IncreaseDetection(detectionIncreaseRate * 2);
