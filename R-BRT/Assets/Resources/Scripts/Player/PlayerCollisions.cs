@@ -48,7 +48,8 @@ public class PlayerCollisions : MonoBehaviour
             { "Close Janitors Closet", CloseJanitorsCloset },
             { "ElevatorLobbyZoneLoader", LoadBatteryHallway },
             { "StealthPathZoneLoader", LoadStealthPathEnemies },
-            { "JetPackZoneLoader", LoadJetpackEnemies }
+            { "JetPackZoneLoader", LoadJetpackEnemies },
+            { "EndCheckPoint", EndCheckPoint }
         };
     }
 
@@ -203,5 +204,9 @@ public class PlayerCollisions : MonoBehaviour
         groundBotSpawner.ToggleHallwayGroup();
         groundBotSpawner.ToggleJetPackGroup();
         flyingBotSpawner.ToggleGroup2();
+    }
+    private void EndCheckPoint(Collider other)
+    {
+        GameManager.instance.AddSpawnPoint(other.gameObject.transform);
     }
 }
