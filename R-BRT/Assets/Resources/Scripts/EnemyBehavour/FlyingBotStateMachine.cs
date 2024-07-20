@@ -55,6 +55,16 @@ public class FlyingBotStateMachine : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        Setup();
+        if (gameObject.name == "FlyingBotGroup1Lobby1" || gameObject.name == "FlyingBotGroup1Lobby2" || gameObject.name == "FlyingBotGroup1Lobby3" || gameObject.name == "FlyingBotGroup1Lobby4")
+        {
+            AssignPatrolPointsBasedOnName();
+            StartPatrolRoutine();
+        }
+    }
+
     void Update()
     {
         UpdateBehavior();

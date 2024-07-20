@@ -8,6 +8,8 @@ public class PlayerCollisions : MonoBehaviour
 
     [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private FirstDialogueFunctionality firstDialogueFunctionality;
+    [SerializeField] private GroundBotSpawner groundBotSpawner;
+    [SerializeField] private FlyingBotSpawner flyingBotSpawner;
 
     private Dictionary<string, System.Action<Collider>> collisionActions;
 
@@ -15,6 +17,8 @@ public class PlayerCollisions : MonoBehaviour
     {
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         firstDialogueFunctionality = GameManager.instance.ReturnFirstDialogueFunctionality();
+        groundBotSpawner = GameManager.instance.ReturnGroundBotSpawner();
+        flyingBotSpawner = GameManager.instance.ReturnFlyingBotSpawner();
 
         InitializeCollisionActions();
     }
@@ -41,7 +45,10 @@ public class PlayerCollisions : MonoBehaviour
             { "Top Stairs", TopStairs },
             { "Second Broken Room", SecondBrokenRoom },
             { "Before Jetpack Puzzle", BeforeJetpackPuzzle },
-            { "Close Janitors Closet", CloseJanitorsCloset }  
+            { "Close Janitors Closet", CloseJanitorsCloset },
+            { "ElevatorLobbyZoneLoader", LoadBatteryHallway },
+            { "StealthPathZoneLoader", LoadStealthPathEnemies },
+            { "JetPackZoneLoader", LoadJetpackEnemies }
         };
     }
 
@@ -157,7 +164,6 @@ public class PlayerCollisions : MonoBehaviour
         GameManager.instance.AddSpawnPoint(other.gameObject.transform);
         GameManager.instance.SetInvisibilityStatus(true);
         GameManager.instance.ReturnPlayerCheckPoint(2).SetActive(false);
-        GameManager.instance.ReturnPlayerCheckPoint(5).SetActive(false);
         GameManager.instance.SetPlayerHasClearedHallway(true);
     }
 
@@ -177,5 +183,25 @@ public class PlayerCollisions : MonoBehaviour
         {
             GameManager.instance.ShutJanitorsCloset();
         }
+    }
+
+    public void LoadBatteryHallway(Collider other)
+    {
+        flyingBotSpawner.ToggleGroup1();
+        groundBotSpawner.ToggleGroup1();
+        groundBotSpawner.ToggleHallwayGroup();
+    }
+
+    public void LoadStealthPathEnemies(Collider other)
+    {
+        groundBotSpawner.ToggleHallwayGroup();
+        groundBotSpawner.ToggleStealthGroup();
+    }
+
+    public void LoadJetpackEnemies(Collider other)
+    {
+        groundBotSpawner.ToggleHallwayGroup();
+        groundBotSpawner.ToggleJetPackGroup();
+        flyingBotSpawner.ToggleGroup2();
     }
 }

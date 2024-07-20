@@ -32,6 +32,7 @@ public class FlyingBotSpawner : MonoBehaviour
         enemiesSpawned = 0;
         SpawnGroup1();
         SpawnGroup2();
+        ToggleGroup2();
     }
 
     void SpawnGroup1()
@@ -88,6 +89,15 @@ public class FlyingBotSpawner : MonoBehaviour
         }
     }
 
+    public void ToggleGroup1()
+    {
+        for (int i = 0; i < group1.Length; i++)
+        {
+            bool isActive = group1[i].activeSelf;
+            group1[i].SetActive(!isActive);
+        }
+    }
+
     public FlyingBotStateMachine ReturnFlyingBotStateInstance()
     {
         return this.flyingBotStateInstance;
@@ -96,6 +106,12 @@ public class FlyingBotSpawner : MonoBehaviour
     public EnemyFlyingBotFieldOfView ReturnEnemyFieldOfViewInstance()
     {
         return this.enemyFlyingBotFieldOfViewInstance;
+    }
+
+    public void ToggleGroup2()
+    {
+        bool isActive = group2[0].activeSelf;
+        group2[0].SetActive(!isActive);
     }
 }
 

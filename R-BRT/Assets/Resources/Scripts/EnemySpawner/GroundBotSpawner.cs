@@ -15,6 +15,10 @@ public class GroundBotSpawner : MonoBehaviour
     [SerializeField] GameObject[] group2;
     [SerializeField] GameObject[] group3;
 
+    [SerializeField] GameObject[] hallwayGroup;
+    [SerializeField] GameObject[] stealthGroup;
+    [SerializeField] GameObject[] jetpackGroup; 
+
     [Header("EnemyGroupLocations")]
     [SerializeField] Transform[] enemyGroupLocations1;
     [SerializeField] Transform[] enemyGroupLocations2;
@@ -47,12 +51,39 @@ public class GroundBotSpawner : MonoBehaviour
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         group1 = new GameObject[1];
-        group2 = new GameObject[12];
+        group2 = new GameObject[11];
         group3 = new GameObject[4];
         
         SpawnGroup1();
         SpawnGroup2();
         SpawnGroup3();
+
+        hallwayGroup = new GameObject[5];
+        stealthGroup = new GameObject[7];
+        jetpackGroup = new GameObject[3];
+
+        hallwayGroup[0] = group2[0];
+        hallwayGroup[1] = group2[1];
+        hallwayGroup[2] = group2[2];
+        hallwayGroup[3] = group2[3];
+        hallwayGroup[4] = group2[4];
+
+        stealthGroup[0] = group2[6];
+        stealthGroup[1] = group2[7];
+        stealthGroup[2] = group2[8];
+        stealthGroup[3] = group3[0];
+        stealthGroup[4] = group3[1];
+        stealthGroup[5] = group3[2];
+        stealthGroup[6] = group3[3];
+
+        jetpackGroup[0] = group2[5];
+        jetpackGroup[1] = group2[9];
+        jetpackGroup[2] = group2[10];
+
+
+
+        ToggleGroup2();
+        ToggleGroup3();
         
     }
 
@@ -189,6 +220,57 @@ public class GroundBotSpawner : MonoBehaviour
     public NavMeshAgent ReturnThisNavAgent()
     {
         return this.groundBotAI;
+    }
+
+    public void ToggleGroup1()
+    {
+        bool isActive = group1[0].activeSelf;
+        group1[0].SetActive(!isActive);
+    }
+
+    public void ToggleGroup2()
+    {
+        for(int i = 0; i < group2.Length; i++) 
+        {
+            bool isActive = group2[i].activeSelf;
+            group2[i].SetActive(false);
+        }
+    }
+
+    public void ToggleGroup3()
+    {
+        for (int i = 0; i < group3.Length; i++)
+        {
+            bool isActive = group3[i].activeSelf;
+            group3[i].SetActive(!isActive);
+        }
+    }
+
+    public void ToggleHallwayGroup()
+    {
+        for (int i = 0; i < hallwayGroup.Length; i++)
+        {
+            bool isActive = hallwayGroup[i].activeSelf;
+            hallwayGroup[i].SetActive(!isActive);
+        }
+    }
+
+    public void ToggleStealthGroup()
+    {
+        for (int i = 0; i < stealthGroup.Length; i++)
+        {
+            bool isActive = stealthGroup[i].activeSelf;
+            stealthGroup[i].SetActive(!isActive);
+        }
+    }
+
+    public void ToggleJetPackGroup()
+    {
+        for (int i = 0; i < jetpackGroup.Length; i++)
+        {
+            bool isActive = jetpackGroup[i].activeSelf;
+            jetpackGroup[i].SetActive(!isActive);
+        }
     }
 }
 

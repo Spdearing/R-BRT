@@ -85,6 +85,9 @@ TagManager:
   - Top Of Elevator
   - BegginingOfHallway
   - BeginingOfLobby
+  - ElevatorLobbyZoneLoader
+  - StealthPathZoneLoader
+  - JetPackZoneLoader
   layers:
   - Default
   - TransparentFX

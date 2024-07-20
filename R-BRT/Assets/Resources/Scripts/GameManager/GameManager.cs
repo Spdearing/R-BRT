@@ -222,11 +222,34 @@ public class GameManager : MonoBehaviour
                         Debug.Log("About to set new spawn location");
                         player.transform.position = newSpawnPoint;
 
-                        if (newSpawnPoint == new Vector3(1.317158f, 13.69235f, -55.02805f))
+                        if (newSpawnPoint == new Vector3(1.317158f, 13.69235f, -55.02805f))//JetPack 2nd checkpoint hit
                         {
-                            Debug.Log("Changing The Rotation Of the Player");
-                            Quaternion newRotation =  Quaternion.Euler(0, 270, 0);
+                            groundBotSpawner.ToggleJetPackGroup();
+                            flyingBotSpawner.ToggleGroup2();
+                            Quaternion newRotation = Quaternion.Euler(0, 270, 0);
                             player.transform.rotation = newRotation;
+                        }
+                        else if (newSpawnPoint == new Vector3(7.067542f, 13.32212f, -32.64403f))// StealthPath Top Of Stairs checkpoint Hit
+                        {
+                            groundBotSpawner.ToggleGroup1();
+                            flyingBotSpawner.ToggleGroup1();
+                            groundBotSpawner.ToggleStealthGroup();
+                            CloseOffTheStairs();
+                        }
+                        if (newSpawnPoint == new Vector3(-9.065497f, 13.32757f, 14.78284f))// StealthPath Second Broken Room checkpoint Hit
+                        {
+                            groundBotSpawner.ToggleGroup1();
+                            flyingBotSpawner.ToggleGroup1();
+                            groundBotSpawner.ToggleStealthGroup();
+                            CloseOffTheStairs();
+                        }
+                        else if (newSpawnPoint == new Vector3(-30.5261f, 0.330572f, -31.97705f))// Janitors Closet Checkpoint hit
+                        {
+                            Debug.Log("Spawning at Janitors Closet");
+                            groundBotSpawner.ToggleGroup1();
+                            flyingBotSpawner.ToggleGroup1();
+                            groundBotSpawner.ToggleHallwayGroup();
+
                         }
 
                     }
