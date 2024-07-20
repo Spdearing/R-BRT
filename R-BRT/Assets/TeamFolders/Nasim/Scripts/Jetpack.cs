@@ -9,6 +9,7 @@ public class Jetpack : MonoBehaviour
     [SerializeField] private bool pressedFirstTime;
     [SerializeField] private bool canUseJetpack;
     [SerializeField] private bool isUsingJetpack;
+    [SerializeField] private bool doublePressSpace;
 
     [Header("Floats")]
     [SerializeField] private float jetpackAcceleration = 15f;
@@ -34,6 +35,7 @@ public class Jetpack : MonoBehaviour
     void Start()
     {
         pressedFirstTime = false;
+        doublePressSpace = false;
         playerCharacterController = GameManager.instance.ReturnPlayerController();
         fuelMeter = GameManager.instance.ReturnFuelMeterSlider();
         currentFillRatio = 1f;
@@ -59,11 +61,13 @@ public class Jetpack : MonoBehaviour
         {
             if (pressedFirstTime && Time.time - lastPressedTime <= delayBetweenPress)
             {
+                doublePressSpace = true;
                 pressedFirstTime = false;
             }
             else
             {
                 pressedFirstTime = true;
+                doublePressSpace = false;
             }
 
             lastPressedTime = Time.time;
@@ -73,11 +77,16 @@ public class Jetpack : MonoBehaviour
         {
             pressedFirstTime = false;
         }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            doublePressSpace = false;
+        }
     }
 
     private void HandleJetpackUsage()
     {
-        bool jetpackIsInUse = canUseJetpack && currentFillRatio > 0f && Input.GetKey(KeyCode.Space);
+        bool jetpackIsInUse = canUseJetpack && currentFillRatio > 0f && doublePressSpace;
 
         if (jetpackIsInUse)
         {
@@ -105,6 +114,7 @@ public class Jetpack : MonoBehaviour
         currentFillRatio -= Time.deltaTime / consumeFuelDuration;
         currentFillRatio = Mathf.Clamp01(currentFillRatio);
 
+        // Ensure the jetpack sound only starts if it is not already playing
         if (!jetpackSound.isPlaying)
         {
             jetpackSound.Play();
@@ -114,6 +124,8 @@ public class Jetpack : MonoBehaviour
     private void StopJetpack()
     {
         isUsingJetpack = false;
+
+        // Ensure the jetpack sound stops when the jetpack is not in use
         if (jetpackSound.isPlaying)
         {
             jetpackSound.Stop();
