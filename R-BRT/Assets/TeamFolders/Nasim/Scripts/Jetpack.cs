@@ -13,7 +13,7 @@ public class Jetpack : MonoBehaviour
 
     [Header("Floats")]
     [SerializeField] private float jetpackAcceleration = 15f;
-    [SerializeField] private float delayBetweenPress = 0.25f;
+    [SerializeField] private float delayBetweenPress = 0.50f;
     [SerializeField] private float lastPressedTime;
     [SerializeField] private float jetpackDownwardVelocity = 0.75f;
     [SerializeField] private float consumeFuelDuration = 1.5f;
