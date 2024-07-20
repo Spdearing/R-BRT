@@ -46,11 +46,6 @@ public class AudioManager : MonoBehaviour
 	public AudioClip endingMusic;
 
 
-	private void Start()
-	{
-		
-	}
-
 	public void PlaySFX(AudioClip clip)
 	{
 		sfxSource.PlayOneShot(clip);

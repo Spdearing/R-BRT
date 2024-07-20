@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource elevatorBreaking;
     [SerializeField] private AudioSource janitorDoorCloses;
     [SerializeField] private AudioSource stairDoorClosing;
+    [SerializeField] private AudioSource jetpackSound;
     #endregion
 
     [Header("Capsule Collider")]
@@ -369,6 +370,7 @@ public class GameManager : MonoBehaviour
 
 
         player = GameObject.Find("Player");
+        jetpackSound = GameObject.Find("Player").GetComponent<AudioSource>();
         playerCollider = GameObject.Find("Player").GetComponentInChildren<CapsuleCollider>();
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera");
         playerCameraTransform = playerCamera.transform;
@@ -729,7 +731,12 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    #region//ReturningAudio Sources
+    #region//Returning Audio Sources
+
+    public AudioSource ReturnJetpackSound()
+    {
+        return this.jetpackSound;
+    }
     public AudioSource ReturnSprintingSound()
     {
         return this.sprintingSound;

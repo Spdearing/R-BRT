@@ -22,6 +22,9 @@ public class Jetpack : MonoBehaviour
     [SerializeField] private float currentFillRatio;
     [SerializeField] private float lastTimeOfUse;
 
+    [Header("Audio Source")]
+    [SerializeField] private AudioSource jetpackSound;
+
     [Range(0f, 1f)]
 
 
@@ -41,7 +44,7 @@ public class Jetpack : MonoBehaviour
 
 
         currentFillRatio = 1f;
-
+        jetpackSound = GameManager.instance.ReturnJetpackSound();
     }
 
     void Update()
@@ -62,6 +65,7 @@ public class Jetpack : MonoBehaviour
             if (pressedFirstTime)
             {
                 bool isDoubledPress = Time.time - lastPressedTime <= delayBetweenPress;
+                
 
                 if (isDoubledPress)
                 {
@@ -85,7 +89,7 @@ public class Jetpack : MonoBehaviour
         if (jetpackIsInUse)
         {
             isUsingJetpack = true;
- 
+            
 
             lastTimeOfUse = Time.time;
 
@@ -107,6 +111,7 @@ public class Jetpack : MonoBehaviour
         else
         {
             isUsingJetpack = false;
+            jetpackSound.Stop();
 
 
             if (Time.time - lastTimeOfUse >= refuelDelay)
