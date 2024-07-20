@@ -51,11 +51,10 @@ public class GroundBotSpawner : MonoBehaviour
         sceneActivity = GameManager.instance.ReturnSceneActivity();
         enemyPrefab = Resources.Load<GameObject>("Sam's_Prefabs/groundBotDone");
         group1 = new GameObject[1];
-        group2 = new GameObject[11];
-        group3 = new GameObject[4];
-        
         SpawnGroup1();
+        group2 = new GameObject[11];
         SpawnGroup2();
+        group3 = new GameObject[4];
         SpawnGroup3();
 
         hallwayGroup = new GameObject[5];
@@ -79,8 +78,6 @@ public class GroundBotSpawner : MonoBehaviour
         jetpackGroup[0] = group2[5];
         jetpackGroup[1] = group2[9];
         jetpackGroup[2] = group2[10];
-
-
 
         ToggleGroup2();
         ToggleGroup3();
