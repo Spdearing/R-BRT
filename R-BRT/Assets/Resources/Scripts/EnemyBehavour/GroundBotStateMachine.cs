@@ -107,17 +107,8 @@ public class GroundBotStateMachine : MonoBehaviour
                 
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
 
-
-                if(GameManager.instance.ReturnNewGameStatus() == true)
-                {
-                    GameManager.instance.SetNewGameStatus(false);
-                }
-                else
-                {
-                    GameManager.instance.SetNewGameStatus(false);
-                }
-                    
-
+                Invoke("DetermineNewGameStatus", 0.1f);
+     
                 playerController.SetCameraLock(true);
 
                 startRotation = playerCameraTransform.rotation;
@@ -151,5 +142,17 @@ public class GroundBotStateMachine : MonoBehaviour
     public void SetGroundBotAIMovement(GroundBotAIMovement value)
     {
         this.groundBotAIMovement = value;
+    }
+
+    public void DetermineNewGameStatus()
+    {
+        if (GameManager.instance.ReturnNewGameStatus() == true)
+        {
+            GameManager.instance.SetNewGameStatus(false);
+        }
+        else
+        {
+            GameManager.instance.SetNewGameStatus(false);
+        }
     }
 }

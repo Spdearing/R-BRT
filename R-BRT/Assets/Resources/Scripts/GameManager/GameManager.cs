@@ -222,19 +222,23 @@ public class GameManager : MonoBehaviour
                         Debug.Log("About to set new spawn location");
                         player.transform.position = newSpawnPoint;
 
-                        if (newSpawnPoint == new Vector3(1.317158f, 13.69235f, -55.02805f))//JetPack 2nd checkpoint hit
+                        if (newSpawnPoint == new Vector3(-21.40365f, 13.53898f, -25.82779f))//JetPack Top of Elevator checkpoint hit
                         {
-                            Invoke("SetUpJetpackPathTwo", 1);
+                            Invoke("SetUpJetpackPath", 1);
                         }
-                        else if (newSpawnPoint == new Vector3(7.067542f, 13.32212f, -32.64403f))// StealthPath Top Of Stairs checkpoint Hit
+                        else if (newSpawnPoint == new Vector3(1.317158f, 13.69235f, -55.02805f))//JetPack 2nd checkpoint hit
+                        {
+                            Invoke("SetUpJetpackPathTwo", 0.1f);
+                        }
+                        if (newSpawnPoint == new Vector3(7.067542f, 13.32212f, -32.64403f))// StealthPath Top Of Stairs checkpoint Hit
                         {
                             Invoke("SetUpStealthPath", 1);
                         }
-                        if (newSpawnPoint == new Vector3(-9.065497f, 13.32757f, 14.78284f))// StealthPath Second Broken Room checkpoint Hit
+                        else if (newSpawnPoint == new Vector3(-9.065497f, 13.32757f, 14.78284f))// StealthPath Second Broken Room checkpoint Hit
                         {
                             Invoke("SetUpStealthPath", 1);
                         }
-                        else if (newSpawnPoint == new Vector3(-30.5261f, 0.330572f, -31.97705f))// Janitors Closet Checkpoint hit
+                        if (newSpawnPoint == new Vector3(-30.5261f, 0.330572f, -31.97705f))// Janitors Closet Checkpoint hit
                         {
                             Invoke("SetUpJanitorCheckPoint", 1);
                         }
@@ -274,8 +278,19 @@ public class GameManager : MonoBehaviour
         CloseOffTheStairs();
     }
 
+    void SetUpJetpackPath()
+    {
+        groundBotSpawner.ToggleGroup1();
+        flyingBotSpawner.ToggleGroup1();
+        groundBotSpawner.ToggleJetPackGroup();
+        flyingBotSpawner.ToggleGroup2();
+        CloseOffTheStairs();
+    }
+
     void SetUpJetpackPathTwo()
     {
+        groundBotSpawner.ToggleGroup1();
+        flyingBotSpawner.ToggleGroup1();
         groundBotSpawner.ToggleJetPackGroup();
         flyingBotSpawner.ToggleGroup2();
         Quaternion newRotation = Quaternion.Euler(0, 270, 0);

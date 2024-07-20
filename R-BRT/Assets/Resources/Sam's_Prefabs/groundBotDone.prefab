@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 8486381568654974530}
   - component: {fileID: 6192688814864769502}
   - component: {fileID: 8186598207576923723}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1274,6 +1274,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: dd0781ea3a1616f4ab11c54a84a058ab, type: 2}
+    - target: {fileID: -259972160606440404, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -259972160606440404, guid: 22e73c20dcd1efe4c8300a16eaac86af, type: 3}
       propertyPath: m_TagString
       value: Untagged
