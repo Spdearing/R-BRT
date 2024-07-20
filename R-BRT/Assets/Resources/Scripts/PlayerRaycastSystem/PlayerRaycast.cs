@@ -30,6 +30,10 @@ public class PlayerRaycast : MonoBehaviour
     [SerializeField] private Animator interactBoxAnim;
     [SerializeField] private Animator interactEAnim;
 
+
+    [Header("AudioSource")]
+    [SerializeField] private AudioSource lorePickUpSound;
+
     private string[] loreEntryTags = { "LoreEntry", "LoreEntry2", "LoreEntry3", "LoreEntry4" };
 
     void Start()
@@ -128,6 +132,7 @@ public class PlayerRaycast : MonoBehaviour
                 {
                     case "LoreEntry":
 
+                        lorePickUpSound.Play();
                         GameManager.instance.SetLoreEntryOne(true);
                         GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryOneGameObject());
                         pauseMenuScript.PauseGame();
@@ -136,6 +141,7 @@ public class PlayerRaycast : MonoBehaviour
 
                     case "LoreEntry2":
 
+                        lorePickUpSound.Play();
                         GameManager.instance.SetLoreEntryTwo(true);
                         GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryTwoGameObject());
                         pauseMenuScript.PauseGame();
@@ -144,6 +150,7 @@ public class PlayerRaycast : MonoBehaviour
 
                     case "LoreEntry3":
 
+                        lorePickUpSound.Play();
                         GameManager.instance.SetLoreEntryThree(true);
                         GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryThreeGameObject());
                         pauseMenuScript.PauseGame();
@@ -152,6 +159,7 @@ public class PlayerRaycast : MonoBehaviour
 
                     case "LoreEntry4":
 
+                        lorePickUpSound.Play();
                         GameManager.instance.SetLoreEntryFour(true);
                         GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryFourGameObject());
                         pauseMenuScript.PauseGame();
@@ -170,6 +178,7 @@ public class PlayerRaycast : MonoBehaviour
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;
         holding = false;
+        lorePickUpSound = GameManager.instance.ReturnLorePickUp();
         interactBoxAnim = GameManager.instance.ReturnInteractBoxAnim();
         interactEAnim = GameManager.instance.ReturnInteractEAnim();
         phoenixChipDecision = GameManager.instance.ReturnPhoenixChipDecision();

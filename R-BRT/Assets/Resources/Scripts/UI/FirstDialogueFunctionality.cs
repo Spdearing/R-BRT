@@ -28,8 +28,9 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [Header("GameObject")]
     [SerializeField] private GameObject continueText;
 
-    [Header("Bools")]
-    [SerializeField] private bool skipText;
+    private bool skipToNextText;
+    private bool isTyping;
+    private bool textFullyDisplayed;
 
     [Header("Dialogue CheckPoint Name")]
     [SerializeField] private string dialogueName;
@@ -38,6 +39,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private int dialogueIndex = 0;
 
     private string[][] dialogues;
+    private Coroutine currentDialogueCoroutine;
 
     void Start()
     {
@@ -60,7 +62,11 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
         if (currentDialogue != null)
         {
-            StartCoroutine(ShowDialogue(currentDialogue));
+            if (currentDialogueCoroutine != null)
+            {
+                StopCoroutine(currentDialogueCoroutine);
+            }
+            currentDialogueCoroutine = StartCoroutine(ShowDialogue(currentDialogue));
         }
     }
 
@@ -87,29 +93,27 @@ public class FirstDialogueFunctionality : MonoBehaviour
             continueText.SetActive(false);
             uiText.text = "";
             string fullText = texts[j];
-            skipText = false;
+            isTyping = true;
+            skipToNextText = false;
+            textFullyDisplayed = false;
 
             for (int i = 0; i <= fullText.Length; i++)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    skipText = true;
-                }
-
-                if (skipText)
+                if (skipToNextText)
                 {
                     uiText.text = fullText;
                     break;
                 }
-                else
-                {
-                    uiText.text = fullText.Substring(0, i);
-                    yield return new WaitForSeconds(delay);
-                }
+
+                uiText.text = fullText.Substring(0, i);
+                yield return new WaitForSeconds(delay);
             }
 
+            isTyping = false;
+            textFullyDisplayed = true;
+            skipToNextText = false;
+
             continueText.SetActive(true);
-            yield return new WaitForSeconds(0.1f); // Slight delay before waiting for the next input
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         }
 
@@ -118,7 +122,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     private void EndDialogue()
     {
-        skipText = false;
+        isTyping = false;
         playerController.SetPlayerActivity(true);
         playerController.isCameraLocked = false;
         sceneActivity.SetDialogueTriggerOne(false);
@@ -134,12 +138,19 @@ public class FirstDialogueFunctionality : MonoBehaviour
         checkPointDialogue = desiredDialogue;
     }
 
-    IEnumerator CountDownTillClose()
+    void Update()
     {
-        yield return new WaitForSeconds(10.0f);
-        dialogueName = GameManager.instance.ReturnPlayerDialogueCheckPoints(dialogueIndex++);
-        playerController.SetPlayerActivity(true);
-        playerController.isCameraLocked = false;
-        sceneActivity.SetDialogueTriggerOne(false);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (isTyping)
+            {
+                skipToNextText = true;
+            }
+            else if (textFullyDisplayed)
+            {
+                skipToNextText = true;
+                textFullyDisplayed = false;
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using static UnityEngine.Rendering.DebugUI;
 
 public class AbilityDialogueFunctionality : MonoBehaviour
 {
@@ -9,49 +8,45 @@ public class AbilityDialogueFunctionality : MonoBehaviour
     [SerializeField] private TMP_Text uiText;
 
     [Header("Strings")]
-
     [SerializeField] private string[] fullStealthAbilityText;
     [SerializeField] private string[] fullJetPackAbilityText;
     [SerializeField] private string[] fullStealthAbilityText2;
-    [SerializeField] private string[] fullJetPackAbilityText2; 
+    [SerializeField] private string[] fullJetPackAbilityText2;
     [SerializeField] private string[] fullStealthAbilityText3;
     [SerializeField] private string[] fullJetPackAbilityText3;
 
     [Header("Floats")]
-    [SerializeField] private float delay;
+    [SerializeField] private float delay = 0.035f;
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private SceneActivity sceneActivity;
-    
 
     [Header("GameObject")]
     [SerializeField] private GameObject continueText;
     [SerializeField] private GameObject firstDialogue;
 
-    [Header("Bools")]
-    [SerializeField] private bool skipText;
+    private bool skipToNextText;
+    private bool isTyping;
+    private bool textFullyDisplayed;
 
     [Header("Dialogue CheckPoint Name")]
     [SerializeField] private string dialogueName;
 
-
     private string[][] dialogues;
-
 
     private void Initialize()
     {
         dialogueName = string.Empty;
-        dialogues = new string[][] { fullStealthAbilityText , fullJetPackAbilityText, fullStealthAbilityText2, fullJetPackAbilityText2, fullStealthAbilityText3, fullJetPackAbilityText3 };
+        dialogues = new string[][] { fullStealthAbilityText, fullJetPackAbilityText, fullStealthAbilityText2, fullJetPackAbilityText2, fullStealthAbilityText3, fullJetPackAbilityText3 };
         playerController = GameManager.instance.ReturnPlayerController();
         sceneActivity = GameManager.instance.ReturnSceneActivity();
-        delay = 0.035f;
     }
 
     private void StartDialogue()
     {
         dialogueName = GameManager.instance.ReturnPlayerDialogueAbilityChoice();
-        string[] currentDialogue = GetCurrentDialogue(dialogueName, GetDialogues());
+        string[] currentDialogue = GetCurrentDialogue(dialogueName);
 
         if (currentDialogue != null)
         {
@@ -59,12 +54,7 @@ public class AbilityDialogueFunctionality : MonoBehaviour
         }
     }
 
-    private string[][] GetDialogues()
-    {
-        return dialogues;
-    }
-
-    private string[] GetCurrentDialogue(string dialogueName, string[][] dialogues)
+    private string[] GetCurrentDialogue(string dialogueName)
     {
         switch (dialogueName)
         {
@@ -72,13 +62,13 @@ public class AbilityDialogueFunctionality : MonoBehaviour
                 return dialogues[0];
             case "Jetpack":
                 return dialogues[1];
-            case "Jetpack2":
-                return dialogues[2];
             case "Stealth2":
+                return dialogues[2];
+            case "Jetpack2":
                 return dialogues[3];
-            case "Jetpack3":
-                return dialogues[4];
             case "Stealth3":
+                return dialogues[4];
+            case "Jetpack3":
                 return dialogues[5];
             default:
                 return null;
@@ -92,26 +82,26 @@ public class AbilityDialogueFunctionality : MonoBehaviour
             continueText.SetActive(false);
             uiText.text = "";
             string fullText = texts[j];
-            skipText = false;
+            isTyping = true;
+            skipToNextText = false;
+            textFullyDisplayed = false;
 
             for (int i = 0; i <= fullText.Length; i++)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    skipText = true;
-                }
-
-                if (skipText)
+                if (skipToNextText)
                 {
                     uiText.text = fullText;
                     break;
                 }
-                else
-                {
-                    uiText.text = fullText.Substring(0, i);
-                    yield return new WaitForSeconds(delay);
-                }
+
+                uiText.text = fullText.Substring(0, i);
+                yield return new WaitForSeconds(delay);
             }
+
+            isTyping = false;
+            textFullyDisplayed = true;
+            skipToNextText = false;
+
             continueText.SetActive(true);
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         }
@@ -121,7 +111,8 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
     private void EndDialogue()
     {
-        skipText = false;
+        isTyping = false;
+        textFullyDisplayed = false;
         playerController.SetPlayerActivity(true);
         playerController.isCameraLocked = false;
         sceneActivity.SetDialogueAbilityTrigger(false);
@@ -135,14 +126,17 @@ public class AbilityDialogueFunctionality : MonoBehaviour
             firstDialogue.SetActive(false);
         }
         else
+        {
             firstDialogue.SetActive(false);
+        }
 
         Initialize();
         StartDialogue();
+    }
 
-
-        
-        
+    public void SetDialogue(string desiredDialogue)
+    {
+        dialogueName = desiredDialogue;
     }
 
     IEnumerator CountDownTillClose()
@@ -151,5 +145,20 @@ public class AbilityDialogueFunctionality : MonoBehaviour
         playerController.SetPlayerActivity(true);
         playerController.isCameraLocked = false;
         sceneActivity.SetDialogueAbilityTrigger(false);
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (isTyping)
+            {
+                skipToNextText = true;
+            }
+            else if (textFullyDisplayed)
+            {
+                textFullyDisplayed = false;
+            }
+        }
     }
 }

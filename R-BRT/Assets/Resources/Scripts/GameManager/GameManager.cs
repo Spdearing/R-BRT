@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource janitorDoorCloses;
     [SerializeField] private AudioSource stairDoorClosing;
     [SerializeField] private AudioSource jetpackSound;
+    [SerializeField] private AudioSource lorePickUp;
     #endregion
 
     [Header("Capsule Collider")]
@@ -205,8 +206,8 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    //startingSpawnLocation = startingSpawnPoint.transform.position;
-                    //player.transform.position = startingSpawnLocation;
+                    startingSpawnLocation = startingSpawnPoint.transform.position;
+                    player.transform.position = startingSpawnLocation;
                     newSpawnPoint = Vector3.zero;
                     
                 }
@@ -416,6 +417,7 @@ public class GameManager : MonoBehaviour
         elevatorBreaking = GameObject.Find("ElevatorRoomFallen").GetComponent<AudioSource>();
         janitorDoorCloses = GameObject.Find("DoorClosedJanitorsCloset").GetComponent<AudioSource>();
         stairDoorClosing = GameObject.Find("DoorClosedTwo").GetComponent<AudioSource>();
+        lorePickUp = GameObject.Find("LorePickUp").GetComponent<AudioSource>();
         fuelMeterSlider = GameObject.Find("JetpackMeterFill").GetComponent<Image>();
         abilityDialogue = GameObject.Find("AbilityDialogue");
         dialogue = GameObject.Find("DialoguePanel");
@@ -732,6 +734,11 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region//Returning Audio Sources
+
+    public AudioSource ReturnLorePickUp()
+    {
+        return this.lorePickUp;
+    }
 
     public AudioSource ReturnJetpackSound()
     {
