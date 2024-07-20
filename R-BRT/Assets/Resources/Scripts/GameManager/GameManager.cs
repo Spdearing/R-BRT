@@ -224,32 +224,19 @@ public class GameManager : MonoBehaviour
 
                         if (newSpawnPoint == new Vector3(1.317158f, 13.69235f, -55.02805f))//JetPack 2nd checkpoint hit
                         {
-                            groundBotSpawner.ToggleJetPackGroup();
-                            flyingBotSpawner.ToggleGroup2();
-                            Quaternion newRotation = Quaternion.Euler(0, 270, 0);
-                            player.transform.rotation = newRotation;
+                            Invoke("SetUpJetpackPathTwo", 1);
                         }
                         else if (newSpawnPoint == new Vector3(7.067542f, 13.32212f, -32.64403f))// StealthPath Top Of Stairs checkpoint Hit
                         {
-                            groundBotSpawner.ToggleGroup1();
-                            flyingBotSpawner.ToggleGroup1();
-                            groundBotSpawner.ToggleStealthGroup();
-                            CloseOffTheStairs();
+                            Invoke("SetUpStealthPath", 1);
                         }
                         if (newSpawnPoint == new Vector3(-9.065497f, 13.32757f, 14.78284f))// StealthPath Second Broken Room checkpoint Hit
                         {
-                            groundBotSpawner.ToggleGroup1();
-                            flyingBotSpawner.ToggleGroup1();
-                            groundBotSpawner.ToggleStealthGroup();
-                            CloseOffTheStairs();
+                            Invoke("SetUpStealthPath", 1);
                         }
                         else if (newSpawnPoint == new Vector3(-30.5261f, 0.330572f, -31.97705f))// Janitors Closet Checkpoint hit
                         {
-                            Debug.Log("Spawning at Janitors Closet");
-                            groundBotSpawner.ToggleGroup1();
-                            flyingBotSpawner.ToggleGroup1();
-                            groundBotSpawner.ToggleHallwayGroup();
-
+                            Invoke("SetUpJanitorCheckPoint", 1);
                         }
 
                     }
@@ -276,6 +263,34 @@ public class GameManager : MonoBehaviour
             default:
                 Debug.LogWarning($"Scene '{scene.name}' not handled in OnSceneLoaded");
                 break;
+        }
+    }
+
+    void SetUpStealthPath()
+    {
+        groundBotSpawner.ToggleGroup1();
+        flyingBotSpawner.ToggleGroup1();
+        groundBotSpawner.ToggleStealthGroup();
+        CloseOffTheStairs();
+    }
+
+    void SetUpJetpackPathTwo()
+    {
+        groundBotSpawner.ToggleJetPackGroup();
+        flyingBotSpawner.ToggleGroup2();
+        Quaternion newRotation = Quaternion.Euler(0, 270, 0);
+        player.transform.rotation = newRotation;
+    }
+
+    void SetUpJanitorCheckPoint()
+    {
+        Debug.Log("Spawning at Janitors Closet");
+        groundBotSpawner.ToggleGroup1();
+        flyingBotSpawner.ToggleGroup1();
+        groundBotSpawner.ToggleHallwayGroup();
+        if(jetpackUnlocked)
+        {
+            CloseOffTheStairs();
         }
     }
 
