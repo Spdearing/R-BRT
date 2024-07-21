@@ -277,4 +277,9 @@ public class FlyingBotStateMachine : MonoBehaviour
     {
         detectingPlayer = value;
     }
+
+    public bool ReturnDetectingPlayer()
+    {
+        return this.detectingPlayer;
+    }
 }

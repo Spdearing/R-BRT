@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
                     
                     
                     //startingSpawnLocation = startingSpawnPoint.transform.position;
-                   //player.transform.position = startingSpawnLocation;
+                    //player.transform.position = startingSpawnLocation;
                     newSpawnPoint = Vector3.zero;
                     
                 }
@@ -756,11 +756,6 @@ public class GameManager : MonoBehaviour
     public GameObject ReturnPlayerCamera()
     {
         return this.playerCamera;
-    }
-
-    public GameObject ReturnLoreEntry()
-    {
-        return this.loreEntryObjects[0];
     }
     #endregion
 

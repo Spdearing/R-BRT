@@ -205,7 +205,7 @@ public class PlayerCollisions : MonoBehaviour
         groundBotSpawner.ToggleJetPackGroup();
         flyingBotSpawner.ToggleGroup2();
     }
-    public void LoadStealthEnemiesFromBackHallway()
+    public void LoadStealthEnemiesFromBackHallway(Collider other)
     {
         groundBotSpawner.ToggleJetPackGroup();
         flyingBotSpawner.ToggleGroup2();

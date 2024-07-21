@@ -18,16 +18,18 @@ public class EnemyProximityCheck : MonoBehaviour
     [SerializeField] private List<GameObject> detectedEnemies = new List<GameObject>();
 
     [Header("Array Of Tags To Compare")]
-    [SerializeField] private string[] enemyTags = new string[] { "GroundBot", "SpiderBot", "FlyingBot" };
+    [SerializeField] private string[] enemyTags;
 
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GroundBotStateMachine groundBotStateMachine;
+    [SerializeField] private FlyingBotStateMachine flyingBotStateMachine;
     [SerializeField] private PlayerAbilities playerAbilities;
 
     private void Start()
     {
+        enemyTags = new string[] { "GroundBot", "FlyingBot" };
         raycastDistance = 7.5f;
         playerController = GameManager.instance.ReturnPlayerController();
         playerAbilities = GameManager.instance.ReturnPlayerAbilities();
@@ -80,8 +82,7 @@ public class EnemyProximityCheck : MonoBehaviour
             
             if (IsTagInList(hitInfo.collider.tag))
             {
-                enemyWithinRange = true;
-                if(hitInfo.collider.tag == "GroundBot" && enemyWithinRange)
+                if(hitInfo.collider.tag == "GroundBot")
                 {
                     groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
                     groundBotStateMachine.SetDetectingPlayer(true);
@@ -94,14 +95,15 @@ public class EnemyProximityCheck : MonoBehaviour
                         playerController.SetPlayerActivity(false);
                     }
                 }
-                else if(hitInfo.collider.tag == "GroundBot" && !enemyWithinRange)
+                else if(hitInfo.collider.tag == "FlyingBot")
                 {
-                    groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
-                    groundBotStateMachine.SetDetectingPlayer(false);
+                    flyingBotStateMachine = hitInfo.collider.GetComponent<FlyingBotStateMachine>();
+                    flyingBotStateMachine.SetDetectingPlayer(true);
                 }
             }
             else
             {
+                groundBotStateMachine.SetDetectingPlayer(false);
                 enemyWithinRange = false;
             }
         }

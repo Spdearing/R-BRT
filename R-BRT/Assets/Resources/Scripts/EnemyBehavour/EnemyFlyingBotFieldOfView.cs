@@ -42,7 +42,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsPlayer(other) && enemyProximity.ReturnEnemyWithinRange() == true && !ability.ReturnUsingInvisibility())
+        if (IsPlayer(other) && flyingBotStateMachine.ReturnDetectingPlayer() == true && !ability.ReturnUsingInvisibility())
         {
             HandlePlayerDetection();
         }
@@ -53,18 +53,16 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         Debug.Log(this.gameObject.name + other.name);
         if (IsPlayer(other))
         {
-            bool withinRange = enemyProximity.ReturnEnemyWithinRange();
+            bool withinRange = flyingBotStateMachine.ReturnDetectingPlayer();
             sceneActivity.SetPlayerIsSpotted(withinRange);
 
             if (!withinRange)
             {
-                Debug.Log("!withinRange");
                 ResetPlayerDetection();
             }
         }
         else
         {
-            Debug.Log("outside the if statement checking the player in OnTriggerStay");
             ResetPlayerDetection();
         }
     }
@@ -79,7 +77,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     public void Disengage()
     {
-        if(enemyProximity.ReturnEnemyWithinRange() == false)
+        if(flyingBotStateMachine.ReturnDetectingPlayer() == false)
         {
             ResetPlayerDetection();
             flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.patrolling);
@@ -89,7 +87,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     private void DetectingPlayer()
     {
-        if (enemyProximity.ReturnEnemyWithinRange() && sceneActivity.ReturnPlayerSpotted() && playerIsBeingDetected)
+        if (flyingBotStateMachine.ReturnDetectingPlayer() && sceneActivity.ReturnPlayerSpotted() && playerIsBeingDetected)
         {
             playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.beingDetected);
             playerIsBeingDetected = false;

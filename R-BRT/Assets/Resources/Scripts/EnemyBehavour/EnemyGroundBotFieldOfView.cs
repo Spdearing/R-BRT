@@ -45,7 +45,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsPlayer(other) && groundBotStateMachine.ReturnDetectingPlayer() == true)
+        if (IsPlayer(other) && groundBotStateMachine.ReturnDetectingPlayer() == true && !ability.ReturnUsingInvisibility())
         {
             sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;

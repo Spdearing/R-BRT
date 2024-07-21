@@ -65,6 +65,10 @@ public class PauseMenu : MonoBehaviour
                 }
             }
         }
+        if(isPaused) 
+        {
+            playerController.SetCameraLock(true);
+        }
     }
 
     public void PauseGame()
