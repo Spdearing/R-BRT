@@ -20,6 +20,7 @@ public class FlyingBotStateMachine : MonoBehaviour
 
     [Header("Bools")]
     [SerializeField] private bool patrolling;
+    [SerializeField] private bool detectingPlayer;
 
     [Header("Scripts")]
     [SerializeField] private GameOverScreen gameOverScreen;
@@ -91,7 +92,7 @@ public class FlyingBotStateMachine : MonoBehaviour
         playerCameraTransform = playerCamera.transform;
         gameOverScreen = GameManager.instance.ReturnGameOver();
         enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
-        patrolSpeed = 5.0f;
+        patrolSpeed = 3.5f;
         patrolling = true;
         
         
@@ -132,7 +133,11 @@ public class FlyingBotStateMachine : MonoBehaviour
         {
             StopCoroutine(patrolRoutine);
         }
-        patrolRoutine = StartCoroutine(PatrolRoutine());
+        else
+        {
+            patrolRoutine = StartCoroutine(PatrolRoutine());
+        }
+        
     }
 
     private IEnumerator PatrolRoutine()
@@ -266,5 +271,10 @@ public class FlyingBotStateMachine : MonoBehaviour
     public void SetPatrollingStatus(bool value)
     {
         patrolling = value;
+    }
+
+    public void SetDetectingPlayer(bool value) 
+    {
+        detectingPlayer = value;
     }
 }

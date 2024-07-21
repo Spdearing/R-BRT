@@ -45,7 +45,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsPlayer(other) && IsDetectable())
+        if (IsPlayer(other) && groundBotStateMachine.ReturnDetectingPlayer() == true)
         {
             sceneActivity.SetPlayerIsSpotted(true);
             playerIsBeingDetected = true;
@@ -57,7 +57,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
     {
         if (IsPlayer(other))
         {
-            bool withinRange = enemyProximity.ReturnEnemyWithinRange();
+            bool withinRange = groundBotStateMachine.ReturnDetectingPlayer();
             sceneActivity.SetPlayerIsSpotted(withinRange);
 
             if (!withinRange)
@@ -87,7 +87,7 @@ public class EnemyGroundBotFieldOfView : MonoBehaviour
 
     private void DetectingPlayer()
     {
-        if (enemyProximity.ReturnEnemyWithinRange() && sceneActivity.ReturnPlayerSpotted())
+        if (groundBotStateMachine.ReturnDetectingPlayer() && sceneActivity.ReturnPlayerSpotted())
         {
             if (playerIsBeingDetected)
             {

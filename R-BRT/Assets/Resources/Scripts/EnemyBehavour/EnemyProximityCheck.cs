@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class EnemyProximityCheck : MonoBehaviour
 {
@@ -80,23 +81,29 @@ public class EnemyProximityCheck : MonoBehaviour
             if (IsTagInList(hitInfo.collider.tag))
             {
                 enemyWithinRange = true;
-
-                if(hitInfo.collider.tag == "GroundBot" && Vector3.Distance(transform.position, hitInfo.collider.transform.position) < 1.5f && !playerAbilities.ReturnUsingInvisibility())
+                if(hitInfo.collider.tag == "GroundBot" && enemyWithinRange)
                 {
-                    Debug.Log("Touched the bot");
                     groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
-                    groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.playerCaught);
-                    playerController.SetPlayerActivity(false);
+                    groundBotStateMachine.SetDetectingPlayer(true);
+
+                    if (Vector3.Distance(transform.position, hitInfo.collider.transform.position) < 1.5f && !playerAbilities.ReturnUsingInvisibility())
+                    {
+                        Debug.Log("Touched the bot");
+                        groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
+                        groundBotStateMachine.ChangeBehavior(GroundBotStateMachine.BehaviorState.playerCaught);
+                        playerController.SetPlayerActivity(false);
+                    }
+                }
+                else if(hitInfo.collider.tag == "GroundBot" && !enemyWithinRange)
+                {
+                    groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
+                    groundBotStateMachine.SetDetectingPlayer(false);
                 }
             }
             else
             {
                 enemyWithinRange = false;
             }
-        }
-        else
-        {
-            enemyWithinRange = false;
         }
     }
 

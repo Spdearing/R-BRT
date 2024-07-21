@@ -42,7 +42,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsPlayer(other))
+        if (IsPlayer(other) && enemyProximity.ReturnEnemyWithinRange() == true && !ability.ReturnUsingInvisibility())
         {
             HandlePlayerDetection();
         }
@@ -73,6 +73,14 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
     {
         if (IsPlayer(other))
         {
+            Disengage();
+        }
+    }
+
+    public void Disengage()
+    {
+        if(enemyProximity.ReturnEnemyWithinRange() == false)
+        {
             ResetPlayerDetection();
             flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.patrolling);
             flyingBotStateMachine.SetPatrollingStatus(true);
@@ -90,7 +98,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     bool IsPlayer(Collider other)
     {
-        return other.CompareTag("Player") && enemyProximity.ReturnEnemyWithinRange() && !ability.ReturnUsingInvisibility();
+        return other.CompareTag("Player");
     }
 
     void HandlePlayerDetection()
@@ -102,6 +110,7 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
         playerDetectionState.SetFlyingBotFieldOfView(this);
 
         playerDetectionState.SetDetectedByFlyingBot(true);
+        flyingBotStateMachine.SetPatrollingStatus(false);
         flyingBotStateMachine.ChangeBehavior(FlyingBotStateMachine.FlyingState.lookingAtPlayer);
     }
 

@@ -17,6 +17,9 @@ public class GroundBotStateMachine : MonoBehaviour
     [Header("GameObject")]
     [SerializeField] private GameObject player;
 
+    [Header("Bool")]
+    [SerializeField] private bool detectingPlayer;
+
 
     private Quaternion startRotation;
     private Quaternion endRotation;
@@ -107,7 +110,7 @@ public class GroundBotStateMachine : MonoBehaviour
                 
                 gameOverScreen.ReturnGameOverPanel().SetActive(true);
 
-                Invoke("DetermineNewGameStatus", 0.1f);
+                Invoke("DetermineNewGameStatus", 0.2f);
      
                 playerController.SetCameraLock(true);
 
@@ -154,5 +157,15 @@ public class GroundBotStateMachine : MonoBehaviour
         {
             GameManager.instance.SetNewGameStatus(false);
         }
+    }
+
+    public bool ReturnDetectingPlayer()
+    {
+        return this.detectingPlayer;
+    }
+
+    public void SetDetectingPlayer(bool value)
+    {
+        detectingPlayer = value;
     }
 }
