@@ -49,7 +49,8 @@ public class PlayerCollisions : MonoBehaviour
             { "ElevatorLobbyZoneLoader", LoadBatteryHallway },
             { "StealthPathZoneLoader", LoadStealthPathEnemies },
             { "JetPackZoneLoader", LoadJetpackEnemies },
-            { "EndCheckPoint", EndCheckPoint }
+            { "EndCheckPoint", EndCheckPoint },
+            { "JetpackBackHallway", LoadStealthEnemiesFromBackHallway }
         };
     }
 
@@ -201,9 +202,14 @@ public class PlayerCollisions : MonoBehaviour
 
     public void LoadJetpackEnemies(Collider other)
     {
-        groundBotSpawner.ToggleHallwayGroup();
         groundBotSpawner.ToggleJetPackGroup();
         flyingBotSpawner.ToggleGroup2();
+    }
+    public void LoadStealthEnemiesFromBackHallway()
+    {
+        groundBotSpawner.ToggleJetPackGroup();
+        flyingBotSpawner.ToggleGroup2();
+        groundBotSpawner.ToggleStealthGroup();
     }
     private void EndCheckPoint(Collider other)
     {

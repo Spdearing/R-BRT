@@ -241,28 +241,41 @@ public class GameManager : MonoBehaviour
 
                     if (newSpawnPoint != new Vector3(0, 0, 0))
                     {
-                        Debug.Log("About to set new spawn location");
+                        
                         player.transform.position = newSpawnPoint;
 
                         if (newSpawnPoint == new Vector3(-21.40365f, 13.53898f, -25.82779f))//JetPack Top of Elevator checkpoint hit
                         {
                             Invoke("SetUpJetpackPath", 1);
+                            currentCheckPointIndex = 3 - 1;
                         }
                         else if (newSpawnPoint == new Vector3(1.317158f, 13.69235f, -55.02805f))//JetPack 2nd checkpoint hit
                         {
                             Invoke("SetUpJetpackPathTwo", 0.1f);
+                            currentCheckPointIndex = 6 - 1;
                         }
                         if (newSpawnPoint == new Vector3(7.067542f, 13.32212f, -32.64403f))// StealthPath Top Of Stairs checkpoint Hit
                         {
                             Invoke("SetUpStealthPath", 1);
+                            currentCheckPointIndex = 4 - 1;
                         }
                         else if (newSpawnPoint == new Vector3(-9.065497f, 13.32757f, 14.78284f))// StealthPath Second Broken Room checkpoint Hit
                         {
                             Invoke("SetUpStealthPath", 1);
+                            currentCheckPointIndex = 5 - 1;
                         }
                         if (newSpawnPoint == new Vector3(-30.5261f, 0.330572f, -31.97705f))// Janitors Closet Checkpoint hit
                         {
                             Invoke("SetUpJanitorCheckPoint", 1);
+                            currentCheckPointIndex = 2 - 1;
+                        }
+                        else if (newSpawnPoint == new Vector3(-35.39333f, -0.1244326f, 7.746853f))//Beginning of Lobby CheckPoint
+                        {
+                            currentCheckPointIndex = 1 - 1;
+                        }
+                        if (newSpawnPoint == new Vector3(-19.15336f, -0.1244326f, -4.795639f))//After Lobby Checkpoint
+                        {
+                            currentCheckPointIndex = 2 - 1;
                         }
 
                     }
@@ -304,8 +317,6 @@ public class GameManager : MonoBehaviour
     {
         groundBotSpawner.ToggleGroup1();
         flyingBotSpawner.ToggleGroup1();
-        groundBotSpawner.ToggleJetPackGroup();
-        flyingBotSpawner.ToggleGroup2();
         CloseOffTheStairs();
     }
 

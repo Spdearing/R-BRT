@@ -89,6 +89,7 @@ TagManager:
   - StealthPathZoneLoader
   - JetPackZoneLoader
   - EndCheckPoint
+  - JetpackBackHallway
   layers:
   - Default
   - TransparentFX
