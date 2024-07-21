@@ -91,7 +91,7 @@ public class FlyingBotStateMachine : MonoBehaviour
         playerCameraTransform = playerCamera.transform;
         gameOverScreen = GameManager.instance.ReturnGameOver();
         enemyFlyingBotFieldOfView = GetComponentInChildren<EnemyFlyingBotFieldOfView>();
-        patrolSpeed = 3.5f;
+        patrolSpeed = 5.0f;
         patrolling = true;
         
         
@@ -213,6 +213,7 @@ public class FlyingBotStateMachine : MonoBehaviour
                 HandlePlayerCaught();
                 break;
             case FlyingState.lookingAtPlayer:
+                StopPatrolRoutine();
                 LookAtPlayer();
                 break;
             default:

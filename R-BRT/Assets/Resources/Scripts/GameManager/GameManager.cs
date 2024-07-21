@@ -226,8 +226,8 @@ public class GameManager : MonoBehaviour
 
                     
                     
-                    startingSpawnLocation = startingSpawnPoint.transform.position;
-                    player.transform.position = startingSpawnLocation;
+                    //startingSpawnLocation = startingSpawnPoint.transform.position;
+                   //player.transform.position = startingSpawnLocation;
                     newSpawnPoint = Vector3.zero;
                     
                 }
@@ -991,7 +991,6 @@ public class GameManager : MonoBehaviour
         {
             if (loreEntries[index])
             {
-                Debug.Log($"Lore Entry {index}: {loreEntries[index]}");
                 loreButtons[index].interactable = true;
             }
             else
@@ -1003,10 +1002,16 @@ public class GameManager : MonoBehaviour
 
     public void CheckLoreObjectInventroy()
     {
-        int inventory = 0;
-        foreach(bool pickedUpEntries in pickedUpLore)
+      for(int i = 0; i < pickedUpLore.Length; i++)
         {
-            loreEntryObjects[inventory].SetActive(pickedUpEntries);
+            if (pickedUpLore[i])
+            {
+                loreEntryObjects[i].SetActive(false);
+            }
+            else
+            {
+                loreEntryObjects[i].SetActive(true);
+            }
         }
     }
 

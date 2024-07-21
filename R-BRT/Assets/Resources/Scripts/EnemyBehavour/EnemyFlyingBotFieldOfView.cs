@@ -58,11 +58,13 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
             if (!withinRange)
             {
+                Debug.Log("!withinRange");
                 ResetPlayerDetection();
             }
         }
         else
         {
+            Debug.Log("outside the if statement checking the player in OnTriggerStay");
             ResetPlayerDetection();
         }
     }
@@ -93,7 +95,6 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     void HandlePlayerDetection()
     {
-        Debug.Log("Entering " + transform.parent.parent.gameObject.name);
         sceneActivity.SetPlayerIsSpotted(true);
         playerIsBeingDetected = true;
 
@@ -106,7 +107,6 @@ public class EnemyFlyingBotFieldOfView : MonoBehaviour
 
     void ResetPlayerDetection()
     {
-        Debug.Log("Exiting " + transform.parent.parent.gameObject.name);
         sceneActivity.SetPlayerIsSpotted(false);
         playerIsBeingDetected = false;
         playerDetectionState.ChangeDetectionState(PlayerDetectionState.DetectionState.meterRepleneshing);
