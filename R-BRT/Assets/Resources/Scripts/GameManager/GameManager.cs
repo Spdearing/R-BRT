@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject invisVolume;
     [SerializeField] private GameObject elevator;
     [SerializeField] private GameObject elevatorFallen;
-    [SerializeField] private GameObject closeJanitorDoorCollider;
     #endregion
 
     [Header("Dialogue String")]
@@ -484,7 +483,6 @@ public class GameManager : MonoBehaviour
         elevator = GameObject.Find("ElevatorRoomBox");
         elevatorFallen = GameObject.Find("ElevatorRoomFallen");
         elevatorFallen.SetActive(false);
-        closeJanitorDoorCollider = GameObject.Find("CloseJanitorsCloset");
     }
 
     void CheckPlayerAbility()
@@ -633,11 +631,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region //Return GameObjects
-
-    public GameObject ReturnCloseJanitorDoorCollider()
-    {
-        return this.closeJanitorDoorCollider;
-    }
 
     public PauseMenu ReturnPauseMenu()
     {
