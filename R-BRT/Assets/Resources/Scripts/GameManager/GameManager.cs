@@ -226,8 +226,8 @@ public class GameManager : MonoBehaviour
 
                     
                     
-                    //startingSpawnLocation = startingSpawnPoint.transform.position;
-                    //player.transform.position = startingSpawnLocation;
+                    startingSpawnLocation = startingSpawnPoint.transform.position;
+                    player.transform.position = startingSpawnLocation;
                     newSpawnPoint = Vector3.zero;
                     
                 }
