@@ -103,7 +103,14 @@ public class EnemyProximityCheck : MonoBehaviour
             }
             else
             {
-                groundBotStateMachine.SetDetectingPlayer(false);
+                if(flyingBotStateMachine != null)
+                {
+                    flyingBotStateMachine.SetDetectingPlayer(false);
+                }
+                if(groundBotStateMachine != null)
+                {
+                    groundBotStateMachine.SetDetectingPlayer(false);
+                }
                 enemyWithinRange = false;
             }
         }
