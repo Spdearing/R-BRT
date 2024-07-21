@@ -94,7 +94,7 @@ public class PlayerCollisions : MonoBehaviour
 
     private void SeventhDialogueEncounter(Collider other)
     {
-        GameManager.instance.SetIndexForAbilityChoice(3);
+        GameManager.instance.SetIndexForAbilityChoice(2);
         sceneActivity.StartStealthDialogue();
         sceneActivity.TurnOffSeventhDialogueBox();
         sceneActivity.TurnOffNotStealthPathDialogue();
@@ -102,7 +102,7 @@ public class PlayerCollisions : MonoBehaviour
 
     private void EighthDialogueEncounter(Collider other)
     {
-        GameManager.instance.SetIndexForAbilityChoice(2);
+        GameManager.instance.SetIndexForAbilityChoice(3);
         sceneActivity.StartJetPackDialogue();
         sceneActivity.TurnOffEighthDialogueBox();
         sceneActivity.TurnOffNotJetPackPathDialogue();
@@ -110,7 +110,7 @@ public class PlayerCollisions : MonoBehaviour
 
     private void NinthDialogueEncounter(Collider other)
     {
-        GameManager.instance.SetIndexForAbilityChoice(4);
+        GameManager.instance.SetIndexForAbilityChoice(5);
         sceneActivity.StartJetPackDialogue();
         sceneActivity.TurnOffNinthDialogueBox();
         sceneActivity.TurnOffNotJetPackPathDialogue();
@@ -118,7 +118,7 @@ public class PlayerCollisions : MonoBehaviour
 
     private void TenDialogueEncounter(Collider other)
     {
-        GameManager.instance.SetIndexForAbilityChoice(5);
+        GameManager.instance.SetIndexForAbilityChoice(4);
         sceneActivity.StartStealthDialogue();
         sceneActivity.TurnOffTenthDialogueBox();
         sceneActivity.TurnOffNotStealthPathDialogue();
