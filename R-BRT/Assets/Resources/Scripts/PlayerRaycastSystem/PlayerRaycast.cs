@@ -133,8 +133,10 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry":
 
                         lorePickUpSound.Play();
+                        GameManager.instance.SetLoreEntryPickUp(0,true);
+                        GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryOne(true);
-                        GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryOneGameObject());
+                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(0));
                         pauseMenuScript.PauseGame();
                         pauseMenuScript.SwitchToEntriesPanel();
                         break;
@@ -142,8 +144,10 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry2":
 
                         lorePickUpSound.Play();
+                        GameManager.instance.SetLoreEntryPickUp(1, true);
+                        GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryTwo(true);
-                        GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryTwoGameObject());
+                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(1));
                         pauseMenuScript.PauseGame();
                         pauseMenuScript.SwitchToEntriesPanel();
                         break;
@@ -151,8 +155,10 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry3":
 
                         lorePickUpSound.Play();
+                        GameManager.instance.SetLoreEntryPickUp(2, true);
+                        GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryThree(true);
-                        GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryThreeGameObject());
+                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(2));
                         pauseMenuScript.PauseGame();
                         pauseMenuScript.SwitchToEntriesPanel();
                         break;
@@ -160,8 +166,10 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry4":
 
                         lorePickUpSound.Play();
+                        GameManager.instance.SetLoreEntryPickUp(3, true);
+                        GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryFour(true);
-                        GameManager.instance.DestroyGameObject(GameManager.instance.ReturnLoreEntryFourGameObject());
+                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(3));
                         pauseMenuScript.PauseGame();
                         pauseMenuScript.SwitchToEntriesPanel();
                         break;

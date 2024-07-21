@@ -49,19 +49,23 @@ public class LoreEntryController : MonoBehaviour
 
     public void OpenLoreOne()
     {
+        GameManager.instance.StopBlinking();
         SwitchPanel("LoreEntryOne");
     }
 
     public void OpenLoreTwo()
     {
+        GameManager.instance.StopBlinking();
         SwitchPanel("LoreEntryTwo");
     }
     public void OpenLoreThree()
     {
+        GameManager.instance.StopBlinking();
         SwitchPanel("LoreEntryThree");
     }
     public void OpenLoreFour()
     {
+        GameManager.instance.StopBlinking();
         SwitchPanel("LoreEntryFour");
     }
 }

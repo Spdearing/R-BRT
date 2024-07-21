@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7793460247634086435
 Transform:
@@ -143,7 +143,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7396886177224137540
 Transform:
@@ -171,7 +171,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 4c5d6a008e6faa841a611df52049e8e6, type: 2}
   m_audioClip: {fileID: 8300000, guid: 69635f993559f2947b8fa4b0c84d6689, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -271,7 +271,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6992047874849072379
 Transform:
@@ -406,15 +406,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 670d3c57e4e2eae468e9d669c8fdfdef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -72.094
+      value: -19.698
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 670d3c57e4e2eae468e9d669c8fdfdef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.557
+      value: -0.09800005
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 670d3c57e4e2eae468e9d669c8fdfdef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.199
+      value: -8.869
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 670d3c57e4e2eae468e9d669c8fdfdef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -454,7 +454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 670d3c57e4e2eae468e9d669c8fdfdef, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3451118302482216456, guid: 670d3c57e4e2eae468e9d669c8fdfdef, type: 3}
       propertyPath: m_Convex

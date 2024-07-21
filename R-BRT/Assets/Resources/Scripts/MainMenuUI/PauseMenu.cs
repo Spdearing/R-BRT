@@ -70,17 +70,19 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
         isPaused = true;
         pausePanelOpen = true;
+        playerController.SetPlayerActivity(false);
+        playerController.SetCameraLock(true);
         EnableCursor();
     }
 
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
         isPaused = false;
+        playerController.SetPlayerActivity(true);
+        playerController.SetCameraLock(false);
         DisableCursor();
     }
 

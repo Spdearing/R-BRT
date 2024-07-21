@@ -16,10 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject phoenixChipMenu;
-    [SerializeField] private GameObject loreEntry;
-    [SerializeField] private GameObject loreEntry2;
-    [SerializeField] private GameObject loreEntry3;
-    [SerializeField] private GameObject loreEntry4;
+    [SerializeField] private GameObject[] loreEntryObjects;
     [SerializeField] private GameObject battery;
     [SerializeField] private GameObject fuelMeter;
     [SerializeField] private GameObject dialogue;
@@ -121,6 +118,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float startingDetection;
     [SerializeField] private float detectionIncrement;
     [SerializeField] private float maxDetection;
+    [SerializeField] private float blinkDuration;  
+    [SerializeField] private float minOpacity; 
+    [SerializeField] private float maxOpacity; 
     #endregion
 
 
@@ -150,6 +150,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool jetpackUnlocked;
     [SerializeField] private bool hasPickedAbility;
     [SerializeField] private bool playerHasClearedFirstFloor;
+    [SerializeField] private bool isBlinking;
+    [SerializeField] private bool[] pickedUpLore;
+
+
 
     [Header("Buttons")]
     [SerializeField] private Button[] loreButtons;
@@ -158,6 +162,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Light flashLight;
 
     [Header("Index For Ability Dialogue")]
+    [SerializeField] private int abilityIndex;
     [SerializeField] private int index;
     [SerializeField] private int currentCheckPointIndex = 0;
 
@@ -198,6 +203,7 @@ public class GameManager : MonoBehaviour
             case "GameScene":
                 if (newGame)
                 {
+                    
                     index = 0;
                     hasPickedAbility = false;
                     playerHasClearedFirstFloor = false;
@@ -206,8 +212,22 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    startingSpawnLocation = startingSpawnPoint.transform.position;
-                    player.transform.position = startingSpawnLocation;
+                    loreEntries = new bool[4];
+                    loreEntries[0] = false;
+                    loreEntries[1] = false;
+                    loreEntries[2] = false;
+                    loreEntries[3] = false;
+
+                    pickedUpLore = new bool[4];
+                    pickedUpLore[0] = false;
+                    pickedUpLore[1] = false;
+                    pickedUpLore[2] = false;
+                    pickedUpLore[3] = false;
+
+                    
+                    
+                    //startingSpawnLocation = startingSpawnPoint.transform.position;
+                    //player.transform.position = startingSpawnLocation;
                     newSpawnPoint = Vector3.zero;
                     
                 }
@@ -216,6 +236,7 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     GrabAllTheTools();
                     CheckPlayerAbility();
+                    CheckLoreObjectInventroy();
                     
 
                     if (newSpawnPoint != new Vector3(0, 0, 0))
@@ -318,11 +339,20 @@ public class GameManager : MonoBehaviour
 
     public void GrabAllTheTools()
     {
+  
+        isBlinking = false;
+
         startingSpawnPoint = GameObject.Find("StartingSpawnPoint");
 
         playerDialogueCheckPoints = new string[] { "First Dialogue", "Second Dialogue", "Third Dialogue", "Fourth Dialogue", "Fifth Dialogue", "Sixth Dialogue", "Seventh Dialogue", "Eighth Dialogue" };
 
         abilityChosen = new string[] { "Stealth", "Jetpack", "Stealth2", "Jetpack2", "Stealth3", "Jetpack3" };
+
+        loreEntryObjects = new GameObject[4];
+        loreEntryObjects[0] = GameObject.FindWithTag("LoreEntry");
+        loreEntryObjects[1] = GameObject.FindWithTag("LoreEntry2");
+        loreEntryObjects[2] = GameObject.FindWithTag("LoreEntry3");
+        loreEntryObjects[3] = GameObject.FindWithTag("LoreEntry4");
 
         loreButtons = new Button[4];
         loreButtons[0] = GameObject.Find("LoreEntry1").GetComponent<Button>();
@@ -335,6 +365,10 @@ public class GameManager : MonoBehaviour
         lorePanels[1] = GameObject.Find("LoreEntryTwo").GetComponent<Image>();
         lorePanels[2] = GameObject.Find("LoreEntryThree").GetComponent<Image>();
         lorePanels[3] = GameObject.Find("LoreEntryFour").GetComponent<Image>();
+
+        blinkDuration = 0.25f;
+        minOpacity = 0.2f;
+        maxOpacity = 1.0f;
 
 
         checkPoints = new GameObject[7];
@@ -355,11 +389,7 @@ public class GameManager : MonoBehaviour
         checkPointLocations[5] = checkPoints[5].transform;
         checkPointLocations[6] = checkPoints[6].transform;
 
-        loreEntries = new bool[4];
-        loreEntries[0] = false;
-        loreEntries[1] = false;
-        loreEntries[2] = false;
-        loreEntries[3] = false;
+    
 
         checkPointsHit = new bool[6];
         checkPointsHit[0] = false;
@@ -404,10 +434,6 @@ public class GameManager : MonoBehaviour
         batteryScript = GameObject.FindWithTag("Battery").GetComponent<Battery>();
         battery = GameObject.FindWithTag("Battery");
         phoenixChipMenu = GameObject.FindWithTag("PhoenixChipMenu");
-        loreEntry = GameObject.FindWithTag("LoreEntry");
-        loreEntry2 = GameObject.FindWithTag("LoreEntry2");
-        loreEntry3 = GameObject.FindWithTag("LoreEntry3");
-        loreEntry4 = GameObject.FindWithTag("LoreEntry4");
         fuelMeter = GameObject.FindWithTag("FuelMeter");
         activateInvisibility = GameObject.Find("ActivateInvisibility").GetComponent<AudioSource>();
         invisibilityDuration = GameObject.Find("InvisibilityDuration").GetComponent<AudioSource>();
@@ -542,7 +568,7 @@ public class GameManager : MonoBehaviour
     }
     public void SetIndexForAbilityChoice(int value)
     {
-        index = value;
+        abilityIndex = value;
     }
     public void SetPlayerAbilityChoice(int index)
     {
@@ -578,6 +604,12 @@ public class GameManager : MonoBehaviour
     {
         playerCaught = value;
     }
+
+    public void SetLoreEntryPickUp(int index , bool value)
+    {
+        pickedUpLore[index] = value;
+    }
+
     #endregion
 
     #region//Returning Strings
@@ -589,7 +621,7 @@ public class GameManager : MonoBehaviour
 
     public string ReturnPlayerDialogueAbilityChoice()
     {
-        return this.abilityChosen[index];
+        return this.abilityChosen[abilityIndex];
     }
 
     public string ReturnDialogueCheckPoint()
@@ -685,21 +717,9 @@ public class GameManager : MonoBehaviour
         return this.dialogueTwelveHitBox;
     }
 
-    public GameObject ReturnLoreEntryOneGameObject()
+    public GameObject ReturnLoreEntryGameObject(int value)
     {
-        return this.loreEntry;
-    }
-    public GameObject ReturnLoreEntryTwoGameObject()
-    {
-        return this.loreEntry2;
-    }
-    public GameObject ReturnLoreEntryThreeGameObject()
-    {
-        return this.loreEntry3;
-    }
-    public GameObject ReturnLoreEntryFourGameObject()
-    {
-        return this.loreEntry4;
+        return this.loreEntryObjects[value];
     }
 
     public GameObject ReturnFuelMeter()
@@ -729,7 +749,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject ReturnLoreEntry()
     {
-        return this.loreEntry;
+        return this.loreEntryObjects[0];
     }
     #endregion
 
@@ -967,12 +987,73 @@ public class GameManager : MonoBehaviour
 
     public void CheckLoreButtonStatus()
     {
-        int index = 0;
-        foreach (bool activeLore in loreEntries)
+        for (int index = 0; index < loreEntries.Length; index++)
         {
-            Debug.Log($"Lore Entry {index}: {activeLore}");
-            loreButtons[index].interactable = activeLore;
-            index++;
+            if (loreEntries[index])
+            {
+                Debug.Log($"Lore Entry {index}: {loreEntries[index]}");
+                loreButtons[index].interactable = true;
+            }
+            else
+            {
+                loreButtons[index].interactable = false;
+            }
+        }
+    }
+
+    public void CheckLoreObjectInventroy()
+    {
+        int inventory = 0;
+        foreach(bool pickedUpEntries in pickedUpLore)
+        {
+            loreEntryObjects[inventory].SetActive(pickedUpEntries);
+        }
+    }
+
+    public void AddOneToIndex()
+    {
+        index++;
+    }
+
+    public void StartBlinking()
+    {
+        if (!isBlinking)
+        {
+            AddOneToIndex();
+            isBlinking = true;
+            StartCoroutine(Blink());
+        }
+    }
+
+    // Method to stop blinking
+    public void StopBlinking()
+    {
+        if (isBlinking)
+        {
+            isBlinking = false;
+            StopCoroutine(Blink());
+            SetButtonOpacity(maxOpacity);  // Restore the original opacity
+        }
+    }
+
+    private IEnumerator Blink()
+    {
+        while (isBlinking)
+        {
+            SetButtonOpacity(minOpacity);
+            yield return new WaitForSeconds(blinkDuration);
+            SetButtonOpacity(maxOpacity);
+            yield return new WaitForSeconds(blinkDuration);
+        }
+    }
+
+    private void SetButtonOpacity(float opacity)
+    {
+        if (loreButtons[index - 1].image != null)
+        {
+            Color color = loreButtons[index - 1].image.color;
+            color.a = opacity;
+            loreButtons[index - 1].image.color = color;
         }
     }
 
@@ -988,10 +1069,12 @@ public class GameManager : MonoBehaviour
         currentCheckPointIndex++;
     }
 
-    public void DestroyGameObject(GameObject value)
+    public void DisableGameObject(GameObject gameObject)
     {
-        Destroy(value.gameObject);
+        gameObject.SetActive(false);
     }
+
+
 
     public Light ReturnFlashLight()
     {
@@ -1036,6 +1119,14 @@ public class GameManager : MonoBehaviour
         doorOpenThree.SetActive(false);
         doorClosedThree.SetActive(true);
         janitorDoorCloses.Play();
+    }
+
+    public void ToggleLorePanels()
+    {
+        foreach (var panel in lorePanels)
+        {
+            panel.gameObject.SetActive(false);
+        }
     }
 
 }
