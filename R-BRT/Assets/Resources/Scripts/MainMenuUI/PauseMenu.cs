@@ -76,6 +76,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         isPaused = true;
         pausePanelOpen = true;
+        playerController.FreezePlayer();
         playerController.SetPlayerActivity(false);
         playerController.SetCameraLock(true);
         EnableCursor();
@@ -85,6 +86,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         isPaused = false;
+        playerController.UnFreezePlayer();
         playerController.SetPlayerActivity(true);
         playerController.SetCameraLock(false);
         DisableCursor();

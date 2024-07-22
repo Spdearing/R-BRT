@@ -22,6 +22,7 @@ public class PlayerRaycast : MonoBehaviour
     [SerializeField] private PhoenixChipDecision phoenixChipDecision;
     [SerializeField] private Battery battery;
     [SerializeField] private PauseMenu pauseMenuScript;
+    [SerializeField] private PlayerController playerController;
 
     [Header("UI Elements")]
     [SerializeField] private TMP_Text interactableText;
@@ -133,6 +134,7 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry":
 
                         lorePickUpSound.Play();
+                        playerController.FreezePlayer();
                         GameManager.instance.SetLoreEntryPickUp(0,true);
                         GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryOne(true);
@@ -144,6 +146,7 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry2":
 
                         lorePickUpSound.Play();
+                        playerController.FreezePlayer();
                         GameManager.instance.SetLoreEntryPickUp(1, true);
                         GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryTwo(true);
@@ -155,6 +158,7 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry3":
 
                         lorePickUpSound.Play();
+                        playerController.FreezePlayer();
                         GameManager.instance.SetLoreEntryPickUp(2, true);
                         GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryThree(true);
@@ -166,6 +170,7 @@ public class PlayerRaycast : MonoBehaviour
                     case "LoreEntry4":
 
                         lorePickUpSound.Play();
+                        playerController.FreezePlayer();
                         GameManager.instance.SetLoreEntryPickUp(3, true);
                         GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryFour(true);
@@ -186,6 +191,7 @@ public class PlayerRaycast : MonoBehaviour
         raycastDistance = interactDistance;
         pickUpCooldown = 0.5f;
         holding = false;
+        playerController = GameManager.instance.ReturnPlayerController();
         lorePickUpSound = GameManager.instance.ReturnLorePickUp();
         interactBoxAnim = GameManager.instance.ReturnInteractBoxAnim();
         interactEAnim = GameManager.instance.ReturnInteractEAnim();

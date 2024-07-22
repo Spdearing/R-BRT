@@ -422,6 +422,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public void FreezePlayer()
+    {
+        rb.constraints = RigidbodyConstraints.FreezePositionX |RigidbodyConstraints.FreezePositionY |RigidbodyConstraints.FreezePositionZ;
+    }
+
+    public void UnFreezePlayer()
+    {
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+    }
+
     public bool ReturnCrouchingStatus(bool value)
     {
         return this.isCrouching;
