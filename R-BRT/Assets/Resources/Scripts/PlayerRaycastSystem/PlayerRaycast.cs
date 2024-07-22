@@ -171,7 +171,7 @@ public class PlayerRaycast : MonoBehaviour
 
                         lorePickUpSound.Play();
                         playerController.FreezePlayer();
-                        GameManager.instance.SetLoreEntryPickUp(3, true);
+                        GameManager.instance.SetLoreEntryPickUp(2, true);
                         GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryFour(true);
                         GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(3));
@@ -186,7 +186,7 @@ public class PlayerRaycast : MonoBehaviour
                         GameManager.instance.SetLoreEntryPickUp(3, true);
                         GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryFour(true);
-                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(3));
+                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(4));
                         pauseMenuScript.PauseGame();
                         pauseMenuScript.SwitchToEntriesPanel();
                         break;
@@ -198,7 +198,7 @@ public class PlayerRaycast : MonoBehaviour
                         GameManager.instance.SetLoreEntryPickUp(3, true);
                         GameManager.instance.StartBlinking();
                         GameManager.instance.SetLoreEntryFour(true);
-                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(3));
+                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(5));
                         pauseMenuScript.PauseGame();
                         pauseMenuScript.SwitchToEntriesPanel();
                         break;
