@@ -22,6 +22,11 @@ public class PlayerCam : MonoBehaviour
     // Transition speed for sensitivity change
     [SerializeField] private float sensitivityTransitionSpeed = 5.0f;
 
+    // Smoothing variables
+    private Vector2 currentMouseDelta;
+    private Vector2 currentMouseDeltaVelocity;
+    [SerializeField] private float mouseSmoothTime = 0.03f;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -52,8 +57,14 @@ public class PlayerCam : MonoBehaviour
             currentSensX = Mathf.Lerp(currentSensX, targetSensX, Time.deltaTime * sensitivityTransitionSpeed);
             currentSensY = Mathf.Lerp(currentSensY, targetSensY, Time.deltaTime * sensitivityTransitionSpeed);
 
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * currentSensX;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * currentSensY;
+            // Get raw mouse input
+            Vector2 targetMouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
+            // Smooth the mouse input
+            currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
+
+            float mouseX = currentMouseDelta.x * Time.deltaTime * currentSensX;
+            float mouseY = currentMouseDelta.y * Time.deltaTime * currentSensY;
 
             yRotation += mouseX;
             xRotation -= mouseY;
