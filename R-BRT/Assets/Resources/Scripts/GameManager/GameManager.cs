@@ -416,7 +416,7 @@ public class GameManager : MonoBehaviour
 
         loreEntryObjects = new GameObject[6];
         loreEntryObjects[0] = GameObject.Find("Lore1");
-        loreEntryObjects[1] = GameObject.Find("LoreEntry2");
+        loreEntryObjects[1] = GameObject.Find("Lore2");
         loreEntryObjects[2] = GameObject.Find("Lore3StealthPath");
         loreEntryObjects[3] = GameObject.Find("Lore3JetpackPathOne");
         loreEntryObjects[4] = GameObject.Find("Lore4StealthPath");

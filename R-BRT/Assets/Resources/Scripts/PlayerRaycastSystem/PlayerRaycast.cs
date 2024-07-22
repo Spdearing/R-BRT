@@ -35,7 +35,7 @@ public class PlayerRaycast : MonoBehaviour
     [Header("AudioSource")]
     [SerializeField] private AudioSource lorePickUpSound;
 
-    private string[] loreEntryTags = { "LoreEntry", "LoreEntry2", "LoreEntry3", "LoreEntry4" };
+    private string[] loreEntryTags = { "LoreEntry", "LoreEntry2", "LoreEntry3", "LoreEntry4" , "LoreEntry5", "LoreEntry6" };
 
     void Start()
     {
@@ -173,7 +173,7 @@ public class PlayerRaycast : MonoBehaviour
                         playerController.FreezePlayer();
                         GameManager.instance.SetLoreEntryPickUp(2, true);
                         GameManager.instance.StartBlinking();
-                        GameManager.instance.SetLoreEntryFour(true);
+                        GameManager.instance.SetLoreEntryThree(true);
                         GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(3));
                         pauseMenuScript.PauseGame();
                         pauseMenuScript.SwitchToEntriesPanel();
