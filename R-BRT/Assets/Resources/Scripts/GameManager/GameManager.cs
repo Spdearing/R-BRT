@@ -414,11 +414,13 @@ public class GameManager : MonoBehaviour
 
         abilityChosen = new string[] { "Stealth", "Jetpack", "Stealth2", "Jetpack2", "Stealth3", "Jetpack3" };
 
-        loreEntryObjects = new GameObject[4];
-        loreEntryObjects[0] = GameObject.FindWithTag("LoreEntry");
-        loreEntryObjects[1] = GameObject.FindWithTag("LoreEntry2");
-        loreEntryObjects[2] = GameObject.FindWithTag("LoreEntry3");
-        loreEntryObjects[3] = GameObject.FindWithTag("LoreEntry4");
+        loreEntryObjects = new GameObject[6];
+        loreEntryObjects[0] = GameObject.Find("LoreEntry");
+        loreEntryObjects[1] = GameObject.Find("LoreEntry2");
+        loreEntryObjects[2] = GameObject.Find("Lore3StealthPath");
+        loreEntryObjects[3] = GameObject.Find("Lore3JetpackPathOne");
+        loreEntryObjects[4] = GameObject.Find("Lore4StealthPath");
+        loreEntryObjects[5] = GameObject.Find("Lore4JetpackPathTwo");
 
         loreButtons = new Button[4];
         loreButtons[0] = GameObject.Find("LoreEntry1").GetComponent<Button>();

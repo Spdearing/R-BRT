@@ -179,6 +179,30 @@ public class PlayerRaycast : MonoBehaviour
                         pauseMenuScript.SwitchToEntriesPanel();
                         break;
 
+                    case "LoreEntry5":
+
+                        lorePickUpSound.Play();
+                        playerController.FreezePlayer();
+                        GameManager.instance.SetLoreEntryPickUp(3, true);
+                        GameManager.instance.StartBlinking();
+                        GameManager.instance.SetLoreEntryFour(true);
+                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(3));
+                        pauseMenuScript.PauseGame();
+                        pauseMenuScript.SwitchToEntriesPanel();
+                        break;
+
+                    case "LoreEntry6":
+
+                        lorePickUpSound.Play();
+                        playerController.FreezePlayer();
+                        GameManager.instance.SetLoreEntryPickUp(3, true);
+                        GameManager.instance.StartBlinking();
+                        GameManager.instance.SetLoreEntryFour(true);
+                        GameManager.instance.DisableGameObject(GameManager.instance.ReturnLoreEntryGameObject(3));
+                        pauseMenuScript.PauseGame();
+                        pauseMenuScript.SwitchToEntriesPanel();
+                        break;
+
                 }
             }
         }

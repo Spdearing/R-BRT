@@ -90,6 +90,8 @@ TagManager:
   - JetPackZoneLoader
   - EndCheckPoint
   - JetpackBackHallway
+  - LoreEntry5
+  - LoreEntry6
   layers:
   - Default
   - TransparentFX
