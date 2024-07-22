@@ -86,6 +86,7 @@ public class EnemyProximityCheck : MonoBehaviour
                 {
                     groundBotStateMachine = hitInfo.collider.GetComponent<GroundBotStateMachine>();
                     groundBotStateMachine.SetDetectingPlayer(true);
+                    enemyWithinRange = true;
 
                     if (Vector3.Distance(transform.position, hitInfo.collider.transform.position) < 1.5f && !playerAbilities.ReturnUsingInvisibility())
                     {

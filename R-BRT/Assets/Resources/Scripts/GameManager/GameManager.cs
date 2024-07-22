@@ -268,11 +268,7 @@ public class GameManager : MonoBehaviour
                         {
                             Invoke("SetUpJanitorCheckPoint", 1);
                             currentCheckPointIndex = 2 - 1;
-                            dialogueSixHitBox.SetActive(false);
-                            dialogueTwoHitBox.SetActive(false);
-                            dialogueFourHitBox.SetActive(false);
-                            dialogueThreeHitBox.SetActive(false);
-                            dialogueTwoHitBox.SetActive(false);   
+                               
                         }
                         else if (newSpawnPoint == new Vector3(-35.39333f, -0.1244326f, 7.746853f))//Beginning of Lobby CheckPoint
                         {
@@ -281,6 +277,12 @@ public class GameManager : MonoBehaviour
                         if (newSpawnPoint == new Vector3(-19.15336f, -0.1244326f, -4.795639f))//After Lobby Checkpoint
                         {
                             currentCheckPointIndex = 2 - 1;
+                            Invoke("SetUpAfterLobby", 1);
+                        }
+                        else if (newSpawnPoint == new Vector3(-55.15377f, 13.69235f, -17.5384f))//End Of Game
+                        {
+                            currentCheckPointIndex = 7 - 1;
+                            Invoke("EndOfGameCheckPoint", 1);
                         }
 
                     }
@@ -310,6 +312,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void SetUpAfterLobby()
+    {
+        checkPoints[0].SetActive(false);
+        dialogueTwoHitBox.SetActive(false);
+        dialogueFourHitBox.SetActive(false);
+        dialogueThreeHitBox.SetActive(false);
+
+    }
+
+    void EndOfGameCheckPoint()
+    {
+        checkPoints[4].SetActive(false);
+        checkPoints[5].SetActive(false);
+        dialogueTenHitBox.SetActive(false);
+        dialogueSevenHitBox.SetActive(false);
+        groundBotSpawner.ToggleStealthGroup();
+        CloseOffTheStairs();
+
+    }
+
+
+
     void SetUpStealthPath()
     {
         groundBotSpawner.ToggleGroup1();
@@ -318,10 +342,22 @@ public class GameManager : MonoBehaviour
         CloseOffTheStairs();
     }
 
+    void SetUpStealthPathTwo()
+    {
+        groundBotSpawner.ToggleGroup1();
+        flyingBotSpawner.ToggleGroup1();
+        checkPoints[4].SetActive(false);
+        groundBotSpawner.ToggleStealthGroup();
+        CloseOffTheStairs();
+    }
+
     void SetUpJetpackPath()
     {
         groundBotSpawner.ToggleGroup1();
         flyingBotSpawner.ToggleGroup1();
+        checkPoints[0].SetActive(false);
+        checkPoints[1].SetActive(false);
+        checkPoints[2].SetActive(false);
         CloseOffTheStairs();
     }
 
@@ -331,6 +367,10 @@ public class GameManager : MonoBehaviour
         flyingBotSpawner.ToggleGroup1();
         groundBotSpawner.ToggleJetPackGroup();
         flyingBotSpawner.ToggleGroup2();
+        checkPoints[0].SetActive(false);
+        checkPoints[1].SetActive(false);
+        checkPoints[2].SetActive(false);
+        checkPoints[3].SetActive(false);
         Quaternion newRotation = Quaternion.Euler(0, 270, 0);
         player.transform.rotation = newRotation;
     }
@@ -345,6 +385,13 @@ public class GameManager : MonoBehaviour
         {
             CloseOffTheStairs();
         }
+        dialogueSixHitBox.SetActive(false);
+        dialogueFiveHitBox.SetActive(false);
+        dialogueTwoHitBox.SetActive(false);
+        dialogueFourHitBox.SetActive(false);
+        dialogueThreeHitBox.SetActive(false);
+        checkPoints[0].SetActive(false);
+        checkPoints[1].SetActive(false);
     }
 
 
@@ -387,7 +434,7 @@ public class GameManager : MonoBehaviour
         maxOpacity = 1.0f;
 
 
-        checkPoints = new GameObject[7];
+        checkPoints = new GameObject[8];
         checkPoints[0] = GameObject.Find("BeginningOfLobby");
         checkPoints[1] = GameObject.Find("After Lobby");
         checkPoints[2] = GameObject.Find("In Front Of Janitors Closet");
@@ -395,6 +442,7 @@ public class GameManager : MonoBehaviour
         checkPoints[4] = GameObject.Find("Top Of Stairs Spawn");
         checkPoints[5] = GameObject.Find("Second Broken Room");
         checkPoints[6] = GameObject.Find("Before Jetpack Puzzle");
+        checkPoints[7] = GameObject.Find("EndCheckPoint");
 
         checkPointLocations = new Transform[7];
         checkPointLocations[0] = checkPoints[0].transform;

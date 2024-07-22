@@ -425,13 +425,13 @@ public class PlayerController : MonoBehaviour
 
     public void FreezePlayer()
     {
-        rb.constraints = RigidbodyConstraints.FreezePositionX |RigidbodyConstraints.FreezePositionY |RigidbodyConstraints.FreezePositionZ;
+        rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
     }
 
     public void UnFreezePlayer()
     {
-        rb.constraints = RigidbodyConstraints.None;
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     public bool ReturnCrouchingStatus(bool value)

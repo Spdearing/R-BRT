@@ -16,7 +16,7 @@ public class AbilityDialogueFunctionality : MonoBehaviour
     [SerializeField] private string[] fullJetPackAbilityText3;
 
     [Header("Floats")]
-    [SerializeField] private float delay = 0.035f;
+    [SerializeField] private float delay;
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
@@ -34,6 +34,8 @@ public class AbilityDialogueFunctionality : MonoBehaviour
     [SerializeField] private string dialogueName;
 
     private string[][] dialogues;
+
+    [SerializeField] private AudioSource textSound;
 
     private void Initialize()
     {
@@ -96,6 +98,9 @@ public class AbilityDialogueFunctionality : MonoBehaviour
 
                 uiText.text = fullText.Substring(0, i);
                 yield return new WaitForSeconds(delay);
+                float randomPitchAmount = Random.Range(1.0f, 1.25f);
+                textSound.pitch = randomPitchAmount;
+                textSound.Play();
             }
 
             isTyping = false;
@@ -129,7 +134,9 @@ public class AbilityDialogueFunctionality : MonoBehaviour
         {
             firstDialogue.SetActive(false);
         }
+        textSound = gameObject.GetComponent<AudioSource>();
 
+        delay = 0.10f;
         Initialize();
         StartDialogue();
     }

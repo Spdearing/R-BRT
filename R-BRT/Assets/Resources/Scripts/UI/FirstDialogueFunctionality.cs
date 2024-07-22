@@ -19,7 +19,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
     [SerializeField] private string checkPointDialogue;
 
     [Header("Floats")]
-    [SerializeField] private float delay = 0.035f;
+    [SerializeField] private float delay;
 
     [Header("Scripts")]
     [SerializeField] private PlayerController playerController;
@@ -41,8 +41,11 @@ public class FirstDialogueFunctionality : MonoBehaviour
     private string[][] dialogues;
     private Coroutine currentDialogueCoroutine;
 
+    [SerializeField] private AudioSource textSound;
+
     void Start()
     {
+        textSound = gameObject.GetComponent<AudioSource>();
         checkPointDialogue = "First Dialogue";
         Initialize();
         StartDialogue();
@@ -107,6 +110,9 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
                 uiText.text = fullText.Substring(0, i);
                 yield return new WaitForSeconds(delay);
+                float randomPitchAmount = Random.Range(1.0f, 1.25f);
+                textSound.pitch = randomPitchAmount;
+                textSound.Play();
             }
 
             isTyping = false;
@@ -130,6 +136,7 @@ public class FirstDialogueFunctionality : MonoBehaviour
 
     private void OnEnable()
     {
+        delay = 0.10f;
         StartDialogue();
     }
 
