@@ -268,6 +268,11 @@ public class GameManager : MonoBehaviour
                         {
                             Invoke("SetUpJanitorCheckPoint", 1);
                             currentCheckPointIndex = 2 - 1;
+                            dialogueSixHitBox.SetActive(false);
+                            dialogueTwoHitBox.SetActive(false);
+                            dialogueFourHitBox.SetActive(false);
+                            dialogueThreeHitBox.SetActive(false);
+                            dialogueTwoHitBox.SetActive(false);   
                         }
                         else if (newSpawnPoint == new Vector3(-35.39333f, -0.1244326f, 7.746853f))//Beginning of Lobby CheckPoint
                         {
