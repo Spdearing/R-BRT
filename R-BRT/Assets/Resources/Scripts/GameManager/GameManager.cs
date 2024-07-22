@@ -213,20 +213,22 @@ public class GameManager : MonoBehaviour
                     playerCaught = false;
                     dialogueCheckPoint = "First Dialogue";
                     GrabAllTheTools();
-                    loreEntries = new bool[4];
+                    loreEntries = new bool[6];
                     loreEntries[0] = false;
                     loreEntries[1] = false;
                     loreEntries[2] = false;
                     loreEntries[3] = false;
 
-                    pickedUpLore = new bool[4];
+                    pickedUpLore = new bool[6];
                     pickedUpLore[0] = false;
                     pickedUpLore[1] = false;
                     pickedUpLore[2] = false;
                     pickedUpLore[3] = false;
+                    pickedUpLore[4] = false;
+                    pickedUpLore[5] = false;
 
-                    
-                    
+
+
                     startingSpawnLocation = startingSpawnPoint.transform.position;
                     player.transform.position = startingSpawnLocation;
                     newSpawnPoint = Vector3.zero;

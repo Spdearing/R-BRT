@@ -29,6 +29,7 @@ public class GroundBotHeadMovement : MonoBehaviour
     [SerializeField] private EnemyGroundBotFieldOfView enemyGroundBotFieldOfView;
     [SerializeField] private EnemyProximityCheck enemyProximityCheck;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerAbilities abilities;
 
 
 
@@ -47,7 +48,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         {
             Patrol();
         }
-        if(enemyProximityCheck.ReturnEnemyWithinRange() && playerController.PlayerIsRunning() == true)
+        if(enemyProximityCheck.ReturnEnemyWithinRange() && playerController.PlayerIsRunning() == true && abilities.ReturnUsingInvisibility() == true)
         {
             RotateTowardsPlayer();
         }
@@ -69,6 +70,7 @@ public class GroundBotHeadMovement : MonoBehaviour
         enemyProximityCheck = GameManager.instance.ReturnEnemyProximityCheck();
         startYRotation = transform.eulerAngles.y;
         playerTransform = GameManager.instance.ReturnPlayerTransform();
+        abilities = GameManager.instance.ReturnPlayerAbilities();
         SetTargetYRotation();
     }
 
