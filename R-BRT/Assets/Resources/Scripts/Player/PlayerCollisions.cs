@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCollisions : MonoBehaviour
 {
     [SerializeField] GameObject destinationA;
+    [SerializeField] GameObject closeJanitorDoorCollider;
 
     [SerializeField] private SceneActivity sceneActivity;
     [SerializeField] private FirstDialogueFunctionality firstDialogueFunctionality;
@@ -19,6 +20,7 @@ public class PlayerCollisions : MonoBehaviour
         firstDialogueFunctionality = GameManager.instance.ReturnFirstDialogueFunctionality();
         groundBotSpawner = GameManager.instance.ReturnGroundBotSpawner();
         flyingBotSpawner = GameManager.instance.ReturnFlyingBotSpawner();
+        closeJanitorDoorCollider = GameManager.instance.ReturnCloseJanitorDoorCollider();
 
         InitializeCollisionActions();
     }
@@ -184,6 +186,7 @@ public class PlayerCollisions : MonoBehaviour
         if (GameManager.instance.CheckIfPickedUpAbility())
         {
             GameManager.instance.ShutJanitorsCloset();
+            closeJanitorDoorCollider.SetActive(false);
         }
     }
 
